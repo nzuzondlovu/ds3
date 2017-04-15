@@ -1,0 +1,62 @@
+CREATE TABLE `category` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`name` varchar(15) NOT NULL,
+	`description` varchar(100) NOT NULL,
+	PRIMARY KEY (`id`)
+)
+
+CREATE TABLE `job` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`user` int(11) NOT NULL,
+	`name` varchar(35) NOT NULL,
+	`serial` varchar(50) NOT NULL,
+	`type` varchar(30) NOT NULL,
+	`pic_url` varchar(100) NOT NULL,
+	`description` varchar(250) NOT NULL,
+	`description2` varchar(250) NOT NULL,
+	`date_in` datetime NOT NULL,
+	`status` varchar(20) NOT NULL,
+	`technician` varchar(35) NOT NULL,
+	`date_out` datetime NOT NULL,
+	`date` datetime NOT NULL,
+	PRIMARY KEY (`id`)
+)
+
+CREATE TABLE `product` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`user` int(11) NOT NULL,
+	`name` varchar(30) NOT NULL,
+	`description` varchar(100) NOT NULL,
+	`type` varchar(20) NOT NULL,
+	`price` decimal(7,2) NOT NULL,
+	`pic_url` varchar(100) NOT NULL,
+	`date` datetime NOT NULL,
+	PRIMARY KEY (`id`)
+)
+
+CREATE TABLE `status` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`name` varchar(20) NOT NULL,
+	`description` varchar(100) NOT NULL,
+	PRIMARY KEY (`id`)
+)
+
+CREATE TABLE `user` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`name` varchar(25) NOT NULL,
+	`surname` varchar(25) NOT NULL,
+	`cell` varchar(13) NOT NULL,
+	`idnumber` int(13) NOT NULL,
+	`location` varchar(50) NOT NULL,
+	`email` varchar(35) NOT NULL,
+	`password` varchar(70) NOT NULL,
+	`role` varchar(10) NOT NULL,
+	PRIMARY KEY (`id`)
+)
+
+CREATE TABLE `wallpaper` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`name` varchar(30) NOT NULL,
+	`pic_url` varchar(100) NOT NULL,
+	PRIMARY KEY (`id`)
+)
