@@ -45,7 +45,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><?php echo $sitename; ?> User/a>
+                <a class="navbar-brand" href="index.php"><?php echo $sitename; ?> User</a>
             </div>
             <!-- /.navbar-header -->
 
