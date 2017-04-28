@@ -59,10 +59,17 @@ include 'header.php';
 											<th>Price</th>
 											<th>Picture</th>
 											<th>Date</th>
+											<th>Promo</th>
 										</tr>
 									</thead>
 									<tbody>';
 										while ($row = mysqli_fetch_assoc($res)) {
+
+											$button = '';
+											
+											if ($row['promo_price'] == 0) {
+												$button = '<a href="editpromo.php?id='.$row['id'].'" class="btn btn-primary">Make Promo</a>';
+											}
 
 											echo '
 											<tr>
@@ -74,6 +81,7 @@ include 'header.php';
 												<td>'.$row['price'].'</td>
 												<td><img src="'.$row['pic_url'].'"></td>
 												<td>'.date("M d, y",strtotime($row['date'])).'</td>
+												<td>'.$button.'</td>
 											</tr>';
 										}
 										echo '
