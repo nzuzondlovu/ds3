@@ -77,7 +77,7 @@ include 'header.php';
                                 <form role="form" method="post">
                                     <div class="form-group">
                                         <label>Device name</label>
-                                        <input name="name" class="form-control" placeholder="Enter text">
+                                        <input type="date" name="name" class="form-control" placeholder="Enter text">
                                     </div>
                                     <div class="form-group">
                                         <label>Serial number</label>
