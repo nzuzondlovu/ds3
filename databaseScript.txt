@@ -28,9 +28,12 @@ CREATE TABLE `product` (
 	`name` varchar(30) NOT NULL,
 	`description` varchar(100) NOT NULL,
 	`type` varchar(20) NOT NULL,
+	`promo_price` decimal(7,2) NOT NULL,
 	`price` decimal(7,2) NOT NULL,
 	`pic_url` varchar(100) NOT NULL,
 	`date` datetime NOT NULL,
+	`promo_date1` datetime NOT NULL,
+	`promo_date2` datetime NOT NULL,
 	PRIMARY KEY (`id`)
 )
 
