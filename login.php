@@ -40,6 +40,7 @@ if(isset($_POST['submit'])) {
 
             if ($_SESSION['user_id'] == 1) {
                 $_SESSION['key'] = $user_details['name'];
+                $_SESSION['type'] = ''; //this part determines what options/privilleges the user gets
                 header("Location: admin/index.php");
             } else {
                 header("Location: user/index.php");
