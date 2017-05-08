@@ -78,7 +78,7 @@ include 'header.php';
                         echo '
                         <div class="col-sm-4 col-lg-4 col-md-4">
                             <div class="thumbnail">
-                                <img src="'.$row['pic_url'].'" alt="'.$row['name'].'">
+                                <img class="img-responsive" src="uploads/'.$row['pic_url'].'" alt="'.$row['name'].'">
                                 <div class="caption">
                                     <h4 class="pull-right">R'.$row['price'].'</h4>
                                     <h4><a href="item.php">'.$row['name'].'</a>
