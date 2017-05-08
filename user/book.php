@@ -12,20 +12,22 @@ if(isset($_SESSION['user_id']) == '' ) {
 
 if(isset($_POST['submit'])) {
 
+
     $name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
     $serial = mysqli_real_escape_string($con, strip_tags(trim($_POST["serial"])));
     $type = mysqli_real_escape_string($con, strip_tags(trim($_POST["type"])));
-    //$pic_url = mysqli_real_escape_string($con, strip_tags(trim($_POST["pic_url"])));
     $description = mysqli_real_escape_string($con, strip_tags(trim($_POST["description"])));
     $date = date("Y-m-d H:i:s");
-    $user = $_SESSION['user_id'];
+    $target_dir = "../uploads/";
+    $url = basename( $_FILES["fileToUpload"]["name"]);
+    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+    $user = $_SESSION['user_id'];    
 
     if($name !='' && $serial !='' && $type !='' && $description !=''){
 
-        $sql = "INSERT INTO job(user, name, serial, type, description, date)
-        VALUES('".$user."', '".$name."', '".$serial."', '".$type."', '".$description."', '".$date."')";
-        mysqli_query($con, $sql);
-        $_SESSION['success'] = 'Your device has been added.';
+        $sql = "INSERT INTO job(user, name, serial, type, pic_url, description, date)
+        VALUES('".$user."', '".$name."', '".$serial."', '".$type."', '".$url."', '".$description."', '".$date."')";
+        upload($url, $target_dir, $target_file, $sql, $con);
 
     }else{
         $_SESSION['failure'] = 'Make sure you have filled all fields.';
@@ -74,18 +76,19 @@ include 'header.php';
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-offset-3 col-md-6">
-                                <form role="form" method="post">
+                                <form role="form" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label>Device name</label>
-                                        <input type="date" name="name" class="form-control" placeholder="Enter text">
+                                        <input type="text" name="name" class="form-control" placeholder="Enter text">
                                     </div>
                                     <div class="form-group">
                                         <label>Serial number</label>
                                         <input name="serial" class="form-control" placeholder="Enter text">
                                     </div>                                        
                                     <div class="form-group">
+                                    <label>Device type</label>
                                         <select name="type" class="form-control">
-                                            <option value="" selected="selected">Device type</option>
+                                            <option value="" selected="selected">Select type</option>
                                             <?php
                                             $sql = "SELECT * FROM category ORDER BY name ASC";
                                             $res = mysqli_query($con, $sql);
@@ -100,7 +103,7 @@ include 'header.php';
                                     </div>
                                     <div class="form-group">
                                         <label>Upload picture</label>
-                                        <input type="file">
+                                        <input type="file" name="fileToUpload">
                                     </div>
                                     <div class="form-group">
                                         <label>What happened to the device</label>

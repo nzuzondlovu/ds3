@@ -52,7 +52,7 @@ if(mysqli_num_rows($res) > 0) {
 		Price : R '.$row['price'].'<br>
 		Date : '.date("M d, y",strtotime($row['date'])).'<br>
 		Description : '.$row['description'].'<br>
-		<img class="img-responsive" src="'.$row['pic_url'].'">';
+		<img class="img-responsive" src="../uploads/'.$row['pic_url'].'">';
 	}
 }
 ?>

@@ -14,24 +14,19 @@ if(isset($_POST['submit'])) {
 
     $name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
     $type = mysqli_real_escape_string($con, strip_tags(trim($_POST["type"])));
-    //$pic_url = mysqli_real_escape_string($con, strip_tags(trim($_POST["pic_url"])));
     $description = mysqli_real_escape_string($con, strip_tags(trim($_POST["description"])));
     $price = mysqli_real_escape_string($con, strip_tags(trim($_POST["price"])));
-    $pic_url = '';
-    $date = date("Y-m-d H:i:s");
+    $target_dir = "../uploads/";
+    $url = basename( $_FILES["fileToUpload"]["name"]);
+    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
     $user = $_SESSION['user_id'];
+    $date = date("Y-m-d H:i:s");
 
+    $sql = "INSERT INTO product(user, name, description, type, price, pic_url, date)
+        VALUES('".$user."', '".$name."', '".$description."', '".$type."', '".$price."', '".$url."', '".$date."')";
 
-    if($name != '' && $type != '' && $description != '' && $price != '') {
+    upload($url, $target_dir, $target_file, $sql, $con);
 
-        $sql = "INSERT INTO product(user, name, description, type, price, pic_url, date)
-        VALUES('".$user."', '".$name."', '".$description."', '".$type."', '".$price."', '".$pic_url."', '".$date."')";
-        mysqli_query($con, $sql);
-        $_SESSION['success'] = 'Your new product was added successfully.';
-        header("Location: items.php");
-    }else {
-        $_SESSION['failure'] = 'Please fill in all fields.';
-    }
 }
 ?>
 
@@ -74,13 +69,13 @@ include 'header.php';
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-offset-3 col-md-6">
-                                <form role="form" method="post">
+                                <form role="form" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label>Device name</label>
                                         <input name="name" class="form-control" placeholder="Enter text">
                                     </div>
                                     <div class="form-group">
-                                    <label>Device type</label>
+                                        <label>Device type</label>
                                         <select name="type" class="form-control">
                                             <option value="" selected="selected">Select type</option>
                                             <?php
@@ -101,7 +96,7 @@ include 'header.php';
                                     </div>
                                     <div class="form-group">
                                         <label>Upload picture</label>
-                                        <input type="file">
+                                        <input type="file" name="fileToUpload">
                                     </div>
                                     <div class="form-group">
                                         <label>Device description</label>

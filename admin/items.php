@@ -79,7 +79,7 @@ include 'header.php';
 												<td>'.$row['description'].'</td>
 												<td>'.$row['type'].'</td>
 												<td>'.$row['price'].'</td>
-												<td><img src="'.$row['pic_url'].'"></td>
+												<td><img src="../uploads/'.$row['pic_url'].'" class="img-responsive"></td>
 												<td>'.date("M d, y",strtotime($row['date'])).'</td>
 												<td>'.$button.'</td>
 											</tr>';
