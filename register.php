@@ -9,14 +9,15 @@ if(isset($_POST['submit'])) {
     $surname = mysqli_real_escape_string($con, strip_tags(trim($_POST["surname"])));
     $cell = mysqli_real_escape_string($con, strip_tags(trim($_POST["cell"])));
     $idnumber = mysqli_real_escape_string($con, strip_tags(trim($_POST["idnumber"])));
+    $location = mysqli_real_escape_string($con, strip_tags(trim($_POST["location"])));
     $email = mysqli_real_escape_string($con, strip_tags(trim($_POST["email"])));
     $password = md5(mysqli_real_escape_string($con, strip_tags(trim($_POST["password"]))));
     $role = '';
 
-    if($name !='' && $surname !='' && $cell !='' && $idnumber !='' && $email !='' && $password !=''){
+    if($name !='' && $surname !='' && $cell !='' && $idnumber !='' && $location !='' && $email !='' && $password !=''){
 
-        $sql = "INSERT INTO user(name, surname, cell, idnumber, email, password, role)
-        VALUES('".$name."', '".$surname."', '".$cell."', '".$idnumber."', '".$email."', '".$password."', '".$role."')";
+        $sql = "INSERT INTO user(name, surname, cell, idnumber, location, email, password, role)
+        VALUES('".$name."', '".$surname."', '".$cell."', '".$idnumber."', '".$location."', '".$email."', '".$password."', '".$role."')";
         mysqli_query($con, $sql);
         $_SESSION['success'] = 'You have been registered succesfully, please log in.';
         header("Location: login.php");
@@ -79,7 +80,7 @@ if(isset($_POST['submit'])) {
                             <h3 class="panel-title">Please Register</h3>
                         </div>
                         <div class="panel-body">
-                            <form role="form" method="post">
+                            <form role="form" method="post" id="form">
                                 <fieldset>
                                     <div class="form-group">
                                         <input class="form-control" placeholder="Name" name="name" type="text" autofocus>
@@ -94,7 +95,7 @@ if(isset($_POST['submit'])) {
                                         <input class="form-control" placeholder="ID Number" name="idnumber" type="number" value="">
                                     </div>
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="Location" name="location" type="text" value="">
+                                        <input id="geocomplete" class="form-control" placeholder="Location" name="location" type="text" value="">
                                     </div>
                                     <div class="form-group">
                                         <input class="form-control" placeholder="E-mail" name="email" type="email" value="">
@@ -118,6 +119,19 @@ if(isset($_POST['submit'])) {
         </div>
 
         <!-- jQuery -->
+
+        <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key=AIzaSyDeSnzn_iwMZkhJrjDNYuTkPkfGeFdyWps"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+        <script src="js/jquery.geocomplete.js"></script>
+
+        <script>
+          $('#geocomplete').geocomplete({
+            details: '#form',
+            detailsAttribute: "data-geo"
+          });
+        </script>
+
         <script src="js/jquery.min.js"></script>
 
         <!-- Bootstrap Core JavaScript -->
