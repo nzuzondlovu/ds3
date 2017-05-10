@@ -16,6 +16,7 @@
 
     <!-- Custom CSS -->
     <link href="css/shop-homepage.css" rel="stylesheet">
+    <link href="admin/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -60,9 +61,26 @@
                         </li>
                         <li>
                             <a href="login.php">Login</a>
-                        </li> 
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-shopping-cart fa-fw"></i> <i class="fa fa-caret-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-alerts">
+                            <?php
+                            echo $_SESSION['cart'];
+                            ?>
+                                <li>
+                                    <a class="text-center" href="user/">
+                                        <strong>See All Items</strong>
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- /.dropdown-alerts -->
+                        </li>
                     </ul>
-                </div>
+                </div>                
                 <!-- /.navbar-collapse -->
             </div>
             <!-- /.container -->
