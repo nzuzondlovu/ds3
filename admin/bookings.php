@@ -91,7 +91,7 @@ include 'header.php';
 												<td>'.$row['name'].'</td>
 												<td>'.$row['serial'].'</td>
 												<td>'.$row['type'].'</td>
-												<td><img src="'.$row['pic_url'].'"></td>
+												<td><img src="../uploads/'.$row['pic_url'].'"></td>
 												<td>'.$row['description'].'</td>
 												<td>'.date("M d, y",strtotime($row['date_in'])).'</td>
 												<td>'.$row['status'].'</td>
