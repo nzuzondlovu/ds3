@@ -74,7 +74,7 @@ include 'header.php';
                             <!-- /.col-lg-6 (nested) -->
 
                             <div class="col-md-6">
-                                <form role="form" method="post">
+                                <form role="form" method="post" id="form">
                                     <div class="form-group">
                                         <label>Email</label>
                                         <input name="email" class="form-control" value="<?php
@@ -89,7 +89,7 @@ include 'header.php';
                                         $res = mysqli_query($con, "SELECT * FROM user WHERE id='".$_SESSION['user_id']."' ");
                                         $row = mysqli_fetch_assoc($res);
                                         echo $row['location'];
-                                        ?> ">
+                                        ?> " id="geolocation">
                                     </div>
                                     <div class="form-group">
                                         <label>Password</label>
@@ -114,6 +114,18 @@ include 'header.php';
     <!-- /.container-fluid -->
 </div>
 <!-- /#page-wrapper -->
+
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key=AIzaSyDeSnzn_iwMZkhJrjDNYuTkPkfGeFdyWps"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+        <script src="../js/jquery.geocomplete.js"></script>
+
+        <script>
+          $('#geocomplete').geocomplete({
+            details: '#form',
+            detailsAttribute: "data-geo"
+          });
+        </script>
 
 <?php
 include 'footer.php';

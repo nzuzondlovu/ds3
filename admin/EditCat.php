@@ -27,7 +27,7 @@ if(isset($_POST['submit'])) {
 
 		$sql = "UPDATE category SET name='".$name."', type='".$type."', description='".$description."' WHERE id='".$id."'";
 		mysqli_query($con, $sql);
-		$_SESSION['success'] = 'Your new Category was added successfully.';
+		$_SESSION['success'] = 'Your new Category was updated successfully.';
 		header("Location: viewcat.php");
 	}else {
 		$_SESSION['failure'] = 'Please fill in all fields.';
@@ -49,7 +49,7 @@ if(mysqli_num_rows($res) > 0) {
 		Name : '.$row['name'].'<br>
 		Type : '.$row['type'].'<br>
 		Description : '.$row['description'].'<br>
-		Date : '.date("M d, y",strtotime($row['date'])).'
+		Date : '.date("M d, y",strtotime($row['dateCreated'])).'
 		';
 	
 	}
@@ -105,7 +105,11 @@ include 'header.php';
 								<form role="form" method="post">
 									<div class="form-group">
 										<label>Category Name</label>
-										<input type="decimal" name="name" class="form-control" placeholder="Enter New Name">
+										<input type="decimal" name="name" class="form-control" value="<?php
+                                        $res = mysqli_query($con, "SELECT * FROM category WHERE id='".$id."' ");
+                                        $row = mysqli_fetch_assoc($res);
+                                        echo $row['name'];
+                                        ?> ">
 									</div>
 									<div class="form-group">
 										<label>Category Type</label>

@@ -11,7 +11,7 @@ if(isset($_SESSION['key']) == '' ) {
 
 <?php
 if (isset($_GET['id']) && $_GET['id'] != null) {
- $id = (int)$_GET["id"];
+	$id = (int)$_GET["id"];
 } else {
 	header('Location: viewcat.php');
 }
@@ -50,36 +50,36 @@ if(mysqli_num_rows($res) > 0) {
 		Category Name : '.$row['name'].'<br>
 		Category Type : '.$row['type'].'<br>
 		Category Description : '.$row['description'].'<br>
-		Date : '.date("M d, y",strtotime($row['date'])).'<br>
+		Date : '.date("M d, y",strtotime($row['dateCreated'])).'<br>
 		';
 		
 	}
 }
 ?>
 <?php
-    require 'database.php';
-    $Id = 0;
-     
-    if ( !empty($_GET['id'])) {
-        $id = $_REQUEST['id'];
-    }
-     
-    if ( !empty($_POST)) {
+require 'database.php';
+$Id = 0;
+
+if ( !empty($_GET['id'])) {
+	$id = $_REQUEST['id'];
+}
+
+if ( !empty($_POST)) {
         // keep track post values
-        $id = $_POST['id'];
-         
+	$id = $_POST['id'];
+	
         // delete data
-        $pdo = Database::connect();
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "DELETE FROM category  WHERE id = ?";
-        $q = $pdo->prepare($sql);
-        $q->execute(array($id));
-        Database::disconnect();
-        header("Location: viewcat.php");
-         
-    }
+	$pdo = Database::connect();
+	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$sql = "DELETE FROM category  WHERE id = ?";
+	$q = $pdo->prepare($sql);
+	$q->execute(array($id));
+	Database::disconnect();
+	header("Location: viewcat.php");
+	
+}
 ?>
- 
+
 <?php
 include 'header.php';
 ?>
@@ -118,20 +118,20 @@ include 'header.php';
 					</div>
 					<div class="panel-body">
 						<div class="row">
-							<div class="col-md-6">
-							<h2>Category details</h2>
-							<?php
-							echo $delete;
-							?>
-					
-						<form class="form-horizontal" action="DeleteCat.php" method="post">
-                      <input type="hidden" name="id" value="<?php echo $id;?>"/>
-                      <p class="alert alert-error"><h4><strong>Are you sure to delete ?</strong></h4></p>
-                      <div class="form-actions">
-                          <button type="submit" class="btn btn-danger">Yes</button>
-                          <a class="btn" href="viewcat.php">No</a>
-                        </div>
-                    </form>
+							<div class="col-md-offset-3 col-md-6">
+								<h2>Category details</h2>
+								<?php
+								echo $delete;
+								?>
+								
+								<form class="form-horizontal" action="DeleteCat.php" method="post">
+									<input type="hidden" name="id" value="<?php echo $id;?>"/>
+									<p class="alert alert-error"><h4><strong>Are you sure to delete ?</strong></h4></p>
+									<div class="form-actions">
+										<button type="submit" class="btn btn-danger">Yes</button>
+										<a class="btn btn-primary" href="viewcat.php">No</a>
+									</div>
+								</form>
 							</div>
 
 							<!-- /.col-lg-6 (nested) -->
