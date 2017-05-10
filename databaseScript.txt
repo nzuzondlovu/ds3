@@ -63,3 +63,15 @@ CREATE TABLE `wallpaper` (
 	`pic_url` varchar(100) NOT NULL,
 	PRIMARY KEY (`id`)
 )
+
+CREATE TABLE `review` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT ,
+	`prod_id` INT(11) NOT NULL ,
+	`user` INT(11) NOT NULL ,
+	`name` VARCHAR(20) NOT NULL ,
+	`message` VARCHAR(160) NOT NULL ,
+	`rate` INT(1) NOT NULL ,
+	`date` DATETIME NOT NULL ,
+	PRIMARY KEY (`id`)
+)
+
