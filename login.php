@@ -36,14 +36,20 @@ if(isset($_POST['submit'])) {
             $_SESSION['idnumber'] = $user_details['idnumber'];
             $_SESSION['cell'] = $user_details['cell'];
             $_SESSION['email'] = $user_details['email'];
-            $_SESSION['login_success'] = 'Welcome to \''.$sitename.'\' user dashboard.';
+            $_SESSION['success'] = 'Welcome to \''.$sitename.'\' user dashboard.';
 
             if ($_SESSION['user_id'] == 1) {
                 $_SESSION['key'] = $user_details['name'];
                 $_SESSION['type'] = ''; //this part determines what options/privilleges the user gets
                 header("Location: admin/index.php");
             } else {
-                header("Location: user/index.php");
+                if (isset($_GET['id']) && $_GET['id'] != '') {
+                    $sql = "UPDATE cart SET user_id='".$_SESSION['user_id']."' WHERE prod_id='".$_GET['id']."' AND date='".$_SESSION['pDate']."'";
+                    mysqli_query($con, $sql);
+                    header('Location: item.php?id='.$_GET['id']);
+                } else {
+                    header("Location: user/index.php");
+                }                
             }
 
         } else {

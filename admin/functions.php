@@ -144,19 +144,53 @@ function pagination($con, $sql, $num_rec_per_page, $page)
 </div>';
 }
 
-function cart($id, $title, $amount)
+function cart($id, $title, $price, $quantity, $con)
 {
-	$request = array('id'=>$id, 'title'=>$title, 'amount'=>$amount);
-	$_SESSION['cart'] .= '
-	<li>
-		<a href="item.php?id='.$id.'">
-			<div>
-				'.$title.'
-				<span class="pull-right text-muted small">R '.$amount.'</span>
-			</div>
-		</a>
-	</li>
-	<li class="divider"></li>';
+	$date = date("Y-m-d H:i:s");
+
+	if (isset($_SESSION['user_id'])) {
+
+		$sql = "SELECT * FROM cart WHERE user_id='".$_SESSION['user_id']."' AND prod_id='".$id."'";
+		$res = mysqli_query($con, $sql);
+		$tot = mysqli_num_rows($res);
+
+		if ($tot > 1) {
+			echo $sql = "UPDATE cart SET num=num+'".$quantity."'";
+			//mysqli_query($con, $sql);
+		} else {
+			$sql = "INSERT INTO cart(user_id, prod_id, name, price, num, date)
+			VALUES('".$_SESSION['user_id']."', '".$id."', '".$title."', '".$price."', '".$quantity."', '".$date."')";
+			mysqli_query($con, $sql);
+		}
+
+		$sql = "SELECT * FROM cart WHERE user_id='".$_SESSION['user_id']."' ORDER BY prod_id";
+		$res = mysqli_query($con, $sql);
+
+		if (mysqli_num_rows($res) > 0) {
+
+			while ($row = mysqli_fetch_assoc($res)) {
+				$_SESSION['cart'] .= '
+				<li>
+					<a href="item.php?id='.$id.'">
+						<div>
+							'.$row['name'].'
+							<span class="pull-right text-muted small">R '.$row['price'].'</span>
+						</div>
+					</a>
+				</li>
+				<li class="divider"></li>';
+			}
+		}
+		
+	} else {
+
+		$sql = "INSERT INTO cart(user_id, prod_id, name, price, num, date)
+		VALUES('', '".$id."', '".$title."', '".$price."', '".$quantity."', '".$date."')";
+		mysqli_query($con, $sql);
+		$_SESSION['pDate'] = $date;
+		header('Location: login.php?id='.$id);
+	}
+	
 }
 
 ?>

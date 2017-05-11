@@ -277,6 +277,9 @@
                             <a href="../user/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
+                            <a href="cart.php"><i class="fa fa-shopping-cart fa-fw"></i> View Cart</a>
+                        </li>
+                        <li>
                             <a href="bookings.php"><i class="fa fa-table fa-fw"></i> View Bookings</a>
                         </li>
                         <li>

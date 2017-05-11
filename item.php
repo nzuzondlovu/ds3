@@ -32,9 +32,9 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
 
 if (isset($_POST['quantity'])) {
     $quantity = (int)mysqli_real_escape_string($con, strip_tags(trim($_POST['num'])));
-    $amount = $price * $quantity;
+    //$amount = $price * $quantity;
 
-    cart($id, $title, $amount);
+    cart($id, $title, $price, $quantity, $con);
 }
 ?>
 
@@ -80,7 +80,21 @@ include 'header.php';
         </div>
 
         <div class="col-md-9">
+            <div>
+                <?php if(isset($_SESSION['failure']) && $_SESSION['failure'] != '') { ?>
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <?php echo $_SESSION['failure']; unset($_SESSION['failure']); ?>
+                </div>
+                <?php } ?>
 
+                <?php if(isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
+                </div>
+                <?php } ?>
+            </div>
             <div class="thumbnail">
                 <?php
                 echo '

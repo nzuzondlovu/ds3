@@ -56,20 +56,30 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav pull-right">
-                        <li>
-                            <a href="register.php">Register</a>
-                        </li>
-                        <li>
-                            <a href="login.php">Login</a>
-                        </li>
+                        <?php
+                        if (isset($_SESSION['user_id'])) {
+                            echo '
+                            <li>
+                                <a href="user/index.php">Dashboard</a>
+                            </li>';
+                        } else {
+                            echo '
+                            <li>
+                                <a href="register.php">Register</a>
+                            </li>
+                            <li>
+                                <a href="login.php">Login</a>
+                            </li>';
+                        }
+                        ?>                        
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 <i class="fa fa-shopping-cart fa-fw"></i> <i class="fa fa-caret-down"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-alerts">
-                            <?php
-                            echo $_SESSION['cart'];
-                            ?>
+                                <?php
+                                echo $_SESSION['cart'];
+                                ?>
                                 <li>
                                     <a class="text-center" href="user/">
                                         <strong>See All Items</strong>

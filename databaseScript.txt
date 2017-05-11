@@ -75,3 +75,13 @@ CREATE TABLE `review` (
 	PRIMARY KEY (`id`)
 )
 
+CREATE TABLE `cart` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT ,
+	`user_id` INT(11) NOT NULL ,
+	`prod_id` INT(11) NOT NULL ,
+	`name` VARCHAR(50) NOT NULL ,
+	`price` DECIMAL(7,2) NOT NULL ,
+	`date` DATETIME NOT NULL ,
+	PRIMARY KEY (`id`)
+)
+
