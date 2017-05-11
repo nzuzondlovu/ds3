@@ -95,54 +95,16 @@ include 'header.php';
 						}
 
 						$sql = "SELECT * FROM product";
-						$rs_result = mysqli_query($con, $sql); 
-						$total_records = mysqli_num_rows($rs_result);  
-						$total_pages = ceil($total_records / $num_rec_per_page);
-
-						if ($total_pages == 0) {
-							$total_pages = 1;
-						}
-
-						echo '
+						pagination($con, $sql, $num_rec_per_page, $page);
+						?>
 					</div>
-					<div class="col-lg-12">
-						<p align="center">
-						<a class="btn btn-primary" href="?page=1">'."|<".'</a> '; 
-
-							if ($page < 4) {
-								for ($i=1; $i<$page; $i++) {
-									echo '<a class="btn btn-primary" href="?page='.$i.'">'.$i.'</a> ';
-								};
-							} else {
-								for ($i=($page-3); $i<$page; $i++) {
-									echo '<a class="btn btn-primary" href="?page='.$i.'">'.$i.'</a> ';
-								};
-							}
-							echo '<a class="btn btn-default" href="?page='.$page.'">'.$page.'</a> ';
-
-							if ($page >= ($total_pages - 3)) {
-								for ($i=($page+1); $i<=($total_pages); $i++) {
-									echo '<a class="btn btn-primary" href="?page='.$i.'">'.$i.'</a> ';
-								};
-							} else {
-								for ($i=($page+1); $i<=($page+3); $i++) {
-									echo '<a class="btn btn-primary" href="?page='.$i.'">'.$i.'</a> ';
-								};
-							}
-
-							echo '
-							<a class="btn btn-primary" href="?page='.$total_pages.'">'.">|".'</a>
-						</p>
-					</div>';
-					?>
+					<!-- /.table-responsive -->
 				</div>
-				<!-- /.table-responsive -->
+				<!-- /.panel-body -->
 			</div>
-			<!-- /.panel-body -->
+			<!-- /.panel -->
 		</div>
-		<!-- /.panel -->
 	</div>
-</div>
 </div>
 <!-- /.container-fluid -->
 </div>
