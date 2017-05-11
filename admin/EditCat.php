@@ -51,7 +51,7 @@ if(mysqli_num_rows($res) > 0) {
 		Description : '.$row['description'].'<br>
 		Date : '.date("M d, y",strtotime($row['dateCreated'])).'
 		';
-	
+		
 	}
 }
 ?>
@@ -90,15 +90,15 @@ include 'header.php';
 				</div>
 				<div class="panel panel-default">
 					<div class="panel-heading">
-					Enter	Category details
+						Enter	Category details
 					</div>
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-md-6">
-							<h2>Category details</h2>
-							<?php
-							echo $cat;
-							?>
+								<h2>Category details</h2>
+								<?php
+								echo $cat;
+								?>
 							</div>
 
 							<div class="col-md-6">
@@ -106,18 +106,18 @@ include 'header.php';
 									<div class="form-group">
 										<label>Category Name</label>
 										<input type="decimal" name="name" class="form-control" value="<?php
-                                        $res = mysqli_query($con, "SELECT * FROM category WHERE id='".$id."' ");
-                                        $row = mysqli_fetch_assoc($res);
-                                        echo $row['name'];
-                                        ?> ">
+										$res = mysqli_query($con, "SELECT * FROM category WHERE id='".$id."' ");
+										$row = mysqli_fetch_assoc($res);
+										echo $row['name'];
+										?> ">
 									</div>
 									<div class="form-group">
 										<label>Category Type</label>
 										<select name="type" class="form-control">
-                                            <option value="" selected="selected">Select type</option>
-                                            <option value="Hardware" >Hardware</option>
-                                            <option value="Software" >Software</option>
-                                        </select>
+											<option value="" selected="selected">Select type</option>
+											<option value="Hardware" >Hardware</option>
+											<option value="Software" >Software</option>
+										</select>
 									</div>
 									<div class="form-group">
 										<label>Category Description</label>

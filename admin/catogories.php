@@ -21,7 +21,7 @@ if(isset($_POST['submit'])) {
 
     if($name != '' && $type != '' && $description != '') {
 
-        $sql = "INSERT INTO category(name, type, description,dateCreated)
+        $sql = "INSERT INTO category(name, type, description, dateCreated)
         VALUES('".$name."', '".$type."','".$description."' , '".$date."')";
         mysqli_query($con, $sql);
         $_SESSION['success'] = 'Your new category was added successfully.';
@@ -77,7 +77,7 @@ include 'header.php';
                                         <input name="name" class="form-control" placeholder="Enter text">
                                     </div>
                                     <div class="form-group">
-                                    <label>Category type</label>
+                                        <label>Category type</label>
                                         <select name="type" class="form-control">
                                             <option value="" selected="selected">Select type</option>
                                             <option value="Hardware" >Hardware</option>

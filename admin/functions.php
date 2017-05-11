@@ -86,4 +86,77 @@ if ($uploadOk == 0) {
 }
 }
 
+function catagory($con)
+{
+
+	$sql = "SELECT * FROM category ORDER BY name ASC";
+	$res = mysqli_query($con, $sql);
+
+	if (mysqli_num_rows($res) > 0) {
+
+		while ($row = mysqli_fetch_assoc($res)) {
+
+			echo '<a href="?cat='.$row['name'].'" class="list-group-item">'.$row['name'].'</a>';
+		}
+	}
+}
+
+function pagination($con, $sql, $num_rec_per_page, $page)
+{
+	$rs_result = mysqli_query($con, $sql); 
+	$total_records = mysqli_num_rows($rs_result);  
+	$total_pages = ceil($total_records / $num_rec_per_page);
+
+	if ($total_pages == 0) {
+		$total_pages = 1;
+	}
+
+	echo '
+</div>
+<div class="col-lg-12">
+	<p align="center">
+		<a class="btn btn-primary" href="?page=1">'."|<".'</a> '; 
+
+		if ($page < 4) {
+			for ($i=1; $i<$page; $i++) {
+				echo '<a class="btn btn-primary" href="?page='.$i.'">'.$i.'</a> ';
+			};
+		} else {
+			for ($i=($page-3); $i<$page; $i++) {
+				echo '<a class="btn btn-primary" href="?page='.$i.'">'.$i.'</a> ';
+			};
+		}
+		echo '<a class="btn btn-default" href="?page='.$page.'">'.$page.'</a> ';
+
+		if ($page >= ($total_pages - 3)) {
+			for ($i=($page+1); $i<=($total_pages); $i++) {
+				echo '<a class="btn btn-primary" href="?page='.$i.'">'.$i.'</a> ';
+			};
+		} else {
+			for ($i=($page+1); $i<=($page+3); $i++) {
+				echo '<a class="btn btn-primary" href="?page='.$i.'">'.$i.'</a> ';
+			};
+		}
+
+		echo '
+		<a class="btn btn-primary" href="?page='.$total_pages.'">'.">|".'</a>
+	</p>
+</div>';
+}
+
+function cart($id, $title, $amount)
+{
+	$request = array('id'=>$id, 'title'=>$title, 'amount'=>$amount);
+	$_SESSION['cart'] .= '
+	<li>
+		<a href="item.php?id='.$id.'">
+			<div>
+				'.$title.'
+				<span class="pull-right text-muted small">R '.$amount.'</span>
+			</div>
+		</a>
+	</li>
+	<li class="divider"></li>';
+}
+
 ?>
