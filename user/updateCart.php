@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include '../admin/functions.php';
 ?>
 
@@ -29,6 +30,17 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 			$tot;
 		}
 	}
+}
+?>
+
+<?php
+
+if(isset($_POST['remove'])) {
+
+	$sql = "DELETE FROM cart WHERE id='".$id."'";
+	mysqli_query($con, $sql);
+	$_SESSION['success'] = 'Successfully deleted order.';
+	header("Location: cart.php");
 }
 ?>
 
@@ -102,10 +114,10 @@ include 'header.php';
 									<div class="form-group">
 										<label>Change status</label>
 										<input class="form-control" type="number" name="num" value="<?php
-                                        $res = mysqli_query($con, "SELECT * FROM cart WHERE id='".$_GET['id']."' ");
-                                        $row = mysqli_fetch_assoc($res);
-                                        echo $row['num'];
-                                        ?>">
+										$res = mysqli_query($con, "SELECT * FROM cart WHERE id='".$_GET['id']."' ");
+										$row = mysqli_fetch_assoc($res);
+										echo $row['num'];
+										?>">
 									</div>
 									<button name="submit" type="submit" class="btn btn-primary">Submit Update</button>
 									<button name="remove" type="submit" class="btn btn-danger">Remove Entirely</button>
