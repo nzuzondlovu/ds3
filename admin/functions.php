@@ -2,14 +2,14 @@
 $sitename = 'Infinity';
 $siteaddress = '';
 session_start();
-
+//"localhost","thehewri_main","SzlqF-n,X2m$","thehewri_master"
 $con = mysqli_connect("localhost","nzuzor1","hohi74Ro", "shop");
 
 function user($type)
 {
 	$menu = '
 	<li>
-		<a href="../admin/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+		<a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 	</li>
 	<li>
 		<a href="bookings.php"><i class="fa fa-table fa-fw"></i> View Bookings</a>

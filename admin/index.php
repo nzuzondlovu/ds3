@@ -1,5 +1,12 @@
 <?php
+ob_start();
 include 'functions.php';
+?>
+
+<?php
+if(isset($_SESSION['key']) == '' ) {
+    header("location:../login.php");
+}
 ?>
 
 <?php

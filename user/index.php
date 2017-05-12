@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include '../admin/functions.php';
 ?>
 
@@ -54,12 +55,22 @@ include 'header.php';
                             <i class="fa fa-tasks fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">0</div>
+                            <div class="huge">
+                                <?php
+                                $sql = "SELECT * FROM job WHERE user='".$_SESSION['user_id']."'";
+                                $rs_result = mysqli_query($con, $sql); //run the query
+                                $cart = mysqli_num_rows($rs_result);
+                                if ($cart < 0) {
+                                    $cart = 0;
+                                }
+                                echo $cart;
+                                ?>
+                            </div>
                             <div>All Bookings!</div>
                         </div>
                     </div>
                 </div>
-                <a href="#">
+                <a href="bookings.php">
                     <div class="panel-footer">
                         <span class="pull-left">View Details</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
