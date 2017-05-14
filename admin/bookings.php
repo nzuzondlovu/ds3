@@ -100,7 +100,7 @@ include 'header.php';
 												<td>'.date("M d, y",strtotime($row['date_out'])).'</td>
 												<td>'.date("M d, y",strtotime($row['date'])).'</td>
 												<td>
-													<a href="allocate.php?id='.$row['id'].'" class="btn btn-primary btn-block btn-small">Update Booking</a>
+													<a href="quotation.php?id='.$row['id'].'" class="btn btn-primary btn-block btn-small">Create Quotation</a>
 												</td>
 											</tr>';
 										}

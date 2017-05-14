@@ -5,14 +5,34 @@ session_start();
 //"localhost","thehewri_main","SzlqF-n,X2m$","thehewri_master"
 $con = mysqli_connect("localhost","nzuzor1","hohi74Ro", "shop");
 
+function head($type)
+{
+	$_SESSION['kind'] = 'Admin';
+
+	if ($type == 'technician') {
+
+		$_SESSION['kind'] = 'Technician';
+	} else if ($type == 'clerk') {
+
+		$_SESSION['kind'] = 'Clerk';
+	}
+}
+
 function user($type)
 {
+	
 	$menu = '
 	<li>
 		<a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 	</li>
 	<li>
 		<a href="bookings.php"><i class="fa fa-table fa-fw"></i> View Bookings</a>
+	</li>
+	<li>
+		<a href="viewquot.php"><i class="fa fa-table fa-fw"></i> View Quotation</a>
+	</li>
+	<li>
+		<a href="suppliers.php"><i class="fa fa-table fa-fw"></i> View Suppliers</a>
 	</li>
 	<li>
 		<a href="viewcat.php"><i class="fa fa-edit fa-fw"></i> Categories</a>
@@ -24,16 +44,63 @@ function user($type)
 		<a href="items.php"><i class="fa fa-table fa-fw"></i> View Products</a>
 	</li>
 	<li>
+		<a href="users.php"><i class="fa fa-table fa-fw"></i> View Users</a>
+	</li>
+	<li>
+		<a href="orders.php"><i class="fa fa-table fa-fw"></i> View Orders</a>
+	</li>
+	<li>
 		<a href="promo.php"><i class="fa fa-table fa-fw"></i> Promotional Items</a>
 	</li>
 	<li>
 		<a href="update.php"><i class="fa fa-cogs fa-fw"></i> Update Details</a>
 	</li>';
 
-	if ($type == 'tech') {
-		$menu = 'hello tech';
+	if ($type == 'technician') {
+
+		$menu = '
+		<li>
+			<a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+		</li>	
+		<li>
+			<a href="bookings.php"><i class="fa fa-table fa-fw"></i> Create Quotation</a>
+		</li>
+		<li>
+			<a href="viewquot.php"><i class="fa fa-table fa-fw"></i> View Quotation</a>
+		</li>	
+		<li>
+			<a href="items.php"><i class="fa fa-edit fa-fw"></i> Products</a>		
+		</li>
+		<li>
+			<a href="update.php"><i class="fa fa-cogs fa-fw"></i> Update Details</a>
+		</li>';
 	} else if ($type == 'clerk') {
-		$menu = 'hello clerk';
+
+		$menu = '
+		<li>
+			<a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+		</li>
+		<li>
+			<a href="bookings.php"><i class="fa fa-edit fa-fw"></i> Bookings</a>
+		</li>
+		<li>
+			<a href="addTech.php"><i class="fa fa-edit fa-fw"></i> Add Technician</a>
+		</li>
+		<li>
+			<a href="viewtech.php"><i class="fa fa-edit fa-fw"></i> View Technicians</a>
+		</li>	
+		<li>
+			<a href="quotation.php"><i class="fa fa-table fa-fw"></i> Create Quotation</a>
+		</li>
+		<li>
+			<a href="viewquot.php"><i class="fa fa-table fa-fw"></i> View Quotation</a>
+		</li>
+		<li>
+			<a href="items.php"><i class="fa fa-edit fa-fw"></i> Products</a>
+		</li>
+		<li>
+			<a href="update.php"><i class="fa fa-cogs fa-fw"></i> Update Details</a>
+		</li>';
 	}
 	
 	echo $menu;

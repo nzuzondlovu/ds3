@@ -91,6 +91,11 @@ include 'header.php';
 					</div>
 					<div class="panel-body">
 						<div class="row">
+						<div class="col-lg-12">
+								<div class="pull-right">
+									<a href="bookings.php" class="btn btn-warning">Bookings</a>
+								</div>
+							</div>
 							<div class="col-md-offset-3 col-md-6">
 								<form role="form" method="post">
 									<div class="form-group">
@@ -122,7 +127,7 @@ include 'header.php';
 										<select name="technician" class="form-control">
 											<option value="" selected="selected">Select technician</option>
 											<?php
-											$sql = "SELECT * FROM user WHERE role='Technician'";
+											$sql = "SELECT * FROM technician";
 											$res = mysqli_query($con, $sql);
 
 											if(mysqli_num_rows($res) > 0) {

@@ -14,20 +14,22 @@ if(isset($_SESSION['key']) == '' ) {
 if(isset($_POST['submit'])) {
 
     $name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
-    $type = mysqli_real_escape_string($con, strip_tags(trim($_POST["type"])));
-    $description = mysqli_real_escape_string($con, strip_tags(trim($_POST["description"])));
-    $price = mysqli_real_escape_string($con, strip_tags(trim($_POST["price"])));
-    $target_dir = "../uploads/";
-    $url = basename( $_FILES["fileToUpload"]["name"]);
-    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-    $user = $_SESSION['user_id'];
-    $date = date("Y-m-d H:i:s");
+    $email = mysqli_real_escape_string($con, strip_tags(trim($_POST["email"])));
+    $number = mysqli_real_escape_string($con, strip_tags(trim($_POST["number"])));
+    $address = mysqli_real_escape_string($con, strip_tags(trim($_POST["address"])));
+    $website = mysqli_real_escape_string($con, strip_tags(trim($_POST["website"])));
+    $product = mysqli_real_escape_string($con, strip_tags(trim($_POST["product"])));
 
-    $sql = "INSERT INTO product(user, name, description, type, price, pic_url, date)
-        VALUES('".$user."', '".$name."', '".$description."', '".$type."', '".$price."', '".$url."', '".$date."')";
+    if ($name != '' && $email != '' && $number != '' &&  $address != '' && $website != '' && $product != '') {
 
-    upload($url, $target_dir, $target_file, $sql, $con);
-
+        $sql = "INSERT INTO suppliers(name, product, contactNumber, email, website, address)
+        VALUES('".$name."', '".$product."', '".$number."', '".$email."', '".$website."', '".$address."')";
+        mysqli_query($con, $sql);
+        $_SESSION['success'] = 'You have successfully added a new supplier.';
+        header("Location: suppliers.php");
+    } else {
+        $_SESSION['failure'] = 'Please fill in all the fields.';
+    }
 }
 ?>
 
@@ -40,7 +42,7 @@ include 'header.php';
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Add Product</h1>
+				<h1 class="page-header">Add Supplier</h1>
 			</div>
 			<!-- /.col-lg-12 -->
 		</div>
@@ -65,51 +67,43 @@ include 'header.php';
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Enter item details
+                        Enter supplier details
                     </div>
                     <div class="panel-body">
                         <div class="row">
-                        <div class="col-lg-12">
+                            <div class="col-lg-12">
                                 <div class="pull-right">
-                                    <a href="items.php" class="btn btn-warning">Products</a>
+                                    <a href="suppliers.php" class="btn btn-warning">Suppliers</a>
                                 </div>
                             </div>
                             <div class="col-md-offset-3 col-md-6">
                                 <form role="form" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
-                                        <label>Device name</label>
-                                        <input name="name" class="form-control" placeholder="Enter text">
+                                        <label>Name</label>
+                                        <input type="text" name="name" class="form-control" placeholder="Enter name">
                                     </div>
                                     <div class="form-group">
-                                        <label>Device type</label>
-                                        <select name="type" class="form-control">
-                                            <option value="" selected="selected">Select type</option>
-                                            <?php
-                                            $sql = "SELECT * FROM category ORDER BY name ASC";
-                                            $res = mysqli_query($con, $sql);
-
-                                            if(mysqli_num_rows($res) > 0) {
-                                                while($row = mysqli_fetch_assoc($res)) {
-                                                    echo '<option value="'.$row['name'].'">'.$row['name'].'</option>';
-                                                }
-                                            }
-                                            ?>
-                                        </select>
+                                        <label>Email</label>
+                                        <input type="email" name="email" class="form-control" placeholder="Enter email">
                                     </div>
                                     <div class="form-group">
-                                        <label>Device price</label>
-                                        <input name="price" class="form-control" placeholder="Enter text">
+                                        <label>Contact Number</label>
+                                        <input type="text" name="number" class="form-control" placeholder="Enter number">
                                     </div>
                                     <div class="form-group">
-                                        <label>Upload picture</label>
-                                        <input type="file" name="fileToUpload">
+                                        <label>Address</label>
+                                        <input type="text" name="address" class="form-control" placeholder="Enter address">
                                     </div>
                                     <div class="form-group">
-                                        <label>Device description</label>
-                                        <textarea name="description" class="form-control" rows="3"></textarea>
+                                        <label>Website</label>
+                                        <input type="text" name="website" class="form-control" value="http://">
                                     </div>
-                                    <button name="submit" type="submit" class="btn btn-primary">Submit Device</button>
-                                    <button type="reset" class="btn btn-default">Reset Device</button>
+                                    <div class="form-group">
+                                        <label>Supplied Product</label>
+                                        <input type="text" name="product" class="form-control" placeholder="Enter product">
+                                    </div>
+                                    <button name="submit" type="submit" class="btn btn-primary">Submit Supplier</button>
+                                    <button type="reset" class="btn btn-default">Reset Supplier</button>
                                 </form>
                             </div>
                             <!-- /.col-lg-6 (nested) -->

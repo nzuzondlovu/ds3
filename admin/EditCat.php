@@ -95,6 +95,11 @@ include 'header.php';
 					</div>
 					<div class="panel-body">
 						<div class="row">
+						<div class="col-lg-12">
+								<div class="pull-right">
+									<a href="viewcat.php" class="btn btn-warning">Categories</a>
+								</div>
+							</div>
 							<div class="col-md-6">
 								<h2>Category details</h2>
 								<?php

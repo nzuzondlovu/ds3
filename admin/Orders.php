@@ -9,56 +9,69 @@ if(isset($_SESSION['key']) == '' ) {
 }
 ?>
 
-
 <?php
 include 'header.php';
 ?>
-
-
 
 <!-- Page Content -->
 <div id="page-wrapper">
 	<div class="container-fluid">
 		<div class="row">
-		
 			<div class="col-lg-12">
-				<h1 class="page-header">Orders</h1>
-					
+				<h1 class="page-header">Orders</h1>				
 			</div>
 			<!-- /.col-lg-12 -->
 		</div>
 		<!-- /.row -->
+		<!-- /.row -->
 		<div class="row">
 			<div class="col-lg-12">
+				<div>
+					<?php if(isset($_SESSION['failure']) && $_SESSION['failure'] != '') { ?>
+					<div class="alert alert-danger">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<?php echo $_SESSION['failure']; unset($_SESSION['failure']); ?>
+					</div>
+					<?php } ?>
+
+					<?php if(isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
+					<div class="alert alert-success">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
+					</div>
+					<?php } ?>
+				</div>
 				<div class="panel panel-default">
-					<div class="panel-heading">                      
-                                <form action="Orders.php" role="form" method="post">
-                                    <div class="form-group">
-                                        <label>OrderID</label><br/>
-										<td class="sidebar-search">
-                           					 <label><div class="input-group custom-search-form">
-              <input type="text" name="orde" class="form-control" placeholder="" value="">
-            
+					<div class="panel-heading">
+						Search for order
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-offset-2 col-md-8">
+								<form method="POST">
+									<dl>
+										<dt class="sidebar-search">
+											<div class="input-group custom-search-form">
+												<input type="text" name="query" class="form-control" placeholder="Enter text">
 												<span class="input-group-btn">
-                                    	<button class="btn btn-default" type="button">
-                                        <i class="fa fa-search"></i><label>
-                                    </button>
-                                </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
-                                    </div>
-                                   
-      <button  type="submit" name="search"  class="btn btn-primary">Search</button>
-      <button  type="submit" name="delete"  class="btn btn-primary">Cancel</button>
-      
-      	<?php
+													<button id="search" name="search" type="submit" class="btn btn-primary">Search</button>
+												</span>
+											</div>
+											<!-- /input-group -->
+										</dt>
+									</dl>
+
+									<?php
 									if(isset($_POST['search']))
 									{
-										$name='';
-										$name = mysqli_real_escape_string($con, strip_tags(trim($_POST['orde'])));
+										echo '
+										<h2>
+											Search Results
+										</h2>';
+										
+										$name = mysqli_real_escape_string($con, strip_tags(trim($_POST['query'])));
 
-										$query="SELECT * FROM orders WHERE OrderID=$name";
+										$query="SELECT * FROM orders WHERE supplierName LIKE '%".$name."%' OR productName LIKE '%".$name."%' OR email LIKE '%".$name."%'";
 
 										$result =mysqli_query($con,$query);
 
@@ -68,37 +81,30 @@ include 'header.php';
 											<table class="table">
 												<thead>
 													<tr>
-																<th>OrderID</th>
-																<th>SupplierID</th>
-																<th>SupplierName</th>
-																<th>OrderDate</th>
-																<th>Product</th>
-																<th>Quantity</th>
-																<th>Email</th>											
-																<th>Total Price</th>		
+														<th>ID</th>
+														<th>Supplier ID</th>
+														<th>Supplier</th>
+														<th>Date</th>
+														<th>Quantity</th>
+														<th>Product Name</th>
+														<th>Email</th>
+														<th>Total</th>
 													</tr>
 												</thead>
 												<tbody>';
 													while ($row=mysqli_fetch_array($result)) {
-													$button = '';
-													$button1 = '';
-							if ($row['OrderID'] != 0) {
-							 		$button1 = '<a href="Orders.php?id='.$row['OrderID'].'" class="btn btn-primary">Update</a>';
-									$button = '<a href="Orders.php?id='.$row['OrderID'].'"class="btn btn-primary">Cancel</a>';
-									
-											}
 
 														echo '
 														<tr>
-																	<td>'.$row['OrderID'].'</td>
-																	<td>'.$row['SupplierID'].'</td>
-																	<td>'.$row['SupplierName'].'</td>
-																	<td>'.$row['OrderDate'].'</td>	
-																	<td>'.$row['Quantity'].'</td>											
-																	<td>'.$row['productName'].'</td>
-																	<td>'.$row['Email'].'</td>	
-																	<td>'.$row['TotalPrice'].'</td>									
-																																			
+															<td>'.$row['id'].'</td>
+															<td>'.$row['supplierID'].'</td>
+															<td>'.$row['supplierName'].'</td>
+															<td>'.date("M d, y",strtotime($row['orderDate'])).'</td>
+															<td>'.$row['quantity'].'</td>
+															<td>'.$row['productName'].'</td>
+															<td>'.$row['email'].'</td>
+															<td>R '.$row['totalPrice'].'</td>
+
 														</tr>';
 													}
 
@@ -111,43 +117,32 @@ include 'header.php';
 									}
 
 									?>
-										<?php
-									if(isset($_POST['delete']))
-									{
-										$name='';
-										$name = mysqli_real_escape_string($con, strip_tags(trim($_POST['orde'])));
 
-										$query="DELETE FROM orders WHERE OrderID=$name";
-
-										$result =mysqli_query($con,$query);
-
-									
-
-											echo '
-											<table class="table">
-												<thead>
-													
-												</thead>
-												<tbody>';
-												
-
-													echo '
-												</tbody>
-											</table>';
-
-									}
-
-									?>
-      
-      
-      
-					</div>					
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.col-lg-12 -->
+		</div>
+		<!-- /.row -->
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						List of all orders
+					</div>
 					<!-- /.panel-heading -->
 					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="pull-right">
+									<a href="suppliers.php" class="btn btn-success"> Make Order</a>
+								</div>
+							</div>
+						</div>
 						<div class="table-responsive">
-						
-						
-						
 							<?php
 							$num_rec_per_page=10;
 
@@ -157,12 +152,10 @@ include 'header.php';
 							} else {
 
 								$page=1;
-							}					
-							
-							
+							}
 
 							$start_from = ($page-1) * $num_rec_per_page;
-							$sql = "SELECT * FROM orders ORDER BY OrderID DESC LIMIT $start_from, $num_rec_per_page";
+							$sql = "SELECT * FROM orders ORDER BY id DESC LIMIT $start_from, $num_rec_per_page";
 							$res = mysqli_query($con, $sql);
 
 							if (mysqli_num_rows($res) > 0) {
@@ -170,41 +163,31 @@ include 'header.php';
 								<table class="table">
 									<thead>
 										<tr>
-											<th>OrderID</th>
-											<th>SupplierID</th>
-											<th>SupplierName</th>
-											<th>OrderDate</th>
-											<th>Product</th>
+											<th>ID</th>
+											<th>Supplier ID</th>
+											<th>Supplier</th>
+											<th>Date</th>
 											<th>Quantity</th>
-											<th>Email</th>											
-											<th>Total Price</th>
-																														
+											<th>Product Name</th>
+											<th>Email</th>
+											<th>Total</th>
 										</tr>
 									</thead>
 									<tbody>';
-										while ($row = mysqli_fetch_assoc($res)) {
-
-											$button = '';
-											$button1 = '';
-							if ($row['OrderID'] != 0) {
-							 		$button1 = '<a href="makeOrder.php?id='.$row['OrderID'].'" class="btn btn-primary">Update</a>';
-									$button = '<a href="Orders.php?id='.$row['OrderID'].'" class="btn btn-primary">Cancel</a>';
-									
-											}
+										while ($row=mysqli_fetch_array($res)) {
 
 											echo '
 											<tr>
-												<td>'.$row['OrderID'].'</td>
-												<td>'.$row['SupplierID'].'</td>
-												<td>'.$row['SupplierName'].'</td>
-												<td>'.$row['OrderDate'].'</td>	
-												<td>'.$row['Quantity'].'</td>											
+												<td>'.$row['id'].'</td>
+												<td>'.$row['supplierID'].'</td>
+												<td>'.$row['supplierName'].'</td>
+												<td>'.date("M d, y",strtotime($row['orderDate'])).'</td>
+												<td>'.$row['quantity'].'</td>
 												<td>'.$row['productName'].'</td>
-												<td>'.$row['Email'].'</td>	
-												<td>R'.$row['TotalPrice'].'</td>						
-											</tr>';
-											
+												<td>'.$row['email'].'</td>
+												<td>R '.$row['totalPrice'].'</td>
 
+											</tr>';
 										}
 										echo '
 									</tbody>
@@ -215,58 +198,18 @@ include 'header.php';
 								<strong>No Orders found.</strong>
 							</div>';
 						}
-						
 
-						$sql = "SELECT * FROM orders";
-						$rs_result = mysqli_query($con, $sql); 
-						$total_records = mysqli_num_rows($rs_result);  
-						$total_pages = ceil($total_records / $num_rec_per_page);
-
-						if ($total_pages == 0) {
-							$total_pages = 1;
-						}
-
-						echo '
+						$sql = "SELECT * FROM category";
+						pagination($con, $sql, $num_rec_per_page, $page);
+						?>
 					</div>
-					<div class="col-lg-12">
-						<p align="center">
-						<a class="btn btn-primary" href="?page=1">'."|<".'</a> '; 
-
-							if ($page < 4) {
-								for ($i=1; $i<$page; $i++) {
-									echo '<a class="btn btn-primary" href="?page='.$i.'">'.$i.'</a> ';
-								};
-							} else {
-								for ($i=($page-3); $i<$page; $i++) {
-									echo '<a class="btn btn-primary" href="?page='.$i.'">'.$i.'</a> ';
-								};
-							}
-							echo '<a class="btn btn-default" href="?page='.$page.'">'.$page.'</a> ';
-
-							if ($page >= ($total_pages - 3)) {
-								for ($i=($page+1); $i<=($total_pages); $i++) {
-									echo '<a class="btn btn-primary" href="?page='.$i.'">'.$i.'</a> ';
-								};
-							} else {
-								for ($i=($page+1); $i<=($page+3); $i++) {
-									echo '<a class="btn btn-primary" href="?page='.$i.'">'.$i.'</a> ';
-								};
-							}
-
-							echo '
-							<a class="btn btn-primary" href="?page='.$total_pages.'">'.">|".'</a>
-						</p>
-					</div>';
-					?>
-					
+					<!-- /.table-responsive -->
 				</div>
-				<!-- /.table-responsive -->
+				<!-- /.panel-body -->
 			</div>
-			<!-- /.panel-body -->
+			<!-- /.panel -->
 		</div>
-		<!-- /.panel -->
 	</div>
-</div>
 </div>
 <!-- /.container-fluid -->
 </div>

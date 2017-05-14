@@ -96,6 +96,12 @@ include 'header.php';
 					</div>
 					<div class="panel-body">
 						<div class="row">
+						<div class="col-lg-12">
+								<div class="pull-right">
+									<a href="items.php" class="btn btn-warning">Items</a>
+									<a href="promo.php" class="btn btn-warning">Promotional</a>
+								</div>
+							</div>
 							<div class="col-md-6">
 							<h2>Device details</h2>
 							<?php

@@ -31,6 +31,13 @@ include 'header.php';
 					</div>
 					<!-- /.panel-heading -->
 					<div class="panel-body">
+					<div class="row">
+							<div class="col-lg-12">
+								<div class="pull-right">
+									<a href="additem.php" class="btn btn-success"> Add Product</a>
+								</div>
+							</div>
+						</div>
 						<div class="table-responsive">
 							<?php
 							$num_rec_per_page=10;
