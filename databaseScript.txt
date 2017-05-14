@@ -1,7 +1,9 @@
 CREATE TABLE `category` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
 	`name` varchar(15) NOT NULL,
+	`type` varchar(15) NOT NULL,
 	`description` varchar(100) NOT NULL,
+	`dateCreated` datetime,
 	PRIMARY KEY (`id`)
 )
 
@@ -28,8 +30,8 @@ CREATE TABLE `product` (
 	`name` varchar(30) NOT NULL,
 	`description` varchar(100) NOT NULL,
 	`type` varchar(20) NOT NULL,
-	`promo_price` decimal(7,2) NOT NULL,
 	`price` decimal(7,2) NOT NULL,
+	`promo_price` decimal(7,2) NOT NULL,
 	`pic_url` varchar(100) NOT NULL,
 	`date` datetime NOT NULL,
 	`promo_date1` datetime NOT NULL,
@@ -81,7 +83,55 @@ CREATE TABLE `cart` (
 	`prod_id` INT(11) NOT NULL ,
 	`name` VARCHAR(50) NOT NULL ,
 	`price` DECIMAL(7,2) NOT NULL ,
+	`num` int(11) NOT NULL,
 	`date` DATETIME NOT NULL ,
+	PRIMARY KEY (`id`)
+)
+
+CREATE TABLE `suppliers` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT ,
+	`name` VARCHAR(50) NOT NULL ,
+	`product` VARCHAR(50) NOT NULL ,
+	`contactNumber` VARCHAR(15) NOT NULL ,
+	`email` VARCHAR(50) NOT NULL ,
+	`website` VARCHAR(50) NOT NULL ,
+	`address` VARCHAR(100) NOT NULL ,
+	PRIMARY KEY (`id`)
+)
+
+CREATE TABLE `orders` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT , 
+	`supplierID` INT(11) NOT NULL , 
+	`supplierName` VARCHAR(50) NOT NULL , 
+	`orderDate` DATETIME NOT NULL , 
+	`quantity` INT(11) NOT NULL , 
+	`productName` VARCHAR(50) NOT NULL , 
+	`email` VARCHAR(50) NOT NULL , 
+	`totalPrice` DECIMAL(7,2) NOT NULL , 
+	PRIMARY KEY (`id`)
+)
+
+CREATE TABLE `technician` ( 
+	`id` INT(11) NOT NULL AUTO_INCREMENT , 
+	`name` VARCHAR(30) NOT NULL , 
+	`surname` VARCHAR(30) NOT NULL , 
+	`email` VARCHAR(50) NOT NULL , 
+	`speciality` VARCHAR(30) NOT NULL , 
+	PRIMARY KEY (`id`)
+)
+
+CREATE TABLE `quotation` ( 
+	`id` INT(11) NOT NULL AUTO_INCREMENT , 
+	`name` VARCHAR(50) NOT NULL , 
+	`serial` VARCHAR(50) NOT NULL , 
+	`model` VARCHAR(50) NOT NULL , 
+	`accessory` VARCHAR(50) NOT NULL , 
+	`technician` VARCHAR(50) NOT NULL , 
+	`description` VARCHAR(160) NOT NULL , 
+	`deposit` DECIMAL(7,2) NOT NULL , 
+	`balance` DECIMAL(7,2) NOT NULL , 
+	`total` DECIMAL(7,2) NOT NULL , 
+	`status` varchar(20) NOT NULL ,
 	PRIMARY KEY (`id`)
 )
 
