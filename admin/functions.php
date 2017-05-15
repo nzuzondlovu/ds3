@@ -29,6 +29,9 @@ function user($type)
 		<a href="bookings.php"><i class="fa fa-table fa-fw"></i> View Bookings</a>
 	</li>
 	<li>
+		<a href="stock.php"><i class="fa fa-table fa-fw"></i> View Stock</a>
+	</li>
+	<li>
 		<a href="viewquot.php"><i class="fa fa-table fa-fw"></i> View Quotation</a>
 	</li>
 	<li>

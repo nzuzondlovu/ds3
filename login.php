@@ -137,7 +137,8 @@ if(isset($_POST['submit'])) {
                                     <div class="checkbox">
                                         <label>
                                             <a href="recover.php">Recover Lost Password</a><br>
-                                            <a href="register.php">Register your account</a>
+                                            <a href="register.php">Register your account</a><br>
+                                            <a href="index.php">Home</a>
                                         </label>
                                     </div>
                                 </fieldset>

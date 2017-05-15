@@ -135,3 +135,11 @@ CREATE TABLE `quotation` (
 	PRIMARY KEY (`id`)
 )
 
+CREATE TABLE `stork` ( 
+	`id` INT(11) NOT NULL AUTO_INCREMENT , 
+	`category` VARCHAR(50) NOT NULL , 
+	`productName` VARCHAR(50) NOT NULL , 
+	`QuantityOnHand` INT(11) NOT NULL , 
+	PRIMARY KEY (`id`)
+)
+

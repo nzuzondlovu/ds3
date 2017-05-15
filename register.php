@@ -108,7 +108,8 @@ if(isset($_POST['submit'])) {
                                     <button name="submit" type="submit" class="btn btn-lg btn-primary btn-block">Register</button>
                                     <div class="checkbox">
                                         <label>
-                                            <a href="login.php">Login to your account</a>
+                                            <a href="login.php">Login to your account</a><br>
+                                            <a href="index.php">Home</a>
                                         </label>
                                     </div>
                                 </fieldset>

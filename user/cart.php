@@ -70,7 +70,7 @@ include 'header.php';
 									</thead>
 									<tbody>
 										<div class="pull-right">
-											<a href="generate.php" class="btn btn-warning"><i class="fa fa-shopping-cart"></i> Check Out</a>
+											<a href="template.php" class="btn btn-warning"><i class="fa fa-shopping-cart"></i> Check Out</a> <a href="generate.php" class="btn btn-warning"><i class="fa fa-print"></i> Download PDF</a>
 										</div>';
 										while ($row = mysqli_fetch_assoc($res)) {
 
