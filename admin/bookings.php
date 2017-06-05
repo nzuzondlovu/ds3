@@ -1,11 +1,26 @@
 <?php
 ob_start();
-include 'functions.php';
+include '../includes/functions.php';
 ?>
 
 <?php
 if(isset($_SESSION['key']) == '' ) {
 	header("location:../login.php");
+}
+?>
+
+<?php
+if(isset($_GET['id']) && $_GET['id'] != '') {
+
+	$id = mysqli_real_escape_string($con, strip_tags(trim($_GET['id'])));
+
+	if ($id) {
+		$sql = "UPDATE job SET archive=1 WHERE id='".$id."'";
+		mysqli_query($con, $sql);
+		$_SESSION['success'] = 'Booking was archived successfully.';
+	} else {
+		$_SESSION['failure'] = 'An error occured, please try again.';
+	}	
 }
 ?>
 
@@ -48,23 +63,13 @@ include 'header.php';
 					<div class="panel-body">
 						<div class="table-responsive">
 							<?php
-							$num_rec_per_page=10;
 
-							if (isset($_GET["page"])) {
-
-								$page  = $_GET["page"];
-							} else {
-
-								$page=1;
-							}
-
-							$start_from = ($page-1) * $num_rec_per_page;
-							$sql = "SELECT * FROM job ORDER BY id DESC LIMIT $start_from, $num_rec_per_page";
+							$sql = "SELECT * FROM job WHERE archive = 0";
 							$res = mysqli_query($con, $sql);
 
 							if (mysqli_num_rows($res) > 0) {
 								echo '
-								<table class="table">
+								<table id="bookings" class="table data-table">
 									<thead>
 										<tr>
 											<th>ID</th>
@@ -83,26 +88,36 @@ include 'header.php';
 										</tr>
 									</thead>
 									<tbody>';
-										while ($row = mysqli_fetch_assoc($res)) {											
+										while ($row = mysqli_fetch_assoc($res)) {
+
+											$sql1 = "SELECT * FROM quotation WHERE booking_id = '".$row['id']."' AND archive = 0";
+											$res1 = mysqli_query($con, $sql1);
+											$btn = '<a href="createquote.php?id='.$row['id'].'" class="btn btn-primary">Create Quotation</a>';
+
+											if (mysqli_num_rows($res1) > 0) {
+
+												$row1 = mysqli_fetch_assoc($res1);
+												$btn = '<a href="editquote.php?id='.$row1['id'].'" class="btn btn-info">Review Quotation</a>';
+											}
 
 											echo '
-											<tr>
-												<td>'.$row['id'].'</td>
-												<td>'.$row['user'].'</td>
-												<td>'.$row['name'].'</td>
-												<td>'.$row['serial'].'</td>
-												<td>'.$row['type'].'</td>
-												<td><img src="../uploads/'.$row['pic_url'].'"></td>
-												<td>'.$row['description'].'</td>
-												<td>'.date("M d, y",strtotime($row['date_in'])).'</td>
-												<td>'.$row['status'].'</td>
-												<td>'.$row['technician'].'</td>
-												<td>'.date("M d, y",strtotime($row['date_out'])).'</td>
-												<td>'.date("M d, y",strtotime($row['date'])).'</td>
-												<td>
-													<a href="quotation.php?id='.$row['id'].'" class="btn btn-primary btn-block btn-small">Create Quotation</a>
-												</td>
-											</tr>';
+												<tr>
+													<td>'.$row['id'].'</td>
+													<td>'.$row['user'].'</td>
+													<td>'.$row['name'].'</td>
+													<td>'.$row['serial'].'</td>
+													<td>'.$row['type'].'</td>
+													<td><img src="../uploads/'.$row['pic_url'].'"></td>
+													<td>'.$row['description'].'</td>
+													<td>'.date("M d, y",strtotime($row['date_in'])).'</td>
+													<td>'.$row['status'].'</td>
+													<td>'.$row['technician'].'</td>
+													<td>'.date("M d, y",strtotime($row['date_out'])).'</td>
+													<td>'.date("M d, y",strtotime($row['date'])).'</td>
+													<td class="pull-right">
+														 '.$btn.'  <a href="?id='.$row['id'].'" class="btn btn-warning">Archive Booking</a>
+													</td>
+												</tr>';
 										}
 										echo '
 									</tbody>
@@ -113,18 +128,15 @@ include 'header.php';
 								<strong>No products found.</strong>
 							</div>';
 						}
-
-						$sql = "SELECT * FROM job";
-						pagination($con, $sql, $num_rec_per_page, $page);
-					?>
+						?>
+					</div>
+					<!-- /.table-responsive -->
 				</div>
-				<!-- /.table-responsive -->
+				<!-- /.panel-body -->
 			</div>
-			<!-- /.panel-body -->
+			<!-- /.panel -->
 		</div>
-		<!-- /.panel -->
 	</div>
-</div>
 </div>
 <!-- /.container-fluid -->
 </div>
@@ -133,3 +145,8 @@ include 'header.php';
 <?php
 include 'footer.php';
 ?>
+<script>
+	$(document).ready(function(){
+		$('#bookings').DataTable();
+	});
+</script>

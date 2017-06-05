@@ -1,6 +1,6 @@
 <?php
 ob_start();
-include 'functions.php';
+include '../includes/functions.php';
 ?>
 
 <?php
@@ -146,7 +146,7 @@ include 'header.php';
 											</select>                                        
 										</div>
 										<button name="submit" type="submit" class="btn btn-primary">Update Role</button>
-										<button type="reset" class="btn btn-default">Reset Role</button>
+										<button type="reset" class="btn btn-default">Reset Form</button>
 									</div>
 								</form>
 							</div>

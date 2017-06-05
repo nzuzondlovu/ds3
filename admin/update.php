@@ -1,6 +1,6 @@
 <?php
 ob_start();
-include 'functions.php';
+include '../includes/functions.php';
 ?>
 
 <?php
@@ -38,7 +38,7 @@ include 'header.php';
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Your Details</h1>
+                <h1 class="page-header">Update Details</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>

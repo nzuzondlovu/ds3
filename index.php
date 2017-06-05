@@ -1,5 +1,5 @@
 <?php
-include 'admin/functions.php';
+include 'includes/functions.php';
 ?>
 
 
@@ -63,7 +63,24 @@ include 'header.php';
             <div class="row">                    
                 <?php
 
-                $sql = "SELECT * FROM product ORDER BY id DESC LIMIT 12";
+                $cat = '';
+                $num_rec_per_page=12;
+
+                if (isset($_GET["page"])) {
+
+                    $page  = $_GET["page"];
+                } else {
+
+                    $page=1;
+                }
+
+                if (isset($_GET["cat"])) {
+
+                    $cat  = "WHERE type='".$_GET["cat"]."'";
+                }
+
+                $start_from = ($page-1) * $num_rec_per_page;
+                $sql = "SELECT * FROM product $cat ORDER BY id DESC LIMIT $start_from, $num_rec_per_page";
                 $res = mysqli_query($con, $sql);
 
                 if (mysqli_num_rows($res) > 0) {
@@ -94,7 +111,8 @@ include 'header.php';
                         </div>';
                     }
                 }
-
+                $sql = "SELECT * FROM product $cat";
+                pagination($con, $sql, $num_rec_per_page, $page);
                 ?>
             </div>
 

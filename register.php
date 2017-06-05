@@ -1,6 +1,6 @@
 <?php
 ob_start();
-include 'admin/functions.php';
+include 'includes/functions.php';
 ?>
 
 <?php
@@ -43,16 +43,16 @@ if(isset($_POST['submit'])) {
     <title>Register - <?php echo $sitename; ?></title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="css/metisMenu.min.css" rel="stylesheet">
+    <link href="assets/css/metisMenu.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
+    <link href="assets/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -125,7 +125,7 @@ if(isset($_POST['submit'])) {
         <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key=AIzaSyDeSnzn_iwMZkhJrjDNYuTkPkfGeFdyWps"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
-        <script src="js/jquery.geocomplete.js"></script>
+        <script src="assets/js/jquery.geocomplete.js"></script>
 
         <script>
           $('#geocomplete').geocomplete({
@@ -134,16 +134,16 @@ if(isset($_POST['submit'])) {
           });
         </script>
 
-        <script src="js/jquery.min.js"></script>
+        <script src="assets/js/jquery.min.js"></script>
 
         <!-- Bootstrap Core JavaScript -->
-        <script src="js/bootstrap.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
 
         <!-- Metis Menu Plugin JavaScript -->
-        <script src="js/metisMenu.min.js"></script>
+        <script src="assets/js/metisMenu.min.js"></script>
 
         <!-- Custom Theme JavaScript -->
-        <script src="js/sb-admin-2.js"></script>
+        <script src="assets/js/sb-admin-2.js"></script>
 
     </body>
 

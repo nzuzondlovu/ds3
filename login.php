@@ -1,6 +1,6 @@
 <?php
 ob_start();
-include 'admin/functions.php';
+include 'includes/functions.php';
 ?>
 
 <?php
@@ -39,9 +39,9 @@ if(isset($_POST['submit'])) {
             $_SESSION['email'] = $user_details['email'];
             $_SESSION['success'] = 'Welcome to \''.$sitename.'\' user dashboard.';
 
-            if ($_SESSION['user_id'] == 1) {
+            if ($user_details['role'] != '') {
                 $_SESSION['key'] = $user_details['name'];
-                $_SESSION['type'] = ''; //this part determines what options/privilleges the user gets
+                $_SESSION['type'] = $user_details['role'];
                 header("Location: admin/index.php");
             } else {
                 if (isset($_GET['id']) && $_GET['id'] != '') {
@@ -79,16 +79,16 @@ if(isset($_POST['submit'])) {
     <title>Login - <?php echo $sitename; ?></title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="css/metisMenu.min.css" rel="stylesheet">
+    <link href="assets/css/metisMenu.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
+    <link href="assets/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -150,16 +150,16 @@ if(isset($_POST['submit'])) {
         </div>
 
         <!-- jQuery -->
-        <script src="js/jquery.min.js"></script>
+        <script src="assets/js/jquery.min.js"></script>
 
         <!-- Bootstrap Core JavaScript -->
-        <script src="js/bootstrap.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
 
         <!-- Metis Menu Plugin JavaScript -->
-        <script src="js/metisMenu.min.js"></script>
+        <script src="assets/js/metisMenu.min.js"></script>
 
         <!-- Custom Theme JavaScript -->
-        <script src="js/sb-admin-2.js"></script>
+        <script src="assets/js/sb-admin-2.js"></script>
 
     </body>
 

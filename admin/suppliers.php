@@ -1,6 +1,6 @@
 <?php
 ob_start();
-include 'functions.php';
+include '../includes/functions.php';
 ?>
 
 <?php
@@ -23,6 +23,30 @@ if (isset($_GET['del']) && $_GET['del'] != '') {
 ?>
 
 <?php
+
+if(isset($_POST['submit'])) {
+
+	$name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
+	$email = mysqli_real_escape_string($con, strip_tags(trim($_POST["email"])));
+	$number = mysqli_real_escape_string($con, strip_tags(trim($_POST["number"])));
+	$address = mysqli_real_escape_string($con, strip_tags(trim($_POST["address"])));
+	$website = mysqli_real_escape_string($con, strip_tags(trim($_POST["website"])));
+	$product = mysqli_real_escape_string($con, strip_tags(trim($_POST["product"])));
+
+	if ($name != '' && $email != '' && $number != '' &&  $address != '' && $website != '' && $product != '') {
+
+		$sql = "INSERT INTO suppliers(name, product, contactNumber, email, website, address)
+		VALUES('".$name."', '".$product."', '".$number."', '".$email."', '".$website."', '".$address."')";
+		mysqli_query($con, $sql);
+		$_SESSION['success'] = 'You have successfully added a new supplier.';
+		header("Location: suppliers.php");
+	} else {
+		$_SESSION['failure'] = 'Please fill in all the fields.';
+	}
+}
+?>
+
+<?php
 include 'header.php';
 ?>
 
@@ -36,6 +60,50 @@ include 'header.php';
 			<!-- /.col-lg-12 -->
 		</div>
 		<!-- /.row -->
+
+		<!-- Modal -->
+		<div class="modal fade" id="addSupp" tabindex="-1" role="dialog" aria-labelledby="addSuppLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span> Close</button>
+						<h4 class="modal-title" id="addSuppLabel">Add Supplier</h4>
+					</div>
+					<div class="modal-body">
+						<form role="form" method="post" enctype="multipart/form-data">
+							<div class="form-group">
+								<label>Name</label>
+								<input type="text" name="name" class="form-control" placeholder="Enter name">
+							</div>
+							<div class="form-group">
+								<label>Email</label>
+								<input type="email" name="email" class="form-control" placeholder="Enter email">
+							</div>
+							<div class="form-group">
+								<label>Contact Number</label>
+								<input type="text" name="number" class="form-control" placeholder="Enter number">
+							</div>
+							<div class="form-group">
+								<label>Address</label>
+								<input type="text" name="address" class="form-control" placeholder="Enter address">
+							</div>
+							<div class="form-group">
+								<label>Website</label>
+								<input type="text" name="website" class="form-control" value="http://">
+							</div>
+							<div class="form-group">
+								<label>Supplied Product</label>
+								<input type="text" name="product" class="form-control" placeholder="Enter product">
+							</div>
+							<button name="submit" type="submit" class="btn btn-primary">Submit Supplier</button>
+							<button type="reset" class="btn btn-default">Reset Supplier</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /.Modal -->
+
 		<div class="row">
 			<div class="col-lg-12">
 				<div>
@@ -53,87 +121,6 @@ include 'header.php';
 					</div>
 					<?php } ?>
 				</div>
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						Search for supplier
-					</div>
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-md-offset-3 col-md-6">
-								<form method="POST">
-									<dl>
-										<dt class="sidebar-search">
-											<div class="input-group custom-search-form">
-												<input type="text" name="query" class="form-control" placeholder="Enter text">
-												<span class="input-group-btn">
-													<button id="search" name="search" type="submit" class="btn btn-primary">Search</button>
-												</span>
-											</div>
-											<!-- /input-group -->
-										</dt>
-									</dl>
-
-									<?php
-									if(isset($_POST['search']))
-									{
-										echo '
-										<h2>
-											Search Results
-										</h2>';
-										
-										$name = mysqli_real_escape_string($con, strip_tags(trim($_POST['query'])));
-
-										$query="SELECT * FROM suppliers WHERE name LIKE '%".$name."%' OR product LIKE '%".$name."%' OR website LIKE '%".$name."%'";
-
-										$result =mysqli_query($con,$query);
-
-										if (mysqli_num_rows($result) > 0) {
-											echo '
-											<table class="table">
-												<thead>
-													<tr>
-														<th>ID</th>
-														<th>Name</th>
-														<th>Product</th>
-														<th>Contact #</th>
-														<th>Email</th>
-														<th>Website</th>
-														<th>Address</th>
-														<th>Action</th>
-													</tr>
-												</thead>
-												<tbody>';
-													while ($row = mysqli_fetch_assoc($result)) {											
-
-														echo '
-														<tr>
-															<td>'.$row['id'].'</td>
-															<td>'.$row['name'].'</td>
-															<td>'.$row['product'].'</td>
-															<td>'.$row['contactNumber'].'</td>
-															<td>'.$row['email'].'</td>
-															<td><a target="blank" href="'.$row['website'].'">'.$row['website'].'</a></td>
-															<td>'.$row['address'].'</td>
-															<td class="pull-right">
-																<a href="createorder.php?id='.$row['id'].'" class="btn btn-warning">Make Order</a>   <a href="editsupplier.php?id='.$row['id'].'" class="btn btn-primary">Update Supplier</a>
-															</td>
-														</tr>';
-													}
-													echo '
-												</tbody>
-											</table>';
-										} else {
-											echo " Supplier Not Found";
-										}	
-									}
-
-									?>
-
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 		<!-- /.row -->
@@ -148,7 +135,7 @@ include 'header.php';
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="pull-right">
-									<a href="addsupplier.php" class="btn btn-success"> Add Supplier</a>
+									<button class="btn btn-success" data-toggle="modal" data-target="#addSupp"> Add Supplier</button>
 								</div>
 							</div>
 						</div>
@@ -165,12 +152,12 @@ include 'header.php';
 							}
 
 							$start_from = ($page-1) * $num_rec_per_page;
-							$sql = "SELECT * FROM suppliers ORDER BY id DESC LIMIT $start_from, $num_rec_per_page";
+							$sql = "SELECT * FROM suppliers";
 							$res = mysqli_query($con, $sql);
 
 							if (mysqli_num_rows($res) > 0) {
 								echo '
-								<table class="table">
+								<table id="suppliers" class="table">
 									<thead>
 										<tr>
 											<th>ID</th>
@@ -209,9 +196,6 @@ include 'header.php';
 								<strong>No products found.</strong>
 							</div>';
 						}
-
-						$sql = "SELECT * FROM job";
-						pagination($con, $sql, $num_rec_per_page, $page);
 						?>
 					</div>
 					<!-- /.table-responsive -->
@@ -229,3 +213,8 @@ include 'header.php';
 <?php
 include 'footer.php';
 ?>
+<script>
+	$(document).ready(function(){
+		$('#suppliers').DataTable();
+	});
+</script>

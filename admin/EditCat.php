@@ -1,6 +1,6 @@
 <?php
 ob_start();
-include 'functions.php';
+include '../includes/functions.php';
 ?>
 
 <?php
@@ -13,7 +13,7 @@ if(isset($_SESSION['key']) == '' ) {
 if (isset($_GET['id']) && $_GET['id'] != null) {
 	$id = mysqli_real_escape_string($con, strip_tags(trim($_GET["id"])));
 } else {
-	header('Location: viewcat.php');
+	header('Location: categories.php');
 }
 
 
@@ -29,7 +29,7 @@ if(isset($_POST['submit'])) {
 		$sql = "UPDATE category SET name='".$name."', type='".$type."', description='".$description."' WHERE id='".$id."'";
 		mysqli_query($con, $sql);
 		$_SESSION['success'] = 'Your new Category was updated successfully.';
-		header("Location: viewcat.php");
+		header("Location: categories.php");
 	}else {
 		$_SESSION['failure'] = 'Please fill in all fields.';
 	}
@@ -39,6 +39,9 @@ if(isset($_POST['submit'])) {
 <?php
 
 $cat = '';
+$nam = '';
+$typ = '';
+$des = '';
 
 $sql = "SELECT * FROM category WHERE id=$id";
 $res = mysqli_query($con, $sql);
@@ -52,7 +55,9 @@ if(mysqli_num_rows($res) > 0) {
 		Description : '.$row['description'].'<br>
 		Date : '.date("M d, y",strtotime($row['dateCreated'])).'
 		';
-		
+		$nam = $row['name'];
+		$typ = $row['type'];
+		$des = $row['description'];		
 	}
 }
 ?>
@@ -97,7 +102,7 @@ include 'header.php';
 						<div class="row">
 						<div class="col-lg-12">
 								<div class="pull-right">
-									<a href="viewcat.php" class="btn btn-warning">Categories</a>
+									<a href="categories.php" class="btn btn-warning">Categories</a>
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -111,23 +116,19 @@ include 'header.php';
 								<form role="form" method="post">
 									<div class="form-group">
 										<label>Category Name</label>
-										<input type="decimal" name="name" class="form-control" value="<?php
-										$res = mysqli_query($con, "SELECT * FROM category WHERE id='".$id."' ");
-										$row = mysqli_fetch_assoc($res);
-										echo $row['name'];
-										?> ">
+										<input type="decimal" name="name" class="form-control" value="<?php	echo $nam; ?>">
 									</div>
 									<div class="form-group">
 										<label>Category Type</label>
 										<select name="type" class="form-control">
-											<option value="" selected="selected">Select type</option>
+											<option value="" selected="selected"><?php	echo $typ; ?></option>
 											<option value="Hardware" >Hardware</option>
 											<option value="Software" >Software</option>
 										</select>
 									</div>
 									<div class="form-group">
 										<label>Category Description</label>
-										<textarea name="description" class="form-control" rows="3"></textarea>
+										<textarea name="description" class="form-control" rows="3"><?php	echo $des; ?></textarea>
 									</div>
 									<button name="submit" type="submit" class="btn btn-primary">Submit Category</button>
 									<button type="reset" class="btn btn-default">Reset Category</button>

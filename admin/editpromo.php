@@ -1,6 +1,6 @@
 <?php
 ob_start();
-include 'functions.php';
+include '../includes/functions.php';
 ?>
 
 <?php
@@ -14,22 +14,30 @@ if(isset($_SESSION['key']) == '' ) {
 if (isset($_GET['id']) && $_GET['id'] != null) {
 	$id = mysqli_real_escape_string($con, strip_tags(trim($_GET["id"])));
 } else {
-	header('Location: items.php');
+	header('Location: products.php');
 }
 
 
 if(isset($_POST['submit'])) {
-
 	$price = mysqli_real_escape_string($con, strip_tags(trim($_POST["price"])));
 	$start = mysqli_real_escape_string($con, strip_tags(trim($_POST["start"])));
 	$end = mysqli_real_escape_string($con, strip_tags(trim($_POST["end"])));
+	$date = date("Y-m-d");
 	
 	if($price != '' && $start != '' && $end != '') {
 
-		$sql = "UPDATE product SET promo_price='".$price."', promo_date1='".$start."', promo_date2='".$end."' WHERE id='".$id."'";
-		mysqli_query($con, $sql);
-		$_SESSION['success'] = 'Your new Promotional Product was added successfully.';
-		header("Location: promo.php");
+		if ($start < $date) {
+			$_SESSION['failure'] = 'Entered start date has past already.';
+
+		} else if ($end > $start) {
+
+			$sql = "UPDATE product SET promo_price='".$price."', promo_date1='".$start."', promo_date2='".$end."' WHERE id='".$id."'";
+			mysqli_query($con, $sql);
+			$_SESSION['success'] = 'Your new Promotional Product was added successfully.';
+			header("Location: promotions.php");
+		} else {
+			$_SESSION['failure'] = 'Entered end date has past already.';
+		}		
 	}else {
 		$_SESSION['failure'] = 'Please fill in all fields.';
 	}
@@ -96,17 +104,17 @@ include 'header.php';
 					</div>
 					<div class="panel-body">
 						<div class="row">
-						<div class="col-lg-12">
+							<div class="col-lg-12">
 								<div class="pull-right">
-									<a href="items.php" class="btn btn-warning">Items</a>
-									<a href="promo.php" class="btn btn-warning">Promotional</a>
+									<a href="products.php" class="btn btn-warning">Products</a>
+									<a href="promotions.php" class="btn btn-warning">Promotions</a>
 								</div>
 							</div>
 							<div class="col-md-6">
-							<h2>Device details</h2>
-							<?php
-							echo $promo;
-							?>
+								<h2>Device details</h2>
+								<?php
+								echo $promo;
+								?>
 							</div>
 
 							<div class="col-md-6">
