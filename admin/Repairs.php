@@ -19,46 +19,10 @@
 	 	$con=mysqli_connect($host,$user,$password,$database);	
 	}catch(Exception $ex){
  		echo 'Error';
-	}
-	
-	function getPosts()
-	{
-		$posts= array();
-		$posts[0] = $_POST['supplierID'];
-		$posts[1] = $_POST['productName'];
-		$posts[2] = $_POST['Quantity'];
-		$posts[3] = $_POST['OrderDate'];
-		return $posts;
-	}
-	
-	if(isset($_POST['search']))
-	{
-	 	$data = getPosts();
-		
-		$search_Query ="SELECT supplierID,productName,Quantity,OrderDate FROM suppliers WHERE supplierID = $data[0]";
+	}	
 
-		$search_Result =mysqli_query($con,$search_Query);
-			
-			if($search_Result)
-			{
-				if(mysqli_num_rows($search_Result))
-				{
-					while($row = mysqli_fetch_array($search_Result))
-					{
-					 	$supplierID= $row['supplierID'];
-						$productName= $row['productName'];
-						$Quantity=	$row['Quantity'];
-						$OrderDate=	$row['OrderDate'];						
-					}
-				}else {
-				 	echo 'No Data';					
-				}
-			}else 
-			{
-				echo 'Result error';
-			}
-			
-	}
+	
+	
 ?>
 
 
