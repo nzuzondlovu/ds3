@@ -1,97 +1,124 @@
 <!DOCTYPE html>
+<!--
+	ustora by freshdesignweb.com
+	Twitter: https://twitter.com/freshdesignweb
+	URL: https://www.freshdesignweb.com/ustora/
+-->
 <html lang="en">
-
-<head>
-
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Home - <?php echo $sitename; ?></title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-
+    <title>Ustora Demo</title>
+    
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
+    
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    
     <!-- Custom CSS -->
-    <link href="assets/css/shop-homepage.css" rel="stylesheet">
-    <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+   
+    <div class="header-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="user-menu">
+                        <ul>
+                            <li><a href="login.php"><i class="fa fa-user"></i> My Account</a></li>
+                            <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
+                            <li><a href="cart.php"><i class="fa fa-user"></i> My Cart</a></li>
+                            <li><a href="checkout.php"><i class="fa fa-user"></i> Checkout</a></li>
+                            <li><a href="login.php"><i class="fa fa-user"></i> Login</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="header-right">
+                        <ul class="list-unstyled list-inline">
+                            <li class="dropdown dropdown-small">
+                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">currency :</span><span class="value">USD </span><b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">USD</a></li>
+                                    <li><a href="#">INR</a></li>
+                                    <li><a href="#">GBP</a></li>
+                                </ul>
+                            </li>
 
-    </head>
-
-    <body>
-
-        <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="container">
-                <!-- Brand and toggle get grouped for better mobile display -->
+                            <li class="dropdown dropdown-small">
+                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">language :</span><span class="value">English </span><b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">English</a></li>
+                                    <li><a href="#">French</a></li>
+                                    <li><a href="#">German</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End header area -->
+    
+    <div class="site-branding-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="logo">
+                        <h1><a href="./"><img src="img/logo.png"></a></h1>
+                    </div>
+                </div>
+                
+                <div class="col-sm-6">
+                    <div class="shopping-item">
+                        <a href="cart.php">Cart - <span class="cart-amunt">$100</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End site branding area -->
+    
+    <div class="mainmenu-area">
+        <div class="container">
+            <div class="row">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.php"><?php echo $sitename; ?></a>
-                </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                </div> 
+                <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li>
-                            <a href="about.php">About</a>
-                        </li>
-                        <li>
-                            <a href="services.php">Services</a>
-                        </li>
-                        <li>
-                            <a href="contact.php">Contact</a>
-                        </li>
+                        <li class="active"><a href="index.php">Home</a></li>
+                        <li><a href="shop.php">Shop page</a></li>
+                        <li><a href="product.php">Single product</a></li>
+                        <li><a href="cart.php">Cart</a></li>
+                        <li><a href="checkout.php">Checkout</a></li>
+                        <li><a href="#">Category</a></li>
+                        <li><a href="#">Others</a></li>
+                        <li><a href="#">Contact</a></li>
                     </ul>
-                    <ul class="nav navbar-nav pull-right">
-                        <?php
-                        if (isset($_SESSION['user_id'])) {
-                            echo '
-                            <li>
-                                <a href="user/index.php">Dashboard</a>
-                            </li>';
-                        } else {
-                            echo '
-                            <li>
-                                <a href="register.php">Register</a>
-                            </li>
-                            <li>
-                                <a href="login.php">Login</a>
-                            </li>';
-                        }
-                        ?>                        
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="fa fa-shopping-cart fa-fw"></i> <i class="fa fa-caret-down"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-alerts">
-                                <?php
-                                echo $_SESSION['cart'];
-                                ?>
-                                <li>
-                                    <a class="text-center" href="user/">
-                                        <strong>See All Items</strong>
-                                        <i class="fa fa-angle-right"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                            <!-- /.dropdown-alerts -->
-                        </li>
-                    </ul>
-                </div>                
-                <!-- /.navbar-collapse -->
+                </div>  
             </div>
-            <!-- /.container -->
-        </nav>
+        </div>
+    </div> <!-- End mainmenu area -->
