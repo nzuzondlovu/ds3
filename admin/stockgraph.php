@@ -55,67 +55,25 @@ include 'header.php';
 								</div>
 							</div>
 						</div>
-						<div class="hero-unit-table">
-							<div class="charts_container">
-								<div class="chart_container">
-									<canvas id="motorcycle_graph" width="1500" height="400">
-										Your web-browser does not support the HTML 5 canvas element.
-									</canvas>
-								</div>
+						<div class="row">
+							<div class="col-md-12">
+								<canvas id="stockcanvas">
+									Your web-browser does not support the HTML 5 canvas element.
+								</canvas>
 							</div>
 						</div>
-						<script type="application/javascript">
-							var motorcycle_chart = new AwesomeChart('motorcycle_graph');
-							motorcycle_chart.data = [
-							<?php
-							$num_rec_per_page=10;
-
-							if (isset($_GET["page"])) {
-
-								$page  = $_GET["page"];
-							} else {
-
-								$page=1;
-							}
-
-							$start_from = ($page-1) * $num_rec_per_page;
-
-							$query = mysqli_query($con, "SELECT * FROM product LIMIT $start_from, $num_rec_per_page");
-							while ($row = mysqli_fetch_array($query)) {
-								?>
-								<?php echo $row['price'] . ','; ?>
-								<?php }; ?>
-								];
-
-								motorcycle_chart.labels = [
-								<?php
-								$query = mysqli_query($con, "SELECT * FROM product LIMIT $start_from, $num_rec_per_page");
-								while ($row = mysqli_fetch_array($query)) {
-									?>
-									<?php echo "'" . $row['name'] . "'" . ','; ?>
-									<?php }; ?>
-									];
-									motorcycle_chart.colors = ['gold', 'skyblue', '#FF6600', 'pink', 'darkblue', 'lightpink', 'green'];
-									motorcycle_chart.randomColors = true;
-									motorcycle_chart.animate = true;
-									motorcycle_chart.animationFrames = 30;
-									motorcycle_chart.draw();
-								</script>
-								<?php
-								$sql = "SELECT * FROM product";
-								pagination($con, $sql, $num_rec_per_page, $page);
-								?>
-							</div>
-							<!-- /.panel-body -->
-						</div>
-						<!-- /.panel -->
 					</div>
+					<!-- /.panel-body -->
 				</div>
+				<!-- /.panel -->
 			</div>
-			<!-- /.container-fluid -->
 		</div>
-		<!-- /#page-wrapper -->
+	</div>
+	<!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->
 
-		<?php
-		include 'footer.php';
-		?>
+<?php
+include 'footer.php';
+?>
+<script type="text/javascript" src="../assets/js/stockchart.js"></script>
