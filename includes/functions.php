@@ -82,6 +82,9 @@ function user($type)
 				<a href="cart.php">Cart</a>
 			</li>
 			<li>
+				<a href="cartgraph.php">Cart Sales</a>
+			</li>
+			<li>
 				<a href="#">Second Level Item</a>
 			</li>
 			<li>
