@@ -12,6 +12,8 @@
     <script src="../assets/datatables/js/dataTables.bootstrap.min.js"></script>
     <script src="../assets/datatables/js/jquery.dataTables.min.js"></script>
 
+    <script src="../assets/js/Chart.min.js"></script>
+
     <!-- Metis Menu Plugin JavaScript -->
     <script src="../assets/js/metisMenu.min.js"></script>
 
