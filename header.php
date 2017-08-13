@@ -1,3 +1,7 @@
+<?php
+ob_start();
+include 'includes/functions.php';
+?>
 <!DOCTYPE html>
 <!--
 	ustora by freshdesignweb.com
