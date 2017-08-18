@@ -41,6 +41,58 @@ CREATE TABLE repairsale(
 	recievedate varchar(255),
         amount decimal
 );
+CREATE TABLE `drivers` ( 
+	`driverID` int(11) NOT NULL AUTO_INCREMENT,
+	`name` varchar(25) NOT NULL,
+	`surname` varchar(25) NOT NULL,
+	`cell` varchar(13) NOT NULL,
+	`idnumber` varchar(13) NOT NULL,
+	`email` varchar(35) NOT NULL,
+       PRIMARY KEY (`driverID`)
+);
+CREATE TABLE `driverDelivery` ( 
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`driverID` int(11) NOT NULL,
+	`deliveryID` int(11) NOT NULL,
+	`dateofDelivery` DATETIME NOT NULL ,
+	`custname` varchar(25) NOT NULL,
+	`custcell` varchar(13) NOT NULL,
+	`location` varchar(250)NOT NULL,
+	FOREIGN KEY(driverID) REFERENCES drivers(driverID),
+	FOREIGN KEY(deliveryID) REFERENCES custDelivery(deliveryID),
+      PRIMARY KEY (`id`)
+);
+CREATE TABLE `custDelivery` ( 
+	`deliveryID` int(11) NOT NULL AUTO_INCREMENT,
+	`custID` int(11) NOT NULL,
+	`custname` varchar(25) NOT NULL,
+	`custcell` varchar(13) NOT NULL,
+      `strAddress` varchar(100) NOT NULL,
+	`suburb` varchar(100) NOT NULL,
+	`area` varchar(100) NOT NULL,
+	`boxcode` int(11) NOT NULL ,
+      `dateofRequest` DATETIME NOT NULL ,
+      `dateofDelivery` DATETIME NOT NULL ,
+	FOREIGN KEY(custID) REFERENCES users(id),
+	 PRIMARY KEY (`deliveryID`)
+);
+CREATE TABLE `postal` (
+`id` int(11) NOT NULL AUTO_INCREMENT, 
+	`suburb` varchar(50) NOT NULL,
+	`boxcode` int(11) NOT NULL ,
+	`strcode` int(11) NOT NULL ,
+	`area` varchar(50) NOT NULL,
+	 PRIMARY KEY (`id`)
+);
+CREATE TABLE `postalDelivery` (
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+	`strAddress` varchar(100) NOT NULL,  
+	`suburb` varchar(50) NOT NULL,
+	`boxcode` int(11) NOT NULL ,
+	`strcode` int(11) NOT NULL ,
+	`area` varchar(50) NOT NULL,
+	 PRIMARY KEY (`id`)
+);
 
 
 
