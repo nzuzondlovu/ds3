@@ -162,7 +162,7 @@ if(isset($_POST['recover'])) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ustora Demo</title>
+    <title><?php echo $sitename; ?></title>
     
     <!-- Google Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'>
@@ -195,11 +195,21 @@ if(isset($_POST['recover'])) {
                 <div class="col-md-8">
                     <div class="user-menu">
                         <ul>
-                            <li><a href="login.php"><i class="fa fa-user"></i> My Account</a></li>
-                            <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
-                            <li><a href="cart.php"><i class="fa fa-user"></i> My Cart</a></li>
-                            <li><a href="checkout.php"><i class="fa fa-user"></i> Checkout</a></li>
-                            <li><a data-toggle="modal" data-target="#login"><i class="fa fa-user"></i> Login</a></li>
+                            <?php
+
+                            if (isset($_SESSION['user_id'])) {
+
+                                echo '
+                                <li><a href="login.php"><i class="fa fa-user"></i> My Account</a></li>                            
+                                <!--<li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>-->
+                                <li><a href="cart.php"><i class="fa fa-user"></i> My Cart</a></li>
+                                <li><a href="checkout.php"><i class="fa fa-user"></i> Checkout</a></li>';
+                            } else {
+
+                                echo '<li><a data-toggle="modal" data-target="#login"><i class="fa fa-user"></i> Login</a></li>';
+                            }
+
+                            ?>                            
                         </ul>
                     </div>
                 </div>
