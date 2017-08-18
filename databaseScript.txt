@@ -193,3 +193,14 @@ CREATE TABLE techrepair(
     tname varchar(255)
 
 );
+
+
+
+
+CREATE TABLE `query` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+	`email`varchar(25) NOT NULL,
+	`name` varchar(30) NOT NULL,
+	`query` varchar(100) NOT NULL,
+	PRIMARY KEY (`id`)
+)
