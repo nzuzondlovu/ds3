@@ -143,3 +143,53 @@ CREATE TABLE `stork` (
 	PRIMARY KEY (`id`)
 )
 
+
+
+
+CREATE TABLE repairmaterial(
+	materialid int(11) not null AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(225) not null,
+	type VARCHAR(225) not null,
+    description VARCHAR(128) not null,
+    dateRecieved datetime,
+    quantity int
+);
+
+CREATE TABLE customerSaleDevice(
+	id int(11) PRIMARY KEY AUTO_INCREMENT not null,
+    diviceName varchar(255) not null,
+    model varchar(255) not null,
+    serialNumber varchar(255) not null,
+    Dtype varchar(255) not null,
+    recievedDate varchar(255) not null,
+    establishAmount decimal(18,2) not null
+
+);
+
+CREATE TABLE tech(
+	id int(11) NOT null PRIMARY KEY AUTO_INCREMENT,
+    tname varchar(255),
+    sname varchar(255)
+);
+
+CREATE TABLE repairsale(
+	id int(11) NOT null PRIMARY KEY AUTO_INCREMENT,
+   	 dname varchar(255),
+   	 model varchar(255),
+	serialnumber varchar(255),
+	recievedate varchar(255),
+        amount decimal(18.2)
+);
+
+
+CREATE TABLE techrepair(
+	id int(11) PRIMARY KEY AUTO_INCREMENT not null,
+    diviceName varchar(255) not null,
+    model varchar(255) not null,
+    serialNumber varchar(255) not null,
+    Dtype varchar(255) not null,
+    recievedDate varchar(255) not null,
+    amount decimal(18,2) not null,
+    tname varchar(255)
+
+);
