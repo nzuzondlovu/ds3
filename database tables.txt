@@ -39,8 +39,71 @@ CREATE TABLE repairsale(
    	 model varchar(255),
 	serialnumber varchar(255),
 	recievedate varchar(255),
-        amount decimal
+        amount decimal(18.2)
 );
 
 
+CREATE TABLE techrepair(
+	id int(11) PRIMARY KEY AUTO_INCREMENT not null,
+    diviceName varchar(255) not null,
+    model varchar(255) not null,
+    serialNumber varchar(255) not null,
+    Dtype varchar(255) not null,
+    recievedDate varchar(255) not null,
+    amount decimal(18,2) not null,
+    tname varchar(255)
+
+);
+
+INSERT INTO `tech` (`id`, `tname`, `sname`) VALUES
+(1, 'Luthos', 'SPA'),
+(2, 'Simo', 'nqu'),
+(3, 'Nzuzo', 'ndlo');
+
+
+
+INSERT INTO `techrepair` (`id`, `diviceName`, `model`, `serialNumber`, `Dtype`, `recievedDate`, `amount`, `tname`) VALUES
+(17, 'sumsung young 2', 'mobile', 'Young123', 'Hardware', '2017-06-12', '500', 'Nzuzo'),
+(16, 'Dell', 'mobile', 'Dell989', 'Software', '2017-04-25', '500', 'Luthos'),
+(14, 'hewui', 'mobile', 'Young123', 'Hardware', '2017-06-12', '100', 'Luthos'),
+(15, 'LMOVO', 'mobile', 'Dell989', 'Hardware', '2017-06-12', '1324', 'Nzuzo'),
+(21, 'iBook', 'Laptop', 'Iphon80', 'Hardware', '2017-06-12', '780', 'Luthos'),
+(22, 'sumsung young 2', 'mobile', 'su2', 'Hardware', '2017-03-14', '478', 'Simo'),
+(24, 'LMOVO', 'mobile', 'Young123', 'Software', '2017-06-12', '500', 'Luthos');
+
+
+
+INSERT INTO `shoprepaire` (`id`, `dname`, `type`, `serialnumber`, `recievedate`, `price`, `description`, `tname`) VALUES
+(1, 'Head set', 'Hardware', 'ht21', '2017/04/12', '45', 'have an sub boost', ''),
+(2, 'Charger', 'Hardware', 'S121x', '2017/06/12', '5', 'fast current', ''),
+(3, 'J2', 'software', 'js', '2017/05/01', '524', 'compateble', ''),
+(4, 'mousy', 'Hardware', 'm8s', '2017/05/01', '524', 'wire less', '');
+
+
+
+CREATE TABLE `stork` (
+  `StorkID` int(11) NOT NULL,
+  `category` varchar(225) NOT NULL,
+  `ProductName` varchar(225) NOT NULL,
+  `Date` date NOT NULL,
+  `QuantityOnHand` int(11) DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+
+INSERT INTO `order` (`orderId`, `productname`, `Quantity`, `OrderDate`) VALUES
+(1, 'hewui', 5, '2017-08-01'),
+(2, 'hp', 1, '2017-08-21'),
+(3, 'sumsage', 8, '2017-08-09'),
+(4, 'Access', 4, '2017-08-01'),
+(5, 'Iphone', 2, '2017-08-02'),
+(6, 'pu', 8, '2017-08-07');
+
+
+INSERT INTO `stork` (`StorkID`, `category`, `ProductName`, `Date`, `QuantityOnHand`, `quantity`) VALUES
+(1, 'HardWare', 'IPad', '2017-08-02', 4, 2),
+(2, 'Software', 'lonovo', '2017-08-16', 7, 4),
+(3, 'Software', 'iPhone 5', '2017-08-01', 4, 88),
+(4, 'Hadware', 'Midel', '2017-08-23', 5, 11);
 
