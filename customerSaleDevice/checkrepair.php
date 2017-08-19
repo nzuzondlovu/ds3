@@ -61,10 +61,7 @@ if (!isset($_GET['id'])) {
 
 					<td>Type:</td>
 					<td> <select name="Dtype" value='<?php echo "$Dtype";?>'readonly required="please select model">
-						//	<option value=\"$Dtype\">Hardware</option>
-						<option value="Hardware">Hardware</option>
-						<option value="Software">Software</option>
-					</select></td>
+							<option value=\"$Dtype\">Hardware</option>
 				</tr>
 
 				<tr>
@@ -119,7 +116,7 @@ if(isset($_POST['submit'])){
 	//$ruun = $con->query($insertd) or die("failed to run query".mysql_errno());
 	$delete = "Delete from customersaledevice where id= '$id'";
 	$rundelete = $con->query($delete);
-	header("location: techallocate.php");
+	header("location: index.php");
 }
 ?>
 
