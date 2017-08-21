@@ -32,11 +32,21 @@
                 <div class="footer-menu">
                     <h2 class="footer-wid-title">Categories</h2>
                     <ul>
-                        <li><a href="#">Mobile Phone</a></li>
-                        <li><a href="#">Home accesseries</a></li>
-                        <li><a href="#">LED TV</a></li>
-                        <li><a href="#">Computer</a></li>
-                        <li><a href="#">Gadets</a></li>
+                    <?php
+                        $sql = "SELECT * FROM category";
+                        $res = mysqli_query($con, $sql);
+
+                        if (mysqli_num_rows($res) > 0) {
+
+                            while ($row = mysqli_fetch_assoc($res)) {
+
+                                echo '<li><a href="shop.php?cat='.$row['name'].'">'.$row['name'].'</a></li>';
+                            }
+                        } else {
+
+                            echo '<li><a href="#">No Categories Found</a></li>';
+                        }
+                        ?>
                     </ul>                        
                 </div>
             </div>
