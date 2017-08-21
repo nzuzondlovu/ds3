@@ -57,7 +57,7 @@ include 'header.php';
 						</div>
 						<div class="row">
 							<div class="col-md-12">
-								<canvas id="stockcanvas">
+								<canvas id="stockcanvas" height="100%">
 									Your web-browser does not support the HTML 5 canvas element.
 								</canvas>
 							</div>
