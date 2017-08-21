@@ -32,7 +32,16 @@ $(document).ready(function(){
 
 			var graph = new Chart(ctx, {
 				type: 'bar',
-				data: chartdata
+				data: chartdata,
+				options: {
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero: true
+							}
+						}]
+					}
+				}
 			});
 		},
 		error: function(data) {
