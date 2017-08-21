@@ -58,6 +58,7 @@ if(isset($_POST['login'])) {
         if ($_SESSION['user_id'] != $id1) {
 
             $_SESSION['name'] = $user_details['name'];
+            $_SESSION['surname'] = $user_details['surname'];
             $_SESSION['location'] = $user_details['location'];
             $_SESSION['idnumber'] = $user_details['idnumber'];
             $_SESSION['cell'] = $user_details['cell'];
@@ -200,7 +201,7 @@ if(isset($_POST['recover'])) {
                             if (isset($_SESSION['user_id'])) {
 
                                 echo '
-                                <li><a href="login.php"><i class="fa fa-user"></i> My Account</a></li>                            
+                                <li><a href="user/"><i class="fa fa-user"></i> My Account</a></li>                            
                                 <!--<li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>-->
                                 <li><a href="cart.php"><i class="fa fa-user"></i> My Cart</a></li>
                                 <li><a href="checkout.php"><i class="fa fa-user"></i> Checkout</a></li>';

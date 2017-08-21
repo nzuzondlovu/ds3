@@ -33,6 +33,7 @@ if(isset($_POST['submit'])) {
         if ($_SESSION['user_id'] != $id1) {
 
             $_SESSION['name'] = $user_details['name'];
+            $_SESSION['surname'] = $user_details['surname'];
             $_SESSION['location'] = $user_details['location'];
             $_SESSION['idnumber'] = $user_details['idnumber'];
             $_SESSION['cell'] = $user_details['cell'];
