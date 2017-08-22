@@ -63,7 +63,7 @@ function user($type)
 				<a href="stocktable.php">View Stock</a>
 			</li>
 			<li>
-				<a href="stockgraph.php">View Stock (Graph)</a>
+				<a href="stockgraph.php">View Stock Graph</a>
 			</li>
 			<li>
 				<a href="orders.php">View Orders</a>
@@ -82,11 +82,14 @@ function user($type)
 				<a href="cart.php">Cart</a>
 			</li>
 			<li>
-				<a href="cartgraph.php">Cart Sales</a>
+				<a href="cartgraph.php">Cart Graph</a>
 			</li>
 			<li>
-				<a href="#">Second Level Item</a>
+				<a href="expense.php">Expenses</a>
 			</li>
+			<li>
+				<a href="expensegraph.php">Expenses Chart</a>
+			</li>			
 			<li>
 				<a href="#">Third Level <span class="fa arrow"></span></a>
 				<ul class="nav nav-third-level">
