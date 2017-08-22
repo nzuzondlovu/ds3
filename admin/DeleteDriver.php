@@ -73,7 +73,7 @@ include 'header.php';
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Category Details</h1>
+				<h1 class="page-header">Driver Details</h1>
 			</div>
 			<!-- /.col-lg-12 -->
 		</div>
@@ -103,7 +103,7 @@ include 'header.php';
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-md-offset-3 col-md-6">
-								<h2>Quotation details</h2>
+								<h2>Driver details</h2>
 								<?php
 								echo $delete;
 								?>
