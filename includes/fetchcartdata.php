@@ -3,7 +3,7 @@ header('Content-Type: application/json');
 
 include 'functions.php';
 
-$query = mysqli_query($con, "SELECT * FROM orders");
+$query = mysqli_query($con, "SELECT * FROM cart");
 
 $data = array();
 

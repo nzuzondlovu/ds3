@@ -10,6 +10,28 @@ if(isset($_SESSION['key']) == '' ) {
 ?>
 
 <?php
+
+$tot = 0.00;
+$qty = 0;
+$num = 0;
+
+$sql = "SELECT * FROM cart";
+$res = mysqli_query($con, $sql);
+
+if (mysqli_num_rows($res) > 0) {
+
+	$sql1 = "SELECT DISTINCT(name) FROM cart";
+	$num = mysqli_num_rows(mysqli_query($con, $sql1));
+	
+	while ($row = mysqli_fetch_assoc($res)) {
+
+		$qty += $row['num'];
+		$tot += ($row['price'] * $row['num']);
+	}
+}
+?>
+
+<?php
 include 'header.php';
 ?>
 <script src="../assets/js/jquery.js" type="text/javascript"></script>
@@ -51,7 +73,14 @@ include 'header.php';
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="pull-right">
-									<a href="cart.php" class="btn btn-success"> Show Cart</a>
+									<a href="cart.php" class="btn btn-success"> Show Table</a>
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<div class="pull-left">
+									There have been <b><u><?php echo $num; ?></u></b> types of products sold to date<br>
+									The total number of products sold to customers to date is <b><u><?php echo $qty; ?></u></b><br>
+									The grand total income from all sales from customers is <b><u>R <?php echo $tot; ?></u></b>
 								</div>
 							</div>
 						</div>
