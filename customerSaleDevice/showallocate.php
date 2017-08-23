@@ -1,5 +1,6 @@
 <?php
-include '../include.php';
+//include '../../include.php';
+include '../../header.php';
 ?>
 
 	 <title>Show Allocation</title>
@@ -40,14 +41,16 @@ include '../include.php';
 
 
 
-			$sql1 = "INSERT INTO shoprepair(dname,model, serialNumber, recievedDate, price,tname) values() where id = '$id'";
-			$run1 = $con->query($sql1);
+			//$sql1 = "INSERT INTO shoprepair(dname,model, serialNumber, recievedDate, price,tname) values() where id = '$id'";
+			//$run1 = $con->query($sql1);
 
-		  	$sql1 = "DELETE * FROM techrepair WHERE id = '$id'";
+		  //	$sql1 = "DELETE * FROM techrepair WHERE id = '$id'";
 		  //$run2 = $con->query($sql1);	
 
 			?>
 
 			<a href="techallocate.php">Back</a>
+
+<?php include '../../footer.php';?>
 </body>
 </html>

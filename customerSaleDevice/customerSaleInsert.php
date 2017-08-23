@@ -1,7 +1,8 @@
 
  <?php
- include "../connection.php";
-include '../include.php';
+ include "../../connection.php";
+include '../../include.php';
+ include '../../header.php';
 
  		if(isset($_POST['create'])){
 

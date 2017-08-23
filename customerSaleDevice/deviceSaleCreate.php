@@ -1,11 +1,7 @@
 <?php
-include '../include.php';
-?>
+include '../../include.php';
+include '../../header.php';?>
 	 <title>Sale Device details</title>
-</head>
-
-<body>
-
 <form action="deviceDetailInsert.php" method="post">
 
   <div class="container">
@@ -50,7 +46,7 @@ include '../include.php';
         </div>
     </div>
 </form>
-
+<?php include '../../footer.php';?>
 </body>
 
 

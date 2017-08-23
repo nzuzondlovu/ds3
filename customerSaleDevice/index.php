@@ -1,12 +1,10 @@
 <?php
       
-    include '../include.php';
-  
+    //include '../../include.php';
+    include '../../header.php';
 ?>
     <title>Fix Device</title>
-</head>
 
-<body>
   <div class="container">
 
             <div class="row">
@@ -33,7 +31,6 @@
                           <th>Serial No</th>
                           <th>type</th>
                           <th>Date Recieved</th>
-                          <th>Cost</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -48,9 +45,8 @@
 							echo '<td>'. $row['serialNumber'].'</td>';
 							echo '<td>'. $row['Dtype'].'</td>';
 							echo '<td>'. $row['recievedDate'].'</td>';
-              echo '<td>'. $row['establishAmount'].'</td>';
-							echo '<td>'.'<a href="devicedelete.php?id='.$row['id'].'"><img src="../img/deleteimg.png" alt="delete_image"></a>'." : ".
-								'<a href="deviceedite.php?id='.$row['id'].'"><img src="../img/edit.png" alt="edit_image"></a>'.'......'.
+							echo '<td>'.'<a href="devicedelete.php?id='.$row['id'].'"><img src="../../img/deleteimg.png" alt="delete_image"></a>'." : ".
+								'<a href="deviceedite.php?id='.$row['id'].'"><img src="../../img/edit.png" alt="edit_image"></a>'.'......'.
                 '<a href="checkrepair.php?id='.$row['id'].'">Repaire Device.</a><br>'.'</td>';
 
 							echo '</tr>';
@@ -66,6 +62,6 @@
                  <a href="createCustomer.php" class="btn btn-success">back</a>
         </div>
     </div> <!-- /container -->
-
+<?php include '../../footer.php';?>
   </body>
 </html>

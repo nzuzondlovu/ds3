@@ -1,5 +1,5 @@
 <?php
-include "../connection.php";
+include "../../connection.php";
 
  ?>
  <!DOCTYPE html>
@@ -8,8 +8,8 @@ include "../connection.php";
     <meta charset="utf-8">
     
    <title>Tecnician work</title>
-    <link   href="../css/bootstrap.min.css" rel="stylesheet">
-    <script src="../js/bootstrap.min.js"></script>
+    <link   href="../../css/bootstrap.min.css" rel="stylesheet">
+    <script src=".../../js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="container">

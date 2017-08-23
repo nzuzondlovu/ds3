@@ -1,6 +1,6 @@
 
 <?php
-include '../connection.php';
+include '../../connection.php';
 		IF(ISSET($_GET['id'])){
 		$id = $_GET['id'];
 		

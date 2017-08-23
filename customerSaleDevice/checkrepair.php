@@ -1,22 +1,12 @@
 <?php
-include '../connection.php';
-include '../include.php';
+include '../../connection.php';
+include '../../header.php';
 
 //Check if the id is available
 if (!isset($_GET['id'])) {
 	header('Location: index.php');
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Allocate To</title>
-	<link   href="../css/bootstrap.min.css" rel="stylesheet">
-	<script src="../js/bootstrap.min.js"></script>
-</head>
-<body>
-
 	<?php
 	$diviceName = '';
 	$model = '';
@@ -120,5 +110,6 @@ if(isset($_POST['submit'])){
 }
 ?>
 
+<?php include '../../footer.php';?>
 </body>
 </html>

@@ -1,16 +1,7 @@
 <?php
-include "../connection.php";
-
+//include "../../connection.php";
+include '../../header.php';
  ?>
- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    
-	 <title>Tecnician work</title>
-    <link   href="../css/bootstrap.min.css" rel="stylesheet">
-    <script src="../js/bootstrap.min.js"></script>
-
     <style>
 .flip3D{ width:240px; height:200px; margin:10px; float:left; }
 .flip3D > .front{
@@ -95,5 +86,7 @@ include "../connection.php";
                <a href="techalldevices.php" class="btn btn-success">All Devices</a>
           </div> 
     </div>
+
+<?php include '../../footer.php';?>
   </body>
 </html>

@@ -1,18 +1,9 @@
 <?php
-include "../connection.php";
+include "../../connection.php";
+    include '../../header.php';
 
  ?>
- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    
-	 <title>Tecnician work</title>
-    <link   href="../css/bootstrap.min.css" rel="stylesheet">
-    <script src="../js/bootstrap.min.js"></script>
-</head>
-
-<body>
+ 
   <div id="google_translate_element"></div><script type="text/javascript">
   function googleTranslateElementInit() {
     new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'af,en,xh,zh-CN,zu', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
@@ -61,5 +52,6 @@ include "../connection.php";
         </div>
     </div> <!-- /container -->
 
+<?php include '../../footer.php';?>
   </body>
 </html>
