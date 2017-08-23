@@ -153,7 +153,13 @@ function user($type)
 		</li>
 		<li>
 			<a href="viewtech.php"><i class="fa fa-edit fa-fw"></i> View Technicians</a>
-		</li>	
+		</li>
+		<li>
+		<a href="viewD.php"><i class="fa fa-edit fa-fw"></i>Deliveries</a>
+		</li>
+		<li>
+		<a href="drivers.php"><i class="fa fa-edit fa-fw"></i>Drivers</a>
+		</li>
 		<li>
 			<a href="quotation.php"><i class="fa fa-table fa-fw"></i> Create Quotation</a>
 		</li>
