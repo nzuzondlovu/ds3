@@ -135,6 +135,9 @@ function user($type)
 		</li>
 		<li>
 			<a href="update.php"><i class="fa fa-cogs fa-fw"></i> Update Details</a>
+		</li>
+		<li>
+			<a href="../../techallocate.php"><i class="fa fa-cogs fa-fw"></i> Allocate to technician</a>
 		</li>';
 	} else if ($type == 'clerk') {
 
@@ -162,6 +165,24 @@ function user($type)
 		</li>
 		<li>
 			<a href="update.php"><i class="fa fa-cogs fa-fw"></i> Update Details</a>
+		</li>
+		<li>
+			<a href="../../index.php"><i class="fa fa-cogs fa-fw"></i>Customer Devices</a>
+		</li>
+		<li>
+			<a href="../../techallocate.php"><i class="fa fa-cogs fa-fw"></i>Insert customer Info</a>
+		</li>
+		<li>
+			<a href="../../createCustomer.php"><i class="fa fa-cogs fa-fw"></i>Customer Devices</a>
+		</li>
+		<li>
+			<a href="../../techallocate.php"><i class="fa fa-cogs fa-fw"></i> Allocate to technician</a>
+		</li>
+		<li>
+			<a href="../../view.php"><i class="fa fa-cogs fa-fw"></i> Repair Meterial</a>
+		</li>
+		<li>
+			<a href="../../create.php"><i class="fa fa-cogs fa-fw"></i> Create Order</a>
 		</li>';
 	}
 	

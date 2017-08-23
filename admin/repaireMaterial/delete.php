@@ -4,9 +4,9 @@ include '../../connection.php';
 		IF(ISSET($_GET['id'])){
 		$id = $_GET['id'];
 		
-		$sql = "DELETE FROM customersaledevice WHERE id ='$id'";
+		$sql = "DELETE FROM repairmaterial WHERE materialid ='$id'";
 		$run =  $con->query($sql);
-		header("Location: index.php?deletedsuccessful");
+		header("Location: view.php?deletedsuccessful");
 		}
 
 
