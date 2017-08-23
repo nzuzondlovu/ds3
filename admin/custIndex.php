@@ -18,7 +18,15 @@ if(isset($_POST['submit'])) {
 	$phone = mysqli_real_escape_string($con, strip_tags(trim($_POST["phone"])));
 	$email = mysqli_real_escape_string($con, strip_tags(trim($_POST["email"])));
 
-	$sql = 'INSERT INTO customerrepaire (Cname, idNo, num, email) VALUES("'.$cname.'", "'.$IdNo.'", "'.$num.'", "'.$email.'")';
+	if ($id != '' && $name != '' && $phone != '' && $email != '') {
+
+		$sql = 'INSERT INTO customerrepaire (Cname, idNo, num, email) VALUES("'.$cname.'", "'.$IdNo.'", "'.$num.'", "'.$email.'")';
+		mysqli_query($con, $sql);
+		$_SESSION['success'] = 'User was added successfully.';
+	} else {
+		$_SESSION['failure'] = 'An error occured, please try again.';
+	}
+	
 
 
 }
@@ -34,7 +42,7 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 		mysqli_query($con, $sql);
 		$_SESSION['success'] = 'Booking was archived successfully.';
 	} else {
-		$_SESSION['failure'] = 'An error occured, please try again.';
+		$_SESSION['failure'] = 'An error occured, fill in all fields and please try again.';
 	}	
 }
 ?>
@@ -113,13 +121,13 @@ include 'header.php';
 					<!-- /.panel-heading -->
 					<div class="panel-body">						
 						<div class="table-responsive">
-						<div class="row">
-							<div class="col-lg-12">
-								<div class="pull-right">
-									<button class="btn btn-success" data-toggle="modal" data-target="#addItem"> Add Customer</button>
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="pull-right">
+										<button class="btn btn-success" data-toggle="modal" data-target="#addItem"> Add Customer</button>
+									</div>
 								</div>
 							</div>
-						</div>
 							<?php
 
 							$sql = "SELECT * FROM customersaledevice";
@@ -152,7 +160,7 @@ include 'header.php';
 												<td>'.$row['Dtype'].'</td>
 												<td>'.$row['establishAmount'].'</td>												
 												<td>'.date("M d, y",strtotime($row['recievedDate'])).'</td>
-												<td class="pull-right">
+												<td>
 													<a class="btn btn-danger" href="devicedelete.php?id='.$row['id'].'"><span class="fa fa-trash"> Delete</span></a>
 													<a class="btn btn-warning" href="deviceedite.php?id='.$row['id'].'"><span class="fa fa-pencil"> Edit</a>
 													<a class="btn btn-info" href="checkrepair.php?id='.$row['id'].'"><span class="fa fa-cogs"> Repair device</a>
