@@ -115,7 +115,7 @@ include 'header.php';
 									<p class="alert alert-error"><h4><strong>Are you sure to delete ?</strong></h4></p>
 									<div class="form-actions">
 										<button type="submit" class="btn btn-danger">Yes</button>
-										<a class="btn btn-primary" href="drivers.php">No</a>
+										<a class="btn btn-primary" href="viewD.php">No</a>
 									</div>
 								</form>
 							</div>

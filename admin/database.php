@@ -3,8 +3,8 @@ class Database
 {
   private static $dbName = 'shop' ;
   private static $dbHost = 'localhost' ;
-  private static $dbUsername = 'nzuzor1';
-  private static $dbUserPassword = 'hohi74Ro';
+  private static $dbUsername = '';
+  private static $dbUserPassword = '';
   private static $cont  = null;
 
   public function __construct() {

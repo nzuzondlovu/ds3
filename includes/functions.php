@@ -55,7 +55,18 @@ function user($type)
 		</ul>
 		<!-- /.nav-second-level -->
 	</li>
-
+	<li>
+		<a href="#"><i class="fa fa-sitemap fa-fw"></i> Deliveries<span class="fa arrow"></span></a>
+		<ul class="nav nav-second-level">
+		<li>
+		<a href="viewD.php"><i class="fa fa-edit fa-fw"></i>View Deliveries</a>
+		</li>
+		<li>
+		<a href="drivers.php"><i class="fa fa-edit fa-fw"></i>View Drivers</a>
+		</li>
+		</ul>
+		<!-- /.nav-second-level -->
+	</li>
 	<li>
 		<a href="#"><i class="fa fa-sitemap fa-fw"></i> Customer Sales<span class="fa arrow"></span></a>
 		<ul class="nav nav-second-level">
