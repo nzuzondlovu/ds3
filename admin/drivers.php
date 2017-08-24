@@ -1,5 +1,5 @@
 <?php
-include 'admin/functions.php';
+include '../includes/functions.php';
 ?>
 
 <?php
