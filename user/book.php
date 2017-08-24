@@ -1,6 +1,6 @@
 <?php
 ob_start();
-include '../admin/functions.php';
+include '../includes/functions.php';
 ?>
 
 <?php
