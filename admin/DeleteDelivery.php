@@ -22,13 +22,13 @@ if (isset($_GET['id']) && $_GET['id'] != null) {
 
 $delete = '';
 
-$sql = "SELECT * FROM custdelivery WHERE deliveryID=$id";
+$sql = "SELECT * FROM custdelivery WHERE id=$id";
 $res = mysqli_query($con, $sql);
 
 if(mysqli_num_rows($res) > 0) {
 	while($row = mysqli_fetch_assoc($res)) {
 		$delete = '
-		ID:</b>'.$row['deliveryID'].'</br>
+		ID:</b>'.$row['id'].'</br>
 		Customer ID:'.$row['custID'].'</br>
 		Street Address:'.$row['strAddress'].'</br>
 		Suburb:'.$row['suburb'].'</br>
