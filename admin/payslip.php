@@ -136,118 +136,120 @@ include 'header.php';
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="pull-right">
-									<a href="salary.php" class="btn btn-warning">Salaries</a>
+									<button onclick="javascript:printDiv('printablediv')" class="btn btn-warning"><span class="fa fa-print"></span> Print</button> <a href="salary.php" class="btn btn-warning">Salaries</a>
 								</div>
 							</div>
-							<div class="col-md-6">
-							<?php
-							echo '
-								Employers name: '.$sitename.'<br>
-								Employee ID: '.$id.'<br>
-								Employees name: '.$user.'<br>
-								Employment status: '.$role.'<br>
-								Hourly rate: R'.$hpay.'<br>
-							</div>
-							<div class="col-md-6">
-								Date of payment: '.date('d/m/y').'<br>
-								Pay period: '.date('d/m/y').'';?>									
-							</div>
-							<div class="col-md-12">
-								<div class="table-responsive">
-									<table class="table data-table table-bordered">
-										<thead>
-											<tr>
-												<th>Entitlements</th>
-												<th width="10%">Hours</th>
-												<th width="10%">Hourly Rate</th>
-												<th width="10%">Total</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<?php
-												echo'
-												<td>Basic salary</td>
-												<td>'.$norm.'Hrs</td>
-												<td>R'.$hpay.'</td>
-												<td>R'.$norm * $hpay.'</td>';
-												?>
-											</tr>
-											<tr>
-												<?php
-												echo'
-												<td>Extra Hours</td>
-												<td>'.$extr.'Hrs</td>
-												<td>R'.$hpay.'</td>
-												<td>R'.$extr * $hpay.'</td>';
-												?>
-											</tr>
-											<tr>
-												<?php
-												echo'
-												<td>Other</td>
-												<td>0</td>
-												<td>R0.00</td>
-												<td>R0.00</td>';
-												?>
-											</tr>
-										</tbody>									
-									</table>
+							<div id="printablediv">
+								<div class="col-md-6">
+									<?php
+									echo '
+									Employers name: '.$sitename.'<br>
+									Employee ID: '.$id.'<br>
+									Employees name: '.$user.'<br>
+									Employment status: '.$role.'<br>
+									Hourly rate: R'.$hpay.'<br>
 								</div>
-								<div class="table-responsive">
-									<table class="table data-table table-bordered">
-										<thead>
-											<tr>
-												<th>Deduction</th>
-												<th width="10%">Total</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<?php
-												echo'
-												<td>UIF</td>
-												<td>R'.$uif.'</td>';
-												?>
-											</tr>
-											<tr>
-												<?php
-												echo'
-												<td>Pension</td>
-												<td>R'.$pens.'</td>';
-												?>
-											</tr>
-											<tr>
-												<?php
-												echo'
-												<td>Medical Aid</td>
-												<td>R'.$meda.'</td>';
-												?>
-											</tr>
-										</tbody>									
-									</table>
+								<div class="col-md-6">
+									Date of payment: '.date('d/m/y').'<br>
+									Pay period: '.date('d/m/y').'';?>									
 								</div>
-								<div class="table-responsive">
-									<table class="table data-table table-bordered">
-										<thead>
-											<tr>
-												<th></th>
-												<th width="10%">Total</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<?php
-												$d = ($uif + $pens + $meda);
-												$s = ($norm * $hpay) + ($extr * $hpay);
-												$a = $s - $d;
-												echo'
-												<td></td>
-												<td>R'.$a.'</td>';
-												?>
-											</tr>
-										</tbody>									
-									</table>
+								<div class="col-md-12">
+									<div class="table-responsive">
+										<table class="table data-table table-bordered">
+											<thead>
+												<tr>
+													<th>Entitlements</th>
+													<th width="10%">Hours</th>
+													<th width="10%">Hourly Rate</th>
+													<th width="10%">Total</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<?php
+													echo'
+													<td>Basic salary</td>
+													<td>'.$norm.'Hrs</td>
+													<td>R'.$hpay.'</td>
+													<td>R'.$norm * $hpay.'</td>';
+													?>
+												</tr>
+												<tr>
+													<?php
+													echo'
+													<td>Extra Hours</td>
+													<td>'.$extr.'Hrs</td>
+													<td>R'.$hpay.'</td>
+													<td>R'.$extr * $hpay.'</td>';
+													?>
+												</tr>
+												<tr>
+													<?php
+													echo'
+													<td>Other</td>
+													<td>0</td>
+													<td>R0.00</td>
+													<td>R0.00</td>';
+													?>
+												</tr>
+											</tbody>									
+										</table>
+									</div>
+									<div class="table-responsive">
+										<table class="table data-table table-bordered">
+											<thead>
+												<tr>
+													<th>Deduction</th>
+													<th width="10%">Total</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<?php
+													echo'
+													<td>UIF</td>
+													<td>R'.$uif.'</td>';
+													?>
+												</tr>
+												<tr>
+													<?php
+													echo'
+													<td>Pension</td>
+													<td>R'.$pens.'</td>';
+													?>
+												</tr>
+												<tr>
+													<?php
+													echo'
+													<td>Medical Aid</td>
+													<td>R'.$meda.'</td>';
+													?>
+												</tr>
+											</tbody>									
+										</table>
+									</div>
+									<div class="table-responsive">
+										<table class="table data-table table-bordered">
+											<thead>
+												<tr>
+													<th></th>
+													<th width="10%">Total</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<?php
+													$d = ($uif + $pens + $meda);
+													$s = ($norm * $hpay) + ($extr * $hpay);
+													$a = $s - $d;
+													echo'
+													<td></td>
+													<td>R'.$a.'</td>';
+													?>
+												</tr>
+											</tbody>									
+										</table>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -264,7 +266,25 @@ include 'header.php';
 	<!-- /.container-fluid -->
 </div>
 <!-- /#page-wrapper -->
+<script language="javascript" type="text/javascript">
+	function printDiv(divID) {
+    //Get the HTML of div
+    var divElements = document.getElementById(divID).innerHTML;
+    //Get the HTML of whole page
+    var oldPage = document.body.innerHTML;
 
+    //Reset the page's HTML with div's HTML only
+    document.body.innerHTML = 
+    "<html><head><title></title></head><body>" + 
+    divElements + "</body>";
+
+    //Print Page
+    window.print();
+
+    //Restore orignal HTML
+    document.body.innerHTML = oldPage;          
+}
+</script>
 <?php
 include 'footer.php';
 ?>
