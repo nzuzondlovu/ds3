@@ -78,7 +78,7 @@
                   ?>
                 </tbody>
               </table>
-              <a href="createCustomer.php" class="btn btn-success">back</a>
+              <a href="createsale.php" class="btn btn-success">back</a>
             </div>
           </div> <!-- /container -->
         </div>

@@ -37,7 +37,16 @@ include 'header.php';
                              echo '<td><b>Serial No </b>'. $row['serialNumber'].'<br></td>';
                              echo '<td><b>Type       </b>'. $row['Dtype'].'<br></td>';
                             echo '<td><b>Date Recieved  </b>'. $row['recievedDate'].'<br><br></td>';
-                          //  echo '<td>'.'<a href="selldevice.php?id='.$row["id"].'">Device Completed</a>'.'<br><br></td>';
+                            echo '<td>'.'<form action="tech.php" method="POST">
+
+                                        <input type="hidden" name="'. $row['diviceName'].'">
+                                        <input type="hidden" name="'. $row['model'].'">
+                                        <input type="hidden" name="'. $row['serialNumber'].'">
+                                        <input type="hidden" name="'. $row['Dtype'].'">
+                                        <input type="submit" name="btns" value="Device Complited">
+                                      </form>'.'<br><br></td>';
+                            echo '<b><hr/></b>';
+                            echo '<td>'.'<a href="#?id='.$row["id"].'">Device Completed</a>'.'<br><br></td>';
                             echo '<b><hr/></b>'; 
                             echo '</tr>'; 
                             $id = $row['id'];
