@@ -96,6 +96,24 @@ function user($type)
 		<!-- /.nav-second-level -->
 	</li>
 
+
+	<li>
+		<a href="#"><i class="fa fa-sitemap fa-fw"></i>Device Recylce<span class="fa arrow"></span></a>
+		<ul class="nav nav-second-level">
+			<li>
+				<a href="jobs.php">Waitlist</a>
+			</li>
+			<li>
+				<a href="createsale.php">Recycle Sales</a>
+			</li>
+				
+				<li>
+				<a href="allocated.php">Allocated</a>
+			</li>		
+		
+		</ul>
+		<!-- /.nav-second-level -->
+	</li>
 	<li>
 		<a href="#"><i class="fa fa-money fa-fw"></i> Cash Flow<span class="fa arrow"></span></a>
 		<ul class="nav nav-second-level">
