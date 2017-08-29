@@ -105,8 +105,26 @@ function user($type)
 		<!-- /.nav-second-level -->
 	</li>
 
+
 	<li>
-		<a href="#"><i class="fa fa-sitemap fa-fw"></i> Sales<span class="fa arrow"></span></a>
+		<a href="#"><i class="fa fa-sitemap fa-fw"></i>Device Recylce<span class="fa arrow"></span></a>
+		<ul class="nav nav-second-level">
+			<li>
+				<a href="jobs.php">Waitlist</a>
+			</li>
+			<li>
+				<a href="createsale.php">Recycle Sales</a>
+			</li>
+				
+				<li>
+				<a href="allocated.php">Allocated</a>
+			</li>		
+		
+		</ul>
+		<!-- /.nav-second-level -->
+	</li>
+	<li>
+		<a href="#"><i class="fa fa-sitemap fa-fw"></i> Cash Flow<span class="fa arrow"></span></a>
 		<ul class="nav nav-second-level">
 			<li>
 				<a href="cart.php">Cart</a>
@@ -121,19 +139,13 @@ function user($type)
 				<a href="expensegraph.php">Expenses Chart</a>
 			</li>			
 			<li>
-				<a href="#">Third Level <span class="fa arrow"></span></a>
+				<a href="#">Salaries <span class="fa arrow"></span></a>
 				<ul class="nav nav-third-level">
 					<li>
-						<a href="#">Third Level Item</a>
+						<a href="salary.php">Table</a>
 					</li>
 					<li>
-						<a href="#">Third Level Item</a>
-					</li>
-					<li>
-						<a href="#">Third Level Item</a>
-					</li>
-					<li>
-						<a href="#">Third Level Item</a>
+						<a href="salarychart.php">Bar Graph</a>
 					</li>
 				</ul>
 				<!-- /.nav-third-level -->
