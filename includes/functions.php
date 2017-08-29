@@ -114,6 +114,25 @@ function user($type)
 		</ul>
 		<!-- /.nav-second-level -->
 	</li>
+
+	<li>
+		<a href="#"><i class="fa fa-sitemap fa-fw"></i>Reports<span class="fa arrow"></span></a>
+		<ul class="nav nav-second-level">
+			<li>
+				<a href="report.php">Reports</a>
+			</li>
+			<li>
+				<a href="stockreport.php">Sales</a>
+			</li>
+				
+				<li>
+				<a href="allocated.php">Shop</a>
+			</li>		
+		
+		</ul>
+		<!-- /.nav-second-level -->
+	</li>
+
 	<li>
 		<a href="#"><i class="fa fa-sitemap fa-fw"></i> Cash Flow<span class="fa arrow"></span></a>
 		<ul class="nav nav-second-level">
@@ -149,25 +168,7 @@ function user($type)
 	</li>
 	<li>
 		<a href="update.php"><i class="fa fa-cogs fa-fw"></i> Update Details</a>
-	</li>
-	<li>
-			<a href="../../index.php"><i class="fa fa-cogs fa-fw"></i>Customer Devices</a>
-		</li>
-		<li>
-			<a href="../../techallocate.php"><i class="fa fa-cogs fa-fw"></i>Insert customer Info</a>
-		</li>
-		<li>
-			<a href="../../createCustomer.php"><i class="fa fa-cogs fa-fw"></i>Customer Devices</a>
-		</li>
-		<li>
-			<a href="../../techallocate.php"><i class="fa fa-cogs fa-fw"></i> Allocate to technician</a>
-		</li>
-		<li>
-			<a href="../../view.php"><i class="fa fa-cogs fa-fw"></i> Repair Meterial</a>
-		</li>
-		<li>
-			<a href="../../create.php"><i class="fa fa-cogs fa-fw"></i> Create Order</a>
-		</li>';
+	</li>';
 
 	if ($type == 'technician') {
 
@@ -186,9 +187,6 @@ function user($type)
 		</li>
 		<li>
 			<a href="update.php"><i class="fa fa-cogs fa-fw"></i> Update Details</a>
-		</li>
-		<li>
-			<a href="../../techallocate.php"><i class="fa fa-cogs fa-fw"></i> Allocate to technician</a>
 		</li>';
 	} else if ($type == 'clerk') {
 
