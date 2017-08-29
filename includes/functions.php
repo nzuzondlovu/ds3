@@ -59,7 +59,7 @@ function user($type)
 		<a href="#"><i class="fa fa-sitemap fa-fw"></i> Queries<span class="fa arrow"></span></a>
 		<ul class="nav nav-second-level">
 			<li>
-				<a href="response.php">View Queries</a>
+				<a href="feedback.php">View Queries</a>
 			</li>
 		</ul>
 		<!-- /.nav-second-level -->

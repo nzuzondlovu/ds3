@@ -61,19 +61,19 @@ include 'header.php';
 							     
 							     <div class="group-data" >
 							     <label>Name</label>
-							     <input type ="text" name="name" class="form-control" placeholder="enter text" > 
+							     <input type ="text" name="name" class="form-control" placeholder="Enter text" > 
 							     </div>
 							     </br>
 							     <div class="group-data" >
 							     <label>Email :</label>
-							     <input name="email" class="form-control" placeholder="enter text" >
+							     <input type ="text"  name="email" class="form-control" placeholder="Enter text" >
 							     </div>
 							     </br>
 							    
 							    
 							     <div class="group-data" >
-							     <label>query :  </label>
-							     <textarea name="description" class="form-control" rows="3" placeholder="enter text"></textarea>  
+							     <label>Query :  </label>
+							     <textarea name="description" class="form-control" rows="3" placeholder="Enter text"></textarea>  
 							     </div>
 							     </br>
 							    

@@ -12,7 +12,6 @@ if(isset($_POST['insert'])){
 
      $id = $_POST['id'];
 	$sql = "UPDATE query SET status='".$status."', feedback='".$feedback."' WHERE id='".$id."'";
-
     $run = $con->query($sql);
 	
 }

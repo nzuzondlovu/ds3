@@ -107,3 +107,11 @@ INSERT INTO `stork` (`StorkID`, `category`, `ProductName`, `Date`, `QuantityOnHa
 (3, 'Software', 'iPhone 5', '2017-08-01', 4, 88),
 (4, 'Hadware', 'Midel', '2017-08-23', 5, 11);
 
+CREATE TABLE country(
+	id int(11) PRIMARY KEY AUTO_INCREMENT not null,
+    country varchar(255) not null
+
+);
+
+INSERT INTO `country` (`country`) VALUES
+('South Africa');
