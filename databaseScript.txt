@@ -205,10 +205,10 @@ CREATE TABLE `query` (
 	PRIMARY KEY (`id`)
 )
 
-CREATE TABLE `drivers` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `name` VARCHAR(25) NOT NULL , `surname` VARCHAR(25) NOT NULL , `cell` VARCHAR(13) NOT NULL , `idnumber` VARCHAR(13) NOT NULL , `email` VARCHAR(35) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 
 
-CREATE TABLE `custdelivery` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `custId` INT(11) NOT NULL , `custname` VARCHAR(25) NOT NULL , `custcell` VARCHAR(13) NOT NULL , `strAddress` VARCHAR(35) NOT NULL , `suburb` VARCHAR(35) NOT NULL , `area` VARCHAR(35) NOT NULL , `boxcode` INT(11) NOT NULL , `dateofRequest` DATETIME NOT NULL , `dateofDelivery` DATETIME NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+
 
 
 

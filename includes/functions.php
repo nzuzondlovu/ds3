@@ -26,7 +26,7 @@ function user($type)
 		<a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 	</li>
 	<li>
-		<a href="#"><i class="fa fa-book fa-fw"></i> Bookings<span class="fa arrow"></span></a>
+		<a href="#"><i class="fa fa-sitemap fa-fw"></i> Bookings<span class="fa arrow"></span></a>
 		<ul class="nav nav-second-level">
 			<li>
 				<a href="bookings.php">View Bookings</a>
@@ -38,7 +38,7 @@ function user($type)
 		<!-- /.nav-second-level -->
 	</li>
 	<li>
-		<a href="#"><i class="fa fa-shopping-basket fa-fw"></i> Products<span class="fa arrow"></span></a>
+		<a href="#"><i class="fa fa-sitemap fa-fw"></i> Products<span class="fa arrow"></span></a>
 		<ul class="nav nav-second-level">
 			<li>
 				<a href="products.php">View Products</a>
@@ -56,19 +56,19 @@ function user($type)
 		<!-- /.nav-second-level -->
 	</li>
 	<li>
-		<a href="#"><i class="fa fa-truck fa-fw"></i> Deliveries<span class="fa arrow"></span></a>
+		<a href="#"><i class="fa fa-sitemap fa-fw"></i> Deliveries<span class="fa arrow"></span></a>
 		<ul class="nav nav-second-level">
 		<li>
-		<a href="viewD.php"> View Deliveries</a>
+		<a href="viewD.php"><i class="fa fa-edit fa-fw"></i>View Deliveries</a>
 		</li>
 		<li>
-		<a href="drivers.php"> View Drivers</a>
+		<a href="drivers.php"><i class="fa fa-edit fa-fw"></i>View Drivers</a>
 		</li>
 		</ul>
 		<!-- /.nav-second-level -->
 	</li>
 	<li>
-		<a href="#"><i class="fa fa-group fa-fw"></i> Customer Sales<span class="fa arrow"></span></a>
+		<a href="#"><i class="fa fa-sitemap fa-fw"></i> Customer Sales<span class="fa arrow"></span></a>
 		<ul class="nav nav-second-level">
 			<li>
 				<a href="custIndex.php">Devices to be fixed</a>
@@ -78,7 +78,7 @@ function user($type)
 	</li>
 	
 	<li>
-		<a href="#"><i class="fa fa-files-o fa-fw"></i> Stock<span class="fa arrow"></span></a>
+		<a href="#"><i class="fa fa-sitemap fa-fw"></i> Stock<span class="fa arrow"></span></a>
 		<ul class="nav nav-second-level">
 			<li>
 				<a href="stocktable.php">View Stock</a>
@@ -98,7 +98,7 @@ function user($type)
 
 
 	<li>
-		<a href="#"><i class="fa fa-recycle fa-fw"></i>Device Recylce<span class="fa arrow"></span></a>
+		<a href="#"><i class="fa fa-sitemap fa-fw"></i>Device Recylce<span class="fa arrow"></span></a>
 		<ul class="nav nav-second-level">
 			<li>
 				<a href="jobs.php">Waitlist</a>
@@ -134,32 +134,20 @@ function user($type)
 	</li>
 
 	<li>
-		<a href="#"><i class="fa fa-money fa-fw"></i> Cash Flow<span class="fa arrow"></span></a>
+		<a href="#"><i class="fa fa-sitemap fa-fw"></i> Cash Flow<span class="fa arrow"></span></a>
 		<ul class="nav nav-second-level">
 			<li>
-				<a href="#">Cart <span class="fa arrow"></span></a>
-				<ul class="nav nav-third-level">
-					<li>
-						<a href="cart.php">Table</a>
-					</li>
-					<li>
-						<a href="cartgraph.php">Bar Graph</a>
-					</li>
-				</ul>
-				<!-- /.nav-third-level -->
+				<a href="cart.php">Cart</a>
 			</li>
 			<li>
-				<a href="#">Expenses <span class="fa arrow"></span></a>
-				<ul class="nav nav-third-level">
-					<li>
-						<a href="expense.php">Table</a>
-					</li>
-					<li>
-						<a href="expensegraph.php">Pie Chart</a>
-					</li>
-				</ul>
-				<!-- /.nav-third-level -->
+				<a href="cartgraph.php">Cart Graph</a>
 			</li>
+			<li>
+				<a href="expense.php">Expenses</a>
+			</li>
+			<li>
+				<a href="expensegraph.php">Expenses Chart</a>
+			</li>			
 			<li>
 				<a href="#">Salaries <span class="fa arrow"></span></a>
 				<ul class="nav nav-third-level">
@@ -176,34 +164,11 @@ function user($type)
 		<!-- /.nav-second-level -->
 	</li>
 	<li>
-		<a href="users.php"><i class="fa fa-table fa-fw"></i> List All Users</a>
+		<a href="users.php"><i class="fa fa-cogs fa-fw"></i> List All Users</a>
 	</li>
 	<li>
-<<<<<<< HEAD
 		<a href="update.php"><i class="fa fa-cogs fa-fw"></i> Update Details</a>
 	</li>';
-=======
-		<a href="update.php"><i class="fa fa-user fa-fw"></i> Update Details</a>
-	</li>
-	<li>
-			<a href="../../index.php"><i class="fa fa-cogs fa-fw"></i>Customer Devices</a>
-		</li>
-		<li>
-			<a href="../../techallocate.php"><i class="fa fa-cogs fa-fw"></i>Insert customer Info</a>
-		</li>
-		<li>
-			<a href="../../createCustomer.php"><i class="fa fa-cogs fa-fw"></i>Customer Devices</a>
-		</li>
-		<li>
-			<a href="../../techallocate.php"><i class="fa fa-cogs fa-fw"></i> Allocate to technician</a>
-		</li>
-		<li>
-			<a href="../../view.php"><i class="fa fa-cogs fa-fw"></i> Repair Meterial</a>
-		</li>
-		<li>
-			<a href="../../create.php"><i class="fa fa-cogs fa-fw"></i> Create Order</a>
-		</li>';
->>>>>>> 1e7fe7ab9c5a3544dab7d6f09161f95427d8ac93
 
 	if ($type == 'technician') {
 

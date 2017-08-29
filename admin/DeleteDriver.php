@@ -22,13 +22,13 @@ if (isset($_GET['id']) && $_GET['id'] != null) {
 
 $delete = '';
 
-$sql = "SELECT * FROM drivers WHERE id=$id";
+$sql = "SELECT * FROM drivers WHERE driverID=$id";
 $res = mysqli_query($con, $sql);
 
 if(mysqli_num_rows($res) > 0) {
 	while($row = mysqli_fetch_assoc($res)) {
 		$delete = '
-		ID: '.$row['id'].'</br>
+		ID: '.$row['driverID'].'</br>
 		Driver Name: '.$row['name'].'</br>
 		Driver Surname: '.$row['surname'].'</br>
 		Cell Number: '.$row['cell'].'</br>

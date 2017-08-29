@@ -219,9 +219,9 @@ if(isset($_POST['recover'])) {
                     <div class="header-right">
                         <ul class="list-unstyled list-inline">
                             <li class="dropdown dropdown-small">
-                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">currency :</span><span class="value">ZAR </span><b class="caret"></b></a>
+                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">currency :</span><span class="value">USD </span><b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">ZAR</a></li>
+                                    <li><a href="#">USD</a></li>
                                     <li><a href="#">INR</a></li>
                                     <li><a href="#">GBP</a></li>
                                 </ul>
@@ -269,7 +269,7 @@ if(isset($_POST['recover'])) {
                 
                 <div class="col-sm-6">
                     <div class="shopping-item">
-                        <a href="cart.php">Cart - <span class="cart-amunt">R0.00</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">0</span></a>
+                        <a href="cart.php">Cart - <span class="cart-amunt">$100</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
                     </div>
                 </div>
             </div>
