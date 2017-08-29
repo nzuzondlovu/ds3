@@ -119,16 +119,17 @@ function user($type)
 		<a href="#"><i class="fa fa-sitemap fa-fw"></i>Reports<span class="fa arrow"></span></a>
 		<ul class="nav nav-second-level">
 			<li>
-				<a href="report.php">Reports</a>
+				<a href="report.php">Menu</a>
 			</li>
 			<li>
-				<a href="stockreport.php">Sales</a>
+				<a href="stockreport.php">Stock Reports</a>
 			</li>
-				
-				<li>
-				<a href="allocated.php">Shop</a>
-			</li>		
-		
+			<li>
+				<a href="orderrport.php">Oder Reports</a>
+			</li>	
+			<li>
+				<a href="shopreport.php">Shop Reports</a>
+			</li>	
 		</ul>
 		<!-- /.nav-second-level -->
 	</li>

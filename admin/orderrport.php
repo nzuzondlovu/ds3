@@ -33,7 +33,7 @@ include 'header.php';
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Repot</h1>
+				<h1 class="page-header">Order Reports</h1>
 			</div>
 			<!-- /.col-lg-12 -->
 		</div>
@@ -57,7 +57,7 @@ include 'header.php';
 				</div>
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						List of all bookings
+						Reports
 					</div>
 					<!-- /.panel-heading -->
 					<div class="panel-body">
@@ -79,9 +79,11 @@ include 'header.php';
 				 $run = $con->query($sql);
 
 				while ($row = $run->fetch_assoc()) {
-					echo "<div style='align: center;'>".$row['productname']."<br>"; 
+					echo "<div align='center'>";
+					echo $row['productname']."<br>"; 
 					echo $row['Quantity']."<br>"; 
-					echo $row['OrderDate']."<br><br>"; 
+					echo $row['OrderDate']."<br>"; 
+					echo "<hr>";
 					echo "</div>";
 
 					}

@@ -33,7 +33,7 @@ include 'header.php';
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Bookings</h1>
+				<h1 class="page-header">Reports</h1>
 			</div>
 			<!-- /.col-lg-12 -->
 		</div>
@@ -57,7 +57,7 @@ include 'header.php';
 				</div>
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						List of all bookings
+						reports
 					</div>
 					<!-- /.panel-heading -->
 					<div class="panel-body">
@@ -66,15 +66,14 @@ include 'header.php';
 
 
         </div>
-        <div class= "col-md-6">
-              <ol>
-                <h1> Reports</h1>
-                <li><a href="orderrport.php">Order</a></li>
-                <li><a href="stockreport.php">Stork</a></li>
-                <li><a href="shopreport.php">Shop</a></li>
-              </ol>
-
-              </div>
+        <div class= "col-md-4">
+				              
+				                <h1> MENU BUTTONS</h1>
+				                <a href="orderrport.php" class="btn btn-lg btn-primary col-md-6">Order</a><br><br><br>
+				                <a href="stockreport.php" class="btn btn-lg btn-primary col-md-6">Stock</a><br><br><br>
+				                <a href="shopreport.php" class="btn btn-lg btn-primary col-md-6">Shop</a><br><br><br>
+				                
+				              </div>
               <div class= "col-md-6">
               </div>
     </div> <!-- /container -->

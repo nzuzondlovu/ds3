@@ -66,24 +66,26 @@ include 'header.php';
 				        </div>
 				       <div class= "col-md-4">
 				              
-				                <h1> Reports</h1>
+				                <h1> Menu Buttons</h1>
 				                <a href="orderrport.php" class="btn btn-lg btn-primary col-md-6">Order</a><br><br><br>
 				                <a href="stockreport.php" class="btn btn-lg btn-primary col-md-6">Stock</a><br><br><br>
 				                <a href="shopreport.php" class="btn btn-lg btn-primary col-md-6">Shop</a><br><br><br>
 				                
 				              </div>
 				              <div class= "col-md-6">
-				            <h2>Stocks</h2>
+				            <h2>List of Stocks</h2>
 							<?php  
 
 					 $sql = "SELECT * FROM `stork`";
 					 $run = $con->query($sql);
 
 					while ($row = $run->fetch_assoc()) {
-						echo "<div>".$row['category']."<br>"; 
+						echo "<div align='center'>";
+						echo $row['category']."<br>"; 
 						echo $row['Date']."<br>";
 						echo $row['QuantityOnHand']."<br>";
-						echo $row['quantity']."<br><br>";
+						echo $row['quantity']."<br>";
+						echo "<hr>";
 						echo "</div>";
 
 						}
