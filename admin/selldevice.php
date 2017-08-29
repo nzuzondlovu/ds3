@@ -47,9 +47,8 @@
                       <th>Model</th>
                       <th>Serial No</th>
                       <th>type</th>
-                      <th>Date Recieved</th>
                       <th>Cost</th>
-                      <th>Cost</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -72,10 +71,10 @@
                   ?>
                 </tbody>
               </table>
-              <a href="createCustomer.php" class="btn btn-success">back</a>
+              <a href="techalldevices.php" class="btn btn-success">back</a>
             </div>
           </div> <!-- /container -->
-          
+
 
  </div>
         <!-- /.panel-body -->

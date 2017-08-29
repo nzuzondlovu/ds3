@@ -79,6 +79,7 @@
                 </tbody>
               </table>
               <a href="createsale.php" class="btn btn-success">back</a>
+              <a href="techalldevices.php" class="btn btn-success">All allocated devices</a>
             </div>
           </div> <!-- /container -->
         </div>
