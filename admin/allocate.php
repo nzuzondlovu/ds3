@@ -36,13 +36,17 @@ include 'header.php';
         $establishAmount = $row['establishAmount'];
     }
     ?>
+    <div id="page-wrapper">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <h1 class="page-header">ALLOCATE TO TECHNICIAN</h1>
+          </div>
+          <!-- /.col-lg-12 -->
+        </div>
     <form method="post">
 
         <div class="container">
-
-            <div class="row">
-                <h1 style="font-family:AR BLANCA; text-align: center">ALLOCATE TO TECHNICIAN</h1>
-            </div>
             <div class="row">
                 <br><table class="table table-striped table-bordered">
                 <tr>
@@ -71,7 +75,7 @@ include 'header.php';
                 </tr>
                 <tr>
                     <td>Quantity: </td>
-                    <td> <button type='submit' name ='submit' class="btn btn-success" value='submit'>submit</button><input type="text" name="establishAmount" value='<?php echo "$establishAmount";?>'readonly required="please enter amount"/></td>
+                    <td><input type="text" name="establishAmount" value='<?php echo "$establishAmount";?>'readonly required="please enter amount"/></td>
                 </tr>
 
 
@@ -120,7 +124,10 @@ if(isset($_POST['submit'])){
     header("location: jobs.php");
 }
 ?>
-
+ </div>
+  </div>
+  <!-- /.container-fluid -->
+  </div>
 </body>
 
 

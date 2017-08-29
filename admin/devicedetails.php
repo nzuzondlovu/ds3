@@ -15,7 +15,14 @@ include 'header.php';
 
 
 <body>
-
+<div id="page-wrapper">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <h1 class="page-header">Cart Sales</h1>
+          </div>
+          <!-- /.col-lg-12 -->
+        </div>
 <form action="ddInsert.php" method="post">
 
   <div class="container">
@@ -48,8 +55,6 @@ include 'header.php';
                                     <tr>
                                         <td>Date recieved: </td>
                                         <td>
-                                        
-                                <input alighn="right" type="submit" name="create" class="btn btn-success" value="save"/>
                                         <input type="text" name="dateRecieved" required="please enter Date recieved" placeholder="Enter Date recieved"/></td>
                                     </tr>
                                     <tr>
@@ -64,7 +69,15 @@ include 'header.php';
         </div>
     </div>
 </form>
-
+ </div>
+        <!-- /.panel-body -->
+      </div>
+      <!-- /.panel -->
+    </div>
+  </div>
+  </div>
+  <!-- /.container-fluid -->
+  </div>
 </body>
 <!-- Page Content -->
 

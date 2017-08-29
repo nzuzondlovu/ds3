@@ -42,7 +42,8 @@ if(isset($_SESSION['key']) == '' ) {
 <?php
 include 'header.php';
 ?>
-
+<div id="page-wrapper">
+  <div class="container-fluid">
   <div class="container">
 
     <div class='row'>
@@ -91,7 +92,9 @@ include 'header.php';
     </div>
 <!-- Page Content -->
 <!-- /#page-wrapper -->
-
+</div> 
+    </div>
+    
 <?php
 include 'footer.php';
 ?>

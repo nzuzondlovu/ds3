@@ -49,30 +49,24 @@
                       <th>type</th>
                       <th>Date Recieved</th>
                       <th>Cost</th>
+                      <th>Cost</th>
                     </tr>
                   </thead>
                   <tbody>
                    <?php
-
-                   $sql = "SELECT * FROM customersaledevice ORDER BY id DESC";
+                   $sql = "SELECT * FROM shoprepaire ORDER BY id DESC";
                    $run = $con->query($sql) or die("error: ". mysqli_error($con));
                    while($row = $run->fetch_assoc()){
                     echo '<tr>';
-                    echo '<td>'. $row['diviceName'].'</td>';
-                    echo '<td>'. $row['model'].'</td>';
-                    echo '<td>'. $row['serialNumber'].'</td>';
-                    echo '<td>'. $row['Dtype'].'</td>';
-                    echo '<td>'. $row['recievedDate'].'</td>';
-                    echo '<td>'. $row['establishAmount'].'</td>';
+                    echo '<td>'. $row['dname'].'</td>';
+                    echo '<td>'. $row['type'].'</td>';
+                    echo '<td>'. $row['serialnumber'].'</td>';
+                    echo '<td>'. $row['recievedate'].'</td>';
+                    echo '<td>'. $row['price'].'</td>';
                     echo '<td>'.'<a href="devicedelete.php?id='.$row['id'].'"><img src="../../img/deleteimg.png" alt="delete_image"></a>'." : ".
-                    '<a href="deviceedite.php?id='.$row['id'].'"><img src="../../img/edit.png" alt="edit_image"></a>'.'......'.
-                    '<a href="allocate.php?id='.$row['id'].'">Repaire Device.</a><br>'.'</td>';
+                    '<a href="deviceedite.php?id='.$row['id'].'"><img src="../../img/edit.png" alt="edit_image"></a>'.'......'.'</td>';
 
                     echo '</tr>';
-                  }
-
-                  if(isset($_POST['check'])) {
-                    header("location: allocate.php");
                   }
 
                   ?>
@@ -81,7 +75,9 @@
               <a href="createCustomer.php" class="btn btn-success">back</a>
             </div>
           </div> <!-- /container -->
-        </div>
+
+
+ </div>
         <!-- /.panel-body -->
       </div>
       <!-- /.panel -->
@@ -95,3 +91,4 @@
   <?php
   include 'footer.php';
   ?>
+
