@@ -98,7 +98,7 @@ function user($type)
 
 
 	<li>
-		<a href="#"><i class="fa fa-sitemap fa-fw"></i>Device Recylce<span class="fa arrow"></span></a>
+		<a href="#"><i class="fa fa-recycle fa-fw"></i>Device Recylce<span class="fa arrow"></span></a>
 		<ul class="nav nav-second-level">
 			<li>
 				<a href="jobs.php">Waitlist</a>

@@ -10,64 +10,109 @@ if(isset($_SESSION['key']) == '' ) {
 ?>
 
 <?php
+if(isset($_POST['submit'])){
+
+$name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
+$id = mysqli_real_escape_string($con, strip_tags(trim($_POST["id"])));
+$number = mysqli_real_escape_string($con, strip_tags(trim($_POST["number"])));
+$email = mysqli_real_escape_string($con, strip_tags(trim($_POST["email"])));
+
+if($name != '' && $id != '' && $number != '' && $email != '') {
+
+        $sql = "INSERT INTO customerrepaire(Cname, idNo, num, email)
+        VALUES ('".$name."','".$id."', '".$number."', '".$email."')";
+        mysqli_query($con, $sql);
+        $_SESSION['success'] = 'Your customer was added successfully.';
+        header("Location: devicedetails.php");
+
+    }else {
+        $_SESSION['failure'] = 'Please fill in all fields.';
+    }
+
+}
+
+?>
+
+<?php
 include 'header.php';
 ?>
 
 <!-- Page Content -->
-
-<!-- /#page-wrapper -->
-<body>
-    <div id="page-wrapper">
-      <div class="container-fluid">
+<div id="page-wrapper">
+    <div class="container-fluid">
         <div class="row">
-          <div class="col-lg-12">
-            <h1 class="page-header">CREATE CUSTOMER</h1>
-        </div>
-        <!-- /.col-lg-12 -->
-    </div>
-    <!-- /.row -->
-    <div class="row">
-      <div class="col-lg-12">
-        <div>
-            <form action="createS.php" method="post">
-
-              <div class="container">
-                <div class="row">
-                    <br><table class="table table-striped table-bordered">
-                    <tr>
-                        <td>Customer Name:</td>
-                        <td><input type="text" name="Cname" required="please enter name" placeholder="Enter customer name"/></td>
-                    </tr>
-                    <tr>
-                        <td>ID Number:</td>
-                        <td><input type="text" name="IdNo" required="please enter Idenity Number" placeholder="Enter ID number"/></td>
-                    </tr>
-                    <tr>
-                        <td>Phone Number:</td>
-                        <td><input type="text" name="num" required="please enter Phone Number" placeholder="Enter Phone number"/></td>
-                    </tr>
-                    <tr>
-                        <td>Email: </td>
-                        <td><input type="text" name="email" required="please enter email" placeholder="Enter email"/></td>
-                    </tr>
-
-                </table>
-
-                <input type="submit" name="create" class="btn btn-success" value="save"/><br><br>
-                <a href="index.php">View<a>
-                </div>
+            <div class="col-lg-12">
+                <h1 class="page-header">Create Sale</h1>
             </div>
-        </form>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div>
+                    <?php if(isset($_SESSION['failure']) && $_SESSION['failure'] != '') { ?>
+                    <div class="alert alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <?php echo $_SESSION['failure']; unset($_SESSION['failure']); ?>
+                    </div>
+                    <?php } ?>
+
+                    <?php if(isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
+                    <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
+                    </div>
+                    <?php } ?>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Insert Customer details
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="pull-right">
+                                    <a href="jobs.php" class="btn btn-warning">Devices</a>
+                                </div>
+                            </div>
+                            <div class=" col-md-offset-3 col-md-6">
+                                <form role="form" method="post">
+                                    <div class="form-group">
+                                        <label>Name</label>
+                                        <input type="text" name="name" class="form-control" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label>ID Number</label>
+                                        <input type="number" name="id" class="form-control" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Number</label>
+                                        <input type="text" name="number" class="form-control" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="email" name="email" class="form-control" >
+                                    </div>
+                                    <button name="submit" type="submit" class="btn btn-primary">Add Customer</button>
+                                    <button type="reset" class="btn btn-default">Reset Form</button>
+                                </form>
+                            </div>
+                            <!-- /.col-lg-6 (nested) -->
+                        </div>
+                        <!-- /.row (nested) -->
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
     </div>
-    <!-- /.panel-body -->
+    <!-- /.container-fluid -->
 </div>
-<!-- /.panel -->
-</div>
-</div>
-</div>
-<!-- /.container-fluid -->
-</div>
-</body>
+<!-- /#page-wrapper -->
 
 <?php
 include 'footer.php';
