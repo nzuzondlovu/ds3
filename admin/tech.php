@@ -37,7 +37,7 @@ include 'header.php';
                              echo '<td><b>Serial No </b>'. $row['serialNumber'].'<br></td>';
                              echo '<td><b>Type       </b>'. $row['Dtype'].'<br></td>';
                             echo '<td><b>Date Recieved  </b>'. $row['recievedDate'].'<br><br></td>';
-                            echo '<td>'.'<a href="finished.php?tname='.$tname.'">Device Completed</a>'.'<br><br></td>';
+                            //echo '<td>'.'<a href="finished.php?tname='.$tname.'">Device Completed</a>'.'<br><br></td>';
                             echo '<b><hr/></b>'; 
                             echo '</tr>'; 
                             $id = $row['id'];
@@ -65,7 +65,7 @@ include 'header.php';
 
             ?>
 
-            <a href="allocated.php">Back</a>
+            <a href="allocated.php" class="btn btn-primary btn-lg">Back</a>
             </div>
             </div>
             </div>

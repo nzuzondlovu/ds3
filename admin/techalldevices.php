@@ -33,7 +33,7 @@ include 'header.php';
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-12">
-        <h1 class="page-header">Bookings</h1>
+        <h1 class="page-header">Recycle Material</h1>
       </div>
       <!-- /.col-lg-12 -->
     </div>
@@ -57,14 +57,14 @@ include 'header.php';
         </div>
         <div class="panel panel-default">
           <div class="panel-heading">
-            Recycle Materail
+            Recycle Material
           </div>
           <!-- /.panel-heading -->
           <div class="panel-body">
             <div class="table-responsive">
              <div class="container">
         <div class='row'>
-                <h1 style='font-family:AR BLANCA; text-align: center'>Technician work</h1>
+                <h1 style='font-family:AR BLANCA; text-align: center'>Work Allocated</h1>
             </div>
             <div class="row">
                 <br><table class="table table-striped table-bordered">
@@ -99,7 +99,7 @@ include 'header.php';
             ?>
                       </tbody>
                 </table>
-                 <a href="allocated.php" class="btn btn-success">back</a>
+                 <a href="allocated.php" class="btn btn-primary">back</a>
         </div>
     </div> <!-- /container -->
 
