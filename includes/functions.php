@@ -96,6 +96,8 @@ function user($type)
 		<!-- /.nav-second-level -->
 	</li>
 
+	
+
 
 	<li>
 		<a href="#"><i class="fa fa-sitemap fa-fw"></i>Device Recylce<span class="fa arrow"></span></a>
@@ -114,6 +116,22 @@ function user($type)
 		</ul>
 		<!-- /.nav-second-level -->
 	</li>
+
+
+	<li>
+		<a href="#"><i class="fa fa-sitemap fa-fw"></i> Tools and Material<span class="fa arrow"></span></a>
+		<ul class="nav nav-second-level">
+			<li>
+				<a href="viewMaterial.php">View </a>
+			</li>
+			<li>
+				<a href="requestOrder.php">Make Request</a>
+			</li>
+			
+		</ul>
+		<!-- /.nav-second-level -->
+	</li>
+
 
 	<li>
 		<a href="#"><i class="fa fa-sitemap fa-fw"></i>Reports<span class="fa arrow"></span></a>

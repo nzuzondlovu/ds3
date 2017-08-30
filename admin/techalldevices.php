@@ -57,7 +57,7 @@ include 'header.php';
         </div>
         <div class="panel panel-default">
           <div class="panel-heading">
-            List of all bookings
+            Recycle Materail
           </div>
           <!-- /.panel-heading -->
           <div class="panel-body">
@@ -90,7 +90,7 @@ include 'header.php';
                echo '<td>'. $row['serialNumber'].'</td>';
                echo '<td>'. $row['Dtype'].'</td>';
               echo '<td>'. $row['recievedDate'].'</td>';
-              echo '<td>'.'<a href="showallocate.php?tname='.$row["tname"].'">'. $row['tname'].'</a>'.'</td>'; 
+              echo '<td>'.'<a href="tech.php?tname='.$row["tname"].'">'. $row['tname'].'</a>'.'</td>'; 
               //echo '<td>'.'<a href="checkrepair.php?id='.$row['id'].'">Repaire Device.</a><br>'.'</td>';
               /*$t = "select tname from tech";
               $tx = $con->query($t);
