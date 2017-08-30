@@ -115,3 +115,19 @@ CREATE TABLE country(
 
 INSERT INTO `country` (`country`) VALUES
 ('South Africa');
+
+CREATE TABLE customerDelivery(
+deliveryID int(11) PRIMARY KEY AUTO_INCREMENT not null,
+custID int(11) not null,
+custName varchar(100) not null,
+custSurname varchar(100) not null,
+strAddress varchar(250) not null,
+buildingUnit varchar(250),
+suburb varchar(250) not null,
+area varchar(250) not null,
+code int(100),
+province varchar(100) not null,
+country varchar(300) not null,
+dateOfRequest varchar(100) not null,
+dateOfDelivery varchar(100) not null,
+);
