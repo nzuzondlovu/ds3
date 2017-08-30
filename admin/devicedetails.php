@@ -19,7 +19,7 @@ include 'header.php';
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-12">
-            <h1 class="page-header">Cart Sales</h1>
+            <h1 class="page-header">Device Recyle</h1>
           </div>
           <!-- /.col-lg-12 -->
         </div>
@@ -28,7 +28,7 @@ include 'header.php';
   <div class="container">
 
             <div class="row">
-                <h1 style="font-family:AR BLANCA; text-align: center"> CREATE DETAILS</h1>
+                <h1 style="text-align: center">DEVICE DETAILS</h1>
             </div>
             <div class="row">
                 <br><table class="table table-striped table-bordered">
@@ -64,7 +64,7 @@ include 'header.php';
                                     </tr>
                 </table>
 
-                                <input alighn="right" type="submit" name="create" class="btn btn-success" value="save"/><br><br>
+                                <input alighn="right" type="submit" name="create" class="btn btn-primary" value="save"/><br><br>
                             
         </div>
     </div>

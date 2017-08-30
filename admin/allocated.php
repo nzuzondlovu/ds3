@@ -86,7 +86,7 @@ include 'header.php';
     </div> <!-- /container -->
     <div class="row">
                 
-               <a href="index.php" class="btn btn-success">back</a>
+               <a href="jobs.php" class="btn btn-primary">back</a>
                <a href="techalldevices.php" class="btn btn-success">All Devices</a>
           </div> 
     </div>

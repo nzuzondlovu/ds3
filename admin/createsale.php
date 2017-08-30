@@ -53,8 +53,8 @@ include 'header.php';
 
                 </table>
 
-                <input type="submit" name="create" class="btn btn-success" value="save"/><br><br>
-                <a href="index.php">View<a>
+                <input type="submit" name="create" class="btn btn-primary" value="save"/><br><br>
+                <a href="jobs.php">View<a>
                 </div>
             </div>
         </form>

@@ -98,7 +98,7 @@ include 'header.php';
 
 
         </div>
-        <button type='submit' name ='submit' class="btn btn-success" value='submit'>submit</button><br>
+        <button type='submit' name ='submit' class="btn btn-primary" value='submit'>submit</button><br>
         <a href="jobs.php" >back</a>
     </div>
 
