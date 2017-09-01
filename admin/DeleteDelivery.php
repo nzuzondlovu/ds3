@@ -22,7 +22,7 @@ if (isset($_GET['id']) && $_GET['id'] != null) {
 
 $delete = '';
 
-$sql = "SELECT * FROM customerDelivery WHERE deliveryID=$id";
+$sql = "SELECT * FROM custdelivery WHERE deliveryID=$id";
 $res = mysqli_query($con, $sql);
 
 if(mysqli_num_rows($res) > 0) {
@@ -31,12 +31,9 @@ if(mysqli_num_rows($res) > 0) {
 		ID:</b>'.$row['deliveryID'].'</br>
 		Customer ID:'.$row['custID'].'</br>
 		Street Address:'.$row['strAddress'].'</br>
-		Apartment/Unit:'.$row['buildingUnit'].'</br>
 		Suburb:'.$row['suburb'].'</br>
 		Area:'.$row['area'].'</br>
-		Boxcode:'.$row['code'].'</br>
-		Province:'.$row['province'].'</br>
-		Country:'.$row['country'].'</br>
+		Boxcode:'.$row['boxcode'].'</br>
 		Date of Request'.$row['dateofRequest'].'</br>
 		Date of Delivery'.$row['dateofDelivery'].'</br>
 		';
@@ -60,7 +57,7 @@ if ( !empty($_POST)) {
         // delete data
 	$pdo = Database::connect();
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$sql = "DELETE FROM customerDelivery  WHERE id = ?";
+	$sql = "DELETE FROM custdelivery  WHERE id = ?";
 	$q = $pdo->prepare($sql);
 	$q->execute(array($id));
 	Database::disconnect();
