@@ -33,7 +33,7 @@ include 'header.php';
 
               <div class="container">
                 <div class="row">
-                    <br><table class="table table-striped table-bordered">
+                    <br><table class="table table-hover">
                     <tr>
                         <td>Customer Name:</td>
                         <td><input type="text" name="Cname" required="please enter name" placeholder="Enter customer name"/></td>

@@ -81,10 +81,9 @@ include 'header.php';
 
 					while ($row = $run->fetch_assoc()) {
 						echo "<div align='center'>";
-						echo $row['category']."<br>"; 
-						echo $row['Date']."<br>";
-						echo $row['QuantityOnHand']."<br>";
-						echo $row['quantity']."<br>";
+						echo "<b>Category </b>". $row['category']."<br>"; 
+						echo "<b>Date </b>".$row['Date']."<br>";
+						echo "<b>Quantity </b>".$row['quantity']."<br>";
 						echo "<hr>";
 						echo "</div>";
 

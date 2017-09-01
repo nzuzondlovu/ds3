@@ -80,9 +80,9 @@ include 'header.php';
 
 				while ($row = $run->fetch_assoc()) {
 					echo "<div align='center'>";
-					echo $row['productname']."<br>"; 
-					echo $row['Quantity']."<br>"; 
-					echo $row['OrderDate']."<br>"; 
+					echo"<b>Name </b>". $row['productname']."<br>"; 
+					echo"<b>Quantity </b>". $row['Quantity']."<br>"; 
+					echo "<b>Order date </b>".$row['OrderDate']."<br>"; 
 					echo "<hr>";
 					echo "</div>";
 

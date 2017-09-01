@@ -63,7 +63,7 @@ include 'header.php';
 							<div class="container">
              
             <div class="row">
-                <br><table class="table table-striped table-bordered">
+                <br><table class="table table-hover">
                       <thead>
                         <tr>
                           <th>Name</th>

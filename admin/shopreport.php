@@ -81,11 +81,11 @@ include 'header.php';
 
 				while ($row = $run->fetch_assoc()) {
 					echo "<div align='center'>";
-					echo "<p color='red'>Device Name</p>".$row['dname']."<br>"; 
-					echo $row['type']."<br>";
-					echo $row['serialnumber']."<br>";
-					echo $row['recievedate']."<br>";
-					echo $row['price']."<br>";
+					echo "<b>Device Name </b>".$row['dname']."<br>"; 
+					echo "<b>Type </b>".$row['type']."<br>";
+					echo "<b>Serial No </b>".$row['serialnumber']."<br>";
+					echo "<b>Recieved Date </b>".$row['recievedate']."<br>";
+					echo "<b>Price </b>".$row['price']."<br>";
 					echo "<hr>";
 					echo "</div>";
 
