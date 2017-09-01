@@ -8,6 +8,20 @@ if(isset($_SESSION['user_id']) == '' ) {
 }
 ?>
 
+<?php
+if(isset($_POST['insert'])){
+
+     $feedback = $_POST["feedback"];
+     $status="answered";
+
+     $id = $_GET['id'];
+	echo $sql = "UPDATE query SET status='".$status."', feedback='".$feedback."' WHERE id='".$id."'";
+    $run = $con->query($sql);
+	
+	header("Location: feedback.php");
+}
+?>
+
 
 <?php
 include 'header.php';
@@ -55,7 +69,7 @@ include 'header.php';
 					     <div class="col-md-offset-3 col-md-6">
 
 
-					     <form action="responseMeth.php" method = "post" >
+					     <form action="" method = "post" >
 							  </br>
 							     <div class="group-data" >
 							     
@@ -75,19 +89,19 @@ include 'header.php';
 							     ?>
 							       <div class="form-group">
                                         <label>Name</label>
-                                        <input class="form-control" value='<?php echo "$Nam"; ?>' disabled="">
+                                        <input name="name" class="form-control" value='<?php echo "$Nam"; ?>' disabled="">
                                     </div>
 							     
 							      <div class="form-group">
                                         <label>Email</label>
-                                        <input class="form-control" value='<?php echo "$emai"; ?>' disabled="">
+                                        <input name="email" class="form-control" value='<?php echo "$emai"; ?>' disabled="">
                                     </div>
 							    
 							     
 							    
 							      <div class="form-group">
                                         <label>Query</label>
-                                        <input class="form-control" value='<?php echo "$query";?>' disabled="">
+                                        <input name="query" class="form-control" value='<?php echo "$query";?>' disabled="">
                                     </div>
                                     </br>
                                     <div class="group-data" >
