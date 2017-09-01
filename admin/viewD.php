@@ -70,7 +70,7 @@ include 'header.php';
 										
 										$name = mysqli_real_escape_string($con, strip_tags(trim($_POST['query'])));
 
-										$query="SELECT * FROM custdelivery WHERE custname LIKE '%".$name."%' OR custcell LIKE '%".$name."%' OR deliveryID LIKE '%".$name."%' OR custID LIKE '%".$name."%'";
+										$query="SELECT * FROM customerDelivery WHERE custName LIKE '%".$name."%' OR custSurname LIKE '%".$name."%' OR deliveryID LIKE '%".$name."%' OR custID LIKE '%".$name."%'";
 
 										$result =mysqli_query($con,$query);
 
@@ -82,11 +82,14 @@ include 'header.php';
 													<tr>
 														<th>Customer ID</th>
 														<th>Customer Name</th>
-														<th>Cell Number</th>
+														<th>Customer Surname</th>
 														<th>Street Address</th>
+														<th>Apartment/Unit</th>
 														<th>Suburb</th>
 														<th>Area</th>
 														<th>Postal Code</th>
+														<th>Province</th>
+														<th>Country</th>
 														<th>Date of Request</th>
 														<th>Delivery Date</th>
 													</tr>
@@ -97,12 +100,15 @@ include 'header.php';
 														echo '
 														<tr>
 															<td>'.$row['custID'].'</td>
-															<td>'.$row['custname'].'</td>
-															<td>'.$row['custcell'].'</td>
+															<td>'.$row['custName'].'</td>
+															<td>'.$row['custSurname'].'</td>
 															<td>'.$row['strAddress'].'</td>
+															<td>'.$row['buildingUnit'].'</td>
 															<td>'.$row['suburb'].'</td>
 															<td>'.$row['area'].'</td>
-															<td>'.$row['boxcode'].'</td>
+															<td>'.$row['code'].'</td>
+															<td>'.$row['province'].'</td>
+															<td>'.$row['country'].'</td>
 															<td>'.$row['dateofRequest'].'</td>
 															<td>'.$row['dateofDelivery'].'</td>
 															<td class=" pull-right"><a href="allocateDriver.php?id='.$row['deliveryID'].'" class="btn btn-danger">Allocate Driver</a> <a href="DeleteDelivery.php?id='.$row['deliveryID'].'" class="btn btn-primary">Delete</a></td>
@@ -150,7 +156,7 @@ include 'header.php';
 							}
 
 							$start_from = ($page-1) * $num_rec_per_page;
-							$sql = "SELECT * FROM custdelivery ORDER BY deliveryID DESC LIMIT $start_from, $num_rec_per_page";
+							$sql = "SELECT * FROM customerDelivery ORDER BY deliveryID DESC LIMIT $start_from, $num_rec_per_page";
 							$res = mysqli_query($con, $sql);
 
 							if (mysqli_num_rows($res) > 0) {
@@ -163,11 +169,14 @@ include 'header.php';
 													<tr>
 														<th>Customer ID</th>
 														<th>Customer Name</th>
-														<th>Cell Number</th>
+														<th>Customer Surname</th>
 														<th>Street Address</th>
+														<th>Apartment/Unit</th>
 														<th>Suburb</th>
 														<th>Area</th>
 														<th>Postal Code</th>
+														<th>Province</th>
+														<th>Country</th>
 														<th>Date of Request</th>
 														<th>Delivery Date</th>
 													</tr>
@@ -180,15 +189,18 @@ include 'header.php';
 											<tr>
 														<tr>
 															<td>'.$row['custID'].'</td>
-															<td>'.$row['custname'].'</td>
-															<td>'.$row['custcell'].'</td>
+															<td>'.$row['custName'].'</td>
+															<td>'.$row['custSurname'].'</td>
 															<td>'.$row['strAddress'].'</td>
+															<td>'.$row['buildingUnit'].'</td>
 															<td>'.$row['suburb'].'</td>
 															<td>'.$row['area'].'</td>
-															<td>'.$row['boxcode'].'</td>
+															<td>'.$row['code'].'</td>
+															<td>'.$row['province'].'</td>
+															<td>'.$row['country'].'</td>
 															<td>'.$row['dateofRequest'].'</td>
 															<td>'.$row['dateofDelivery'].'</td>
-															<td class=" pull-right"><a href="allocateDriver.php?id='.$row['deliveryID'].'" class="btn btn-danger">Allocate Driver</a>  <a href="DeleteDelivery.php?id='.$row['deliveryID'].'" class="btn btn-primary">Delete Request</a></td>
+															<td class=" pull-right"><a href="allocateDriver.php?id='.$row['deliveryID'].'" class="btn btn-danger">Allocate Driver</a> <a href="DeleteDelivery.php?id='.$row['deliveryID'].'" class="btn btn-primary">Delete</a></td>
 
 														</tr>';
 										}
@@ -202,7 +214,7 @@ include 'header.php';
 							</div>';
 						}
 
-						$sql = "SELECT * FROM custdelivery";
+						$sql = "SELECT * FROM customerDelivery";
 						pagination($con, $sql, $num_rec_per_page, $page);
 						?>
 					</div>

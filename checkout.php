@@ -37,7 +37,42 @@ $a = 0;
 }
 
 ?>
+<?php
+if (isset($_POST['checkout']))
+ {
+  	$userID= $_SESSION['user_id'];
+    $fname = mysqli_real_escape_string($con, strip_tags(trim($_POST["shipping_first_name"])));
+    $lname = mysqli_real_escape_string($con, strip_tags(trim($_POST["shipping_last_name"])));
+    $strAddr = mysqli_real_escape_string($con, strip_tags(trim($_POST["shipping_address_1"])));
+    $buildingUnit= mysqli_real_escape_string($con, strip_tags(trim($_POST["shipping_address_2"])));
+    $suburb= mysqli_real_escape_string($con, strip_tags(trim($_POST["suburb"])));
+    $area = mysqli_real_escape_string($con, strip_tags(trim($_POST["area"])));
+    $boxcode= mysqli_real_escape_string($con, strip_tags(trim($_POST["boxcode"])));
+    $prov = mysqli_real_escape_string($con, strip_tags(trim($_POST["shipping_state"])));
+    $country = mysqli_real_escape_string($con, strip_tags(trim($_POST["shipping_country"])));
+    $dateR = mysqli_real_escape_string($con, strip_tags(trim($_POST["shipping_deliveryRequest"])));
+    $dateD = mysqli_real_escape_string($con, strip_tags(trim($_POST["shipping_delivery"])));
+    
+   
+     if($userID != '' && $fname != '' && $lname != '' && $strAddr != '' && $suburb != '' && $area != '' && $boxcode != '' && $prov != '' && $country != '' && $dateR != ''&& $dateD != '') {
+     
+	 $sql = "INSERT INTO customeryDelivery(custID,custName,custSurname,strAddress,buildingUnit,suburb,area,code,province,country,dateofRequest,dateofDelivery)
+        VALUES('".$userID."','".$name."','".$cell."','".$strAddr."','".$buildingUnit."','".$suburb."','".$area."','".$boxcode."','".$prov."','".$country."','".$dateR."','".$dateD."')";
+        mysqli_query($con, $sql);
+        $_SESSION['success'] = 'Your delivery request was added successfully.';
+        header("Location: index.php");
+    }else {
+        $_SESSION['failure'] = 'Please fill in all fields.';
+    }
+   
+  
+}
+        
 
+
+
+
+?>
 <div class="product-big-title-area">
     <div class="container">
         <div class="row">
@@ -197,12 +232,12 @@ $a = 0;
                                         <select class="country_to_state country_select" id="billing_country" name="billing_country">
                                             <option value="">Select a country…</option>
                                             <?php
-                                            $sql = "SELECT * FROM country ORDER BY name ASC";
+                                            $sql = "SELECT * FROM country ORDER BY country ASC";
                                             $res = mysqli_query($con, $sql);
 
                                             if(mysqli_num_rows($res) > 0) {
                                                 while($row = mysqli_fetch_assoc($res)) {
-                                                    echo '<option value="'.$row['code'].'">'.$row['name'].'</option>';
+                                                    echo '<option value="'.$row['id'].'">'.$row['country'].'</option>';
                                                 }
                                             }
                                             ?>
@@ -295,12 +330,12 @@ $a = 0;
                                             <select class="country_to_state country_select" id="shipping_country" name="shipping_country">
                                                 <option value="">Select a country…</option>
                                                 <?php
-                                                $sql = "SELECT * FROM country ORDER BY name ASC";
+                                                $sql = "SELECT * FROM country ORDER BY country ASC";
                                                 $res = mysqli_query($con, $sql);
 
                                                 if(mysqli_num_rows($res) > 0) {
                                                     while($row = mysqli_fetch_assoc($res)) {
-                                                        echo '<option value="'.$row['code'].'">'.$row['name'].'</option>';
+                                                        echo '<option value="'.$row['id'].'">'.$row['country'].'</option>';
                                                     }
                                                 }
                                                 ?>
@@ -319,12 +354,6 @@ $a = 0;
                                             <input type="text" value="" placeholder="" id="shipping_last_name" name="shipping_last_name" class="input-text ">
                                         </p>
                                         <div class="clear"></div>
-
-                                        <p id="shipping_company_field" class="form-row form-row-wide">
-                                            <label class="" for="shipping_company">Company Name</label>
-                                            <input type="text" value="" placeholder="" id="shipping_company" name="shipping_company" class="input-text ">
-                                        </p>
-
                                         <p id="shipping_address_1_field" class="form-row form-row-wide address-field validate-required">
                                             <label class="" for="shipping_address_1">Address <abbr title="required" class="required">*</abbr>
                                             </label>
@@ -334,23 +363,69 @@ $a = 0;
                                         <p id="shipping_address_2_field" class="form-row form-row-wide address-field">
                                             <input type="text" value="" placeholder="Apartment, suite, unit etc. (optional)" id="shipping_address_2" name="shipping_address_2" class="input-text ">
                                         </p>
+                                        <p id="shipping_suburb_field" class="form-row form-row-wide address-field">
+                                        <label>Suburb Name</label>
+                                        <select id="suburb" name="suburb" class="form-control" onchange="document.getElementById('area').value=this.value" required>
+                                            <option value="" selected="selected">Select type</option>
+                                            <?php
+                                            $sql = "SELECT * FROM postal ORDER BY suburb ASC";
+                                            $res = mysqli_query($con, $sql);
+
+                                            if(mysqli_num_rows($res) > 0) {
+                                                while($row = mysqli_fetch_assoc($res)) {
+                                                    echo '<option  value="'.$row['id'].'">'.$row['suburb'].'</option>';
+                                                 
+                                                }
+                                                
+                                            }
+                                            ?>
+                                        </select>
+                                        
+                                        </p>
 
                                         <p id="shipping_city_field" class="form-row form-row-wide address-field validate-required" data-o_class="form-row form-row-wide address-field validate-required">
                                             <label class="" for="shipping_city">Town / City <abbr title="required" class="required">*</abbr>
                                             </label>
-                                            <input type="text" value="" placeholder="Town / City" id="shipping_city" name="shipping_city" class="input-text ">
-                                        </p>
+                                             <select id="area" name="area" class="form-control" onchange="document.getElementById('boxcode').value=this.value" required>
+                                            <option value="" selected="selected">Select type</option>
+                                            <?php
+                                            $sql = "SELECT * FROM postal ORDER BY suburb ASC";
+                                            $res = mysqli_query($con, $sql);
 
-                                        <p id="shipping_state_field" class="form-row form-row-first address-field validate-state" data-o_class="form-row form-row-first address-field validate-state">
-                                            <label class="" for="shipping_state">County</label>
-                                            <input type="text" id="shipping_state" name="shipping_state" placeholder="State / County" value="" class="input-text ">
+                                            if(mysqli_num_rows($res) > 0) {
+                                                while($row = mysqli_fetch_assoc($res)) {
+                                                    echo '<option  value="'.$row['boxcode'].'">'.$row['area'].'</option>';
+                                                 
+                                                }
+                                                
+                                            }
+                                            ?>
+                                        </select>
+                                      
                                         </p>
                                         <p id="shipping_postcode_field" class="form-row form-row-last address-field validate-required validate-postcode" data-o_class="form-row form-row-last address-field validate-required validate-postcode">
                                             <label class="" for="shipping_postcode">Postcode <abbr title="required" class="required">*</abbr>
                                             </label>
-                                            <input type="text" value="" placeholder="Postcode / Zip" id="shipping_postcode" name="shipping_postcode" class="input-text ">
+                                           <input id="boxcode" name="boxcode" class="form-control" value="" placeholder="Enter text" >
                                         </p>
+										 <p id="shipping_state_field" class="form-row form-row-first address-field validate-state" data-o_class="form-row form-row-first address-field validate-state">
+                                            <label class="" for="shipping_state">Province</label>
+                                            <input type="text" id="shipping_state" name="shipping_state" placeholder="Province" value="KZN" class="input-text ">
+                                        </p>
+                                        <div class="clear"></div>
 
+                                    </div>
+                                     <p id="shipping_deliveryRequest_field" class="form-row form-row-first address-field validate-state" data-o_class="form-row form-row-first address-field validate-state">
+                                            <label class="" for="shipping_deliveryRequest">Date Requested</label>
+                                            <input type="text" id="shipping_deliveryRequest" name="shipping_deliveryRequest"  value="<?php echo date("Y-m-d")?>" class="input-text ">
+                                        </p>
+                                        <div class="clear"></div>
+
+                                    </div>
+                                    <p id="shipping_delivery_field" class="form-row form-row-first address-field validate-state" data-o_class="form-row form-row-first address-field validate-state">
+                                            <label class="" for="shipping_delivery">Estimated Date of Delivery</label>
+                                            <input type="text" id="shipping_delivery" name="shipping_delivery"  value="<?php echo date('Y-m-d', strtotime('+7 days'))?>" class="input-text ">
+                                        </p>
                                         <div class="clear"></div>
 
                                     </div>
@@ -436,7 +511,7 @@ $a = 0;
 
                                     <div class="form-row place-order">
 
-                                        <input type="submit" data-value="Place order" value="Place order" id="place_order" name="woocommerce_checkout_place_order" class="button alt">
+                                        <input type="submit" data-value="Place order" value="Place order" id="place_order" name="checkout" class="button alt">
 
 
                                     </div>
@@ -452,8 +527,7 @@ $a = 0;
             </div>
         </div>
     </div>
-</div>
-
+</div> 
 <?php
 include 'footer.php';
 ?>

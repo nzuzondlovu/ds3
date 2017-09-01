@@ -56,6 +56,15 @@ function user($type)
 		<!-- /.nav-second-level -->
 	</li>
 	<li>
+		<a href="#"><i class="fa fa-sitemap fa-fw"></i> Queries<span class="fa arrow"></span></a>
+		<ul class="nav nav-second-level">
+			<li>
+				<a href="feedback.php">View Queries</a>
+			</li>
+		</ul>
+		<!-- /.nav-second-level -->
+	</li>
+	<li>
 		<a href="#"><i class="fa fa-sitemap fa-fw"></i> Deliveries<span class="fa arrow"></span></a>
 		<ul class="nav nav-second-level">
 		<li>

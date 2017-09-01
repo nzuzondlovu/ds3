@@ -286,6 +286,18 @@
                             <a href="book.php"><i class="fa fa-edit fa-fw"></i> Create Booking</a>
                         </li>
                         <li>
+							<a href="#"><i class="fa fa-sitemap fa-fw"></i>Queries<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+							<li>
+							<a href="query.php">Submit query</a>
+							</li>
+							<li>
+							<a href="viewFeedback.php">View Feedback</a>
+							</li>
+							</ul>
+							<!-- /.nav-second-level -->
+						</li>
+                        <li>
                             <a href="update.php"><i class="fa fa-cogs fa-fw"></i> Update Details</a>
                         </li>
                     </ul>
