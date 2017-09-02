@@ -69,23 +69,46 @@ include 'header.php';
 				                <h1> Menu Buttons</h1>
 				                <a href="orderrport.php" class="btn btn-lg btn-primary col-md-6">Order</a><br><br><br>
 				                <a href="stockreport.php" class="btn btn-lg btn-primary col-md-6">Stock</a><br><br><br>
-				                <a href="shopreport.php" class="btn btn-lg btn-primary col-md-6">Shop</a><br><br><br>
-				                
+				                <a href="shopreport.php" class="btn btn-lg btn-primary col-md-6">Cart</a><br><br><br>
+				               <a href="suppliersreport.php" class="btn btn-lg btn-primary col-md-6">Suppliers</a><br><br><br>
+				               <a href="salaryreport.php" class="btn btn-lg btn-primary col-md-6">Salaries</a><br><br><br>
+				<style type="text/css">
+					.lcard{
+						  background-color: blue;
+						  border-radius: 2px;
+						  display: inline-block;
+						  height: 300px;
+						  margin: 1rem;
+						  position: relative;
+						  width: 100px;
+						  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+						}
+										</style>
 				              </div>
-              <div class= "col-md-6">
+              <div class= "col-md-8">
               <h2>List of Orders</h2>
 			<?php  
 				 $sql = "SELECT * FROM `order`";
 				 $run = $con->query($sql);
-
+				echo "<div class='col-lg-12'>";
 				while ($row = $run->fetch_assoc()) {
-					echo "<div align='center'>";
+					echo "<div align='center' class='col-md-6' 
+					style='background-color: #fff;
+						  border-radius: 2px;
+						  display: inline-block;
+						  height: auto;
+						  padding-top: 2%;
+						  padding-bottom: 2%;
+						  margin: 1rem;
+						  position: relative;
+						  width: auto;
+						  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+						'>";
 					echo"<b>Name </b>". $row['productname']."<br>"; 
 					echo"<b>Quantity </b>". $row['Quantity']."<br>"; 
-					echo "<b>Order date </b>".$row['OrderDate']."<br>"; 
-					echo "<hr>";
+					echo "<b>Order date </b>".$row['OrderDate']."<br>";
 					echo "</div>";
-
+				echo "<div>";
 					}
 				?>
 

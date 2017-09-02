@@ -78,8 +78,8 @@ include 'header.php';
 							    		$feedback= $_POST['feedback'];
 							    	}
 							    
-                                $sql="SELECT * from query WHERE status='unanswered' ";
-                                $run = $con->query($sql);
+                                $sql="SELECT * from query WHERE status='unanswered'";
+                                $run = $con->query($sql) or die("cant run query");
 
                                 while ($row= $run->fetch_assoc()) {
                                     echo'<tr>';

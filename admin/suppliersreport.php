@@ -33,7 +33,7 @@ include 'header.php';
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Stock Reports</h1>
+				<h1 class="page-header">Suppliers Reports</h1>
 			</div>
 			<!-- /.col-lg-12 -->
 		</div>
@@ -63,8 +63,8 @@ include 'header.php';
 					<div class="panel-body">
 						<div class="table-responsive">
 						 <div class="container">
-				        </div>
-				       <div class= "col-md-4">
+				             </div>
+        			<div class= "col-md-4">
 				              
 				                <h1> Menu Buttons</h1>
 				                <a href="orderrport.php" class="btn btn-lg btn-primary col-md-6">Order</a><br><br><br>
@@ -72,36 +72,36 @@ include 'header.php';
 				                <a href="shopreport.php" class="btn btn-lg btn-primary col-md-6">Cart</a><br><br><br>
 				               <a href="suppliersreport.php" class="btn btn-lg btn-primary col-md-6">Suppliers</a><br><br><br>
 				               <a href="salaryreport.php" class="btn btn-lg btn-primary col-md-6">Salaries</a><br><br><br>
+				                
 				              </div>
-				              <div class= "col-md-8">
-				            <h2>List of Stocks</h2>
-							<?php  
+              <div class= "col-md-8">
+              <h2>List of Suppliers</h2>
+			<?php  
+				 $sql = "SELECT * FROM `suppliers`";
+				 $run = $con->query($sql);
 
-					 $sql = "SELECT * FROM `stork`";
-					 $run = $con->query($sql);
-
-					while ($row = $run->fetch_assoc()) {
-						echo "<div align='center' class='col-md-6' 
+				while ($row = $run->fetch_assoc()) {
+					echo "<div align='center' class='col-md-6' 
 					style='background-color: #fff;
 						  border-radius: 2px;
 						  display: inline-block;
 						  height: auto;
-						  margin: 1rem;
 						  padding-top: 2%;
 						  padding-bottom: 2%;
+						  margin: 1rem;
 						  position: relative;
 						  width: auto;
 						  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-						'>";
-						echo "<b>Stork Id </b>". $row['StorkID']."<br>"; 
-						echo "<b>Category </b>".$row['category']."<br>";
-						echo "<b>Product Name </b>".$row['ProductName']."<br>";
-						echo "<b>Date </b>".$row['Date']."<br>";
-						echo "<b>Quantity On Hand </b>".$row['QuantityOnHand']."<br>";
-						echo "<b>Quantity </b>".$row['quantity']."<br>";
-						echo "</div>";
+						'>>";
+					echo"<b>Name </b>". $row['name']."<br>"; 
+					echo"<b>Product </b>". $row['product']."<br>"; 
+					echo "<b>ContactNumber </b>".$row['contactNumber']."<br>";  
+					echo "<b>Email </b>".$row['email']."<br>"; 
+					echo "<b>Website </b>".$row['website']."<br>";
+					echo "<b>Address </b>".$row['address']."<br>";
+					echo "</div>";
 
-						}
+					}
 				?>
 
               </div>

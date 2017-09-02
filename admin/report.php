@@ -71,8 +71,9 @@ include 'header.php';
 				                <h1> MENU BUTTONS</h1>
 				                <a href="orderrport.php" class="btn btn-lg btn-primary col-md-6">Order</a><br><br><br>
 				                <a href="stockreport.php" class="btn btn-lg btn-primary col-md-6">Stock</a><br><br><br>
-				                <a href="shopreport.php" class="btn btn-lg btn-primary col-md-6">Shop</a><br><br><br>
-				                
+				                <a href="shopreport.php" class="btn btn-lg btn-primary col-md-6">Cart</a><br><br><br>
+				                <a href="suppliersreport.php" class="btn btn-lg btn-primary col-md-6">Suppliers</a><br><br><br>
+				                <a href="salaryreport.php" class="btn btn-lg btn-primary col-md-6">Salaries</a><br><br><br> 	
 				              </div>
               <div class= "col-md-6">
               </div>

@@ -33,7 +33,7 @@ include 'header.php';
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Stock Reports</h1>
+				<h1 class="page-header">Employees Reports</h1>
 			</div>
 			<!-- /.col-lg-12 -->
 		</div>
@@ -62,52 +62,53 @@ include 'header.php';
 					<!-- /.panel-heading -->
 					<div class="panel-body">
 						<div class="table-responsive">
-						 <div class="container">
-				        </div>
-				       <div class= "col-md-4">
+							<div class="container">
+
+       							 </div>
+        					<div class= "col-md-4">
 				              
 				                <h1> Menu Buttons</h1>
 				                <a href="orderrport.php" class="btn btn-lg btn-primary col-md-6">Order</a><br><br><br>
 				                <a href="stockreport.php" class="btn btn-lg btn-primary col-md-6">Stock</a><br><br><br>
 				                <a href="shopreport.php" class="btn btn-lg btn-primary col-md-6">Cart</a><br><br><br>
-				               <a href="suppliersreport.php" class="btn btn-lg btn-primary col-md-6">Suppliers</a><br><br><br>
-				               <a href="salaryreport.php" class="btn btn-lg btn-primary col-md-6">Salaries</a><br><br><br>
+				               <a href="suppliersreport.php" class="btn btn-lg btn-primary col-md-6">suppliers</a><br>
+				               <br><br>
+				               <a href="salaryreport.php" class="btn btn-lg btn-primary col-md-6">Salary</a><br><br><br>
 				              </div>
-				              <div class= "col-md-8">
-				            <h2>List of Stocks</h2>
-							<?php  
+					              <div class= "col-md-8">
+					              <h2>List of Employee Salaries</h2>
+								<?php 
+				 $sql = "SELECT * FROM `salary`";// CHANGE THIS REPORT TO BE AN CART
+				 $run = $con->query($sql);
 
-					 $sql = "SELECT * FROM `stork`";
-					 $run = $con->query($sql);
-
-					while ($row = $run->fetch_assoc()) {
-						echo "<div align='center' class='col-md-6' 
+				while ($row = $run->fetch_assoc()) {
+					echo "<div align='center'class='col-md-6' 
 					style='background-color: #fff;
 						  border-radius: 2px;
 						  display: inline-block;
 						  height: auto;
-						  margin: 1rem;
 						  padding-top: 2%;
 						  padding-bottom: 2%;
+						  margin: 1rem;
 						  position: relative;
 						  width: auto;
 						  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 						'>";
-						echo "<b>Stork Id </b>". $row['StorkID']."<br>"; 
-						echo "<b>Category </b>".$row['category']."<br>";
-						echo "<b>Product Name </b>".$row['ProductName']."<br>";
-						echo "<b>Date </b>".$row['Date']."<br>";
-						echo "<b>Quantity On Hand </b>".$row['QuantityOnHand']."<br>";
-						echo "<b>Quantity </b>".$row['quantity']."<br>";
-						echo "</div>";
+					echo "<b>Employee id </b>".$row['emp_id']."<br>";
+					echo "<b>Number of hours </b>".$row['norm_hours']."<br>"; 
+					echo "<b>Price </b>".$row['extra_hours']."<br>";
+					echo "<b>Hourly Pay </b>".$row['hourly_pay']."<br>";
+					echo "<b>Bonus Id </b>".$row['bonus_id']."<br>";
+					echo "<b>Total Salary </b>".$row['total_salary']."<br>";
+					echo "</div>";
 
-						}
-				?>
+					}
 
+			?>
               </div>
     </div> <!-- /container -->
   
-    </div> <!-- /container -->
+   						</div> <!-- /container -->
   
 					</div>
 					<!-- /.table-responsive -->

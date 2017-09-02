@@ -1,26 +1,11 @@
-<?php
+  <?php
 ob_start();
 include '../includes/functions.php';
 ?>
 
 <?php
 if(isset($_SESSION['key']) == '' ) {
-	header("location:../login.php");
-}
-?>
-
-<?php
-if(isset($_GET['id']) && $_GET['id'] != '') {
-
-	$id = mysqli_real_escape_string($con, strip_tags(trim($_GET['id'])));
-
-	if ($id) {
-		$sql = "UPDATE job SET archive=1 WHERE id='".$id."'";
-		mysqli_query($con, $sql);
-		$_SESSION['success'] = 'Booking was archived successfully.';
-	} else {
-		$_SESSION['failure'] = 'An error occured, please try again.';
-	}	
+    header("location:../login.php");
 }
 ?>
 
@@ -28,87 +13,66 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 include 'header.php';
 ?>
 
-<!-- Page Content -->
+<body>
 <div id="page-wrapper">
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-lg-12">
-				<h1 class="page-header">Shop Reports</h1>
-			</div>
-			<!-- /.col-lg-12 -->
-		</div>
-		<!-- /.row -->
-		<div class="row">
-			<div class="col-lg-12">
-				<div>
-					<?php if(isset($_SESSION['failure']) && $_SESSION['failure'] != '') { ?>
-					<div class="alert alert-danger">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						<?php echo $_SESSION['failure']; unset($_SESSION['failure']); ?>
-					</div>
-					<?php } ?>
+      <div class="container-fluid">
+<div align="center">
+    
+<div class="col-lg-12">
 
-					<?php if(isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
-					<div class="alert alert-success">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						<?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
-					</div>
-					<?php } ?>
-				</div>
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						Reports
-					</div>
-					<!-- /.panel-heading -->
-					<div class="panel-body">
-						<div class="table-responsive">
-							<div class="container">
+            <?php
 
-       							 </div>
-        					<div class= "col-md-4">
-				              
-				                <h1> Menu Buttons</h1>
-				                <a href="orderrport.php" class="btn btn-lg btn-primary col-md-6">Order</a><br><br><br>
-				                <a href="stockreport.php" class="btn btn-lg btn-primary col-md-6">Stock</a><br><br><br>
-				                <a href="shopreport.php" class="btn btn-lg btn-primary col-md-6">Shop</a><br><br><br>
-				                
-				              </div>
-					              <div class= "col-md-6">
-					              <h2>List of Shop Products</h2>
-								<?php 
-				 $sql = "SELECT * FROM `shoprepaire`";
-				 $run = $con->query($sql);
+            if(!isset($_GET['tname'])){
+                header('Location: techallocate.php');
+            }
+            $tname = $_GET['tname'];
+    $pp = "SELECT id, diviceName, model, serialNumber, Dtype, recievedDate FROM techrepair WHERE tname ='".$tname."'";
+                           $r = $con->query($pp) or die("error: ". mysqli_error($con));
+                           echo "<div style='border-style: groove;'>";
+                           while($row = $r->fetch_assoc()){
+                            echo "<div class='col-md-4'>";
+                            echo '<tr>';
+                             echo '<td><b>Device Name </b>'. $row['diviceName'].'<br></td>';
+                             echo '<td><b>Type </b>'. $row['model'].'<br></td>';
+                             echo '<td><b>Serial No </b>'. $row['serialNumber'].'<br></td>';
+                             echo '<td><b>Type       </b>'. $row['Dtype'].'<br></td>';
+                            echo '<td><b>Date Recieved  </b>'. $row['recievedDate'].'<br><br></td>';
+                            echo '<div>';
+                            //echo '<td>'.'<a href="finished.php?tname='.$tname.'">Device Completed</a>'.'<br><br></td>';
+                            echo '<b><hr/></b>'; 
+                            echo '</tr>'; 
+                            $id = $row['id'];
+                            $dn = $row['diviceName'];
+                            $mo = $row['model'];
+                            $sn = $row['serialNumber'];
+                            $dt = $row['Dtype'];
 
-				while ($row = $run->fetch_assoc()) {
-					echo "<div align='center'>";
-					echo "<b>Device Name </b>".$row['dname']."<br>"; 
-					echo "<b>Type </b>".$row['type']."<br>";
-					echo "<b>Serial No </b>".$row['serialnumber']."<br>";
-					echo "<b>Recieved Date </b>".$row['recievedate']."<br>";
-					echo "<b>Price </b>".$row['price']."<br>";
-					echo "<hr>";
-					echo "</div>";
+                    $sql1 = "INSERT INTO shoprepair(dname,model, serialNumber, recievedDate, price,tname)
+                     values('$dn','$mo','$sn','$dt','',$tname') where id = '$id'";
+                        $run1 = $con->query($sql1);
 
-					}
+                        $sql1 = "DELETE * FROM techrepair WHERE id = '$id'";
+                      //$run2 = $con->query($sql1); 
 
-			?>
-              </div>
-    </div> <!-- /container -->
-  
-   						</div> <!-- /container -->
-  
-					</div>
-					<!-- /.table-responsive -->
-				</div>
-				<!-- /.panel-body -->
-			</div>
-			<!-- /.panel -->
-		</div>
-	</div>
-</div>
-<!-- /.container-fluid -->
-</div>
-<!-- /#page-wrapper -->
+                    }
+                      echo "<div>";
+
+
+            $sql1 = "INSERT INTO shoprepair(dname,model, serialNumber, recievedDate, price,tname) values() where id = '$id'";
+            $run1 = $con->query($sql1);
+
+            $sql1 = "DELETE * FROM techrepair WHERE id = '$id'";
+          //$run2 = $con->query($sql1); 
+
+            ?>
+
+            <a href="allocated.php" class="btn btn-primary btn-lg">Back</a>
+        </div>
+      </div>
+     </div>
+  </div>
+</body>
+
 
 <?php
 include 'footer.php';
