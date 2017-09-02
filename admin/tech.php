@@ -18,7 +18,7 @@ include 'header.php';
       <div class="container-fluid">
 <div align="center">
     
-
+<div class="col-lg-12">
 
             <?php
 
@@ -30,13 +30,14 @@ include 'header.php';
                            $r = $con->query($pp) or die("error: ". mysqli_error($con));
                            echo "<div style='border-style: groove;'>";
                            while($row = $r->fetch_assoc()){
-                            
+                           
                             echo '<tr>';
                              echo '<td><b>Device Name </b>'. $row['diviceName'].'<br></td>';
                              echo '<td><b>Type </b>'. $row['model'].'<br></td>';
                              echo '<td><b>Serial No </b>'. $row['serialNumber'].'<br></td>';
                              echo '<td><b>Type       </b>'. $row['Dtype'].'<br></td>';
                             echo '<td><b>Date Recieved  </b>'. $row['recievedDate'].'<br><br></td>';
+                          
                             //echo '<td>'.'<a href="finished.php?tname='.$tname.'">Device Completed</a>'.'<br><br></td>';
                             echo '<b><hr/></b>'; 
                             echo '</tr>'; 
@@ -66,9 +67,10 @@ include 'header.php';
             ?>
 
             <a href="allocated.php" class="btn btn-primary btn-lg">Back</a>
-            </div>
-            </div>
-            </div>
+        </div>
+      </div>
+     </div>
+  </div>
 </body>
 
 
