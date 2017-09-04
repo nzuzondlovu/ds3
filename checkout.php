@@ -37,7 +37,47 @@ $a = 0;
 }
 
 ?>
-
+<?php
+ if (isset($_POST['submit']))
+ {
+  	$userID= $_SESSION['user_id'];
+    $name = mysqli_real_escape_string($con, strip_tags(trim($_POST["shipping_first_name"])));
+    $cell= mysqli_real_escape_string($con, strip_tags(trim($_POST["shipping_last_name"])));
+    $Addr1 = mysqli_real_escape_string($con, strip_tags(trim($_POST["shipping_address_1"])));
+     $Addr2 = mysqli_real_escape_string($con, strip_tags(trim($_POST["shipping_address_2"])));
+     $strAddr=$Addr1. " ," .$Addr2;
+     $id = mysqli_real_escape_string($con, strip_tags(trim($_POST["suburb"])));
+    $area = '';
+    $suburb='';
+    $boxcode= mysqli_real_escape_string($con, strip_tags(trim($_POST["boxcode"])));
+    $dateR = mysqli_real_escape_string($con, strip_tags(trim($_POST["dateR"])));
+    $dateD = mysqli_real_escape_string($con, strip_tags(trim($_POST["dateD"])));
+    
+    $sql = "SELECT * FROM postal WHERE id='".$id."' ORDER BY suburb ASC";
+    $res = mysqli_query($con, $sql);
+	if(mysqli_num_rows($res) > 0) {
+    while($row = mysqli_fetch_assoc($res)) {
+    $suburb=$row['suburb'];
+    $area=$row['area'];
+        }
+                                        
+    }
+   
+     if($userID != '' && $name != '' && $cell != '' && $strAddr != '' && $suburb != '' && $area != '' && $boxcode != '' && $dateR != ''&& $dateD != '') {
+     
+	 $sql = "INSERT INTO custdelivery(custID,custname,custcell,strAddress,suburb,area,boxcode,dateofRequest,dateofDelivery)
+        VALUES('".$userID."','".$name."','".$cell."','".$strAddr."','".$suburb."','".$area."','".$boxcode."','".$dateR."','".$dateD."')";
+        mysqli_query($con, $sql);
+        $_SESSION['success'] = 'Your delivery request was added successfully.';
+        header("Location: index.php");
+    }else {
+        $_SESSION['failure'] = 'Please fill in all fields.';
+    }
+   
+  
+}
+        
+    ?>
 <div class="product-big-title-area">
     <div class="container">
         <div class="row">
@@ -169,7 +209,7 @@ $a = 0;
                         <div class="clear"></div>
                     </form>-->
 
-                    <div class="woocommerce-info">Have a coupon? <a class="showcoupon" data-toggle="collapse" href="#coupon-collapse-wrap" aria-expanded="false" aria-controls="coupon-collapse-wrap">Click here to enter your code</a>
+<div class="woocommerce-info">Have a coupon? <a class="showcoupon" data-toggle="collapse" href="#coupon-collapse-wrap" aria-expanded="false" aria-controls="coupon-collapse-wrap">Click here to enter your code</a>
                     </div>
 
                     <form id="coupon-collapse-wrap" method="post" class="checkout_coupon collapse">
@@ -289,24 +329,7 @@ $a = 0;
                                         <input type="checkbox" value="1" name="ship_to_different_address" checked="checked" class="input-checkbox" id="ship-to-different-address-checkbox">
                                     </h3>
                                     <div class="shipping_address" style="display: block;">
-                                        <p id="shipping_country_field" class="form-row form-row-wide address-field update_totals_on_change validate-required woocommerce-validated">
-                                            <label class="" for="shipping_country">Country <abbr title="required" class="required">*</abbr>
-                                            </label>
-                                            <select class="country_to_state country_select" id="shipping_country" name="shipping_country">
-                                                <option value="">Select a country…</option>
-                                                <?php
-                                                $sql = "SELECT * FROM country ORDER BY country ASC";
-                                                $res = mysqli_query($con, $sql);
-
-                                                if(mysqli_num_rows($res) > 0) {
-                                                    while($row = mysqli_fetch_assoc($res)) {
-                                                        echo '<option value="'.$row['id'].'">'.$row['country'].'</option>';
-                                                    }
-                                                }
-                                                ?>
-                                            </select>
-                                        </p>
-
+                                    
                                         <p id="shipping_first_name_field" class="form-row form-row-first validate-required">
                                             <label class="" for="shipping_first_name">First Name <abbr title="required" class="required">*</abbr>
                                             </label>
@@ -314,16 +337,11 @@ $a = 0;
                                         </p>
 
                                         <p id="shipping_last_name_field" class="form-row form-row-last validate-required">
-                                            <label class="" for="shipping_last_name">Last Name <abbr title="required" class="required">*</abbr>
+                                            <label class="" for="shipping_last_name">Contact Number <abbr title="required" class="required">*</abbr>
                                             </label>
                                             <input type="text" value="" placeholder="" id="shipping_last_name" name="shipping_last_name" class="input-text ">
                                         </p>
                                         <div class="clear"></div>
-
-                                        <p id="shipping_company_field" class="form-row form-row-wide">
-                                            <label class="" for="shipping_company">Company Name</label>
-                                            <input type="text" value="" placeholder="" id="shipping_company" name="shipping_company" class="input-text ">
-                                        </p>
 
                                         <p id="shipping_address_1_field" class="form-row form-row-wide address-field validate-required">
                                             <label class="" for="shipping_address_1">Address <abbr title="required" class="required">*</abbr>
@@ -372,24 +390,30 @@ $a = 0;
                                             }
                                             ?>
                                         </select>
-                                      
+                                     
                                         </p>
                                         <p id="shipping_postcode_field" class="form-row form-row-last address-field validate-required validate-postcode" data-o_class="form-row form-row-last address-field validate-required validate-postcode">
                                             <label class="" for="shipping_postcode">Postcode <abbr title="required" class="required">*</abbr>
                                             </label>
                                            <input id="boxcode" name="boxcode" class="form-control" value="" placeholder="Enter text" >
                                         </p>
-										 <p id="shipping_state_field" class="form-row form-row-first address-field validate-state" data-o_class="form-row form-row-first address-field validate-state">
-                                            <label class="" for="shipping_state">Province</label>
-                                            <input type="text" id="shipping_state" name="shipping_state" placeholder="Province" value="KZN" class="input-text ">
+										<p id="shipping_delivery_field" class="form-row form-row-last address-field validate-required validate-delivery" data-o_class="form-row form-row-last address-field validate-required validate-postcode">
+                                            <label class="" for="shipping_postcode">Date requested <abbr title="required" class="required">*</abbr>
+                                            </label>
+                                           <input type="text" name="dateR" value="<?php echo date("Y-m-d")?>" size="8" readonly="">
                                         </p>
+                                        <p id="shipping_delivery_field" class="form-row form-row-last address-field validate-required validate-delivery" data-o_class="form-row form-row-last address-field validate-required validate-postcode">
+                                            <label class="" for="shipping_postcode">Date of Delivery <abbr title="required" class="required">*</abbr>
+                                            </label>
+                                           <input type="text" name="dateD" value="<?php echo date('Y-m-d', strtotime('+7 days'))?>" size="8"  readonly=""></br>
+                                        </p>
+                                        <p class="form-row form-row-last">
+                            					<input type="submit" value="Submit" name="submit" class="button">
+                        				</p>
                                         <div class="clear"></div>
 
                                     </div>
-                                    <p id="order_comments_field" class="form-row notes">
-                                        <label class="" for="order_comments">Order Notes</label>
-                                        <textarea cols="5" rows="2" placeholder="Notes about your order, e.g. special notes for delivery." id="order_comments" class="input-text " name="order_comments"></textarea>
-                                    </p>
+                        
                                 </div>
                             </div>
                         </div>
