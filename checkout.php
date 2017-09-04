@@ -26,11 +26,11 @@ $a = 0;
     $a++;
 }
 
-    $country = $key[2];
+
     $name = $_SESSION['name'];
     $surname = $_SESSION['surname'];
     $town = $key[0];
-    $state = $key[1];
+    
     $zip = $_SESSION['location'];
     $email = $_SESSION['email'];
     $cell = $_SESSION['cell'];
@@ -78,6 +78,16 @@ $a = 0;
 }
         
     ?>
+
+    <script type="text/javascript">
+function valueChanged()
+{
+    if($('#ship-to-different-address-checkbox').is(":checked"))   
+        $("#shipping").show();
+    else
+        $("#shipping").hide();
+}
+</script>
 <div class="product-big-title-area">
     <div class="container">
         <div class="row">
@@ -328,7 +338,7 @@ $a = 0;
                                         <label class="checkbox" for="ship-to-different-address-checkbox">Ship to a different address?</label>
                                         <input type="checkbox" value="1" name="ship_to_different_address" checked="checked" class="input-checkbox" id="ship-to-different-address-checkbox">
                                     </h3>
-                                    <div class="shipping_address" style="display: block;">
+                                    <div id="shipping" class="shipping_address" style="display: block;">
                                     
                                         <p id="shipping_first_name_field" class="form-row form-row-first validate-required">
                                             <label class="" for="shipping_first_name">First Name <abbr title="required" class="required">*</abbr>
