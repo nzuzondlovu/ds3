@@ -1,7 +1,7 @@
 <?php
 include 'header.php';
 ?>
-
+ 
 <?php
 
 $country = '';
@@ -46,23 +46,12 @@ $a = 0;
     $Addr1 = mysqli_real_escape_string($con, strip_tags(trim($_POST["shipping_address_1"])));
      $Addr2 = mysqli_real_escape_string($con, strip_tags(trim($_POST["shipping_address_2"])));
      $strAddr=$Addr1. " ," .$Addr2;
-     $id = mysqli_real_escape_string($con, strip_tags(trim($_POST["suburb"])));
-    $area = '';
-    $suburb='';
+     $suburb = mysqli_real_escape_string($con, strip_tags(trim($_POST["suburb"])));
+   $area=mysqli_real_escape_string($con, strip_tags(trim($_POST["area"])));
     $boxcode= mysqli_real_escape_string($con, strip_tags(trim($_POST["boxcode"])));
     $dateR = mysqli_real_escape_string($con, strip_tags(trim($_POST["dateR"])));
     $dateD = mysqli_real_escape_string($con, strip_tags(trim($_POST["dateD"])));
     
-    $sql = "SELECT * FROM postal WHERE id='".$id."' ORDER BY suburb ASC";
-    $res = mysqli_query($con, $sql);
-	if(mysqli_num_rows($res) > 0) {
-    while($row = mysqli_fetch_assoc($res)) {
-    $suburb=$row['suburb'];
-    $area=$row['area'];
-        }
-                                        
-    }
-   
      if($userID != '' && $name != '' && $cell != '' && $strAddr != '' && $suburb != '' && $area != '' && $boxcode != '' && $dateR != ''&& $dateD != '') {
      
 	 $sql = "INSERT INTO custdelivery(custID,custname,custcell,strAddress,suburb,area,boxcode,dateofRequest,dateofDelivery)
@@ -367,12 +356,12 @@ function valueChanged()
                                         <select id="suburb" name="suburb" class="form-control" onchange="document.getElementById('area').value=this.value" required>
                                             <option value="" selected="selected">Select type</option>
                                             <?php
-                                            $sql = "SELECT * FROM postal ORDER BY suburb ASC";
+                                            $sql = "SELECT * FROM suburb ORDER BY suburbName ASC";
                                             $res = mysqli_query($con, $sql);
 
                                             if(mysqli_num_rows($res) > 0) {
                                                 while($row = mysqli_fetch_assoc($res)) {
-                                                    echo '<option  value="'.$row['id'].'">'.$row['suburb'].'</option>';
+                                                    echo '<option  value="'.$row['id'].'">'.$row['suburbName'].'</option>';
                                                  
                                                 }
                                                 
@@ -388,12 +377,12 @@ function valueChanged()
                                              <select id="area" name="area" class="form-control" onchange="document.getElementById('boxcode').value=this.value" required>
                                             <option value="" selected="selected">Select type</option>
                                             <?php
-                                            $sql = "SELECT * FROM postal ORDER BY suburb ASC";
+                                            $sql = "SELECT * FROM area ORDER BY cityName ASC";
                                             $res = mysqli_query($con, $sql);
 
                                             if(mysqli_num_rows($res) > 0) {
                                                 while($row = mysqli_fetch_assoc($res)) {
-                                                    echo '<option  value="'.$row['boxcode'].'">'.$row['area'].'</option>';
+                                                    echo '<option  value="'.$row['boxcode'].'">'.$row['cityName'].'</option>';
                                                  
                                                 }
                                                 

@@ -42,6 +42,17 @@ CREATE TABLE repairsale(
         amount decimal(18.2)
 );
 
+CREATE TABLE suburb(
+	id int(11) NOT null PRIMARY KEY AUTO_INCREMENT,
+   	 suburbName varchar(255)
+);
+
+CREATE TABLE area(
+	id int(11) NOT null PRIMARY KEY AUTO_INCREMENT,
+   	 cityName varchar(255),
+   	 boxcode int(11)
+);
+
 
 CREATE TABLE techrepair(
 	id int(11) PRIMARY KEY AUTO_INCREMENT not null,
