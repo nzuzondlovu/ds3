@@ -1,10 +1,51 @@
 <?php
+ob_start();
 include '../includes/functions.php';
 ?>
 
 <?php
 if(isset($_SESSION['key']) == '' ) {
 	header("location:../login.php");
+}
+?>
+
+<?php
+if(isset($_GET['id']) && $_GET['id'] != '') {
+
+	$id = mysqli_real_escape_string($con, strip_tags(trim($_GET['id'])));
+
+	if ($id) {
+		$sql = "UPDATE job SET archive=1 WHERE id='".$id."'";
+		mysqli_query($con, $sql);
+		$_SESSION['success'] = 'Booking was archived successfully.';
+	} else {
+		$_SESSION['failure'] = 'An error occured, please try again.';
+	}	
+}
+?>
+
+<?php
+
+if(isset($_POST['submit'])) {
+
+	$driver = mysqli_real_escape_string($con, strip_tags(trim($_POST["driver"])));
+	$custid = mysqli_real_escape_string($con, strip_tags(trim($_POST["custid"])));
+	$name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
+	$cell = mysqli_real_escape_string($con, strip_tags(trim($_POST["cell"])));
+	$dateD = mysqli_real_escape_string($con, strip_tags(trim($_POST["dateD"])));
+	$location = mysqli_real_escape_string($con, strip_tags(trim($_POST["location"])));
+
+	if($driver != '' ) {
+
+		echo $sql="INSERT INTO driverdelivery(driverID,id,custname,custcell,dateofDelivery,location)
+		VALUES('".$driver."','".$custid."', '".$name."','".$cell."','".$dateD."','".$location."')";
+		mysqli_query($con, $sql);
+		$_SESSION['success'] = 'Successfully updated details.';
+		header("Location: drivers.php");
+
+	} else {
+		$_SESSION['failure'] = 'Please fill in all fields';
+	}
 }
 ?>
 
@@ -17,11 +58,10 @@ include 'header.php';
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Deliveries</h1>				
+				<h1 class="page-header">Deliveries</h1>
 			</div>
 			<!-- /.col-lg-12 -->
 		</div>
-		<!-- /.row -->
 		<!-- /.row -->
 		<div class="row">
 			<div class="col-lg-12">
@@ -42,155 +82,51 @@ include 'header.php';
 				</div>
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						Search for Delivery
-					</div>
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-md-offset-3 col-md-6">
-								<form action="viewD.php" method="POST">
-									<dl>
-										<dt class="sidebar-search">
-											<div class="input-group custom-search-form">
-												<input type="text" name="query" class="form-control" placeholder="Enter text">
-												<span class="input-group-btn">
-													<button id="search" name="search" type="submit" class="btn btn-primary">Search</button>
-												</span>
-											</div>
-											<!-- /input-group -->
-										</dt>
-									</dl>
-
-									<?php
-									if(isset($_POST['search']))
-									{
-										echo '
-										<h2>
-											Search Results
-										</h2>';
-										
-										$name = mysqli_real_escape_string($con, strip_tags(trim($_POST['query'])));
-
-										$query="SELECT * FROM custdelivery WHERE custname LIKE '%".$name."%' OR custcell LIKE '%".$name."%' OR deliveryID LIKE '%".$name."%' OR custID LIKE '%".$name."%'";
-
-										$result =mysqli_query($con,$query);
-
-										if(mysqli_num_rows($result)> 0) {
-
-											echo '
-											<table class="table">
-												<thead>
-													<tr>
-														<th>Customer ID</th>
-														<th>Customer Name</th>
-														<th>Cell Number</th>
-														<th>Street Address</th>
-														<th>Suburb</th>
-														<th>Area</th>
-														<th>Postal Code</th>
-														<th>Date of Request</th>
-														<th>Delivery Date</th>
-													</tr>
-												</thead>
-												<tbody>';
-													while ($row=mysqli_fetch_array($result)) {
-
-														echo '
-														<tr>
-															<td>'.$row['custID'].'</td>
-															<td>'.$row['custname'].'</td>
-															<td>'.$row['custcell'].'</td>
-															<td>'.$row['strAddress'].'</td>
-															<td>'.$row['suburb'].'</td>
-															<td>'.$row['area'].'</td>
-															<td>'.$row['boxcode'].'</td>
-															<td>'.$row['dateofRequest'].'</td>
-															<td>'.$row['dateofDelivery'].'</td>
-															<td class=" pull-right"><a href="allocateDriver.php?id='.$row['deliveryID'].'" class="btn btn-danger">Allocate Driver</a> <a href="DeleteDelivery.php?id='.$row['deliveryID'].'" class="btn btn-primary">Delete</a></td>
-
-														</tr>';
-													}
-
-													echo '
-												</tbody>
-											</table>';
-										} else {
-											echo " Request Not Found";
-										}	
-									}
-
-									?>
-
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- /.col-lg-12 -->
-		</div>
-		<!-- /.row -->
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						List of all Delivery Requests
+						List of all deliveries
 					</div>
 					<!-- /.panel-heading -->
 					<div class="panel-body">
 						<div class="table-responsive">
 							<?php
-							$num_rec_per_page=10;
 
-							if (isset($_GET["page"])) {
-
-								$page  = $_GET["page"];
-							} else {
-
-								$page=1;
-							}
-
-							$start_from = ($page-1) * $num_rec_per_page;
-							$sql = "SELECT * FROM custdelivery ORDER BY deliveryID DESC LIMIT $start_from, $num_rec_per_page";
+							$sql = "SELECT * FROM custdelivery ";
 							$res = mysqli_query($con, $sql);
 
 							if (mysqli_num_rows($res) > 0) {
 								echo '
-								<div class="pull-right">
-									<a href="addDriver.php" class="btn btn-success"> Add Driver</a>
-								</div>
-								<table class="table">
+								<table id="bookings" class="table data-table">
 									<thead>
-													<tr>
-														<th>Customer ID</th>
-														<th>Customer Name</th>
-														<th>Cell Number</th>
-														<th>Street Address</th>
-														<th>Suburb</th>
-														<th>Area</th>
-														<th>Postal Code</th>
-														<th>Date of Request</th>
-														<th>Delivery Date</th>
-													</tr>
-											
+										<tr>
+											<th>Customer ID</th>
+											<th>Customer Name</th>
+											<th>Cell Number</th>
+											<th>Street Address</th>
+											<th>Suburb</th>
+											<th>Area</th>
+											<th>Postal Code</th>
+											<th>Date of Request</th>
+											<th>Delivery Date</th>
+											<th>Action</th>
+										</tr>
 									</thead>
 									<tbody>';
 										while ($row = mysqli_fetch_assoc($res)) {
 
 											echo '
 											<tr>
-														<tr>
-															<td>'.$row['custID'].'</td>
-															<td>'.$row['custname'].'</td>
-															<td>'.$row['custcell'].'</td>
-															<td>'.$row['strAddress'].'</td>
-															<td>'.$row['suburb'].'</td>
-															<td>'.$row['area'].'</td>
-															<td>'.$row['boxcode'].'</td>
-															<td>'.$row['dateofRequest'].'</td>
-															<td>'.$row['dateofDelivery'].'</td>
-															<td class=" pull-right"><a href="allocateDriver.php?id='.$row['deliveryID'].'" class="btn btn-danger">Allocate Driver</a>  <a href="DeleteDelivery.php?id='.$row['deliveryID'].'" class="btn btn-primary">Delete Request</a></td>
-
-														</tr>';
+												<td>'.$row['custId'].'</td>
+												<td>'.$row['custname'].'</td>
+												<td>'.$row['custcell'].'</td>
+												<td>'.$row['strAddress'].'</td>
+												<td>'.$row['suburb'].'</td>
+												<td>'.$row['area'].'</td>
+												<td>'.$row['boxcode'].'</td>
+												<td>'.date("M d, y",strtotime($row['dateofRequest'])).'</td>
+												<td>'.date("M d, y",strtotime($row['dateofDelivery'])).'</td>
+												<td class=" pull-right">
+													<button onclick="modal('.$row['id'].')" class="btn btn-warning">Allocate Driver</button>  <a href="DeleteDelivery.php?id='.$row['id'].'" class="btn btn-danger">Delete Request</a>
+												</td>
+											</tr>';
 										}
 										echo '
 									</tbody>
@@ -198,12 +134,9 @@ include 'header.php';
 							} else {
 								echo '<div class="alert alert-info">
 								<button type="button" class="close" data-dismiss="alert">&times;</button>
-								<strong>No Requests Found.</strong>
+								<strong>No deliveries found.</strong>
 							</div>';
 						}
-
-						$sql = "SELECT * FROM custdelivery";
-						pagination($con, $sql, $num_rec_per_page, $page);
 						?>
 					</div>
 					<!-- /.table-responsive -->
@@ -221,3 +154,25 @@ include 'header.php';
 <?php
 include 'footer.php';
 ?>
+<script>
+	function modal(id) {
+		var data = {"id" : id};
+		jQuery.ajax({
+			url : '../includes/drivermodal.php',
+			method : "post",
+			data : data,
+			success : function(data) {
+				jQuery('body').append(data);
+				jQuery('#driverModal').modal('toggle');
+			},
+			error : function() {
+				alert("Ooops! Something went wrong!");
+			}
+		});
+	}
+</script>
+<script>
+	$(document).ready(function(){
+		$('#bookings').DataTable();
+	});
+</script>

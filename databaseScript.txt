@@ -251,4 +251,4 @@ CREATE TABLE `deduction` (
 ) 
 ENGINE = InnoDB;
 
-CREATE TABLE `shop`.`query` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `user_id` INT(11) NOT NULL , `email` VARCHAR(35) NOT NULL , `name` VARCHAR(20) NOT NULL , `query` VARCHAR(175) NOT NULL , `status` VARCHAR(20) NOT NULL , `feedback` VARCHAR(175) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+CREATE TABLE `query` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `user_id` INT(11) NOT NULL , `email` VARCHAR(35) NOT NULL , `name` VARCHAR(20) NOT NULL , `query` VARCHAR(175) NOT NULL , `status` VARCHAR(20) NOT NULL , `feedback` VARCHAR(175) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;

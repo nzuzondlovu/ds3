@@ -15,16 +15,8 @@ $cell = '';
 
 if (isset($_SESSION['user_id'])) {
 
-$token = strtok($_SESSION['location'], ",");
-$key = array();
-$a = 0;
-
-    while ($token !== false){
-
-    $key[$a] = $token;
-    $token = strtok(",");
-    $a++;
-}
+    $key = array();
+    $key = explode(',', $_SESSION['location']);
 
     $country = $key[2];
     $name = $_SESSION['name'];
@@ -185,7 +177,7 @@ $a = 0;
                         <div class="clear"></div>
                     </form>
 
-                    <form enctype="multipart/form-data" action="#" class="checkout" method="post" name="checkout">
+                    <form enctype="multipart/form-data" class="checkout" method="post" name="checkout">
 
                         <div id="customer_details" class="col2-set">
                             <div class="col-1">
@@ -195,7 +187,7 @@ $a = 0;
                                         <label class="" for="billing_country">Country <abbr title="required" class="required">*</abbr>
                                         </label>
                                         <select class="country_to_state country_select" id="billing_country" name="billing_country">
-                                            <option value="">Select a country…</option>
+                                            <option value="<?php echo $country; ?>"><?php echo $country; ?></option>
                                             <?php
                                             $sql = "SELECT * FROM country ORDER BY name ASC";
                                             $res = mysqli_query($con, $sql);
@@ -230,11 +222,11 @@ $a = 0;
                                     <p id="billing_address_1_field" class="form-row form-row-wide address-field validate-required">
                                         <label class="" for="billing_address_1">Address <abbr title="required" class="required">*</abbr>
                                         </label>
-                                        <input type="text" value="<?php echo $name; ?>" placeholder="Street address" id="billing_address_1" name="billing_address_1" class="input-text ">
+                                        <input type="text" value="" placeholder="Street address" id="billing_address_1" name="billing_address_1" class="input-text ">
                                     </p>
 
                                     <p id="billing_address_2_field" class="form-row form-row-wide address-field">
-                                        <input type="text" value="<?php echo $state; ?>" placeholder="Apartment, suite, unit etc. (optional)" id="billing_address_2" name="billing_address_2" class="input-text ">
+                                        <input type="text" value="" placeholder="Apartment, suite, unit etc. (optional)" id="billing_address_2" name="billing_address_2" class="input-text ">
                                     </p>
 
                                     <p id="billing_city_field" class="form-row form-row-wide address-field validate-required" data-o_class="form-row form-row-wide address-field validate-required">
@@ -295,12 +287,12 @@ $a = 0;
                                             <select class="country_to_state country_select" id="shipping_country" name="shipping_country">
                                                 <option value="">Select a country…</option>
                                                 <?php
-                                                $sql = "SELECT * FROM country ORDER BY country ASC";
+                                                $sql = "SELECT * FROM country ORDER BY name ASC";
                                                 $res = mysqli_query($con, $sql);
 
                                                 if(mysqli_num_rows($res) > 0) {
                                                     while($row = mysqli_fetch_assoc($res)) {
-                                                        echo '<option value="'.$row['id'].'">'.$row['country'].'</option>';
+                                                        echo '<option value="'.$row['code'].'">'.$row['name'].'</option>';
                                                     }
                                                 }
                                                 ?>
@@ -335,51 +327,51 @@ $a = 0;
                                             <input type="text" value="" placeholder="Apartment, suite, unit etc. (optional)" id="shipping_address_2" name="shipping_address_2" class="input-text ">
                                         </p>
                                         <p id="shipping_suburb_field" class="form-row form-row-wide address-field">
-                                        <label>Suburb Name</label>
-                                        <select id="suburb" name="suburb" class="form-control" onchange="document.getElementById('area').value=this.value" required>
-                                            <option value="" selected="selected">Select type</option>
-                                            <?php
-                                            $sql = "SELECT * FROM postal ORDER BY suburb ASC";
-                                            $res = mysqli_query($con, $sql);
+                                            <label>Suburb Name</label>
+                                            <select id="suburb" name="suburb" class="form-control" onchange="document.getElementById('area').value=this.value" required>
+                                                <option value="" selected="selected">Select type</option>
+                                                <?php
+                                                $sql = "SELECT * FROM postal ORDER BY suburb ASC";
+                                                $res = mysqli_query($con, $sql);
 
-                                            if(mysqli_num_rows($res) > 0) {
-                                                while($row = mysqli_fetch_assoc($res)) {
-                                                    echo '<option  value="'.$row['id'].'">'.$row['suburb'].'</option>';
-                                                 
+                                                if(mysqli_num_rows($res) > 0) {
+                                                    while($row = mysqli_fetch_assoc($res)) {
+                                                        echo '<option  value="'.$row['id'].'">'.$row['suburb'].'</option>';
+
+                                                    }
+
                                                 }
-                                                
-                                            }
-                                            ?>
-                                        </select>
-                                        
+                                                ?>
+                                            </select>
+
                                         </p>
 
                                         <p id="shipping_city_field" class="form-row form-row-wide address-field validate-required" data-o_class="form-row form-row-wide address-field validate-required">
                                             <label class="" for="shipping_city">Town / City <abbr title="required" class="required">*</abbr>
                                             </label>
-                                             <select id="area" name="area" class="form-control" onchange="document.getElementById('boxcode').value=this.value" required>
-                                            <option value="" selected="selected">Select type</option>
-                                            <?php
-                                            $sql = "SELECT * FROM postal ORDER BY suburb ASC";
-                                            $res = mysqli_query($con, $sql);
+                                            <select id="area" name="area" class="form-control" onchange="document.getElementById('boxcode').value=this.value" required>
+                                                <option value="" selected="selected">Select type</option>
+                                                <?php
+                                                $sql = "SELECT * FROM postal ORDER BY suburb ASC";
+                                                $res = mysqli_query($con, $sql);
 
-                                            if(mysqli_num_rows($res) > 0) {
-                                                while($row = mysqli_fetch_assoc($res)) {
-                                                    echo '<option  value="'.$row['boxcode'].'">'.$row['area'].'</option>';
-                                                 
+                                                if(mysqli_num_rows($res) > 0) {
+                                                    while($row = mysqli_fetch_assoc($res)) {
+                                                        echo '<option  value="'.$row['boxcode'].'">'.$row['area'].'</option>';
+
+                                                    }
+
                                                 }
-                                                
-                                            }
-                                            ?>
-                                        </select>
-                                      
+                                                ?>
+                                            </select>
+
                                         </p>
                                         <p id="shipping_postcode_field" class="form-row form-row-last address-field validate-required validate-postcode" data-o_class="form-row form-row-last address-field validate-required validate-postcode">
                                             <label class="" for="shipping_postcode">Postcode <abbr title="required" class="required">*</abbr>
                                             </label>
-                                           <input id="boxcode" name="boxcode" class="form-control" value="" placeholder="Enter text" >
+                                            <input id="boxcode" name="boxcode" class="form-control" value="" placeholder="Enter text" >
                                         </p>
-										 <p id="shipping_state_field" class="form-row form-row-first address-field validate-state" data-o_class="form-row form-row-first address-field validate-state">
+                                        <p id="shipping_state_field" class="form-row form-row-first address-field validate-state" data-o_class="form-row form-row-first address-field validate-state">
                                             <label class="" for="shipping_state">Province</label>
                                             <input type="text" id="shipping_state" name="shipping_state" placeholder="Province" value="KZN" class="input-text ">
                                         </p>

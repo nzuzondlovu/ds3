@@ -3,7 +3,7 @@ $sitename = 'Infinity';
 $siteaddress = '';
 session_start();
 //"localhost","thehewri_main","SzlqF-n,X2m$","thehewri_master"
-$con = mysqli_connect("localhost","root","", "shop");
+$con = mysqli_connect("localhost","nzuzor1","hohi74Ro", "shop");
 
 function head($type)
 {
@@ -26,7 +26,7 @@ function user($type)
 		<a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 	</li>
 	<li>
-		<a href="#"><i class="fa fa-sitemap fa-fw"></i> Bookings<span class="fa arrow"></span></a>
+		<a href="#"><i class="fa fa-book fa-fw"></i> Bookings<span class="fa arrow"></span></a>
 		<ul class="nav nav-second-level">
 			<li>
 				<a href="bookings.php">View Bookings</a>
@@ -38,7 +38,7 @@ function user($type)
 		<!-- /.nav-second-level -->
 	</li>
 	<li>
-		<a href="#"><i class="fa fa-sitemap fa-fw"></i> Products<span class="fa arrow"></span></a>
+		<a href="#"><i class="fa fa-shopping-basket fa-fw"></i> Products<span class="fa arrow"></span></a>
 		<ul class="nav nav-second-level">
 			<li>
 				<a href="products.php">View Products</a>
@@ -56,38 +56,31 @@ function user($type)
 		<!-- /.nav-second-level -->
 	</li>
 	<li>
-		<a href="#"><i class="fa fa-sitemap fa-fw"></i> Queries<span class="fa arrow"></span></a>
+		<a href="#"><i class="fa fa-support fa-fw"></i> Queries<span class="fa arrow"></span></a>
 		<ul class="nav nav-second-level">
 			<li>
-				<a href="feedback.php">View Queries</a>
+				<a href="query.php">Queries</a>
+			</li>
+			<li>
+				<a href="feedback.php">Feedback</a>
 			</li>
 		</ul>
 		<!-- /.nav-second-level -->
 	</li>
 	<li>
-		<a href="#"><i class="fa fa-sitemap fa-fw"></i> Deliveries<span class="fa arrow"></span></a>
+		<a href="#"><i class="fa fa-truck fa-fw"></i> Deliveries<span class="fa arrow"></span></a>
 		<ul class="nav nav-second-level">
 		<li>
-		<a href="viewD.php"><i class="fa fa-edit fa-fw"></i>View Deliveries</a>
+		<a href="viewD.php">View Deliveries</a>
 		</li>
 		<li>
-		<a href="drivers.php"><i class="fa fa-edit fa-fw"></i>View Drivers</a>
+		<a href="drivers.php">View Drivers</a>
 		</li>
 		</ul>
 		<!-- /.nav-second-level -->
-	</li>
+	</li>	
 	<li>
-		<a href="#"><i class="fa fa-sitemap fa-fw"></i> Customer Sales<span class="fa arrow"></span></a>
-		<ul class="nav nav-second-level">
-			<li>
-				<a href="custIndex.php">Devices to be fixed</a>
-			</li>
-		</ul>
-		<!-- /.nav-second-level -->
-	</li>
-	
-	<li>
-		<a href="#"><i class="fa fa-sitemap fa-fw"></i> Stock<span class="fa arrow"></span></a>
+		<a href="#"><i class="fa fa-cubes fa-fw"></i> Stock<span class="fa arrow"></span></a>
 		<ul class="nav nav-second-level">
 			<li>
 				<a href="stocktable.php">View Stock</a>
@@ -104,77 +97,32 @@ function user($type)
 		</ul>
 		<!-- /.nav-second-level -->
 	</li>
-
-	
-
-
 	<li>
-		<a href="#"><i class="fa fa-sitemap fa-fw"></i>Device Recylce<span class="fa arrow"></span></a>
+		<a href="#"><i class="fa fa-money fa-fw"></i> Cash Flow<span class="fa arrow"></span></a>
 		<ul class="nav nav-second-level">
 			<li>
-				<a href="jobs.php">Waitlist</a>
+				<a href="#">Cart <span class="fa arrow"></span></a>
+				<ul class="nav nav-third-level">
+					<li>
+						<a href="cart.php">Table</a>
+					</li>
+					<li>
+						<a href="cartgraph.php">Bar Graph</a>
+					</li>
+				</ul>
+				<!-- /.nav-third-level -->
 			</li>
 			<li>
-				<a href="createsale.php">Recycle Sales</a>
-			</li>
-				
-				<li>
-				<a href="allocated.php">Allocated</a>
-			</li>		
-		
-		</ul>
-		<!-- /.nav-second-level -->
-	</li>
-
-
-	<li>
-		<a href="#"><i class="fa fa-sitemap fa-fw"></i> Tools and Material<span class="fa arrow"></span></a>
-		<ul class="nav nav-second-level">
-			<li>
-				<a href="viewMaterial.php">View </a>
-			</li>
-			<li>
-				<a href="requestOrder.php">Make Request</a>
-			</li>
-			
-		</ul>
-		<!-- /.nav-second-level -->
-	</li>
-
-
-	<li>
-		<a href="#"><i class="fa fa-sitemap fa-fw"></i>Reports<span class="fa arrow"></span></a>
-		<ul class="nav nav-second-level">
-			<li>
-				<a href="report.php">Menu</a>
-			</li>
-			<li>
-				<a href="stockreport.php">Stock Reports</a>
-			</li>
-			<li>
-				<a href="orderrport.php">Oder Reports</a>
-			</li>	
-			<li>
-				<a href="shopreport.php">Shop Reports</a>
-			</li>	
-		</ul>
-		<!-- /.nav-second-level -->
-	</li>
-
-	<li>
-		<a href="#"><i class="fa fa-sitemap fa-fw"></i> Cash Flow<span class="fa arrow"></span></a>
-		<ul class="nav nav-second-level">
-			<li>
-				<a href="cart.php">Cart</a>
-			</li>
-			<li>
-				<a href="cartgraph.php">Cart Graph</a>
-			</li>
-			<li>
-				<a href="expense.php">Expenses</a>
-			</li>
-			<li>
-				<a href="expensegraph.php">Expenses Chart</a>
+				<a href="#">Expenses <span class="fa arrow"></span></a>
+				<ul class="nav nav-third-level">
+					<li>
+						<a href="expense.php">Table</a>
+					</li>
+					<li>
+						<a href="expensegraph.php">Pie Chart</a>
+					</li>
+				</ul>
+				<!-- /.nav-third-level -->
 			</li>			
 			<li>
 				<a href="#">Salaries <span class="fa arrow"></span></a>
@@ -192,10 +140,10 @@ function user($type)
 		<!-- /.nav-second-level -->
 	</li>
 	<li>
-		<a href="users.php"><i class="fa fa-cogs fa-fw"></i> List All Users</a>
+		<a href="users.php"><i class="fa fa-group fa-fw"></i> List All Users</a>
 	</li>
 	<li>
-		<a href="update.php"><i class="fa fa-cogs fa-fw"></i> Update Details</a>
+		<a href="update.php"><i class="fa fa-refresh fa-fw"></i> Update Details</a>
 	</li>';
 
 	if ($type == 'technician') {
@@ -209,9 +157,34 @@ function user($type)
 		</li>
 		<li>
 			<a href="viewquot.php"><i class="fa fa-table fa-fw"></i> View Quotation</a>
-		</li>	
+		</li>
 		<li>
-			<a href="items.php"><i class="fa fa-edit fa-fw"></i> Products</a>		
+		<a href="#"><i class="fa fa-recycle fa-fw"></i> Device Recylce<span class="fa arrow"></span></a>
+		<ul class="nav nav-second-level">
+			<li>
+				<a href="jobs.php">Waitlist</a>
+			</li>
+				<li>
+				<a href="allocated.php">Allocated</a>
+			</li>		
+		
+		</ul>
+		<!-- /.nav-second-level -->
+	</li>
+	<li>
+		<a href="#"><i class="fa fa-wrench fa-fw"></i> Tools and Material<span class="fa arrow"></span></a>
+		<ul class="nav nav-second-level">
+			<li>
+				<a href="orders.php">View Orders</a>
+			</li>
+			<li>
+				<a href="suppliers.php">View Suppliers</a>
+			</li>			
+		</ul>
+		<!-- /.nav-second-level -->
+	</li>
+		<li>
+			<a href="products.php"><i class="fa fa-edit fa-fw"></i> Products</a>		
 		</li>
 		<li>
 			<a href="update.php"><i class="fa fa-cogs fa-fw"></i> Update Details</a>

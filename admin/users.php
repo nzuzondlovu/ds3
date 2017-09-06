@@ -40,6 +40,33 @@ if(isset($_GET['ub']) && $_GET['ub'] != '') {
 ?>
 
 <?php
+if(isset($_POST['user'])) {
+
+	$id = mysqli_real_escape_string($con, strip_tags(trim($_POST["id"])));
+	$role = mysqli_real_escape_string($con, strip_tags(trim($_POST["role"])));
+	$speciality = mysqli_real_escape_string($con, strip_tags(trim($_POST["speciality"])));
+	
+	if($role != '') {
+
+		$sql = "UPDATE user SET role='".$role."' WHERE id='".$id."'";
+		mysqli_query($con, $sql);
+
+		if ($role == 'technician') {
+
+			$sql = "INSERT INTO technician(name, surname, email, speciality)
+			VALUES( '".$name."', '".$surname."', '".$email."', '".$speciality."')";
+			mysqli_query($con, $sql);
+			$_SESSION['success'] = 'Your new technician was added successfully.';
+		}
+
+		$_SESSION['success'] = 'Your user role was updated successfully.';
+	}else {
+		$_SESSION['failure'] = 'Please fill in all role field.';
+	}
+}
+?>
+
+<?php
 include 'header.php';
 ?>
 
@@ -123,7 +150,7 @@ include 'header.php';
 												<td>'.$row['location'].'</td>
 												<td>'.$row['role'].'</td>
 												<td class="pull-right">
-													<a href="edituser.php?id='.$row['id'].'" class="btn btn-primary">Update User Role</a>   '.$button.'
+													<button onclick="modal('.$row['id'].')" class="btn btn-primary">Update User Role</button>   '.$button.'
 												</td>
 											</tr>';
 										}
@@ -153,6 +180,23 @@ include 'header.php';
 <?php
 include 'footer.php';
 ?>
+<script>
+	function modal(id) {
+		var data = {"id" : id};
+		jQuery.ajax({
+			url : '../includes/usersmodal.php',
+			method : "post",
+			data : data,
+			success : function(data) {
+				jQuery('body').append(data);
+				jQuery('#usersModal').modal('toggle');
+			},
+			error : function() {
+				alert("Ooops! Something went wrong!");
+			}
+		});
+	}
+</script>
 <script>
 	$(document).ready(function(){
 		$('#users').DataTable();

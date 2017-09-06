@@ -17,11 +17,11 @@ if(isset($_POST['register'])) {
 
     if($name !='' && $surname !='' && $cell !='' && $idnumber !='' && $location !='' && $email !='' && $password !=''){
 
-        $sql = "INSERT INTO user(name, surname, cell, idnumber, location, email, password, role)
-        VALUES('".$name."', '".$surname."', '".$cell."', '".$idnumber."', '".$location."', '".$email."', '".$password."', '".$role."')";
+        $sql = "INSERT INTO user(name, surname, cell, idnumber, location, email, password, role, blocked)
+        VALUES('".$name."', '".$surname."', '".$cell."', '".$idnumber."', '".$location."', '".$email."', '".$password."', '".$role."', 0)";
         mysqli_query($con, $sql);
         $_SESSION['success'] = 'You have been registered succesfully, please log in.';
-        header("Location: login.php");
+        header("Location: index.php");
 
     }else{
         $_SESSION['failure'] = 'Make sure you have filled all fields.';

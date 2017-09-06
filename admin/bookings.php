@@ -22,6 +22,34 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 		$_SESSION['failure'] = 'An error occured, please try again.';
 	}	
 }
+
+
+if(isset($_POST['create'])) {
+
+	$id = mysqli_real_escape_string($con, strip_tags(trim($_POST["id"])));
+	$name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
+	$serial = mysqli_real_escape_string($con, strip_tags(trim($_POST["serial"])));
+	$model = mysqli_real_escape_string($con, strip_tags(trim($_POST["model"])));
+	$accessory = mysqli_real_escape_string($con, strip_tags(trim($_POST["accessory"])));
+	$technician = mysqli_real_escape_string($con, strip_tags(trim($_POST["technician"])));
+	$deposit = mysqli_real_escape_string($con, strip_tags(trim($_POST["deposit"])));
+	$balance = mysqli_real_escape_string($con, strip_tags(trim($_POST["balance"])));
+	$total = mysqli_real_escape_string($con, strip_tags(trim($_POST["total"])));
+	$status = mysqli_real_escape_string($con, strip_tags(trim($_POST["status"])));
+	$description = mysqli_real_escape_string($con, strip_tags(trim($_POST["desc"])));
+
+	if( $model != '' && $accessory != '' && $technician != '' && $deposit != '' && $balance != '' && $total != '' && $status != '' && $description != '') {
+
+		$sql = "INSERT INTO quotation(booking_id, name, serial, model, accessory, technician, description, deposit, balance, total, status) 
+		VALUES ('".$id."', '".$name."', '".$serial."', '".$model."', '".$accessory."', '".$technician."', '".$description."', '".$deposit."', '".$balance."', '".$total."', '".$status."')";
+        mysqli_query($con, $sql);
+		$_SESSION['success'] = 'Your new Quotation is added successfully.';
+        header("Location: viewquot.php");
+	}else {
+		$_SESSION['failure'] = 'Please fill in all fields.';
+	}
+}
+
 ?>
 
 <?php
@@ -92,32 +120,32 @@ include 'header.php';
 
 											$sql1 = "SELECT * FROM quotation WHERE booking_id = '".$row['id']."' AND archive = 0";
 											$res1 = mysqli_query($con, $sql1);
-											$btn = '<a href="createquote.php?id='.$row['id'].'" class="btn btn-primary">Create Quotation</a>';
+											$btn = '<button onclick="modal('.$row['id'].')" class="btn btn-primary">Create Quotation</button>';
 
 											if (mysqli_num_rows($res1) > 0) {
 
 												$row1 = mysqli_fetch_assoc($res1);
-												$btn = '<a href="editquote.php?id='.$row1['id'].'" class="btn btn-info">Review Quotation</a>';
+												$btn = '<button onclick="modal1('.$row1['id'].')" class="btn btn-info">Review Quotation</button>';
 											}
 
 											echo '
-												<tr>
-													<td>'.$row['id'].'</td>
-													<td>'.$row['user'].'</td>
-													<td>'.$row['name'].'</td>
-													<td>'.$row['serial'].'</td>
-													<td>'.$row['type'].'</td>
-													<td><img src="../uploads/'.$row['pic_url'].'"></td>
-													<td>'.$row['description'].'</td>
-													<td>'.date("M d, y",strtotime($row['date_in'])).'</td>
-													<td>'.$row['status'].'</td>
-													<td>'.$row['technician'].'</td>
-													<td>'.date("M d, y",strtotime($row['date_out'])).'</td>
-													<td>'.date("M d, y",strtotime($row['date'])).'</td>
-													<td class="pull-right">
-														 '.$btn.'  <a href="?id='.$row['id'].'" class="btn btn-warning">Archive Booking</a>
-													</td>
-												</tr>';
+											<tr>
+												<td>'.$row['id'].'</td>
+												<td>'.$row['user'].'</td>
+												<td>'.$row['name'].'</td>
+												<td>'.$row['serial'].'</td>
+												<td>'.$row['type'].'</td>
+												<td><img src="../uploads/'.$row['pic_url'].'"></td>
+												<td>'.$row['description'].'</td>
+												<td>'.date("M d, y",strtotime($row['date_in'])).'</td>
+												<td>'.$row['status'].'</td>
+												<td>'.$row['technician'].'</td>
+												<td>'.date("M d, y",strtotime($row['date_out'])).'</td>
+												<td>'.date("M d, y",strtotime($row['date'])).'</td>
+												<td class="pull-right">
+													'.$btn.'  <a href="?id='.$row['id'].'" class="btn btn-warning">Archive Booking</a>
+												</td>
+											</tr>';
 										}
 										echo '
 									</tbody>
@@ -145,6 +173,40 @@ include 'header.php';
 <?php
 include 'footer.php';
 ?>
+<script>
+	function modal(id) {
+		var data = {"id" : id};
+		jQuery.ajax({
+			url : '../includes/createquotemodal.php',
+			method : "post",
+			data : data,
+			success : function(data) {
+				jQuery('body').append(data);
+				jQuery('#responseModal').modal('toggle');
+			},
+			error : function() {
+				alert("Ooops! Something went wrong!");
+			}
+		});
+	}
+</script>
+<script>
+	function modal1(id) {
+		var data = {"id" : id};
+		jQuery.ajax({
+			url : '../includes/editquotemodal.php',
+			method : "post",
+			data : data,
+			success : function(data) {
+				jQuery('body').append(data);
+				jQuery('#responseModal').modal('toggle');
+			},
+			error : function() {
+				alert("Ooops! Something went wrong!");
+			}
+		});
+	}
+</script>
 <script>
 	$(document).ready(function(){
 		$('#bookings').DataTable();
