@@ -1,0 +1,125 @@
+Dannhauser,3080
+Hattingspruit,3081
+Madadeni,2951
+Newcastle,2940
+Utrecht,2980
+Amanzimtoti,4126
+Cato Ridge,3680
+Hammerdale,3680
+Doonside,4135
+Drummond,3626
+Bluff,4052
+Durban,4000
+Durban North,4016
+Ekuphakameni,4309
+Hillcrest,3610
+Illovo Beach,4155
+Inanda,4309
+Isipingo,4133
+Karridene,4126
+Kingsburgh,4126
+Kloof,3610
+KwaMashu,4360
+La Lucia,4051
+La Mercy,4399
+Mount Edgecombe,4302
+New Germany,3610
+Pinetown,3600
+Pinetown South,3610
+Queensburgh,4093
+Tongaat,4339
+Umbogintwini,4126
+Umdloti,4319
+Umgababa,4126
+Umhlanga,4019
+Umlazi,4066
+Verulam,4339
+Warner Beach,4126
+Westville,3634
+Chatsworth,4092
+Wentworth,4052
+Umkomaas,4170
+Magabheni,4170
+Ntuzuma,4359
+Phoenix,4068
+Ballito,4399
+KwaDukuza,4450
+Salt Rock,4392
+Bulwer,3244
+Franklin,4706
+Himeville,3256
+Ixopo,3276
+Kokstad,4700
+Matatiele,4730
+Swartberg,4710
+Umzimkulu,4240
+Underberg,3257
+Harding,4680
+Hibberdene,4220
+Ifafa Beach,4184
+Kelso,4183
+Margate,4275
+Palm Beach,4184
+Park Rynie,4182
+Pennington,4184
+Port Edward,4295
+Port Shepstone,4240
+Ramsgate,4284
+Scottburgh,4180
+Sezela,4215
+Shelly Beach,4265
+Southbroom,4277
+Umtentweni,4235
+Umzinto,4200
+Umzumbe,4225
+Uvongo,4270
+Balgowan,4270
+Boston,3211
+Byrne,3781
+Hilton,3201
+Howick,3290
+Merrivale,3291
+Mooi River,3300
+New Hanover,3230
+Pietermaritzburg,3200
+Richmond,3780
+Wartburg,3233
+Dalton,3236
+Hluhluwe,3960
+Ingwavuma,3968
+Mkuze,3965
+Mtubatuba,3935
+Ubombo,3970
+Jozini,3969
+Mbazwana,3974
+Manguzi,3973
+Dundee,3000
+Glencoe,2930
+Greytown,3250
+Kranskop,3268
+Muden,3251
+Pomeroy,3020
+Wasbank,2920
+Nquthu,3135
+Bergville,3350
+Colenso,3360
+Elandslaagte,2900
+Estcourt,3310
+Ladysmith,3370
+Weenen,3325
+Winterton,3340
+Babanango,3850
+Empangeni,3880
+Eshowe,3815
+Mandeni,4490
+Melmoth,3835
+Mtunzini,3867
+Richards Bay,3900
+Louwsburg,3150
+Mahlabatini,3865
+Nongoma,3950
+Paulpietersburg,3180
+Pongola,3170
+Ulundi,3838
+Vryheid,3100
+
