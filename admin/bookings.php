@@ -44,7 +44,7 @@ if(isset($_POST['create'])) {
 		VALUES ('".$id."', '".$name."', '".$serial."', '".$model."', '".$accessory."', '".$technician."', '".$description."', '".$deposit."', '".$balance."', '".$total."', '".$status."')";
         mysqli_query($con, $sql);
 		$_SESSION['success'] = 'Your new Quotation is added successfully.';
-        header("Location: viewquot.php");
+        //header("Location: viewquot.php");
 	}else {
 		$_SESSION['failure'] = 'Please fill in all fields.';
 	}
