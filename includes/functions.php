@@ -3,7 +3,7 @@ $sitename = 'Infinity';
 $siteaddress = '';
 session_start();
 //"localhost","thehewri_main","SzlqF-n,X2m$","thehewri_master"
-$con = mysqli_connect("localhost","nzuzor1","hohi74Ro", "shop");
+$con = mysqli_connect("localhost","root","","shop");
 
 function head($type)
 {
@@ -15,6 +15,10 @@ function head($type)
 	} else if ($type == 'clerk') {
 
 		$_SESSION['kind'] = 'Clerk';
+	}
+	else if ($type == 'driver') {
+
+		$_SESSION['kind'] = 'Driver';
 	}
 }
 
@@ -240,6 +244,22 @@ function user($type)
 		<li>
 			<a href="../../create.php"><i class="fa fa-cogs fa-fw"></i> Create Order</a>
 		</li>';
+	}
+	else if ($type == 'driver') {
+
+		$menu = '
+		
+		<li>
+		<a href="viewD.php"><i class="fa fa-edit fa-fw"></i>Deliveries</a>
+		</li>
+		<li>
+		<a href="drivers.php"><i class="fa fa-edit fa-fw"></i>Drivers</a>
+		</li>
+
+		<li>
+			<a href="update.php"><i class="fa fa-cogs fa-fw"></i> Update Details</a>
+		</li>'
+		;
 	}
 	
 	echo $menu;

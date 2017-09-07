@@ -57,6 +57,7 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
                   <option value="admin" >Admin</option>
                   <option value="clerk" >Clerk</option>
                   <option value="technician" >Technician</option>
+                  <option value="driver" >Driver</option>
                 </select>
               </div>
               <div class="form-group">

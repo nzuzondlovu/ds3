@@ -1,9 +1,8 @@
 <?php
 include 'header.php';
 ?>
-
+ 
 <?php
-
 $country = '';
 $name = '';
 $surname = '';
@@ -12,24 +11,64 @@ $state = '';
 $zip = '';
 $email = '';
 $cell = '';
-
 if (isset($_SESSION['user_id'])) {
-
-    $key = array();
-    $key = explode(',', $_SESSION['location']);
-
-    $country = $key[2];
+$token = strtok($_SESSION['location'], ",");
+$key = array();
+$a = 0;
+    while ($token !== false){
+    $key[$a] = $token;
+    $token = strtok(",");
+    $a++;
+}
     $name = $_SESSION['name'];
     $surname = $_SESSION['surname'];
     $town = $key[0];
-    $state = $key[1];
+    
     $zip = $_SESSION['location'];
     $email = $_SESSION['email'];
     $cell = $_SESSION['cell'];
 }
-
 ?>
+<?php
+ if (isset($_POST['submit']))
+ {
+  	$userID= $_SESSION['user_id'];
+    $name = mysqli_real_escape_string($con, strip_tags(trim($_POST["shipping_first_name"])));
+    $cell= mysqli_real_escape_string($con, strip_tags(trim($_POST["shipping_last_name"])));
+    $Addr1 = mysqli_real_escape_string($con, strip_tags(trim($_POST["shipping_address_1"])));
+     $Addr2 = mysqli_real_escape_string($con, strip_tags(trim($_POST["shipping_address_2"])));
+     $strAddr=$Addr1. " ," .$Addr2;
+     $suburb = mysqli_real_escape_string($con, strip_tags(trim($_POST["suburb"])));
+   $area=mysqli_real_escape_string($con, strip_tags(trim($_POST["area"])));
+    $boxcode= mysqli_real_escape_string($con, strip_tags(trim($_POST["boxcode"])));
+    $dateR = mysqli_real_escape_string($con, strip_tags(trim($_POST["dateR"])));
+    $dateD = mysqli_real_escape_string($con, strip_tags(trim($_POST["dateD"])));
+    
+     if($userID != '' && $name != '' && $cell != '' && $strAddr != '' && $suburb != '' && $area != '' && $boxcode != '' && $dateR != ''&& $dateD != '') {
+     
+	 $sql = "INSERT INTO custdelivery(custID,custname,custcell,strAddress,suburb,area,boxcode,dateofRequest,dateofDelivery)
+        VALUES('".$userID."','".$name."','".$cell."','".$strAddr."','".$suburb."','".$area."','".$boxcode."','".$dateR."','".$dateD."')";
+        mysqli_query($con, $sql);
+        $_SESSION['success'] = 'Your delivery request was added successfully.';
+        header("Location: index.php");
+    }else {
+        $_SESSION['failure'] = 'Please fill in all fields.';
+    }
+   
+  
+}
+        
+    ?>
 
+    <script type="text/javascript">
+function valueChanged()
+{
+    if($('#ship-to-different-address-checkbox').is(":checked"))   
+        $("#shipping").show();
+    else
+        $("#shipping").hide();
+}
+</script>
 <div class="product-big-title-area">
     <div class="container">
         <div class="row">
@@ -61,18 +100,12 @@ if (isset($_SESSION['user_id'])) {
                     <?php
                     $sql = "SELECT * FROM product ORDER BY id ASC LIMIT 4";
                     $res = mysqli_query($con, $sql);
-
                     if (mysqli_num_rows($res) > 0) {
-
                         while ($row = mysqli_fetch_assoc($res)) {
-
                             $promo = '<ins>R'.$row['promo_price'].'</ins> <del>R'.$row['price'].'</del>';
-
                             if ($row['promo_price'] == '0.00') {
-
                                 $promo = '<ins>R'.$row['price'].'</ins>';
                             }
-
                             echo '
                             <div class="thubmnail-recent">
                                 <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
@@ -82,9 +115,7 @@ if (isset($_SESSION['user_id'])) {
                                 </div>                             
                             </div>';
                         }
-
                     } else {
-
                         echo '
                         <div class="alert alert-info">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -100,17 +131,12 @@ if (isset($_SESSION['user_id'])) {
                         <?php
                         $sql = "SELECT * FROM product ORDER BY id DESC LIMIT 5";
                         $res = mysqli_query($con, $sql);
-
                         if (mysqli_num_rows($res) > 0) {
-
                             while ($row = mysqli_fetch_assoc($res)) {
-
                                 echo '
                                 <li><a href="product.php?id='.$row['id'].'">'.$row['name'].'</a></li>';
                             }
-
                         } else {
-
                             echo '
                             <div class="alert alert-info">
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -126,17 +152,13 @@ if (isset($_SESSION['user_id'])) {
                 <div class="product-content-right">
                     <div class="woocommerce">
                         <?php
-
                         if (!isset($_SESSION['user_id'])) {
-
                             echo '<div class="woocommerce-info">Returning customer? <a class="showlogin" data-toggle="modal" data-target="#login" aria-expanded="false" aria-controls="login-form-wrap">Click here to login</a>';
                         }
                         ?>                        
                     </div>
                     <!--<form id="login-form-wrap" class="login collapse" method="post">
-
                         <p>If you have shopped with us before, please enter your details in the boxes below. If you are a new customer please proceed to the Billing &amp; Shipping section.</p>
-
                         <p class="form-row form-row-first">
                             <label for="username">Username or email <span class="required">*</span>
                             </label>
@@ -148,8 +170,6 @@ if (isset($_SESSION['user_id'])) {
                             <input type="password" id="password" name="password" class="input-text">
                         </p>
                         <div class="clear"></div>
-
-
                         <p class="form-row">
                             <input type="submit" value="Login" name="login" class="button">
                             <label class="inline" for="rememberme"><input type="checkbox" value="forever" id="rememberme" name="rememberme"> Remember me </label>
@@ -157,11 +177,10 @@ if (isset($_SESSION['user_id'])) {
                         <p class="lost_password">
                             <a href="#">Lost your password?</a>
                         </p>
-
                         <div class="clear"></div>
                     </form>-->
 
-                    <div class="woocommerce-info">Have a coupon? <a class="showcoupon" data-toggle="collapse" href="#coupon-collapse-wrap" aria-expanded="false" aria-controls="coupon-collapse-wrap">Click here to enter your code</a>
+<div class="woocommerce-info">Have a coupon? <a class="showcoupon" data-toggle="collapse" href="#coupon-collapse-wrap" aria-expanded="false" aria-controls="coupon-collapse-wrap">Click here to enter your code</a>
                     </div>
 
                     <form id="coupon-collapse-wrap" method="post" class="checkout_coupon collapse">
@@ -177,7 +196,7 @@ if (isset($_SESSION['user_id'])) {
                         <div class="clear"></div>
                     </form>
 
-                    <form enctype="multipart/form-data" class="checkout" method="post" name="checkout">
+                    <form enctype="multipart/form-data" action="#" class="checkout" method="post" name="checkout">
 
                         <div id="customer_details" class="col2-set">
                             <div class="col-1">
@@ -187,11 +206,10 @@ if (isset($_SESSION['user_id'])) {
                                         <label class="" for="billing_country">Country <abbr title="required" class="required">*</abbr>
                                         </label>
                                         <select class="country_to_state country_select" id="billing_country" name="billing_country">
-                                            <option value="<?php echo $country; ?>"><?php echo $country; ?></option>
+                                            <option value="">Select a country…</option>
                                             <?php
                                             $sql = "SELECT * FROM country ORDER BY name ASC";
                                             $res = mysqli_query($con, $sql);
-
                                             if(mysqli_num_rows($res) > 0) {
                                                 while($row = mysqli_fetch_assoc($res)) {
                                                     echo '<option value="'.$row['code'].'">'.$row['name'].'</option>';
@@ -222,11 +240,11 @@ if (isset($_SESSION['user_id'])) {
                                     <p id="billing_address_1_field" class="form-row form-row-wide address-field validate-required">
                                         <label class="" for="billing_address_1">Address <abbr title="required" class="required">*</abbr>
                                         </label>
-                                        <input type="text" value="" placeholder="Street address" id="billing_address_1" name="billing_address_1" class="input-text ">
+                                        <input type="text" value="<?php echo $name; ?>" placeholder="Street address" id="billing_address_1" name="billing_address_1" class="input-text ">
                                     </p>
 
                                     <p id="billing_address_2_field" class="form-row form-row-wide address-field">
-                                        <input type="text" value="" placeholder="Apartment, suite, unit etc. (optional)" id="billing_address_2" name="billing_address_2" class="input-text ">
+                                        <input type="text" value="<?php echo $state; ?>" placeholder="Apartment, suite, unit etc. (optional)" id="billing_address_2" name="billing_address_2" class="input-text ">
                                     </p>
 
                                     <p id="billing_city_field" class="form-row form-row-wide address-field validate-required" data-o_class="form-row form-row-wide address-field validate-required">
@@ -280,25 +298,8 @@ if (isset($_SESSION['user_id'])) {
                                         <label class="checkbox" for="ship-to-different-address-checkbox">Ship to a different address?</label>
                                         <input type="checkbox" value="1" name="ship_to_different_address" checked="checked" class="input-checkbox" id="ship-to-different-address-checkbox">
                                     </h3>
-                                    <div class="shipping_address" style="display: block;">
-                                        <p id="shipping_country_field" class="form-row form-row-wide address-field update_totals_on_change validate-required woocommerce-validated">
-                                            <label class="" for="shipping_country">Country <abbr title="required" class="required">*</abbr>
-                                            </label>
-                                            <select class="country_to_state country_select" id="shipping_country" name="shipping_country">
-                                                <option value="">Select a countryâ€¦</option>
-                                                <?php
-                                                $sql = "SELECT * FROM country ORDER BY name ASC";
-                                                $res = mysqli_query($con, $sql);
-
-                                                if(mysqli_num_rows($res) > 0) {
-                                                    while($row = mysqli_fetch_assoc($res)) {
-                                                        echo '<option value="'.$row['code'].'">'.$row['name'].'</option>';
-                                                    }
-                                                }
-                                                ?>
-                                            </select>
-                                        </p>
-
+                                    <div id="shipping" class="shipping_address" style="display: block;">
+                                    
                                         <p id="shipping_first_name_field" class="form-row form-row-first validate-required">
                                             <label class="" for="shipping_first_name">First Name <abbr title="required" class="required">*</abbr>
                                             </label>
@@ -306,16 +307,11 @@ if (isset($_SESSION['user_id'])) {
                                         </p>
 
                                         <p id="shipping_last_name_field" class="form-row form-row-last validate-required">
-                                            <label class="" for="shipping_last_name">Last Name <abbr title="required" class="required">*</abbr>
+                                            <label class="" for="shipping_last_name">Contact Number <abbr title="required" class="required">*</abbr>
                                             </label>
                                             <input type="text" value="" placeholder="" id="shipping_last_name" name="shipping_last_name" class="input-text ">
                                         </p>
                                         <div class="clear"></div>
-
-                                        <p id="shipping_company_field" class="form-row form-row-wide">
-                                            <label class="" for="shipping_company">Company Name</label>
-                                            <input type="text" value="" placeholder="" id="shipping_company" name="shipping_company" class="input-text ">
-                                        </p>
 
                                         <p id="shipping_address_1_field" class="form-row form-row-wide address-field validate-required">
                                             <label class="" for="shipping_address_1">Address <abbr title="required" class="required">*</abbr>
@@ -327,61 +323,65 @@ if (isset($_SESSION['user_id'])) {
                                             <input type="text" value="" placeholder="Apartment, suite, unit etc. (optional)" id="shipping_address_2" name="shipping_address_2" class="input-text ">
                                         </p>
                                         <p id="shipping_suburb_field" class="form-row form-row-wide address-field">
-                                            <label>Suburb Name</label>
-                                            <select id="suburb" name="suburb" class="form-control" onchange="document.getElementById('area').value=this.value" required>
-                                                <option value="" selected="selected">Select type</option>
-                                                <?php
-                                                $sql = "SELECT * FROM postal ORDER BY suburb ASC";
-                                                $res = mysqli_query($con, $sql);
-
-                                                if(mysqli_num_rows($res) > 0) {
-                                                    while($row = mysqli_fetch_assoc($res)) {
-                                                        echo '<option  value="'.$row['id'].'">'.$row['suburb'].'</option>';
-
-                                                    }
-
+                                        <label>Suburb Name</label>
+                                        <select id="suburb" name="suburb" class="form-control" onchange="document.getElementById('area').value=this.value" required>
+                                            <option value="" selected="selected">Select type</option>
+                                            <?php
+                                            $sql = "SELECT * FROM suburb ORDER BY suburbName ASC";
+                                            $res = mysqli_query($con, $sql);
+                                            if(mysqli_num_rows($res) > 0) {
+                                                while($row = mysqli_fetch_assoc($res)) {
+                                                    echo '<option  value="'.$row['id'].'">'.$row['suburbName'].'</option>';
+                                                 
                                                 }
-                                                ?>
-                                            </select>
-
+                                                
+                                            }
+                                            ?>
+                                        </select>
+                                        
                                         </p>
 
                                         <p id="shipping_city_field" class="form-row form-row-wide address-field validate-required" data-o_class="form-row form-row-wide address-field validate-required">
                                             <label class="" for="shipping_city">Town / City <abbr title="required" class="required">*</abbr>
                                             </label>
-                                            <select id="area" name="area" class="form-control" onchange="document.getElementById('boxcode').value=this.value" required>
-                                                <option value="" selected="selected">Select type</option>
-                                                <?php
-                                                $sql = "SELECT * FROM postal ORDER BY suburb ASC";
-                                                $res = mysqli_query($con, $sql);
-
-                                                if(mysqli_num_rows($res) > 0) {
-                                                    while($row = mysqli_fetch_assoc($res)) {
-                                                        echo '<option  value="'.$row['boxcode'].'">'.$row['area'].'</option>';
-
-                                                    }
-
+                                             <select id="area" name="area" class="form-control" onchange="document.getElementById('boxcode').value=this.value" required>
+                                            <option value="" selected="selected">Select type</option>
+                                            <?php
+                                            $sql = "SELECT * FROM area ORDER BY cityName ASC";
+                                            $res = mysqli_query($con, $sql);
+                                            if(mysqli_num_rows($res) > 0) {
+                                                while($row = mysqli_fetch_assoc($res)) {
+                                                    echo '<option  value="'.$row['boxcode'].'">'.$row['cityName'].'</option>';
+                                                 
                                                 }
-                                                ?>
-                                            </select>
-
+                                                
+                                            }
+                                            ?>
+                                        </select>
+                                     
                                         </p>
                                         <p id="shipping_postcode_field" class="form-row form-row-last address-field validate-required validate-postcode" data-o_class="form-row form-row-last address-field validate-required validate-postcode">
                                             <label class="" for="shipping_postcode">Postcode <abbr title="required" class="required">*</abbr>
                                             </label>
-                                            <input id="boxcode" name="boxcode" class="form-control" value="" placeholder="Enter text" >
+                                           <input id="boxcode" name="boxcode" class="form-control" value="" placeholder="Enter text" >
                                         </p>
-                                        <p id="shipping_state_field" class="form-row form-row-first address-field validate-state" data-o_class="form-row form-row-first address-field validate-state">
-                                            <label class="" for="shipping_state">Province</label>
-                                            <input type="text" id="shipping_state" name="shipping_state" placeholder="Province" value="KZN" class="input-text ">
+										<p id="shipping_delivery_field" class="form-row form-row-last address-field validate-required validate-delivery" data-o_class="form-row form-row-last address-field validate-required validate-postcode">
+                                            <label class="" for="shipping_postcode">Date requested <abbr title="required" class="required">*</abbr>
+                                            </label>
+                                           <input type="text" name="dateR" value="<?php echo date("Y-m-d")?>" size="8" readonly="">
                                         </p>
+                                        <p id="shipping_delivery_field" class="form-row form-row-last address-field validate-required validate-delivery" data-o_class="form-row form-row-last address-field validate-required validate-postcode">
+                                            <label class="" for="shipping_postcode">Date of Delivery <abbr title="required" class="required">*</abbr>
+                                            </label>
+                                           <input type="text" name="dateD" value="<?php echo date('Y-m-d', strtotime('+7 days'))?>" size="8"  readonly=""></br>
+                                        </p>
+                                        <p class="form-row form-row-last">
+                            					<input type="submit" value="Submit" name="submit" class="button">
+                        				</p>
                                         <div class="clear"></div>
 
                                     </div>
-                                    <p id="order_comments_field" class="form-row notes">
-                                        <label class="" for="order_comments">Order Notes</label>
-                                        <textarea cols="5" rows="2" placeholder="Notes about your order, e.g. special notes for delivery." id="order_comments" class="input-text " name="order_comments"></textarea>
-                                    </p>
+                        
                                 </div>
                             </div>
                         </div>
@@ -400,16 +400,16 @@ if (isset($_SESSION['user_id'])) {
                             <tbody>
                                 <tr class="cart_item">
                                     <td class="product-name">
-                                        Ship Your Idea <strong class="product-quantity">Ã— 1</strong> </td>
+                                        Ship Your Idea <strong class="product-quantity">× 1</strong> </td>
                                         <td class="product-total">
-                                            <span class="amount">Â£15.00</span> </td>
+                                            <span class="amount">£15.00</span> </td>
                                         </tr>
                                     </tbody>
                                     <tfoot>
 
                                         <tr class="cart-subtotal">
                                             <th>Cart Subtotal</th>
-                                            <td><span class="amount">Â£15.00</span>
+                                            <td><span class="amount">£15.00</span>
                                             </td>
                                         </tr>
 
@@ -425,7 +425,7 @@ if (isset($_SESSION['user_id'])) {
 
                                         <tr class="order-total">
                                             <th>Order Total</th>
-                                            <td><strong><span class="amount">Â£15.00</span></strong> </td>
+                                            <td><strong><span class="amount">£15.00</span></strong> </td>
                                         </tr>
 
                                     </tfoot>
@@ -438,7 +438,7 @@ if (isset($_SESSION['user_id'])) {
                                             <input type="radio" data-order_button_text="" checked="checked" value="bacs" name="payment_method" class="input-radio" id="payment_method_bacs">
                                             <label for="payment_method_bacs">Direct Bank Transfer </label>
                                             <div class="payment_box payment_method_bacs">
-                                                <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order wonâ€™t be shipped until the funds have cleared in our account.</p>
+                                                <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
                                             </div>
                                         </li>
                                         <li class="payment_method_cheque">
@@ -453,7 +453,7 @@ if (isset($_SESSION['user_id'])) {
                                             <label for="payment_method_paypal">PayPal <img alt="PayPal Acceptance Mark" src="https://www.paypalobjects.com/webstatic/mktg/Logo/AM_mc_vs_ms_ae_UK.png"><a title="What is PayPal?" onclick="javascript:window.open('https://www.paypal.com/gb/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;" class="about_paypal" href="https://www.paypal.com/gb/webapps/mpp/paypal-popup">What is PayPal?</a>
                                             </label>
                                             <div style="display:none;" class="payment_box payment_method_paypal">
-                                                <p>Pay via PayPal; you can pay with your credit card if you donâ€™t have a PayPal account.</p>
+                                                <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
                                             </div>
                                         </li>
                                     </ul>

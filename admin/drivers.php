@@ -86,14 +86,14 @@ include 'header.php';
 
 											echo '
 											<tr>
-												<td>'.$row['id'].'</td>
+												<td>'.$row['driverID'].'</td>
 												<td>'.$row['name'].'</td>
 												<td>'.$row['surname'].'</td>
 												<td>'.$row['cell'].'</td>
 												<td>'.$row['idnumber'].'</td>
 												<td>'.$row['email'].'</td>
 												<td class=" pull-right">
-													<a href="DeleteDriver.php?id='.$row['id'].'" class="btn btn-danger">Delete</a>
+													<a href="DeleteDriver.php?id='.$row['driverID'].'" class="btn btn-danger">Delete</a>
 												</td>
 											</tr>';
 										}

@@ -114,7 +114,7 @@ include 'header.php';
 
 											echo '
 											<tr>
-												<td>'.$row['custId'].'</td>
+												<td>'.$row['custID'].'</td>
 												<td>'.$row['custname'].'</td>
 												<td>'.$row['custcell'].'</td>
 												<td>'.$row['strAddress'].'</td>
@@ -124,7 +124,7 @@ include 'header.php';
 												<td>'.date("M d, y",strtotime($row['dateofRequest'])).'</td>
 												<td>'.date("M d, y",strtotime($row['dateofDelivery'])).'</td>
 												<td class=" pull-right">
-													<button onclick="modal('.$row['id'].')" class="btn btn-warning">Allocate Driver</button>  <a href="DeleteDelivery.php?id='.$row['id'].'" class="btn btn-danger">Delete Request</a>
+													<button onclick="modal('.$row['deliveryID'].')" class="btn btn-warning">Allocate Driver</button>  <a href="DeleteDelivery.php?id='.$row['deliveryID'].'" class="btn btn-danger">Delete Request</a>
 												</td>
 											</tr>';
 										}
