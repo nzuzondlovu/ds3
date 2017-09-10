@@ -6,6 +6,8 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
   $cat = '';
   $name = '';
   $surname = '';
+  $cell='';
+  $idnumber='';
   $email = '';
 
   $sql = "SELECT * FROM user WHERE id=$id";
@@ -25,6 +27,8 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
       ';
       $name = $row['name'];
       $surname = $row['surname'];
+      $cell=$row['cell'];
+      $idnumber=$row['idnumber'];
       $email = $row['email'];   
     }
   }
@@ -70,6 +74,12 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
                 </select>                                        
               </div>
               <input type="text" name="id" value="<?= $id; ?>" hidden="hidden" />
+              <input type="text" name="name" value="<?php $res = mysqli_query($con, "SELECT * FROM users WHERE id=$id ");$row= mysqli_fetch_assoc($res);echo $row['name'];?> " style="display: none" />
+              <input type="text" name="surname" value="<?php $res = mysqli_query($con, "SELECT * FROM users WHERE id=$id ");$row= mysqli_fetch_assoc($res);echo $row['surname'];?> " style="display: none" />
+              <input type="text" name="cell" value="<?php $res = mysqli_query($con, "SELECT * FROM users WHERE id=$id ");$row= mysqli_fetch_assoc($res);echo $row['cell'];?>" style="display: none" />
+              <input type="text" name="idnumber" value="<?php $res = mysqli_query($con, "SELECT * FROM users WHERE id=$id ");$row= mysqli_fetch_assoc($res);echo $row['idnumber'];?> " style="display: none" />
+              <input type="text" name="email" value="<?php $res = mysqli_query($con, "SELECT * FROM users WHERE id=$id ");$row= mysqli_fetch_assoc($res);echo $row['email'];?> " style="display: none" />
+              
               <button name="user" type="submit" class="btn btn-primary">Update Role</button>
               <button type="reset" class="btn btn-default">Reset Form</button>
             </form>

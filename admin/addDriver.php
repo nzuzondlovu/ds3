@@ -17,8 +17,9 @@ if(isset($_POST['submit'])) {
      $cell= mysqli_real_escape_string($con, strip_tags(trim($_POST["cell"])));
       $idnum= mysqli_real_escape_string($con, strip_tags(trim($_POST["idnum"])));
     $email = mysqli_real_escape_string($con, strip_tags(trim($_POST["email"])));
-   
-
+   $location = mysqli_real_escape_string($con, strip_tags(trim($_POST["location"])));
+    $password = md5(mysqli_real_escape_string($con, strip_tags(trim($_POST["password"]))));
+	$role='driver';
 
     
      if($name != '' && $surname != '' && $cell != '' && $idnum != '' && $email != '') {
@@ -31,7 +32,18 @@ if(isset($_POST['submit'])) {
     }else {
         $_SESSION['failure'] = 'Please fill in all fields.';
     }
-   
+    
+    if($name !='' && $surname !='' && $cell !='' && $idnum !='' && $location !='' && $email !='' && $password !=''){
+
+        $sql = "INSERT INTO user(name, surname, cell, idnumber, location, email, password, role)
+        VALUES('".$name."', '".$surname."', '".$cell."', '".$idnum."', '".$location."', '".$email."', '".$password."', '".$role."')";
+        mysqli_query($con, $sql);
+        $_SESSION['success'] = 'You have been registered succesfully, please log in.';
+        header("Location: drivers.php");
+
+    }else{
+       $_SESSION['failure'] = 'Make sure you have filled all fields.';
+    }
 
 }
 ?>
@@ -93,10 +105,16 @@ include 'header.php';
                                          <input name="idnum" class="form-control" placeholder="Enter text">
                                     </div>
                                     <div class="form-group">
+                                        <label>Location</label>
+                                         <input name="location" class="form-control" placeholder="Enter text">
+                                    </div>
+                                    <div class="form-group">
                                         <label>Email Address</label>
                                          <input name="email" class="form-control" placeholder="Enter text">
                                     </div>
-                                   
+                                    
+                                    <input name="password" class="form-control" value="driver#123" style="display:none">
+                                   	
                                     <button name="submit" type="submit" class="btn btn-primary">Submit Driver</button>
                                     <button type="reset" class="btn btn-default">Reset</button>
                                 </form>

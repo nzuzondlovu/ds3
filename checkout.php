@@ -29,6 +29,7 @@ $a = 0;
     $cell = $_SESSION['cell'];
 }
 ?>
+
 <?php
  if (isset($_POST['submit']))
  {
@@ -54,7 +55,10 @@ $a = 0;
     }else {
         $_SESSION['failure'] = 'Please fill in all fields.';
     }
-   
+   if(userID =='')
+   {
+	$_SESSION['failure'] = 'Please Login First.';
+}
   
 }
         
