@@ -269,7 +269,7 @@ if(isset($_POST['recover'])) {
                 
                 <div class="col-sm-6">
                     <div class="shopping-item">
-                        <a href="cart.php">Cart - <span class="cart-amunt">R0.00</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">0</span></a>
+                        <a href="cart.php">Cart - <span class="cart-amunt">R <?php if(isset($_SESSION['cart_total'])){echo($_SESSION['cart_total']);}else echo 0; ?></span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><?php echo($_SESSION['cart_num']); ?></span></a>
                     </div>
                 </div>
             </div>
