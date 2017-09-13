@@ -1,5 +1,6 @@
 
-    </div>
+      <!-- Main Footer -->
+
     <!-- /#wrapper -->
 
     <!-- jQuery -->
