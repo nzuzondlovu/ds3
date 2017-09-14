@@ -1,3 +1,37 @@
+
+<script>
+function sum() {
+            var txtFirstNumberValue = document.getElementById('txt1').value;
+            var txtSecondNumberValue = document.getElementById('txt2').value;
+            var result = parseInt(txtFirstNumberValue) - parseInt(txtSecondNumberValue);
+            if (!isNaN(result)) {
+                document.getElementById('txt3').value = result;
+				
+            }
+			
+			 var txtFirstNumberValue = document.getElementById('txt11').value;
+            var result = parseInt(txtFirstNumberValue);
+            if (!isNaN(result)) {
+                document.getElementById('txt22').value = result;				
+            }
+			
+			 var txtFirstNumberValue = document.getElementById('txt11').value;
+            var txtSecondNumberValue = document.getElementById('txt33').value;
+            var result = parseInt(txtFirstNumberValue) + parseInt(txtSecondNumberValue);
+            if (!isNaN(result)) {
+                document.getElementById('txt55').value = result;
+				
+            }
+			
+			 var txtFirstNumberValue = document.getElementById('txt4').value;
+			 var result = parseInt(txtFirstNumberValue);
+            if (!isNaN(result)) {
+                document.getElementById('txt5').value = result;
+				}
+			
+        }
+</script>
+
 <?php
 ob_start();
 include '../includes/functions.php';
@@ -59,10 +93,74 @@ include 'header.php';
 
 <!-- Page Content -->
 <div id="page-wrapper">
-	<div class="container-fluid">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Products</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+
+
+
+
+
+
+        <div class="col-lg-12">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#activity" data-toggle="tab">Products</a></li>
+              <li><a href="#timeline" data-toggle="tab">Catergories</a></li>
+              <li><a href="#settings" data-toggle="tab">Promotional</a></li>
+         
+              <li><a href="#devices" data-toggle="tab">Reviews</a></li>
+              <li><a href="payments" data-toggle="tab">Payments</a></li>
+              
+            </ul>
+            <div class="tab-content">
+              <div class="active tab-pane" id="activity">
+                <!-- Post -->
+                <div class="post">
+              
+                  <!-- /.user-block -->
+                
+                 
+                     <div class="row">
+            <div class="col-lg-12">
+
+
+
+
 		<div class="row">
-			<div class="col-lg-12">
-				<h1 class="page-header">Products</h1>
+			<div class="col-lg-8">
+				<h1 class="page-header" align="center">
+
+
+
+
+			<?php 
+				include('connect.php');
+				$result = $db->prepare("SELECT * FROM product ORDER BY qty_sold DESC");
+				$result->execute();
+				$rowcount = $result->rowcount();
+			?>
+			
+			<?php 
+				include('connect.php');
+				$result = $db->prepare("SELECT * FROM product where qty < 10 ORDER BY id DESC");
+				$result->execute();
+				$rowcount123 = $result->rowcount();
+
+			?>
+				<div style="text-align:center;">
+			Total Number of Products:  <font color="green" style="font:bold 22px 'Aleo';">[<?php echo $rowcount;?>]</font>
+			</div>
+			
+			<div style="text-align:center;">
+			<font style="color:rgb(255, 95, 66);; font:bold 22px 'Aleo';">[<?php echo $rowcount123;?>]</font> Products are below QTY of 10 
+			</div>
+
+				</h1>
 			</div>
 			<!-- /.col-lg-12 -->
 		</div>
@@ -78,6 +176,7 @@ include 'header.php';
 					</div>
 					<div class="modal-body">
 						<form role="form" method="post" enctype="multipart/form-data">
+<<<<<<< HEAD
 							<div class="form-group">
 								<label>Device brand name</label>
 								<input name="bname" class="form-control" placeholder="Enter text e.g Samsun">
@@ -85,13 +184,71 @@ include 'header.php';
 							<div class="form-group">
 								<label>Device generic name</label>
 								<input name="name" class="form-control" placeholder="Enter text e.g J1">
+=======
+						
+
+								<div class="form-group">
+								<label>Brand Name</label>
+								<input name="brandname" class="form-control" placeholder="Enter text">
+							</div>
+
+								<div class="form-group">
+								<label>Device name</label>
+								<input name="name" class="form-control" placeholder="Enter text">
+
+>>>>>>> a1a5d2000d1cf205fd3c8af0f447284260121e7a
+							</div>
+
+
+							<div class="form-group">
+								<label>Selling Price</label>
+							
+								<input class="form-control" type="text" id="txt1" name="price" onkeyup="sum();" Required placeholder="R0.00">
 							</div>
 							<div class="form-group">
-								<label>Device type</label>
+								<label>Original Price</label>
+								<input class="form-control"  type="text" id="txt2"  name="o_price" onkeyup="sum();" Required placeholder="R0.00">
+							</div>
+					
+						
+							<div class="form-group">
+								<label>Profit</label>	
+										<input type="text" id="txt3" class="form-control" name="profit" readonly>		
+						
+
+
+							</div>
+
+							
+
+								<div class="form-group">
+								<label>Quantity</label>
+								<input type="number" name="quantity" class="form-control" placeholder="Enter text">
+							</div>
+
+							<div class="form-group">
+								<label>Select Catagory</label>
 								<select name="type" class="form-control">
 									<option value="" selected="selected">Select type</option>
 									<?php
 									$sql = "SELECT * FROM category ORDER BY name ASC";
+									$res = mysqli_query($con, $sql);
+
+									if(mysqli_num_rows($res) > 0) {
+										while($row = mysqli_fetch_assoc($res)) {
+											echo '<option value="'.$row['name'].'">'.$row['name'].'</option>';
+										}
+									}
+									?>
+								</select>
+							</div>
+
+								<div class="form-group">
+								<label>Select Supplier</label>
+								<select name="type" class="form-control">
+									<option value="" selected="selected">Select Supplier</option>
+									<?php
+									$sql = "SELECT * FROM suppliers ORDER BY name ASC";
 									$res = mysqli_query($con, $sql);
 
 									if(mysqli_num_rows($res) > 0) {
@@ -150,8 +307,8 @@ include 'header.php';
 								<label>Device description</label>
 								<textarea name="description" class="form-control" rows="3"></textarea>
 							</div>
-							<button name="submit" type="submit" class="btn btn-primary">Submit Device</button>
-							<button type="reset" class="btn btn-default">Reset Device</button>
+							<button name="submit" type="submit" class="btn btn-primary">Save </button>
+							<button type="reset" class="btn btn-default">Reset</button>
 						</form>
 					</div>
 				</div>
@@ -176,20 +333,38 @@ include 'header.php';
 					</div>
 					<?php } ?>
 				</div>
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						List of all products
+		
 					</div>
 					<!-- /.panel-heading -->
-					<div class="panel-body">
+
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="pull-right">
-									<button class="btn btn-success" data-toggle="modal" data-target="#addItem"> Add Product</button>
+								
 								</div>
 							</div>
 						</div>
-						<div class="table-responsive">
+						<div class="table-responsive">					 <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+        
+
+              <div class="box-tools">
+                <div class="input-group input-group-sm" >
+                  
+
+                  <div class="input-group-btn">
+                    <button  class="btn btn-default"  data-toggle="modal" data-target="#addItem"><i class="fa fa-th"></i></button>
+
+                    	<button class="btn btn-success" data-toggle="modal" data-target="#addItem"> Add Product</button>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
 							<?php
 
 							$sql = "SELECT * FROM product WHERE archive = 0";
@@ -197,12 +372,16 @@ include 'header.php';
 
 							if (mysqli_num_rows($res) > 0) {
 								echo '
-								<table id="products" class="table">
+								<table id="products"  class="table table-bordered table-hover">
 									<thead>
 										<tr>
+<<<<<<< HEAD
 											<th>Product ID</th>
+=======
+										
+>>>>>>> a1a5d2000d1cf205fd3c8af0f447284260121e7a
 											<th>Name</th>
-											<th>Description</th>
+											
 											<th>type</th>
 											<th>Order Price</th>
 											<th>Price</th>
@@ -213,23 +392,33 @@ include 'header.php';
 											<th>Picture</th>
 											<th>Barcode</th>
 											<th>Date</th>
-											<th>Promo</th>
+											<th>Promo
+											  	
 										</tr>
 									</thead>
 									<tbody>';
 										while ($row = mysqli_fetch_assoc($res)) {
 
-											$button = '<a href="editpromo.php?id='.$row['id'].'" class="btn btn-primary">Make Promo</a>   <a href="editproduct.php?id='.$row['id'].'" class="btn btn-info">Edit</a>';
+											$button = '<span href="editpromo.php?id='.$row['id'].'" class="label label-primary">Make Promo</span>   <a href="editproduct.php?id='.$row['id'].'" class="label label-info">Edit</a>';
 											
 											if ($row['promo_price'] > 0) {
-												$button = '<a href="editpromo.php?id='.$row['id'].'" class="btn btn-info">Edit Promo</a>   <a href="editproduct.php?id='.$row['id'].'" class="btn btn-primary">Edit</a>';
+
+
+
+												$button = '<span href="editpromo.php?id='.$row['id'].'" class="label label-info">Edit Promo</span>   <a href="editproduct.php?id='.$row['id'].'" class="label label-primary">Edit</a>';
 											}
 
 											echo '
 											<tr>
+<<<<<<< HEAD
 												<td>'.$row['id'].'</td>
 												<td>'.$row['brand_name'].' , '.$row['generic_name'].'</td>
 												<td>'.$row['description'].'</td>
+=======
+									
+												<td>'.$row['name'].'</td>
+											
+>>>>>>> a1a5d2000d1cf205fd3c8af0f447284260121e7a
 												<td>'.$row['type'].'</td>
 												<td>'.$row['order_price'].'</td>
 												<td>'.$row['price'].'</td>
@@ -240,7 +429,336 @@ include 'header.php';
 												<td><img src="../uploads/'.$row['pic_url'].'" class="img-responsive"></td>
 												<td>'.$row['barcode'].'</td>
 												<td>'.date("M d, y",strtotime($row['date'])).'</td>
-												<td>'.$button.'   <a href="?id='.$row['id'].'" class="btn btn-warning">Archive</a></td>
+												<td>'.$button.'   <a href="?id='.$row['id'].'" class="label label-warning">Archive</a></td>
+											</tr>';
+										}
+										echo '
+									</tbody>
+								</table>';
+							} else {
+								echo '<div class="alert alert-info">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+								<strong>No products found.</strong>
+							</div>';
+						}
+						?>
+
+					</div>
+					<!-- /.table-responsive -->
+			
+			<!-- /.panel -->
+		</div>
+
+            </div>
+            <!-- /.panel -->
+        </div>
+    </div>
+                        <!-- /.row (nested) -->
+               
+                    <!-- /.panel-body -->
+             
+                  </p>
+    
+                </div>
+                <!-- /.post -->
+
+           
+                <!-- /.post -->
+
+      
+                <!-- /.post -->
+         
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+              </div>
+
+              </div>
+<script>
+    $(document).ready(function(){
+        $('#products').DataTable();
+    });
+</script>
+              </div>
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="timeline">
+                <!-- The timeline -->
+
+
+<?php
+if(isset($_SESSION['key']) == '' ) {
+	header("location:../login.php");
+}
+?>
+
+<?php
+
+if(isset($_POST['submit'])) {
+
+	$name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
+	$type = mysqli_real_escape_string($con, strip_tags(trim($_POST["type"])));
+	$description = mysqli_real_escape_string($con, strip_tags(trim($_POST["description"])));
+	$date = date("Y-m-d H:i:s");
+
+
+
+	if($name != '' && $type != '' && $description != '') {
+
+		$sql = "INSERT INTO category(name, type, description, dateCreated)
+		VALUES('".$name."', '".$type."','".$description."' , '".$date."')";
+		mysqli_query($con, $sql);
+		$_SESSION['success'] = 'Your new category was added successfully.';
+		header("Location: categories.php");
+	}else {
+		$_SESSION['failure'] = 'Please fill in all fields.';
+	}
+}
+?>
+
+<?php
+if(isset($_GET['id']) && $_GET['id'] != '') {
+
+	$id = mysqli_real_escape_string($con, strip_tags(trim($_GET['id'])));
+
+	if ($id) {
+		$sql = "UPDATE category SET archive=1 WHERE id='".$id."'";
+		mysqli_query($con, $sql);
+		$_SESSION['success'] = 'Category was archived successfully.';
+	} else {
+		$_SESSION['failure'] = 'An error occured, please try again.';
+	}
+	
+	
+}
+?>
+
+
+
+<!-- Page Content -->
+
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">Categories</h1>				
+			</div>
+			<!-- /.col-lg-12 -->
+		</div>
+		<!-- /.row -->
+		<!-- /.row -->
+
+		<!-- Modal -->
+		<div class="modal fade" id="addCat" tabindex="-1" role="dialog" aria-labelledby="addCatLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span> Close</button>
+						<h4 class="modal-title" id="addCatLabel">Add Category</h4>
+					</div>
+					<div class="modal-body">
+						<form role="form" method="post">
+							<div class="form-group">
+								<label>Category name</label>
+								<input name="name" class="form-control" placeholder="Enter name">
+							</div>
+							<div class="form-group">
+								<label>Category type</label>
+								<select name="type" class="form-control">
+									<option value="" selected="selected">Select type</option>
+									<option value="Hardware" >Hardware</option>
+									<option value="Software" >Software</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label>Category description</label>
+								<textarea name="description" class="form-control" rows="3"></textarea>
+							</div>
+							<button name="submit" type="submit" class="btn btn-primary">Submit Category</button>
+							<button type="reset" class="btn btn-default">Reset Category</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /.Modal -->
+
+		<div class="row">
+			<div class="col-lg-12">
+				<div>
+					<?php if(isset($_SESSION['failure']) && $_SESSION['failure'] != '') { ?>
+					<div class="alert alert-danger">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<?php echo $_SESSION['failure']; unset($_SESSION['failure']); ?>
+					</div>
+					<?php } ?>
+
+					<?php if(isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
+					<div class="alert alert-success">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
+					</div>
+					<?php } ?>
+				</div>
+			</div>
+			<!-- /.col-lg-12 -->
+		</div>
+		<!-- /.row -->
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						List of all categories
+					</div>
+					<!-- /.panel-heading -->
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="pull-right">
+									<button class="btn btn-success" data-toggle="modal" data-target="#addCat"> Add Category</button>
+								</div>
+							</div>
+						</div>
+						<div class="table-responsive">
+							<?php
+
+							$sql = "SELECT * FROM category WHERE archive = 0";
+							$res = mysqli_query($con, $sql);
+
+							if (mysqli_num_rows($res) > 0) {
+								echo '								
+								<table id="category" class="table data-table">
+									<thead>
+										<tr>
+											<th>Category ID</th>
+											<th>Name</th>
+											<th>Type</th>
+											<th>Description</th>
+											<th>Date</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>';
+										while ($row = mysqli_fetch_assoc($res)) {
+
+											echo '
+											<tr>
+												<td>'.$row['id'].'</td>
+												<td>'.$row['name'].'</td>
+												<td>'.$row['type'].'</td>
+												<td>'.$row['description'].'</td>
+												<td>'.date("M d, y",strtotime($row['dateCreated'])).'</td>
+												<td class="pull-right">
+													<a href="editcat.php?id='.$row['id'].'" class="btn btn-primary">Edit Category</a>  <a href="?id='.$row['id'].'" class="btn btn-warning">Archive Category</a>
+												</td>
+											</tr>';
+										}
+										echo '
+									</tbody>
+								</table>';
+							} else {
+								echo '<div class="alert alert-info">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+								<strong>No categories found.</strong>
+							</div>';
+						}
+						?>
+					</div>
+					<!-- /.table-responsive -->
+				</div>
+				<!-- /.panel-body -->
+			</div>
+			<!-- /.panel -->
+		</div>
+	</div>
+
+<!-- /#page-wrapper -->
+
+
+<script>
+	$(document).ready(function(){
+		$('#category').DataTable();
+	});
+</script>
+              </div>
+              <!-- /.tab-pane -->
+
+              <div class="tab-pane" id="settings">
+
+
+<?php
+if(isset($_SESSION['key']) == '' ) {
+	header("location:../login.php");
+}
+?>
+
+
+
+<!-- Page Content -->
+
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">Promotional Products</h1>
+			</div>
+			<!-- /.col-lg-12 -->
+		</div>
+		<!-- /.row -->
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						List of all promotional products
+					</div>
+					<!-- /.panel-heading -->
+					<div class="panel-body">
+					<div class="row">
+							<div class="col-lg-12">
+								<div class="pull-right">
+									<a href="products.php" class="btn btn-success"> Create Promotion</a>
+								</div>
+							</div>
+						</div>
+						<div class="table-responsive">
+							<?php
+							
+							$sql = "SELECT * FROM product WHERE promo_price > 0 AND archive = 0";
+							$res = mysqli_query($con, $sql);
+
+							if (mysqli_num_rows($res) > 0) {
+								echo '
+								<table id="promo" class="table">
+									<thead>
+										<tr>
+											<th>ID</th>
+											<th>User</th>
+											<th>Description</th>
+											<th>Promo Price</th>
+											<th>Promo Dates</th>
+											<th>Picture</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>';
+										while ($row = mysqli_fetch_assoc($res)) {
+
+											$details = $row['name'].'<br>'.$row['description'].'<br>'.$row['type'].'<br> R '.$row['price'];
+											$dates = date("M d, y",strtotime($row['promo_date1'])).' - '.date("M d, y",strtotime($row['promo_date2']));
+											echo '
+											<tr>
+												<td>'.$row['id'].'</td>
+												<td>'.$row['user'].'</td>
+												<td>'.$details.'</td>
+												<td> R '.$row['promo_price'].'</td>
+												<td>'.$dates.'</td>
+												<td><img class="img-responsive" src="../uploads/'.$row['pic_url'].'"></td>
+												<td><a href="editpromo.php?id='.$row['id'].'" class="btn btn-primary">Edit Promo</a></td>
 											</tr>';
 										}
 										echo '
@@ -261,6 +779,178 @@ include 'header.php';
 			<!-- /.panel -->
 		</div>
 	</div>
+
+<script>
+	$(document).ready(function(){
+		$('#promo').DataTable();
+	});
+</script>
+              </div>
+             
+                    <div class="tab-pane" id="devices">
+
+
+
+
+<?php
+if(isset($_SESSION['key']) == '' ) {
+	header("location:../login.php");
+}
+?>
+
+<?php
+if(isset($_GET['id']) && $_GET['id'] != '') {
+
+	$id = mysqli_real_escape_string($con, strip_tags(trim($_GET['id'])));
+	$sql = "UPDATE review SET seen=1 WHERE id='".$id."'";
+	$res = mysqli_query($con, $sql);
+}
+?>
+
+<?php
+if(isset($_GET['ar']) && $_GET['ar'] != '') {
+
+	$ar = mysqli_real_escape_string($con, strip_tags(trim($_GET['ar'])));
+
+	if ($ar) {
+		$sql = "UPDATE review SET archive=1 WHERE id='".$ar."'";
+		mysqli_query($con, $sql);
+		$_SESSION['success'] = 'Booking was archived successfully.';
+	} else {
+		$_SESSION['failure'] = 'An error occured, please try again.';
+	}	
+}
+?>
+
+
+
+
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">Reviews</h1>
+			</div>
+			<!-- /.col-lg-12 -->
+		</div>
+		<!-- /.row -->
+		<div class="row">
+			<div class="col-lg-12">
+				<div>
+					<?php if(isset($_SESSION['failure']) && $_SESSION['failure'] != '') { ?>
+					<div class="alert alert-danger">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<?php echo $_SESSION['failure']; unset($_SESSION['failure']); ?>
+					</div>
+					<?php } ?>
+
+					<?php if(isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
+					<div class="alert alert-success">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
+					</div>
+					<?php } ?>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						List of all product reviews
+					</div>
+					<!-- /.panel-heading -->
+					<div class="panel-body">
+						<div class="table-responsive">
+							<?php
+
+							$sql = "SELECT * FROM review WHERE archive = 0";
+							$res = mysqli_query($con, $sql);
+
+							if (mysqli_num_rows($res) > 0) {
+								echo '
+								<table id="review" class="table data-table">
+									<thead>
+										<tr>
+											<th>ID</th>
+											<th>Product</th>
+											<th>User ID</th>
+											<th>Name</th>
+											<th>Message</th>
+											<th>Rating</th>
+											<th>Date</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>';
+										while ($row = mysqli_fetch_assoc($res)) {
+
+											$prodD = '';
+											$button = '';
+
+											$sql2 = "SELECT * FROM product WHERE id='".$row['prod_id']."'";
+											$res2 = mysqli_query($con, $sql2);
+											if (mysqli_num_rows($res2) > 0) {
+												while ($row2 = mysqli_fetch_assoc($res2)) {
+													$prodD = 'Name: '.$row2['name'].'<br>Type: '.$row2['type'].'<br>Price: R '.$row2['price'].'<br>Description: '.$row2['description'];
+												}
+											}else {
+												$prodD = 'Product does not exist!';
+											}
+
+											if ($row['seen'] == 0) {
+												$button = '<a href="?id='.$row['id'].'" class="btn btn-primary">Mark as Seen</a>';
+											}
+
+											echo '
+											<tr>
+												<td>'.$row['id'].'</td>
+												<td>'.$prodD.'</td>
+												<td>'.$row['user'].'</td>
+												<td>'.$row['name'].'</td>
+												<td>'.$row['message'].'</td>
+												<td>'.$row['rate'].'</td>
+												<td>'.date("M d, y",strtotime($row['date'])).'</td>
+												<td class="pull-right">'.$button.'  <a href="?ar='.$row['id'].'" class="btn btn-warning">Archive</a></td>
+											</tr>';
+										}
+										echo '
+									</tbody>
+								</table>';
+							} else {
+								echo '<div class="alert alert-info">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+								<strong>No products found.</strong>
+							</div>';
+						}
+					?>
+				</div>
+				<!-- /.table-responsive -->
+			</div>
+			<!-- /.panel-body -->
+		</div>
+		<!-- /.panel -->
+	</div>
+</div>
+
+<!-- /#page-wrapper -->
+
+
+<script>
+	$(document).ready(function(){
+		$('#review').DataTable();
+	});
+</script>
+                <!-- Post --></div>
+                    <div class="active tab-pane" id="payments">
+                <!-- Post --></div>
+              <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+          </div>
+          <!-- /.nav-tabs-custom -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+    </section>
+        <!-- /.row -->
+
 </div>
 <!-- /.container-fluid -->
 </div>
@@ -280,7 +970,41 @@ function sum() {
 }
 </script>
 <script>
-	$(document).ready(function(){
-		$('#products').DataTable();
-	});
+    function modal(id) {
+        var data = {"id" : id};
+        jQuery.ajax({
+            url : '../includes/createquotemodal.php',
+            method : "post",
+            data : data,
+            success : function(data) {
+                jQuery('body').append(data);
+                jQuery('#responseModal').modal('toggle');
+            },
+            error : function() {
+                alert("Ooops! Something went wrong!");
+            }
+        });
+    }
+</script>
+<script>
+    function modal1(id) {
+        var data = {"id" : id};
+        jQuery.ajax({
+            url : '../includes/editquotemodal.php',
+            method : "post",
+            data : data,
+            success : function(data) {
+                jQuery('body').append(data);
+                jQuery('#responseModal').modal('toggle');
+            },
+            error : function() {
+                alert("Ooops! Something went wrong!");
+            }
+        });
+    }
+</script>
+<script>
+    $(document).ready(function(){
+        $('#bookings').DataTable();
+    });
 </script>
