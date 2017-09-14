@@ -5,6 +5,8 @@ session_start();
 
 $con = mysqli_connect("localhost","root","", "shop");
 
+
+
 function user($type)
 {
 	$menu = '

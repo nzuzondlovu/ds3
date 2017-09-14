@@ -32,34 +32,14 @@ function user($type)
 
 		<a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 	</li>
-	<li>
-		<a href="#"><i class="fa fa-book fa-fw"></i> Bookings<span class="fa arrow"></span></a>
-		<ul class="nav nav-second-level">
-			<li>
-				<a href="bookings.php">View Bookings</a>
-			</li>
-			<li>
-				<a href="quotations.php">View Quotations</a>
-			</li>
-		</ul>
+   <li class="active">
+		<a href="bookings.php"><i class="fa fa-book fa-fw"></i> <span> Bookings</span></a>
+
 		<!-- /.nav-second-level -->
 	</li>
-	<li>
-		<a href="#"><i class="fa fa-shopping-basket fa-fw"></i> Products<span class="fa arrow"></span></a>
-		<ul class="nav nav-second-level">
-			<li>
-				<a href="products.php">View Products</a>
-			</li>
-			<li>
-				<a href="categories.php">View Categories</a>
-			</li>
-			<li>
-				<a href="promotions.php">View Promotions</a>
-			</li>
-			<li>
-				<a href="reviews.php">Product Reviews</a>
-			</li>
-		</ul>
+   <li class="active">
+		<a href="products.php"><i class="fa fa-shopping-basket fa-fw"></i> Products<span></span></a>
+	
 		<!-- /.nav-second-level -->
 	</li>
 	<li>
@@ -151,7 +131,13 @@ function user($type)
 	</li>
 	<li>
 		<a href="update.php"><i class="fa fa-refresh fa-fw"></i> Update Details</a>
-	</li>';
+	</li>
+	
+	'
+
+
+
+	;
 
 	if ($type == 'technician') {
 
