@@ -189,7 +189,7 @@
 </div>
 </div>
 <!-- /.Modal -->
-
+<?php include 'includes/ip_locator.php'; ?>
 <!-- Latest jQuery form server -->
 <script src="assets/js/jquery1.min.js"></script>
 
