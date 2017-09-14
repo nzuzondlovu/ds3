@@ -12,19 +12,25 @@ if(isset($_SESSION['key']) == '' ) {
 <?php
 
 if(isset($_POST['submit'])) {
-
-	$name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
+ 
+	$brandname = mysqli_real_escape_string($con, strip_tags(trim($_POST["bname"])));
+	$genname = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
 	$type = mysqli_real_escape_string($con, strip_tags(trim($_POST["type"])));
 	$description = mysqli_real_escape_string($con, strip_tags(trim($_POST["description"])));
+	$supplier = mysqli_real_escape_string($con, strip_tags(trim($_POST["supplier"])));
+	$oprice = mysqli_real_escape_string($con, strip_tags(trim($_POST["oprice"])));
 	$price = mysqli_real_escape_string($con, strip_tags(trim($_POST["price"])));
+	$profit = mysqli_real_escape_string($con, strip_tags(trim($_POST["profit"])));
+	$qty= mysqli_real_escape_string($con, strip_tags(trim($_POST["qty"])));
+	$qtysold= mysqli_real_escape_string($con, strip_tags(trim($_POST["qtysold"])));
 	$target_dir = "../uploads/";
 	$url = basename( $_FILES["fileToUpload"]["name"]);
 	$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 	$user = $_SESSION['user_id'];
 	$date = date("Y-m-d H:i:s");
 
-	$sql = "INSERT INTO product(user, name, description, type, price, pic_url, date)
-	VALUES('".$user."', '".$name."', '".$description."', '".$type."', '".$price."', '".$url."', '".$date."')";
+	$sql = "INSERT INTO product(user, brand_name,generic_name,description,type,order_price,price,profit,supplierID,qty,qty_sold, pic_url, date)
+	VALUES('".$user."', '".$brandname."', '".$genname."', '".$description."', '".$type."', '".$oprice."', '".$price."','".$profit."','".$supplier."','".$qty."','".$qtysold."','".$url."', '".$date."')";
 
 	upload($url, $target_dir, $target_file, $sql, $con);
 
@@ -39,7 +45,7 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 	if ($id) {
 		$sql = "UPDATE product SET archive=1 WHERE id='".$id."'";
 		mysqli_query($con, $sql);
-		$_SESSION['success'] = 'Booking was archived successfully.';
+		$_SESSION['success'] = 'Product was archived successfully.';
 	} else {
 		$_SESSION['failure'] = 'An error occured, please try again.';
 	}	
@@ -92,8 +98,32 @@ include 'header.php';
 								</select>
 							</div>
 							<div class="form-group">
-								<label>Device price</label>
+								<label>Order price</label>
+								<input name="oprice" class="form-control" placeholder="Enter text">
+							</div>
+							<div class="form-group">
+								<label>Device sell price</label>
 								<input name="price" class="form-control" placeholder="Enter text">
+							</div>
+								<div class="form-group">
+								<label>Profit</label>
+								<input name="profit" class="form-control" placeholder="Enter text" readonly>>
+							</div>
+							<div class="form-group">
+								<label>Supplier Name</label>
+								<select name="supplier" class="form-control">
+									<option value="" selected="selected">Select type</option>
+									<?php
+									$sql = "SELECT * FROM suppliers ORDER BY name ASC";
+									$res = mysqli_query($con, $sql);
+
+									if(mysqli_num_rows($res) > 0) {
+										while($row = mysqli_fetch_assoc($res)) {
+											echo '<option value="'.$row['id'].'">'.$row['name'].'</option>';
+										}
+									}
+									?>
+								</select>
 							</div>
 							<div class="form-group">
 								<label>Upload picture</label>

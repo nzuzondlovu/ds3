@@ -40,11 +40,22 @@ $a = 0;
      $Addr2 = mysqli_real_escape_string($con, strip_tags(trim($_POST["shipping_address_2"])));
      $strAddr=$Addr1. " ," .$Addr2;
      $suburb = mysqli_real_escape_string($con, strip_tags(trim($_POST["suburb"])));
-   $area=mysqli_real_escape_string($con, strip_tags(trim($_POST["area"])));
+   $area='';
     $boxcode= mysqli_real_escape_string($con, strip_tags(trim($_POST["boxcode"])));
     $dateR = mysqli_real_escape_string($con, strip_tags(trim($_POST["dateR"])));
     $dateD = mysqli_real_escape_string($con, strip_tags(trim($_POST["dateD"])));
     
+    $sql = "SELECT * FROM area WHERE boxcode=$boxcode ";
+	$res = mysqli_query($con, $sql);
+    
+	if (mysqli_num_rows($res) > 0) {
+
+		while ($row = mysqli_fetch_assoc($res)) {
+
+			 $area= $row['cityName'];
+			
+		}
+	}
      if($userID != '' && $name != '' && $cell != '' && $strAddr != '' && $suburb != '' && $area != '' && $boxcode != '' && $dateR != ''&& $dateD != '') {
      
 	 $sql = "INSERT INTO custdelivery(custID,custname,custcell,strAddress,suburb,area,boxcode,dateofRequest,dateofDelivery)
@@ -55,24 +66,12 @@ $a = 0;
     }else {
         $_SESSION['failure'] = 'Please fill in all fields.';
     }
-   if(userID =='')
-   {
-	$_SESSION['failure'] = 'Please Login First.';
-}
+   
   
 }
-        
-    ?>
+?>
 
-    <script type="text/javascript">
-function valueChanged()
-{
-    if($('#ship-to-different-address-checkbox').is(":checked"))   
-        $("#shipping").show();
-    else
-        $("#shipping").hide();
-}
-</script>
+
 <div class="product-big-title-area">
     <div class="container">
         <div class="row">
@@ -335,7 +334,7 @@ function valueChanged()
                                             $res = mysqli_query($con, $sql);
                                             if(mysqli_num_rows($res) > 0) {
                                                 while($row = mysqli_fetch_assoc($res)) {
-                                                    echo '<option  value="'.$row['id'].'">'.$row['suburbName'].'</option>';
+                                                    echo '<option  value="'.$row['suburbName'].'">'.$row['suburbName'].'</option>';
                                                  
                                                 }
                                                 
