@@ -278,7 +278,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="../profile.php" class="btn btn-default btn-flat">Profile</a>
+                  <a href="update.php" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                   <a href="../logout.php" class="btn btn-default btn-flat">Sign out</a>

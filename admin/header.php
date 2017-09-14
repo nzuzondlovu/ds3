@@ -277,6 +277,7 @@
                 </p>
               </li>
               <!-- Menu Body -->
+              
               <li class="user-body">
                 <div class="row">
                   <div class="col-xs-4 text-center">
@@ -286,7 +287,7 @@
                     <a href="#"></a>
                   </div>
                   <div class="col-xs-4 text-center">
-                    <a href="#"></a>
+                    <a href="#"> </a>
                   </div>
                 </div>
                 <!-- /.row -->
@@ -294,7 +295,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="../profile.php" class="btn btn-default btn-flat">Profile</a>
+                  <a href="update.php" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                   <a href="../logout.php" class="btn btn-default btn-flat">Sign out</a>
