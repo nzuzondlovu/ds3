@@ -30,10 +30,10 @@ if(mysqli_num_rows($res) > 0) {
 		Name : '.$row['name'].'<br>
 		Email : '.$row['email'].'<br>
 		Website : <a href="'.$row['website'].'" target="blank">'.$row['website'].'</a><br>
-		Product : '.$row['product'].'
+		Notes : '.$row['notes'].'
 		';
 		$name = $row['name'];
-		$product = $row['product'];
+		$product = $row['notes'];
 		$email = $row['email'];
 	}
 }
@@ -136,3 +136,20 @@ include 'header.php';
 <?php
 include 'footer.php';
 ?>
+<script>
+	function modal(id) {
+		var data = {"id" : id};
+		jQuery.ajax({
+			url : '../includes/suppliermodal.php',
+			method : "post",
+			data : data,
+			success : function(data) {
+				jQuery('body').append(data);
+				jQuery('#supplierModal').modal('toggle');
+			},
+			error : function() {
+				alert("Ooops! Something went wrong!");
+			}
+		});
+	}
+</script>

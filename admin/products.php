@@ -23,14 +23,15 @@ if(isset($_POST['submit'])) {
 	$profit = mysqli_real_escape_string($con, strip_tags(trim($_POST["profit"])));
 	$qty= mysqli_real_escape_string($con, strip_tags(trim($_POST["qty"])));
 	$qtysold= mysqli_real_escape_string($con, strip_tags(trim($_POST["qtysold"])));
+	$barcode= mysqli_real_escape_string($con, strip_tags(trim($_POST["barcode"])));
 	$target_dir = "../uploads/";
 	$url = basename( $_FILES["fileToUpload"]["name"]);
 	$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 	$user = $_SESSION['user_id'];
 	$date = date("Y-m-d H:i:s");
 
-	$sql = "INSERT INTO product(user, brand_name,generic_name,description,type,order_price,price,profit,supplierID,qty,qty_sold, pic_url, date)
-	VALUES('".$user."', '".$brandname."', '".$genname."', '".$description."', '".$type."', '".$oprice."', '".$price."','".$profit."','".$supplier."','".$qty."','".$qtysold."','".$url."', '".$date."')";
+	$sql = "INSERT INTO product(user, brand_name,generic_name,description,type,order_price,price,profit,supplierID,qty,qty_sold, pic_url,barcode, date)
+	VALUES('".$user."', '".$brandname."', '".$genname."', '".$description."', '".$type."', '".$oprice."', '".$price."','".$profit."','".$supplier."','".$qty."','".$qtysold."','".$url."','".$barcode."', '".$date."')";
 
 	upload($url, $target_dir, $target_file, $sql, $con);
 
@@ -78,8 +79,12 @@ include 'header.php';
 					<div class="modal-body">
 						<form role="form" method="post" enctype="multipart/form-data">
 							<div class="form-group">
-								<label>Device name</label>
-								<input name="name" class="form-control" placeholder="Enter text">
+								<label>Device brand name</label>
+								<input name="bname" class="form-control" placeholder="Enter text e.g Samsun">
+							</div>
+							<div class="form-group">
+								<label>Device generic name</label>
+								<input name="name" class="form-control" placeholder="Enter text e.g J1">
 							</div>
 							<div class="form-group">
 								<label>Device type</label>
@@ -99,15 +104,15 @@ include 'header.php';
 							</div>
 							<div class="form-group">
 								<label>Order price</label>
-								<input name="oprice" class="form-control" placeholder="Enter text">
+								<input name="oprice" class="form-control" id="txt1"  onkeyup="sum();" placeholder="Enter text">
 							</div>
 							<div class="form-group">
 								<label>Device sell price</label>
-								<input name="price" class="form-control" placeholder="Enter text">
+								<input name="price" class="form-control" id="txt2" onkeyup="sum();" placeholder="Enter text">
 							</div>
-								<div class="form-group">
+							<div class="form-group">
 								<label>Profit</label>
-								<input name="profit" class="form-control" placeholder="Enter text" readonly>>
+								<input name="profit" class="form-control" id="txt3"  placeholder="Enter text" readonly>
 							</div>
 							<div class="form-group">
 								<label>Supplier Name</label>
@@ -126,8 +131,20 @@ include 'header.php';
 								</select>
 							</div>
 							<div class="form-group">
+								<label>Quantity</label>
+								<input name="qty" class="form-control" placeholder="Enter text" >
+							</div>
+							<div class="form-group">
+								<label>Quantity Sold</label>
+								<input name="qtysold" class="form-control" placeholder="Enter text" >
+							</div>
+							<div class="form-group">
 								<label>Upload picture</label>
 								<input type="file" name="fileToUpload">
+							</div>
+								<div class="form-group">
+								<label>Barcode</label>
+								<input name="barcode" class="form-control" placeholder="Enter text" readonly>
 							</div>
 							<div class="form-group">
 								<label>Device description</label>
@@ -184,12 +201,17 @@ include 'header.php';
 									<thead>
 										<tr>
 											<th>Product ID</th>
-											<th>User</th>
 											<th>Name</th>
 											<th>Description</th>
 											<th>type</th>
+											<th>Order Price</th>
 											<th>Price</th>
+											<th>Profit</th>
+											<th>Supplier ID</th>
+											<th>Quantity On Hand</th>
+											<th>Quantity Sold</th>
 											<th>Picture</th>
+											<th>Barcode</th>
 											<th>Date</th>
 											<th>Promo</th>
 										</tr>
@@ -206,12 +228,17 @@ include 'header.php';
 											echo '
 											<tr>
 												<td>'.$row['id'].'</td>
-												<td>'.$row['user'].'</td>
-												<td>'.$row['name'].'</td>
+												<td>'.$row['brand_name'].' , '.$row['generic_name'].'</td>
 												<td>'.$row['description'].'</td>
 												<td>'.$row['type'].'</td>
+												<td>'.$row['order_price'].'</td>
 												<td>'.$row['price'].'</td>
+												<td>'.$row['profit'].'</td>
+												<td>'.$row['supplierID'].'</td>
+												<td>'.$row['qty'].'</td>
+												<td>'.$row['qty_sold'].'</td>
 												<td><img src="../uploads/'.$row['pic_url'].'" class="img-responsive"></td>
+												<td>'.$row['barcode'].'</td>
 												<td>'.date("M d, y",strtotime($row['date'])).'</td>
 												<td>'.$button.'   <a href="?id='.$row['id'].'" class="btn btn-warning">Archive</a></td>
 											</tr>';
@@ -242,6 +269,16 @@ include 'header.php';
 <?php
 include 'footer.php';
 ?>
+<script >
+function sum() {
+      var txtFirstNumberValue = document.getElementById('txt1').value;
+      var txtSecondNumberValue = document.getElementById('txt2').value;
+      var result = parseInt(txtSecondNumberValue) - parseInt(txtFirstNumberValue);
+      if (!isNaN(result)) {
+         document.getElementById('txt3').value = result;
+      }
+}
+</script>
 <script>
 	$(document).ready(function(){
 		$('#products').DataTable();

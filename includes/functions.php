@@ -26,7 +26,10 @@ function user($type)
 {
 	
 	$menu = '
-	<li>
+	  <ul class="sidebar-menu" data-widget="tree">
+        <li class="header"></li>
+          <li class="active">
+
 		<a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 	</li>
 	<li>
@@ -75,7 +78,7 @@ function user($type)
 		<a href="#"><i class="fa fa-truck fa-fw"></i> Deliveries<span class="fa arrow"></span></a>
 		<ul class="nav nav-second-level">
 		<li>
-		<a href="viewD.php">View Deliveries</a>
+		  <a href="viewD.php">View Deliveries</a>
 		</li>
 		<li>
 		<a href="drivers.php">View Drivers</a>
@@ -156,7 +159,9 @@ function user($type)
 	if ($type == 'technician') {
 
 		$menu = '
-		<li>
+		  <ul class="sidebar-menu" data-widget="tree">
+        <li class="header"></li>
+          <li class="active">
 			<a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 		</li>	
 		<li>
@@ -199,7 +204,9 @@ function user($type)
 	} else if ($type == 'clerk') {
 
 		$menu = '
-		<li>
+		  <ul class="sidebar-menu" data-widget="tree">
+        <li class="header"></li>
+          <li class="active">
 			<a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 		</li>
 		<li>
@@ -251,11 +258,19 @@ function user($type)
 	else if ($type == 'driver') {
 
 		$menu = '
+<<<<<<< HEAD
 			<li>
 		<a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 	</li>
 		<li>
 		<a href="driverJobs.php"><i class="fa fa-edit fa-fw"></i>My Deliveries</a>
+=======
+		
+	  <ul class="sidebar-menu" data-widget="tree">
+        <li class="header"></li>
+          <li class="active">
+		<a href="viewD.php"><i class="fa fa-edit fa-fw"></i>Deliveries</a>
+>>>>>>> 43b4aadf4751352f7981c5f41c611f2690d011db
 		</li>
 		<li>
 		<a href="drivers.php"><i class="fa fa-edit fa-fw"></i>Drivers</a>

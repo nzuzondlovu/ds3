@@ -205,6 +205,7 @@
 
 <!-- Main Script -->
 <script src="assets/js/main.js"></script>
+<script src="assets/js/functions.js"></script>
 
 <!-- Slider -->
 <script type="text/javascript" src="assets/js/bxslider.min.js"></script>
