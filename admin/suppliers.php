@@ -183,7 +183,7 @@ include 'header.php';
 												<td>'.$row['address'].'</td>
 												<td>'.$row['notes'].'</td>
 												<td class="pull-right">
-													<button onclick="modal('.$row['id'].')" class="btn btn-warning">Make Order</button>   <a href="editsupplier.php?id='.$row['id'].'" class="btn btn-primary">Update Supplier</a>
+													<a href="createOrder.php?id='.$row['id'].'" class="btn btn-primary">Make Order</a>   <a href="editsupplier.php?id='.$row['id'].'" class="btn btn-primary">Update Supplier</a>
 												</td>
 											</tr>';
 										}
