@@ -1,12 +1,9 @@
 <?php
 session_start();
 include '../includes/functions.php';
-$a = $_POST['invoice'];
-$b = $_POST['product'];
+$a = $_POST['bname'];
+$b = $_POST['genname'];
 $c = $_POST['qty'];
-$w = $_POST['pt'];
-$date = $_POST['date'];
-$discount = $_POST['discount'];
 $result = $db->prepare("SELECT * FROM products WHERE product_id= :userid");
 $result->bindParam(':userid', $b);
 $result->execute();

@@ -256,3 +256,13 @@ CREATE TABLE `query` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `user_id` INT(11) 
 create TABLE Device ( `id` int(11) NOT NULL AUTO_INCREMENT, dName varchar(50) NOT NULL, PRIMARY KEY (`id`) )
 
 CREATE TABLE `views` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `page` VARCHAR(30) NOT NULL , `ip` VARCHAR(20) NOT NULL , `countryCode` VARCHAR(20) NOT NULL , `country` VARCHAR(25) NOT NULL , `regionName` VARCHAR(25) NOT NULL , `city` VARCHAR(25) NOT NULL , `zip` INT(11) NOT NULL , `isp` VARCHAR(25) NOT NULL , `org` VARCHAR(25) NOT NULL , `as1` VARCHAR(25) NOT NULL , `lat` VARCHAR(30) NOT NULL , `lon` VARCHAR(30) NOT NULL , `timezone` VARCHAR(30) NOT NULL , `date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS `supplierproducts` (
+  `productID` int(11) NOT NULL AUTO_INCREMENT,
+  `supplierID` int(11) NOT NULL,
+  `supplierName` varchar(50) NOT NULL,
+  `productName` varchar(100) NOT NULL,
+  `estimatedPrice` decimal(7,2) NOT NULL,
+  PRIMARY KEY (`productID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;

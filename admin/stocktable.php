@@ -93,8 +93,8 @@ include 'header.php';
 												echo '
 												<tr>
 													<td>'.$row['id'].'</td>
-													<td>'.$row['name'].'</td>
-													<td>'.count($row['name']).'</td>													
+													<td>'.$row['brand_name'].' '.$row['generic_name'].'</td>
+													<td>'.count($row['generic_name']).'</td>													
 													<td>'.$row['description'].'</td>
 													<td>'.date("M d, y",strtotime($row['date'])).'</td>
 												</tr>';
@@ -118,6 +118,7 @@ include 'header.php';
 												*/
 											}
 											echo '
+											
 										</tbody>
 									</table>';
 								} else {

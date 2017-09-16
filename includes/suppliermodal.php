@@ -61,7 +61,6 @@ $res = mysqli_query($con, $sql);
 				<label>Order Quantity</label>
 				<input type="number" name="quantity" class="form-control" placeholder="Enter quantity">
 				</div>	
-              
 				 <button name="submit" type="submit" class="btn btn-info"><i class="fa fa-plus fa-fw"></i>Add</button>                                                                  
               <button type="reset" class="btn btn-default">Reset</button>
             </form>

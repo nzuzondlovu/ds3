@@ -33,7 +33,7 @@ if(isset($_POST['submit'])) {
 	$website = mysqli_real_escape_string($con, strip_tags(trim($_POST["website"])));
 	$notes = mysqli_real_escape_string($con, strip_tags(trim($_POST["product"])));
 
-	if ($name != '' && $email != '' && $number != '' &&  $address != '' && $website != '' && $notes != '') {
+	if ($name != '' && $email != '' && $number != '' &&  $address != '' && $website != '' ) {
 
 		$sql = "INSERT INTO suppliers(name, notes, contactNumber, email, website, address)
 		VALUES('".$name."', '".$notes."', '".$number."', '".$email."', '".$website."', '".$address."')";
@@ -91,13 +91,11 @@ include 'header.php';
 								<label>Website</label>
 								<input type="text" name="website" class="form-control" value="http://">
 							</div>
-							<div class="form-group">
-								<label>Supplied Product</label>
-								<input type="text" name="product" class="form-control" placeholder="Enter product">
-							</div>
-							<button name="submit" type="submit" class="btn btn-primary">Submit Supplier</button>
+							
+							<button onclick="modal('.$row['deliveryID'].')" class="btn btn-warning">Allocate Driver</button><button name="submit" type="submit" class="btn btn-primary">Submit Supplier</button>
 							<button type="reset" class="btn btn-default">Reset Supplier</button>
 						</form>
+						
 					</div>
 				</div>
 			</div>
