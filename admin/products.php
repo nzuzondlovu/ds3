@@ -1,4 +1,15 @@
 
+
+<?php
+ob_start();
+include '../includes/functions.php';
+?>
+
+<?php
+if(isset($_SESSION['key']) == '' ) {
+	header("location:../login.php");
+}
+?>
 <script>
 function sum() {
             var txtFirstNumberValue = document.getElementById('txt1').value;
@@ -32,53 +43,6 @@ function sum() {
         }
 </script>
 
-<?php
-ob_start();
-include '../includes/functions.php';
-?>
-
-<?php
-if(isset($_SESSION['key']) == '' ) {
-	header("location:../login.php");
-}
-?>
-
-<?php
-
-if(isset($_POST['submit'])) {
-
-	$name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
-	$type = mysqli_real_escape_string($con, strip_tags(trim($_POST["type"])));
-	$description = mysqli_real_escape_string($con, strip_tags(trim($_POST["description"])));
-	$price = mysqli_real_escape_string($con, strip_tags(trim($_POST["price"])));
-	$target_dir = "../uploads/";
-	$url = basename( $_FILES["fileToUpload"]["name"]);
-	$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-	$user = $_SESSION['user_id'];
-	$date = date("Y-m-d H:i:s");
-
-	$sql = "INSERT INTO product(user, name, description, type, price, pic_url, date)
-	VALUES('".$user."', '".$name."', '".$description."', '".$type."', '".$price."', '".$url."', '".$date."')";
-
-	upload($url, $target_dir, $target_file, $sql, $con);
-
-}
-?>
-
-<?php
-if(isset($_GET['id']) && $_GET['id'] != '') {
-
-	$id = mysqli_real_escape_string($con, strip_tags(trim($_GET['id'])));
-
-	if ($id) {
-		$sql = "UPDATE product SET archive=1 WHERE id='".$id."'";
-		mysqli_query($con, $sql);
-		$_SESSION['success'] = 'Booking was archived successfully.';
-	} else {
-		$_SESSION['failure'] = 'An error occured, please try again.';
-	}	
-}
-?>
 
 <?php
 include 'header.php';
@@ -130,6 +94,60 @@ include 'header.php';
 
 
 
+<?php
+
+if(isset($_POST['btnSubmit'])) {
+
+	$name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
+	$type = mysqli_real_escape_string($con, strip_tags(trim($_POST["type"])));
+	$description = mysqli_real_escape_string($con, strip_tags(trim($_POST["description"])));
+	$price = mysqli_real_escape_string($con, strip_tags(trim($_POST["price"])));
+	$brandname = mysqli_real_escape_string($con, strip_tags(trim($_POST["brandname"])));
+	$supplier = mysqli_real_escape_string($con, strip_tags(trim($_POST["supplier"])));
+	$oPrice = mysqli_real_escape_string($con, strip_tags(trim($_POST["oPrice"])));
+	$profit = mysqli_real_escape_string($con, strip_tags(trim($_POST["profit"])));
+	
+	$qty = mysqli_real_escape_string($con, strip_tags(trim($_POST["qty"])));
+
+
+
+
+
+
+	$target_dir = "../uploads/";
+	$url = basename( $_FILES["fileToUpload"]["name"]);
+	$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+	$user = $_SESSION['user_id'];
+	$date = date("Y-m-d H:i:s");
+
+	$sql = "INSERT INTO product(user, name, description, type, price, pic_url, date,brandname,supplier,oPrice,profit,onhand_qty,qty,qty_sold)
+	VALUES
+	('".$user."', '".$name."', '".$description."', '".$type."', '".$price."', '".$url."', '".$date."', '".$brandname."', 
+	'".$supplier."', '".$oPrice."', '".$profit."','".$qty."')";
+
+	
+
+	upload($url, $target_dir, $target_file, $sql, $con);
+
+
+
+}
+?>
+
+<?php
+if(isset($_GET['id']) && $_GET['id'] != '') {
+
+	$id = mysqli_real_escape_string($con, strip_tags(trim($_GET['id'])));
+
+	if ($id) {
+		$sql = "UPDATE product SET archive=1 WHERE id='".$id."'";
+		mysqli_query($con, $sql);
+		$_SESSION['success'] = 'Product was archived successfully.';
+	} else {
+		$_SESSION['failure'] = 'An error occured, please try again.';
+	}	
+}
+?>
 
 			<?php 
 				include('connect.php');
@@ -190,7 +208,7 @@ include 'header.php';
 							</div>
 							<div class="form-group">
 								<label>Original Price</label>
-								<input class="form-control"  type="text" id="txt2"  name="o_price" onkeyup="sum();" Required placeholder="R0.00">
+								<input class="form-control"  type="text" id="txt2"  name="oPrice" onkeyup="sum();" Required placeholder="R0.00">
 							</div>
 					
 						
@@ -206,7 +224,7 @@ include 'header.php';
 
 								<div class="form-group">
 								<label>Quantity</label>
-								<input type="number" name="quantity" class="form-control" placeholder="Enter text">
+								<input type="number" name="qty" class="form-control" placeholder="Enter text">
 							</div>
 
 							<div class="form-group">
@@ -228,7 +246,7 @@ include 'header.php';
 
 								<div class="form-group">
 								<label>Select Supplier</label>
-								<select name="type" class="form-control">
+								<select name="supplier" class="form-control">
 									<option value="" selected="selected">Select Supplier</option>
 									<?php
 									$sql = "SELECT * FROM suppliers ORDER BY name ASC";
@@ -242,10 +260,7 @@ include 'header.php';
 									?>
 								</select>
 							</div>
-							<div class="form-group">
-								<label>Device price</label>
-								<input name="price" class="form-control" placeholder="Enter text">
-							</div>
+						
 							<div class="form-group">
 								<label>Upload picture</label>
 								<input type="file" name="fileToUpload">
@@ -254,7 +269,7 @@ include 'header.php';
 								<label>Device description</label>
 								<textarea name="description" class="form-control" rows="3"></textarea>
 							</div>
-							<button name="submit" type="submit" class="btn btn-primary">Save </button>
+							<button name="btnSubmit" type="submit" class="btn btn-primary">Save </button>
 							<button type="reset" class="btn btn-default">Reset</button>
 						</form>
 					</div>
@@ -327,7 +342,7 @@ include 'header.php';
 											
 											<th>type</th>
 											<th>Price</th>
-											<th>Picture</th>
+										
 											<th>Date</th>
 											<th>Promo
 											  	
@@ -336,13 +351,13 @@ include 'header.php';
 									<tbody>';
 										while ($row = mysqli_fetch_assoc($res)) {
 
-											$button = '<span href="editpromo.php?id='.$row['id'].'" class="label label-primary">Make Promo</span>   <a href="editproduct.php?id='.$row['id'].'" class="label label-info">Edit</a>';
+											$button = '<a onclick="promoModal('.$row['id'].')" class="label label-primary">Make Promo</a>   <a onclick="productModal('.$row['id'].')"  class="label label-info">Edit</a>';
 											
 											if ($row['promo_price'] > 0) {
 
 
 
-												$button = '<span href="editpromo.php?id='.$row['id'].'" class="label label-info">Edit Promo</span>   <a href="editproduct.php?id='.$row['id'].'" class="label label-primary">Edit</a>';
+												$button = '<a onclick="promoModal('.$row['id'].')"  class="label label-info">Edit Promo</>   <a onclick="productModal('.$row['id'].')"  class="label label-primary">Edit</a>';
 											}
 
 											echo '
@@ -352,7 +367,7 @@ include 'header.php';
 											
 												<td>'.$row['type'].'</td>
 												<td>'.$row['price'].'</td>
-												<td><img src="../uploads/'.$row['pic_url'].'" class="img-responsive"></td>
+										
 												<td>'.date("M d, y",strtotime($row['date'])).'</td>
 												<td>'.$button.'   <a href="?id='.$row['id'].'" class="label label-warning">Archive</a></td>
 											</tr>';
@@ -922,4 +937,40 @@ include 'footer.php';
     $(document).ready(function(){
         $('#bookings').DataTable();
     });
+</script>
+
+<script>
+    function promoModal(id) {
+        var data = {"id" : id};
+        jQuery.ajax({
+            url : '../includes/editpromomodal.php',
+            method : "post",
+            data : data,
+            success : function(data) {
+                jQuery('body').append(data);
+                jQuery('#responseModal').modal('toggle');
+            },
+            error : function() {
+                alert("Ooops! Something went wrong!");
+            }
+        });
+    }
+</script>
+
+<script>
+    function productModal(id) {
+        var data = {"id" : id};
+        jQuery.ajax({
+            url : '../includes/editproductmodal.php',
+            method : "post",
+            data : data,
+            success : function(data) {
+                jQuery('body').append(data);
+                jQuery('#responseModal').modal('toggle');
+            },
+            error : function() {
+                alert("Ooops! Something went wrong!");
+            }
+        });
+    }
 </script>
