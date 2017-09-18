@@ -195,7 +195,7 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 							</div>
 
 								<div class="form-group">
-								<label>Device name</label>
+								<label>Generic Name</label>
 								<input name="name" class="form-control" placeholder="Enter text">
 
 							</div>
@@ -596,7 +596,8 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 												<td>'.$row['description'].'</td>
 												<td>'.date("M d, y",strtotime($row['dateCreated'])).'</td>
 												<td class="pull-right">
-													<a href="editcat.php?id='.$row['id'].'" class="btn btn-primary">Edit Category</a>  <a href="?id='.$row['id'].'" class="btn btn-warning">Archive Category</a>
+													<a href="editcat.php?id='.$row['id'].'" class="label label-primary">Edit </a>  
+													<a href="?id='.$row['id'].'" class="label label-warning">Archive </a>
 												</td>
 											</tr>';
 										}

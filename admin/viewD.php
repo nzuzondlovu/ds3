@@ -94,10 +94,10 @@ include 'header.php';
 
 							if (mysqli_num_rows($res) > 0) {
 								echo '
-								<table id="bookings" class="table data-table">
+								<table id="bookings" class="table data-table ">
 									<thead>
 										<tr>
-											<th>Customer ID</th>
+									
 											<th>Customer Name</th>
 											<th>Cell Number</th>
 											<th>Street Address</th>
@@ -114,7 +114,7 @@ include 'header.php';
 
 											echo '
 											<tr>
-												<td>'.$row['custID'].'</td>
+											
 												<td>'.$row['custname'].'</td>
 												<td>'.$row['custcell'].'</td>
 												<td>'.$row['strAddress'].'</td>
@@ -124,7 +124,8 @@ include 'header.php';
 												<td>'.date("M d, y",strtotime($row['dateofRequest'])).'</td>
 												<td>'.date("M d, y",strtotime($row['dateofDelivery'])).'</td>
 												<td class=" pull-right">
-													<button onclick="modal('.$row['deliveryID'].')" class="btn btn-warning">Allocate Driver</button>  <a href="DeleteDelivery.php?id='.$row['deliveryID'].'" class="btn btn-danger">Delete Request</a>
+													<button onclick="modal('.$row['deliveryID'].')" class="label label-warning">Allocate</button> 
+													 <a href="DeleteDelivery.php?id='.$row['deliveryID'].'" class="label label-danger">Delete</a>
 												</td>
 											</tr>';
 										}
