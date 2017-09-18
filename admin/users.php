@@ -44,6 +44,11 @@ if(isset($_POST['user'])) {
 
 	$id = mysqli_real_escape_string($con, strip_tags(trim($_POST["id"])));
 	$role = mysqli_real_escape_string($con, strip_tags(trim($_POST["role"])));
+	$name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
+	$surname = mysqli_real_escape_string($con, strip_tags(trim($_POST["surname"])));
+	$cell = mysqli_real_escape_string($con, strip_tags(trim($_POST["cell"])));
+	$idnumber = mysqli_real_escape_string($con, strip_tags(trim($_POST["idnumber"])));
+	$email= mysqli_real_escape_string($con, strip_tags(trim($_POST["email"])));
 	$speciality = mysqli_real_escape_string($con, strip_tags(trim($_POST["speciality"])));
 	
 	if($role != '') {
@@ -57,6 +62,13 @@ if(isset($_POST['user'])) {
 			VALUES( '".$name."', '".$surname."', '".$email."', '".$speciality."')";
 			mysqli_query($con, $sql);
 			$_SESSION['success'] = 'Your new technician was added successfully.';
+		}
+		else if ($role == 'driver')
+		{
+		 $sql = "INSERT INTO drivers(name,surname,cell,idnumber,email)
+			VALUES( '".$name."', '".$surname."','".$cell."','".$idnumber."', '".$email."')";
+			mysqli_query($con, $sql);
+			$_SESSION['success'] = 'Your new driver was added successfully.';	
 		}
 
 		$_SESSION['success'] = 'Your user role was updated successfully.';

@@ -5,11 +5,7 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
   $id = mysqli_real_escape_string($con, strip_tags(trim($_POST['id'])));
 
   $cust = '';
-  $deliveryid = '';
-  $name = '';
-  $cell = '';
-  $dateD = '';
-  $location = '';
+ 
 
   $sql = "SELECT * FROM custdelivery WHERE deliveryID='".$id."'";
   $res = mysqli_query($con, $sql);
@@ -27,33 +23,9 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
     Boxcode : '.$row['boxcode'].'<br>
     Date of Request : '.$row['dateofRequest'].'<br>
     Date of Delivery : '.$row['dateofDelivery'];
-
-    $deliveryid = $row['deliveryID'];
-    $name = $row['custname'];
-    $cell = $row['custcell'];
-    $dateD = $row['dateofDelivery'];
-    $location = $row['strAddress'].', '.$row['suburb'].', '.$row['area'].', '.$row['boxcode'];
   }
  
 }
-?>
-<?php
-if(isset($_POST['submit'])) {
-
-	$driver = mysqli_real_escape_string($con, strip_tags(trim($_POST["driver"])));
-	if($driver != '' ) {
-
-		$sql="INSERT INTO driverdelivery(driverID,deliveryID,dateofDelivery,custname,custcell,location)
-		VALUES('".$driver."','".$deliveryid."','".$dateD."', '".$name."','".$cell."','".$location."')";
-		mysqli_query($con, $sql);
-		$_SESSION['success'] = 'Successfully updated details.';
-		header("Location: drivers.php");
-
-	} else {
-		$_SESSION['failure'] = 'Please fill in all fields';
-	}
-}
-
 ?>
 
 <?php ob_start(); ?>
@@ -90,24 +62,22 @@ if(isset($_POST['submit'])) {
                   ?>
                 </select>
               </div>
-              <input type="text" name="deliveryid" value="<?php                                                          
-                 $res = mysqli_query($con, "SELECT * FROM customerDelivery WHERE deliveryID='".$_SESSION['deliveryID']."' ");
-				 $row = mysqli_fetch_assoc($res);
-				 echo $row['deliveryID'];
-				 ?> " hidden="hidden" />
-              <input type="text" name="name" value="<?= $name; ?>" hidden="hidden" />
-              <input type="text" name="cell" value="<?= $cell; ?>" hidden="hidden" />
-              <input type="text" name="dateD" value="<?php                                                          
-                 $res = mysqli_query($con, "SELECT * FROM customerDelivery WHERE deliveryID='".$_SESSION['deliveryID']."' ");
-				 $row = mysqli_fetch_assoc($res);
-				 echo $row['dateofDelivery'];
-				 ?> " hidden="hidden" />
-              <input type="text" name="location" value="<?= $location; ?>" hidden="hidden" />
-              <input name="dateD" class="form-control" value="<?php                                                          
-                 $res = mysqli_query($con, "SELECT * FROM customerDelivery WHERE deliveryID='".$_SESSION['deliveryID']."' ");
-				 $row = mysqli_fetch_assoc($res);
-				 echo $row['dateofDelivery'];
-				 ?> " style="display: none" >
+    			<input type="text" name="del" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row= mysqli_fetch_assoc($res);echo $row['deliveryID'];?> " style="display: none" />
+            		
+              <input type="text" name="name" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['custname'];?>" style="display: none" />
+              
+              <input type="text" name="cell" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['custcell']; ?>"  style="display: none"/>
+              
+              <input type="text" name="dateD" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['dateofDelivery'];?> " style="display: none" />
+              
+              <input type="text" name="strA" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['strAddress']; ?>"  style="display: none"/>
+              
+              <input type="text" name="suburb" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['suburb']; ?>"  style="display: none"/>
+              
+              <input type="text" name="area" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['area']; ?>"  style="display: none"/>
+              
+              <input type="text" name="boxcode" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['boxcode']; ?>"  style="display: none"/>
+              
 				 <button name="submit" type="submit" class="btn btn-primary">Submit Allocation</button>                                                                  
               <button type="reset" class="btn btn-default">Reset</button>
             </form>

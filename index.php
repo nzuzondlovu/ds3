@@ -113,7 +113,7 @@ include 'header.php';
                                     </div>
                                 </div>
 
-                                <h2>'.$row['name'].'</h2>
+                                <h2>'.$row['brand_name'].' '.$row['generic_name'].'</h2>
 
                                 <div class="product-carousel-price">
                                     '.$promo.'
@@ -186,7 +186,7 @@ include 'header.php';
                             echo '
                             <div class="single-wid-product">
                                 <a href="single-product.html"><img src="img/product-thumb-1.jpg" alt="" class="product-thumb"></a>
-                                <h2><a href="single-product.html">'.$row['name'].'</a></h2>
+                                <h2><a href="single-product.html">'.$row['brand_name'].' '.$row['generic_name'].'</a></h2>
                                 <div class="product-wid-rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -235,7 +235,7 @@ include 'header.php';
                             echo '
                             <div class="single-wid-product">
                                 <a href="single-product.html"><img src="img/product-thumb-2.jpg" alt="" class="product-thumb"></a>
-                                <h2><a href="single-product.html">'.$row['name'].'</a></h2>
+                                <h2><a href="single-product.html">'.$row['brand_name'].' '.$row['generic_name'].'</a></h2>
                                 <div class="product-wid-rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -283,7 +283,7 @@ include 'header.php';
                             echo '
                             <div class="single-wid-product">
                                 <a href="single-product.html"><img src="img/product-thumb-3.jpg" alt="" class="product-thumb"></a>
-                                <h2><a href="single-product.html">'.$row['name'].'</a></h2>
+                                <h2><a href="single-product.html">'.$row['brand_name'].' '.$row['generic_name'].'</a></h2>
                                 <div class="product-wid-rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>

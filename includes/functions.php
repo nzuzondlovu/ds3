@@ -63,6 +63,9 @@ function user($type)
 		<li>
 		<a href="drivers.php">View Drivers</a>
 		</li>
+		<li>
+		<a href="addDriver.php">Add Driver</a>
+		</li>
 		</ul>
 		<!-- /.nav-second-level -->
 	</li>	
@@ -241,11 +244,19 @@ function user($type)
 	else if ($type == 'driver') {
 
 		$menu = '
+<<<<<<< HEAD
+			<li>
+		<a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+	</li>
+		<li>
+		<a href="driverJobs.php"><i class="fa fa-edit fa-fw"></i>My Deliveries</a>
+=======
 		
 	  <ul class="sidebar-menu" data-widget="tree">
         <li class="header"></li>
           <li class="active">
 		<a href="viewD.php"><i class="fa fa-edit fa-fw"></i>Deliveries</a>
+>>>>>>> 43b4aadf4751352f7981c5f41c611f2690d011db
 		</li>
 		<li>
 		<a href="drivers.php"><i class="fa fa-edit fa-fw"></i>Drivers</a>

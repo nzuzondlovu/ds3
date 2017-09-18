@@ -47,7 +47,8 @@ if(isset($_POST['submit'])) {
 <?php
 
 $promo = '';
-$nam = '';
+$gennam = '';
+$brandnam = '';
 $typ = '';
 $pri = '';
 $des = '';
@@ -60,13 +61,14 @@ if(mysqli_num_rows($res) > 0) {
 		$promo = '
 		ID : '.$row['id'].'<br>
 		User : '.$row['user'].'<br>
-		Name : '.$row['name'].'<br>
+		Name : '.$row['brand_name'].','.$row['generic_name'].'<br>
 		Type : '.$row['type'].'<br>
 		Price : R '.$row['price'].'<br>
 		Date : '.date("M d, y",strtotime($row['date'])).'<br>
 		Description : '.$row['description'].'<br>
 		<img class="img-responsive" src="../uploads/'.$row['pic_url'].'">';
-		$nam = $row['name'];
+		$gennam = $row['generic_name'];
+		$brandnam = $row['brand_name'];
 		$typ = $row['type'];
 		$pri = $row['price'];
 		$des = $row['description'];
@@ -127,8 +129,12 @@ include 'header.php';
 							<div class="col-md-6">
 								<form role="form" method="post">
 									<div class="form-group">
-										<label>Name</label>
-										<input type="text" name="name" class="form-control" value="<?php echo $nam; ?>">
+										<label>Brand Name</label>
+										<input type="text" name="bname" class="form-control" value="<?php echo $brandnam; ?>">
+									</div>
+										<div class="form-group">
+										<label>Generic Name</label>
+										<input type="text" name="genname" class="form-control" value="<?php echo $gennam; ?>">
 									</div>
 									<div class="form-group">
 										<label>Device type</label>

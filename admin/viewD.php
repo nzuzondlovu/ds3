@@ -29,16 +29,21 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 if(isset($_POST['submit'])) {
 
 	$driver = mysqli_real_escape_string($con, strip_tags(trim($_POST["driver"])));
-	$custid = mysqli_real_escape_string($con, strip_tags(trim($_POST["custid"])));
+	$del = mysqli_real_escape_string($con, strip_tags(trim($_POST["del"])));
 	$name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
 	$cell = mysqli_real_escape_string($con, strip_tags(trim($_POST["cell"])));
 	$dateD = mysqli_real_escape_string($con, strip_tags(trim($_POST["dateD"])));
-	$location = mysqli_real_escape_string($con, strip_tags(trim($_POST["location"])));
+	$strAddr = mysqli_real_escape_string($con, strip_tags(trim($_POST["strA"])));
+    $suburb= mysqli_real_escape_string($con, strip_tags(trim($_POST["suburb"])));
+    $area = mysqli_real_escape_string($con, strip_tags(trim($_POST["area"])));
+    $boxcode= mysqli_real_escape_string($con, strip_tags(trim($_POST["boxcode"])));
+	
+	$location=$strAddr." ,".$suburb." ,".$area.", ".$boxcode;
 
 	if($driver != '' ) {
 
-		echo $sql="INSERT INTO driverdelivery(driverID,id,custname,custcell,dateofDelivery,location)
-		VALUES('".$driver."','".$custid."', '".$name."','".$cell."','".$dateD."','".$location."')";
+		echo $sql="INSERT INTO driverdelivery(driverID,deliveryID,dateofDelivery,custname,custcell,location)
+		VALUES('".$driver."','".$del."','".$dateD."', '".$name."','".$cell."','".$location."')";
 		mysqli_query($con, $sql);
 		$_SESSION['success'] = 'Successfully updated details.';
 		header("Location: drivers.php");

@@ -52,7 +52,7 @@ include 'header.php';
                             <div class="product-upper">
                                 <img src="img/product-2.jpg" alt="">
                             </div>
-                            <h2><a href="product.php?id='.$row['id'].'">'.$row['name'].'</a></h2>
+                            <h2><a href="product.php?id='.$row['id'].'">'.$row['brand_name'].' '.$row['generic_name'].'</a></h2>
                             <div class="product-carousel-price">
                                 '.$promo.'
                             </div>  

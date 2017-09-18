@@ -29,6 +29,7 @@ $a = 0;
     $cell = $_SESSION['cell'];
 }
 ?>
+
 <?php
  if (isset($_POST['submit']))
  {
@@ -39,11 +40,22 @@ $a = 0;
      $Addr2 = mysqli_real_escape_string($con, strip_tags(trim($_POST["shipping_address_2"])));
      $strAddr=$Addr1. " ," .$Addr2;
      $suburb = mysqli_real_escape_string($con, strip_tags(trim($_POST["suburb"])));
-   $area=mysqli_real_escape_string($con, strip_tags(trim($_POST["area"])));
+   $area='';
     $boxcode= mysqli_real_escape_string($con, strip_tags(trim($_POST["boxcode"])));
     $dateR = mysqli_real_escape_string($con, strip_tags(trim($_POST["dateR"])));
     $dateD = mysqli_real_escape_string($con, strip_tags(trim($_POST["dateD"])));
     
+    $sql = "SELECT * FROM area WHERE boxcode=$boxcode ";
+	$res = mysqli_query($con, $sql);
+    
+	if (mysqli_num_rows($res) > 0) {
+
+		while ($row = mysqli_fetch_assoc($res)) {
+
+			 $area= $row['cityName'];
+			
+		}
+	}
      if($userID != '' && $name != '' && $cell != '' && $strAddr != '' && $suburb != '' && $area != '' && $boxcode != '' && $dateR != ''&& $dateD != '') {
      
 	 $sql = "INSERT INTO custdelivery(custID,custname,custcell,strAddress,suburb,area,boxcode,dateofRequest,dateofDelivery)
@@ -57,18 +69,9 @@ $a = 0;
    
   
 }
-        
-    ?>
+?>
 
-    <script type="text/javascript">
-function valueChanged()
-{
-    if($('#ship-to-different-address-checkbox').is(":checked"))   
-        $("#shipping").show();
-    else
-        $("#shipping").hide();
-}
-</script>
+
 <div class="product-big-title-area">
     <div class="container">
         <div class="row">
@@ -109,7 +112,7 @@ function valueChanged()
                             echo '
                             <div class="thubmnail-recent">
                                 <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
-                                <h2><a href="product.php?id='.$row['id'].'">'.$row['name'].'</a></h2>
+                                <h2><a href="product.php?id='.$row['id'].'">'.$row['brand_name'].' '.$row['generic_name'].'</a></h2>
                                 <div class="product-sidebar-price">
                                     '.$promo.'
                                 </div>                             
@@ -134,7 +137,7 @@ function valueChanged()
                         if (mysqli_num_rows($res) > 0) {
                             while ($row = mysqli_fetch_assoc($res)) {
                                 echo '
-                                <li><a href="product.php?id='.$row['id'].'">'.$row['name'].'</a></li>';
+                                <li><a href="product.php?id='.$row['id'].'">'.$row['brand_name'].' '.$row['generic_name'].'</a></li>';
                             }
                         } else {
                             echo '
@@ -331,7 +334,7 @@ function valueChanged()
                                             $res = mysqli_query($con, $sql);
                                             if(mysqli_num_rows($res) > 0) {
                                                 while($row = mysqli_fetch_assoc($res)) {
-                                                    echo '<option  value="'.$row['id'].'">'.$row['suburbName'].'</option>';
+                                                    echo '<option  value="'.$row['suburbName'].'">'.$row['suburbName'].'</option>';
                                                  
                                                 }
                                                 

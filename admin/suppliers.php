@@ -31,12 +31,12 @@ if(isset($_POST['submit'])) {
 	$number = mysqli_real_escape_string($con, strip_tags(trim($_POST["number"])));
 	$address = mysqli_real_escape_string($con, strip_tags(trim($_POST["address"])));
 	$website = mysqli_real_escape_string($con, strip_tags(trim($_POST["website"])));
-	$product = mysqli_real_escape_string($con, strip_tags(trim($_POST["product"])));
+	$notes = mysqli_real_escape_string($con, strip_tags(trim($_POST["product"])));
 
-	if ($name != '' && $email != '' && $number != '' &&  $address != '' && $website != '' && $product != '') {
+	if ($name != '' && $email != '' && $number != '' &&  $address != '' && $website != '' ) {
 
-		$sql = "INSERT INTO suppliers(name, product, contactNumber, email, website, address)
-		VALUES('".$name."', '".$product."', '".$number."', '".$email."', '".$website."', '".$address."')";
+		$sql = "INSERT INTO suppliers(name, notes, contactNumber, email, website, address)
+		VALUES('".$name."', '".$notes."', '".$number."', '".$email."', '".$website."', '".$address."')";
 		mysqli_query($con, $sql);
 		$_SESSION['success'] = 'You have successfully added a new supplier.';
 		header("Location: suppliers.php");
@@ -91,13 +91,11 @@ include 'header.php';
 								<label>Website</label>
 								<input type="text" name="website" class="form-control" value="http://">
 							</div>
-							<div class="form-group">
-								<label>Supplied Product</label>
-								<input type="text" name="product" class="form-control" placeholder="Enter product">
-							</div>
-							<button name="submit" type="submit" class="btn btn-primary">Submit Supplier</button>
+							
+							<button onclick="modal('.$row['deliveryID'].')" class="btn btn-warning">Allocate Driver</button><button name="submit" type="submit" class="btn btn-primary">Submit Supplier</button>
 							<button type="reset" class="btn btn-default">Reset Supplier</button>
 						</form>
+						
 					</div>
 				</div>
 			</div>
@@ -162,11 +160,11 @@ include 'header.php';
 										<tr>
 											<th>ID</th>
 											<th>Name</th>
-											<th>Product</th>
 											<th>Contact #</th>
 											<th>Email</th>
 											<th>Website</th>
 											<th>Address</th>
+											<th>Notes</th>
 											<th>Action</th>
 										</tr>
 									</thead>
@@ -177,13 +175,13 @@ include 'header.php';
 											<tr>
 												<td>'.$row['id'].'</td>
 												<td>'.$row['name'].'</td>
-												<td>'.$row['product'].'</td>
 												<td>'.$row['contactNumber'].'</td>
 												<td>'.$row['email'].'</td>
 												<td><a target="blank" href="'.$row['website'].'">'.$row['website'].'</a></td>
 												<td>'.$row['address'].'</td>
+												<td>'.$row['notes'].'</td>
 												<td class="pull-right">
-													<a href="createorder.php?id='.$row['id'].'" class="btn btn-warning">Make Order</a>   <a href="editsupplier.php?id='.$row['id'].'" class="btn btn-primary">Update Supplier</a>
+													<a href="createOrder.php?id='.$row['id'].'" class="btn btn-primary">Make Order</a>   <a href="editsupplier.php?id='.$row['id'].'" class="btn btn-primary">Update Supplier</a>
 												</td>
 											</tr>';
 										}
@@ -213,6 +211,24 @@ include 'header.php';
 <?php
 include 'footer.php';
 ?>
+<script>
+	function modal(id) {
+		var data = {"id" : id};
+		jQuery.ajax({
+			url : '../includes/suppliermodal.php',
+			method : "post",
+			data : data,
+			success : function(data) {
+				jQuery('body').append(data);
+				jQuery('#supplierModal').modal('toggle');
+			},
+			error : function() {
+				alert("Ooops! Something went wrong!");
+			}
+		});
+	}
+</script>
+
 <script>
 	$(document).ready(function(){
 		$('#suppliers').DataTable();
