@@ -18,7 +18,8 @@ if(isset($_POST['submit'])) {
     $serial = mysqli_real_escape_string($con, strip_tags(trim($_POST["serial"])));
     $type = mysqli_real_escape_string($con, strip_tags(trim($_POST["type"])));
     $description = mysqli_real_escape_string($con, strip_tags(trim($_POST["description"])));
-    $date = date("Y-m-d H:i:s");
+        $date = mysqli_real_escape_string($con, strip_tags(trim($_POST["date"])));
+   // $date = date("Y-m-d H:i:s");
     $target_dir = "../uploads/";
     $url = basename( $_FILES["fileToUpload"]["name"]);
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
@@ -126,7 +127,7 @@ include 'header.php';
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" id="datepicker">
+                  <input name="date" type="text" class="form-control pull-right" id="datepicker">
                 </div>
                 <!-- /.input group -->
               </div>
@@ -205,8 +206,9 @@ include 'footer.php';
 <script src="bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
+<script src="   plugins/timepicker/bootstrap-timepicker.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
+  <link rel="stylesheet" href="plugins/timepicker/bootstrap-timepicker.min.css">
 <!-- Page script -->
 <script>
   $(function () {
@@ -214,9 +216,9 @@ include 'footer.php';
     $('.select2').select2()
 
     //Datemask dd/mm/yyyy
-    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+    $('#datemask').inputmask('yyyy/mm/dd', { 'placeholder': 'yyyy/mm/dd' })
     //Datemask2 mm/dd/yyyy
-    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+    $('#datemask2').inputmask('yyyy/mm/dd', { 'placeholder': 'yyyy/mm/dd' })
     //Money Euro
     $('[data-mask]').inputmask()
 
@@ -245,7 +247,9 @@ include 'footer.php';
 
     //Date picker
     $('#datepicker').datepicker({
-      autoclose: true
+      autoclose: true,
+       format: 'yyyy/mm/dd',
+    startDate: '-3d'
     })
 
     //iCheck for checkbox and radio inputs

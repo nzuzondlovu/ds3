@@ -135,6 +135,7 @@ include 'header.php';
 				</div>
 				<!-- /.table-responsive -->
 			</div>
+			
 			<!-- /.panel-body -->
 		</div>
 		<!-- /.panel -->

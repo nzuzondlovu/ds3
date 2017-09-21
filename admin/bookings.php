@@ -114,7 +114,7 @@ include 'header.php';
 
                             if (mysqli_num_rows($res) > 0) {
                                 echo '
-                                <table id="bookings" class="table table-bordered table-hover">
+                                <table id="bookings" class="table table-danger table-hover">
                                     <thead>
                                         <tr>
                                        
@@ -149,7 +149,7 @@ include 'header.php';
                                                 <td>'.$row['name'].'</td>
                                                 <td>'.$row['serial'].'</td>
                                                 <td>'.$row['type'].'</td>
-                                                <td><img src="../uploads/'.$row['pic_url'].'"></td>
+                                                <td><img src="../uploads/'.$row['pic_url'].'" " class="img-thumbnail" alt="No Image" width="50" height="50"></td>
                                         
                                                 <td>'.date("M d, y",strtotime($row['date_in'])).'</td>
                                              
@@ -278,7 +278,7 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
                                         <th>Model</th>
                                         <th>Accessory</th>
                                         <th>Technician</th>
-                                     
+                                     <th> Booked</th>
                                         <th>Deposit</th>
                                         <th>Balance</th>
                                         <th>Total</th>
@@ -301,7 +301,7 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
                                                 <td>'.$row['model'].'</td>
                                                 <td>'.$row['accessory'].'</td>
                                                 <td>'.$row['technician'].'</td>
-                                              
+                                              <td>'.$row['date'].'</td>
                                                 <td>'.$row['deposit'].'</td>
                                                 <td>'.$row['balance'].'</td>
                                                 <td>'.$row['total'].'</td>
@@ -465,7 +465,23 @@ include 'footer.php';
 
 
 
+            <script>
+  $(function () {
+    $('#quotes').DataTable()
 
+
+  })
+</script>
+ 
+  <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+            <script>
+  $(function () {
+   
+    $('#bookings').DataTable()
+  })
+</script>
 
 
 

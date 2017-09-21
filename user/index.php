@@ -25,6 +25,7 @@ include 'header.php';
 		<!-- /.row -->
      <!-- /.row -->
 
+
       <div class="row">
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
@@ -107,9 +108,30 @@ include 'header.php';
         </div>
         <!-- /.col -->
       </div>
+
       <!-- /.row -->    
     <!-- /.row -->
 </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Bookings</span>
+              <span class="info-box-number">              <?php
+                                $sql = "SELECT * FROM job WHERE user='".$_SESSION['user_id']."'";
+                                $rs_result = mysqli_query($con, $sql); //run the query
+                                $cart = mysqli_num_rows($rs_result);
+                                if ($cart < 0) {
+                                    $cart = 0;
+                                }
+                                echo $cart;
+                                ?></span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
 <!-- /.container-fluid -->
 </div>
 <!-- /#page-wrapper -->

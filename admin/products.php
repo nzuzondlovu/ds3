@@ -361,18 +361,7 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="pull-right">
-								
-								</div>
-							</div>
-						</div>
-						<div class="table-responsive">					 <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header">
-        
-
-              <div class="box-tools">
-                <div class="input-group input-group-sm" >
+								    <div class="input-group input-group-sm" >
                   
 
                   <div class="input-group-btn">
@@ -382,10 +371,24 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 
                   </div>
                 </div>
+								</div>
+							</div>
+						</div>
+						<div class="table-responsive">					 <div class="row">
+        <div class="col-xs-12">
+
+          <div class="box">
+
+            <div class="box-header">
+        
+
+              <div class="box-tools">
+            
               </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
+
 							<?php
 
 							$sql = "SELECT * FROM product WHERE archive = 0";
@@ -519,8 +522,8 @@ if(isset($_POST['btnCat'])) {
 		echo $sql = "INSERT INTO category(name, type, description, dateCreated,archive)
 		VALUES('".$name."', '".$type."','".$description."' , '".$date."', '".$archive."')";
 		mysqli_query($con, $sql);
-		$_SESSION['success'] = 'Your new category was added successfully.';
-		header("Location: products.php?id={$btnCat}");
+		//$_SESSION['success'] = 'Your new category was added successfully.';
+		//header("Location: products.php");
 		//Location: /dns/dns_soa_edit.php?id={$zone_id}
 	}else {
 		$_SESSION['failure'] = 'Please fill in all fields.';
@@ -1039,4 +1042,19 @@ include 'footer.php';
             }
         });
     }
+</script>
+
+
+	<!-- DataTables -->
+	<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+	<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+
+
+
+            <script>
+  $(function () {
+    $('#products').DataTable()
+
+  })
 </script>
