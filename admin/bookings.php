@@ -76,10 +76,6 @@ include 'header.php';
             <ul class="nav nav-tabs">
               <li class="active"><a href="#activity" data-toggle="tab">Bookings</a></li>
               <li><a href="#timeline" data-toggle="tab">Quotations</a></li>
-              <li><a href="#settings" data-toggle="tab">Delivery</a></li>
-              <li class="quotations"><a href="#activity" data-toggle="tab">Quotations</a></li>
-              <li><a href="#devices" data-toggle="tab">Devices</a></li>
-              <li><a href="payments" data-toggle="tab">Payments</a></li>
             </ul>
             <div class="tab-content">
               <div class="active tab-pane" id="activity">
@@ -106,12 +102,10 @@ include 'header.php';
                     </div>
                     <?php } ?>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        List of all bookings
-                    </div>
+              
+                  
                     <!-- /.panel-heading -->
-                    <div class="panel-body">
+     
                         <div class="table-responsive">
                             <?php
 
@@ -120,19 +114,17 @@ include 'header.php';
 
                             if (mysqli_num_rows($res) > 0) {
                                 echo '
-                                <table id="bookings" class="table data-table">
+                                <table id="bookings" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>User</th>
+                                       
                                             <th>Name</th>
                                             <th>serial</th>
                                             <th>type</th>
                                             <th>Picture</th>
-                                            <th>Description</th>
+                                            
                                             <th>Date In</th>
-                                            <th>Status</th>
-                                            <th>Technician</th>
+                                        
                                             <th>Date Out</th>
                                             <th>Date</th>
                                             <th>Action</th>
@@ -143,30 +135,28 @@ include 'header.php';
 
                                             $sql1 = "SELECT * FROM quotation WHERE booking_id = '".$row['id']."' AND archive = 0";
                                             $res1 = mysqli_query($con, $sql1);
-                                            $btn = '<button onclick="modal('.$row['id'].')" class="btn btn-primary">Create Quotation</button>';
+                                            $btn = '<button onclick="modal('.$row['id'].')" class="label-primary label-primary"> Quotation</button>';
 
                                             if (mysqli_num_rows($res1) > 0) {
 
                                                 $row1 = mysqli_fetch_assoc($res1);
-                                                $btn = '<button onclick="modal1('.$row1['id'].')" class="btn btn-info">Review Quotation</button>';
+                                                $btn = '<button onclick="modal1('.$row1['id'].')" class="label label-info">Review</button>';
                                             }
 
                                             echo '
                                             <tr>
-                                                <td>'.$row['id'].'</td>
-                                                <td>'.$row['user'].'</td>
+                                               
                                                 <td>'.$row['name'].'</td>
                                                 <td>'.$row['serial'].'</td>
                                                 <td>'.$row['type'].'</td>
                                                 <td><img src="../uploads/'.$row['pic_url'].'"></td>
-                                                <td>'.$row['description'].'</td>
+                                        
                                                 <td>'.date("M d, y",strtotime($row['date_in'])).'</td>
-                                                <td>'.$row['status'].'</td>
-                                                <td>'.$row['technician'].'</td>
+                                             
                                                 <td>'.date("M d, y",strtotime($row['date_out'])).'</td>
                                                 <td>'.date("M d, y",strtotime($row['date'])).'</td>
                                                 <td class="pull-right">
-                                                    '.$btn.'  <a href="?id='.$row['id'].'" class="btn btn-warning">Archive Booking</a>
+                                                    '.$btn.'  <a href="?id='.$row['id'].'" class="label label-warning">Archive</a>
                                                 </td>
                                             </tr>';
                                         }
@@ -186,9 +176,7 @@ include 'header.php';
                 <!-- /.panel-body -->
             </div>
             <!-- /.panel -->
-        </div>
-    </div>
-                        <!-- /.row (nested) -->
+          <!-- /.row (nested) -->
                
                     <!-- /.panel-body -->
              
@@ -281,16 +269,16 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 
                         if (mysqli_num_rows($res) > 0) {
                             echo '
-                            <table id="quotes" class="table data-table">
+                            <table id="quotes" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Quotation ID</th>
+                                 
                                         <th>Device Name</th>
                                         <th>Serial Number</th>
                                         <th>Model</th>
                                         <th>Accessory</th>
                                         <th>Technician</th>
-                                        <th>Description</th>
+                                     
                                         <th>Deposit</th>
                                         <th>Balance</th>
                                         <th>Total</th>
@@ -307,18 +295,18 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
                                         if (mysqli_num_rows($res1) > 0) {
                                             echo '
                                             <tr>
-                                                <td>'.$row['id'].'</td>
+                                         
                                                 <td>'.$row['name'].'</td>
                                                 <td>'.$row['serial'].'</td>
                                                 <td>'.$row['model'].'</td>
                                                 <td>'.$row['accessory'].'</td>
                                                 <td>'.$row['technician'].'</td>
-                                                <td>'.$row['description'].'</td>
+                                              
                                                 <td>'.$row['deposit'].'</td>
                                                 <td>'.$row['balance'].'</td>
                                                 <td>'.$row['total'].'</td>
                                                 <td class="pull-right">
-                                                    <a href="editquote.php?id='.$row['id'].'" class="btn btn-primary">Edit Quotation</a>
+                                                    <a href="editquote.php?id='.$row['id'].'" class="label label-primary">Edit Quotation</a>
                                                 </td>
                                             </tr>';
                                         }                                                

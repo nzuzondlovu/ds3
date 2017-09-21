@@ -1,4 +1,35 @@
-<?php
+<script>
+function sum() {
+            var txtFirstNumberValue = document.getElementById('txt1').value;
+            var txtSecondNumberValue = document.getElementById('txt2').value;
+            var result = parseInt(txtFirstNumberValue) - parseInt(txtSecondNumberValue);
+            if (!isNaN(result)) {
+                document.getElementById('txt3').value = result;
+        
+            }
+      
+       var txtFirstNumberValue = document.getElementById('txt11').value;
+            var result = parseInt(txtFirstNumberValue);
+            if (!isNaN(result)) {
+                document.getElementById('txt22').value = result;        
+            }
+      
+       var txtFirstNumberValue = document.getElementById('txt11').value;
+            var txtSecondNumberValue = document.getElementById('txt33').value;
+            var result = parseInt(txtFirstNumberValue) + parseInt(txtSecondNumberValue);
+            if (!isNaN(result)) {
+                document.getElementById('txt55').value = result;
+        
+            }
+      
+       var txtFirstNumberValue = document.getElementById('txt4').value;
+       var result = parseInt(txtFirstNumberValue);
+            if (!isNaN(result)) {
+                document.getElementById('txt5').value = result;
+        }
+      
+        }
+</script><?php
 include_once 'functions.php';
 
 if (isset($_POST['id']) && $_POST['id'] != null) {
@@ -74,6 +105,24 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
                     <label>Total</label>
                     <input name="total" class="form-control" value="<?php echo $tot;?>">
                   </div>
+
+                   <div class="form-group">
+                <label>Deposit</label>
+              
+                <input class="form-control" type="text" id="txt2" name="deposit" onkeyup="sum();" Required placeholder="R0.00"  value="<?php echo $dep;?>">
+              </div>
+              <div class="form-group">
+                <label>Total</label>
+                <input class="form-control"  type="text" id="txt1"  name="total" onkeyup="sum();" Required placeholder="R0.00"  value="<?php echo $tot;?>">
+              </div>
+          
+            
+              <div class="form-group">
+                <label>Balance</label> 
+                    <input type="text" id="txt3" class="form-control" name="balance" readonlyvalue="<?php echo $bal;?>">
+
+              </div> 
+
                   <div class="form-group">
                     <label>Status</label>
                     <select name="status" class="form-control">

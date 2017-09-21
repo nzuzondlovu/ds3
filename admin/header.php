@@ -78,7 +78,7 @@
     </head>
 
 
-<body class="hold-transition skin-yellow layout-boxed">
+<body class="hold-transition skin-yellow ">
 <div class="wrapper">
 
   <!-- Main Header -->

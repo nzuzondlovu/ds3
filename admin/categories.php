@@ -12,18 +12,18 @@ if(isset($_SESSION['key']) == '' ) {
 <?php
 
 if(isset($_POST['submit'])) {
-
 	$name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
 	$type = mysqli_real_escape_string($con, strip_tags(trim($_POST["type"])));
 	$description = mysqli_real_escape_string($con, strip_tags(trim($_POST["description"])));
 	$date = date("Y-m-d H:i:s");
+	$archive =0;
 
 
 
 	if($name != '' && $type != '' && $description != '') {
 
-		$sql = "INSERT INTO category(name, type, description, dateCreated)
-		VALUES('".$name."', '".$type."','".$description."' , '".$date."')";
+		echo $sql = "INSERT INTO category(name, type, description, dateCreated,archive)
+		VALUES('".$name."', '".$type."','".$description."' , '".$date."', '".$archive."')";
 		mysqli_query($con, $sql);
 		$_SESSION['success'] = 'Your new category was added successfully.';
 		header("Location: categories.php");

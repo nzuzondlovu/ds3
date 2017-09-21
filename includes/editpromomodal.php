@@ -1,30 +1,39 @@
 <?php
+ob_start();
 include_once 'functions.php';
+?>
 
-$id = '';
-$name = '';
-$serial = '';
+<?php
+if(isset($_SESSION['key']) == '' ) {
+  header("location:../login.php");
+}
+?>
 
-if (isset($_POST['id']) && $_POST['id'] != null) {
+
+<?php
+
+if (isset($_POST['id']) && $_POST['id'] != null) 
+{
 
   $id = mysqli_real_escape_string($con, strip_tags(trim($_POST['id'])));
-  $sql = "SELECT * FROM job WHERE id='".$id."'";
+  $sql = "SELECT * FROM product WHERE id='".$id."' ";
   $res = mysqli_query($con, $sql);
+
 
   if (mysqli_num_rows($res) > 0) {
 
     while ($row = mysqli_fetch_assoc($res)) {
 
-      $_SESSION['booking_id'] = $row['id'];
-      $_SESSION['booking'] = 'Name: '.$row['name'].'<br>Serial: '.
-      $row['serial'].'<br>Type: '.
-      $row['type'].'<br>Status: '.
-      $row['status'].'<br>Description: '.
-      $row['description'].'<br>Date: '.
-      date("M d, y",strtotime($row['date'])).'<br>
-      <img class="img-responsive" src="../uploads/'.$row['pic_url'].'">';
-      $name = $row['name'];
-      $serial = $row['serial'];
+   $promo = '
+    ID : '.$row['id'].'<br>
+    User : '.$row['user'].'<br>
+    Name : '.$row['name'].'<br>
+    Type : '.$row['type'].'<br>
+    Price : R '.$row['price'].'<br>
+    Date : '.date("M d, y",strtotime($row['date'])).'<br>
+    Description : '.$row['description'].'<br>
+
+    <img  src="../uploads/'.$row['pic_url'].'" class="img-thumbnail" alt="Cinque Terre" width="200" height="200">';
     }
   }
 }
@@ -39,82 +48,50 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" onclick="closeModal()" aria-label="Close"><span class="fa fa-close" aria-hidden="true"></span> Close</button>
-        <h4 class="modal-title" id="responseModalLabel">Create Quote</h4>
+        <h4 class="modal-title" id="responseModalLabel">Promotional Item Details</h4>
       </div>
       <div class="modal-body">
         <div class="row">
           <div class="col-md-6">
+          <div class="col-lg-12">
+  
+
+                <div class="pull-right">
+                  <a href="products.php" class="btn btn-warning">Products</a>
+                  <a href="promotions.php" class="btn btn-warning">Promotions</a>
+                </div>
+              </div>
             <h2>Device details</h2>
             <p>
-              <?php
-              echo $_SESSION['booking'];
-              ?>
+            <?php
+                echo $promo;
+                ?>
+
+                
             </p>
           </div>
           <div class="col-md-6">
-            <form id="quoteForm" role="form" method="post">
-              <div class="form-group">
-                <label>Model</label>
-                <input class="form-control" type="text" name="model" placeholder="Enter model">
-              </div>
-              <div class="form-group">
-                <label>Accessory</label>
-                <input class="form-control" type="text" name="accessory" placeholder="Enter accessories">
-              </div>
-              <div class="form-group">
-                <label>Choose technician</label>
-                <select name="technician" class="form-control">
-                  <option value="" selected="selected">Select technician</option>
-                  <?php
-                  $sql = "SELECT * FROM technician";
-                  $res = mysqli_query($con, $sql);
+           
 
-                  if(mysqli_num_rows($res) > 0) {
-                    while($row = mysqli_fetch_assoc($res)) {
-                      echo '<option value="'.$row['name'].'">'.$row['name'].'</option>';
-                    }
-                  }
-                  ?>
-                </select>
-              </div>                                    
-              <div class="form-group">
-                <label>Deposit</label>
-                <input type="number" name="deposit" class="form-control" placeholder="Enter deposit">
-              </div>
-              <div class="form-group">
-                <label>Balance</label>
-                <input type="number" name="balance" class="form-control" placeholder="Enter balance">
-              </div>
-              <div class="form-group">
-                <label>Total</label>
-                <input type="number" name="total" class="form-control" placeholder="Enter total">
-              </div>
-              <div class="form-group">
-                <label>Status</label>
-                <select name="status" class="form-control">
-                  <option value="" selected="selected">Select status</option>
-                  <?php
-                  $sql = "SELECT * FROM status ORDER BY name ASC";
-                  $res = mysqli_query($con, $sql);
 
-                  if(mysqli_num_rows($res) > 0) {
-                    while($row = mysqli_fetch_assoc($res)) {
-                      echo '<option value="'.$row['name'].'">'.$row['name'].'</option>';
-                    }
-                  }
-                  ?>
-                </select>
-              </div>
-              <div class="form-group">
-                <label>Description</label>
-                <textarea name="desc" class="form-control" rows="5"></textarea>
-              </div>
-              <input type="text" name="id" value="<?php echo $id; ?>" hidden>
-              <input type="text" name="name" value="<?php echo $name; ?>" hidden>
-              <input type="text" name="serial" value="<?php echo $serial; ?>" hidden>
-              <button name="create" type="submit" class="btn btn-primary">Submit Quotation</button>
-              <button type="reset" class="btn btn-default">Reset Quotation</button>
-            </form>
+                <form id="promoForm " role="form" method="post">
+                  <div class="form-group">
+                    <label>Promotional Price</label>
+                    <input type="decimal" name="price" class="form-control" placeholder="Enter price">
+                  </div>
+                  <div class="form-group">
+                    <label>Start Date</label>
+                    <input type="date" name="start" class="form-control" placeholder="Enter date">
+                  </div>
+                  <div class="form-group">
+                    <label>End Date</label>
+                    <input type="date" name="end" class="form-control" placeholder="Enter date">
+                  </div>
+                          <input type="text" name="id" value="<?= $id; ?>" hidden>
+                  <button name="btnPromo" type="submit" class="btn btn-primary">Submit Promotion</button>
+                  <button type="reset" class="btn btn-default">Reset Promotion</button>
+                </form>
+
           </div>
         </div>
       </div>
@@ -132,7 +109,7 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
   <script type="text/javascript">
 
     $( document ).ready( function () {
-      $( "#quoteForm" ).validate( {
+      $( "#promoForm" ).validate( {
         rules: {
           model: {
             required: true,

@@ -52,7 +52,7 @@ include 'header.php';
 								<table class="table">
 									<thead>
 										<tr>
-											<th>Booking ID</th>
+										
 											<th>Device name</th>
 											<th>Serial</th>
 											<th>Type</th>
@@ -69,11 +69,11 @@ include 'header.php';
 
 											echo '
 											<tr>
-												<td>'.$row['id'].'</td>
+												
 												<td>'.$row['name'].'</td>
 												<td>'.$row['serial'].'</td>
 												<td>'.$row['type'].'</td>
-												<td><img src="../uploads/'.$row['pic_url'].'"></td>
+												<td> <img src="../uploads/'.$row['pic_url'].'" class="img-rounded" alt="image" width="20" height="20"></td>
 												<td>'.$row['description'].'</td>
 												<td>'.date("M d, y",strtotime($row['date_in'])).'</td>
 												<td>'.$row['status'].'</td>

@@ -62,12 +62,7 @@ include 'header.php';
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            List of all Quotations
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
+            
                             <div class="row">
                              <div class="col-lg-12">
                                 <div class="pull-right">
@@ -86,7 +81,7 @@ include 'header.php';
                             <table id="quotes" class="table data-table">
                                 <thead>
                                     <tr>
-                                        <th>Quotation ID</th>
+                                      
                                         <th>Device Name</th>
                                         <th>Serial Number</th>
                                         <th>Model</th>
@@ -109,7 +104,7 @@ include 'header.php';
                                         if (mysqli_num_rows($res1) > 0) {
                                             echo '
                                             <tr>
-                                                <td>'.$row['id'].'</td>
+                                              
                                                 <td>'.$row['name'].'</td>
                                                 <td>'.$row['serial'].'</td>
                                                 <td>'.$row['model'].'</td>
@@ -120,7 +115,7 @@ include 'header.php';
                                                 <td>'.$row['balance'].'</td>
                                                 <td>'.$row['total'].'</td>
                                                 <td class="pull-right">
-                                                    <a href="editquote.php?id='.$row['id'].'" class="btn btn-primary">Edit Quotation</a>
+                                                    <a href="editquote.php?id='.$row['id'].'" class="label label-primary">Edit Quotation</a>
                                                 </td>
                                             </tr>';
                                         }                                                
@@ -143,9 +138,7 @@ include 'header.php';
         <!-- /.panel -->
     </div>
 </div>
-</div>
-<!-- /.container-fluid -->
-</div>
+
 <!-- /#page-wrapper -->
 
 <?php
