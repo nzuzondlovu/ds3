@@ -145,10 +145,10 @@ include 'header.php';
 									<tbody>';
 										while ($row = mysqli_fetch_assoc($res)) {
 
-											$button = '<a href="?id='.$row['id'].'" class="btn btn-danger">Block User</a>';
+											$button = '<a href="?id='.$row['id'].'" class="label label-danger">Block User</a>';
 											
 											if ($row['blocked'] > 0) {
-												$button = '<a href="?ub='.$row['id'].'" class="btn btn-success">Unblock User</a>';
+												$button = '<a href="?ub='.$row['id'].'" class="label label-success">Unblock User</a>';
 											}
 
 											echo '
@@ -162,7 +162,7 @@ include 'header.php';
 												<td>'.$row['location'].'</td>
 												<td>'.$row['role'].'</td>
 												<td class="pull-right">
-													<button onclick="modal('.$row['id'].')" class="btn btn-primary">Update User Role</button>   '.$button.'
+													<button onclick="modal('.$row['id'].')" class="label label-primary">Update User Role</button>   '.$button.'
 												</td>
 											</tr>';
 										}

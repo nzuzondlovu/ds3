@@ -44,7 +44,7 @@ include 'header.php';
 							}
 
 							$start_from = ($page-1) * $num_rec_per_page;
-							$sql = "SELECT * FROM job WHERE user ='".$_SESSION['user_id']."' ORDER BY id DESC LIMIT $start_from, $num_rec_per_page";
+							$sql = "SELECT * FROM quotation WHERE user ='".$_SESSION['user_id']."' ORDER BY id DESC LIMIT $start_from, $num_rec_per_page";
 							$res = mysqli_query($con, $sql);
 
 							if (mysqli_num_rows($res) > 0) {
@@ -55,13 +55,14 @@ include 'header.php';
 										
 											<th>Device name</th>
 											<th>Serial</th>
-											<th>Type</th>
-											<th>Picture</th>
-											<th>Description</th>
-											<th>Date</th>
-											<th>Status</th>
+											<th>Model</th>
+											<th>Accessory	</th>
 											<th>Technician</th>
-											<th>Date out</th>
+											<th>Description</th>
+											<th>Deposit</th>
+											<th>Balance</th>
+											<th>Total</th>
+												<th>Status</th>
 										</tr>
 									</thead>
 									<tbody>';
@@ -72,14 +73,21 @@ include 'header.php';
 												
 												<td>'.$row['name'].'</td>
 												<td>'.$row['serial'].'</td>
-												<td>'.$row['type'].'</td>
-												<td> <img src="../uploads/'.$row['pic_url'].'" class="img-rounded" alt="image" width="20" height="20"></td>
-												<td>'.$row['description'].'</td>
-												<td>'.date("M d, y",strtotime($row['date'])).'</td>
-												<td>'.$row['status'].'</td>
+												<td>'.$row['model'].'</td>
+											
+												<td>'.$row['accessory'].'</td>
+											
 												<td>'.$row['technician'].'</td>
-												
-												<td>'.date("M d, y",strtotime($row['date_out'])).'</td>
+
+
+												<td>'.$row['description'].'</td>
+											
+												<td>'.$row['deposit'].'</td>
+												<td>'.$row['balance'].'</td>
+											
+												<td>'.$row['total'].'</td>
+												<td>'.$row['status'].'</td>
+											
 											</tr>';
 										}
 										echo '

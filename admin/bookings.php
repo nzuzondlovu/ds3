@@ -37,14 +37,16 @@ if(isset($_POST['create'])) {
     $total = mysqli_real_escape_string($con, strip_tags(trim($_POST["total"])));
     $status = mysqli_real_escape_string($con, strip_tags(trim($_POST["status"])));
     $description = mysqli_real_escape_string($con, strip_tags(trim($_POST["desc"])));
+    $archive=0;
+    
 
     if( $model != '' && $accessory != '' && $technician != '' && $deposit != '' && $balance != '' && $total != '' && $status != '' && $description != '') {
 
-        $sql = "INSERT INTO quotation(booking_id, name, serial, model, accessory, technician, description, deposit, balance, total, status) 
-        VALUES ('".$id."', '".$name."', '".$serial."', '".$model."', '".$accessory."', '".$technician."', '".$description."', '".$deposit."', '".$balance."', '".$total."', '".$status."')";
+       echo $sql = "INSERT INTO quotation(booking_id, name, serial, model, accessory, technician, description, deposit, balance, total, status,archive) 
+        VALUES ('".$id."', '".$name."', '".$serial."', '".$model."', '".$accessory."', '".$technician."', '".$description."', '".$deposit."', '".$balance."', '".$total."', '".$status."', '".$archive."')";
         mysqli_query($con, $sql);
-        $_SESSION['success'] = 'Your new Quotation is added successfully.';
-        //header("Location: viewquot.php");
+       $_SESSION['success'] = 'Your new Quotation is added successfully.';
+        header("Location: bookings.php");
     }else {
         $_SESSION['failure'] = 'Please fill in all fields.';
     }
@@ -301,7 +303,7 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
                                                 <td>'.$row['model'].'</td>
                                                 <td>'.$row['accessory'].'</td>
                                                 <td>'.$row['technician'].'</td>
-                                              <td>'.$row['date'].'</td>
+                                            
                                                 <td>'.$row['deposit'].'</td>
                                                 <td>'.$row['balance'].'</td>
                                                 <td>'.$row['total'].'</td>

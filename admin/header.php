@@ -33,7 +33,6 @@
         <link rel="stylesheet" href="../assets/css/skins/_all-skins.min.css">
 
 
-<<<<<<< HEAD
   <
   <link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <!-- Google Font -->
@@ -42,37 +41,6 @@
     </head>
 
 
-<body class="hold-transition skin-yellow ">
-<div class="wrapper">
-
-  <!-- Main Header -->
-  <header class="main-header">
-
-    <!-- Logo -->
-    <a href="index2.html" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b></b>LTE</span>
-    </a>
-
-    <!-- Header Navbar -->
-    <nav class="navbar navbar-static-top" role="navigation">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
-=======
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
-
-<!-- Google Font -->
-<link rel="stylesheet"
-href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-</head>
 
 
 <body class="hold-transition skin-yellow layout-boxed">
@@ -87,7 +55,7 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
         <span class="logo-mini"><b>A</b>LT</span>
         <!-- logo for regular state and mobile devices -->
         <span class="logo-lg"><b></b>LTE</span>
->>>>>>> 01dac3235c52c0f438d0417a9a75f41147a616bd
+
       </a>
 
       <!-- Header Navbar -->
@@ -439,7 +407,7 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
 
     //Timepicker
     $('.timepicker').timepicker({
-      showInputs: false
+      showInputs: 	
     })
   })
 </script>  
