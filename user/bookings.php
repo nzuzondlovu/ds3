@@ -25,9 +25,23 @@ include 'header.php';
 		<!-- /.row -->
 		<div class="row">
 			<div class="col-lg-12">
-				<div class="panel panel-default">
+			
 					<div class="panel-heading">
-						List of all bookings
+						<?php
+
+                                        $res = mysqli_query($con, "SELECT * FROM user WHERE id='".$_SESSION['user_id']."' ");
+                                        $row = mysqli_fetch_assoc($res);
+                                        echo"Hello " ;echo$row['name']; echo " "; echo $row['surname']; echo " You Have ";
+                                         $sql = "SELECT * FROM job WHERE user='".$_SESSION['user_id']."'";
+                                $rs_result = mysqli_query($con, $sql); //run the query
+                                $cart = mysqli_num_rows($rs_result);
+                                if ($cart < 0) {
+                                    $cart = 0;
+                                }
+                                echo $cart;
+                                echo " Bookings" ; 
+
+                                        ?>
 					</div>
 					<!-- /.panel-heading -->
 					<div class="panel-body">
@@ -43,13 +57,14 @@ include 'header.php';
 								$page=1;
 							}
 
+
 							$start_from = ($page-1) * $num_rec_per_page;
 							$sql = "SELECT * FROM job WHERE user ='".$_SESSION['user_id']."' ORDER BY id DESC LIMIT $start_from, $num_rec_per_page";
 							$res = mysqli_query($con, $sql);
 
 							if (mysqli_num_rows($res) > 0) {
 								echo '
-								<table class="table">
+								<table class="table table-responsive">
 									<thead>
 										<tr>
 										
@@ -59,13 +74,13 @@ include 'header.php';
 											<th>Picture</th>
 											<th>Description</th>
 											<th>Date</th>
-											<th>Status</th>
-											<th>Technician</th>
-											<th>Date out</th>
+										
+											
 										</tr>
 									</thead>
 									<tbody>';
 										while ($row = mysqli_fetch_assoc($res)) {
+
 
 											echo '
 											<tr>
@@ -74,12 +89,11 @@ include 'header.php';
 												<td>'.$row['serial'].'</td>
 												<td>'.$row['type'].'</td>
 												<td> <img src="../uploads/'.$row['pic_url'].'" class="img-rounded" alt="image" width="20" height="20"></td>
-												<td>'.$row['description'].'</td>
+												<td style="word-wrap: break-word;min-width: 120px;max-width: 10px;" >'	.$row['description']. ' </td>
 												<td>'.date("M d, y",strtotime($row['date'])).'</td>
-												<td>'.$row['status'].'</td>
-												<td>'.$row['technician'].'</td>
+											
 												
-												<td>'.date("M d, y",strtotime($row['date_out'])).'</td>
+											
 											</tr>';
 										}
 										echo '
@@ -142,7 +156,7 @@ include 'header.php';
 		<!-- /.panel -->
 	</div>
 </div>
-</div>
+
 <!-- /.container-fluid -->
 </div>
 <!-- /#page-wrapper -->

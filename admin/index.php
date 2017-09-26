@@ -102,6 +102,32 @@ include 'header.php';
         </div>
 
 
+
+      <?php 
+        include('connect.php');
+        $result = $db->prepare("SELECT * FROM product ORDER BY qty_sold DESC");
+        $result->execute();
+        $rowcount = $result->rowcount();
+      ?>
+      
+      <?php 
+        include('connect.php');
+        $result = $db->prepare("SELECT * FROM product where qty < 10 ORDER BY id DESC");
+        $result->execute();
+        $rowcount123 = $result->rowcount();
+
+      ?>
+
+
+        <div style="text-align:center;">
+      Total Number of Products:  <font color="green" style="font:bold 22px 'Aleo';">[<?php echo $rowcount;?>]</font>
+      </div>
+      
+      <div style="text-align:center;">
+      <font style="color:rgb(255, 95, 66);; font:bold 22px 'Aleo';">[</font> Products are below QTY of 10 
+      </div>
+
+
       <div class="row">
         <div class="col-md-12">
           <div class="box">
@@ -219,7 +245,7 @@ include 'header.php';
                 <!-- /.col -->
                 <div class="col-sm-3 col-xs-6">
                   <div class="description-block">
-                    <span class="description-percentage text-red"><i class="fa fa-caret-down"></i> 18%</span>
+                    <span class="description-percentage text-red"><i class="fa fa-caret-down"></i> <?php echo $rowcount123;?> </span>
                     <h5 class="description-header">1200</h5>
                     <span class="description-text">GOAL COMPLETIONS</span>
                   </div>

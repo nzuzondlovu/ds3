@@ -19,6 +19,7 @@ if(isset($_POST['submit'])) {
     $type = mysqli_real_escape_string($con, strip_tags(trim($_POST["type"])));
     $description = mysqli_real_escape_string($con, strip_tags(trim($_POST["description"])));
         $date = mysqli_real_escape_string($con, strip_tags(trim($_POST["date"])));
+        $time =mysqli_real_escape_string($con, strip_tags(trim($_POST["time"])));
    // $date = date("Y-m-d H:i:s");
     $target_dir = "../uploads/";
     $url = basename( $_FILES["fileToUpload"]["name"]);
@@ -91,20 +92,22 @@ include 'header.php';
               <li class="active"><a href="#" data-toggle="tab"></a></li>
               <li class="pull-left header"><i class="fa fa-inbox"></i> Booking Details </li>
             </ul>
-            <div class="tab-content no-padding" style="position: relative; height: 600px;>
-              <!-- Morris chart - Sales -->
+            <div class="tab-content no-padding" style="position: relative; height: 600px;" >
+         
+
                        <form role="form" method="post" enctype="multipart/form-data">
-                                    <div class="form-group">
+
+                                    <div class="form-group col-lg-6">
                                         <label>Device name</label>
                                         <input type="text" name="name" class="form-control" placeholder="Enter text">
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group col-lg-6">
                                         <label>Serial number</label>
                                         <input name="serial" class="form-control" placeholder="Enter text">
                                     </div>                                        
-                                    <div class="form-group">
+                                    <div class="form-group col-lg-6">
                                     <label>Device type</label>
-                                        <select name="type" class="form-control">
+                                        <select name="type" class="form-control col-lg-6">
                                             <option value="" selected="selected">Select type</option>
                                             <?php
                                             $sql = "SELECT * FROM category ORDER BY name ASC";
@@ -118,16 +121,28 @@ include 'header.php';
                                             ?>
                                         </select>
                                     </div>
-                                    <div class="form-group glyphicon glyphicon-cloud-upload">
-                                        <label>Upload picture</label>
-                                        <input type="file" name="fileToUpload">
-                                    </div>
+
                                     <div class="form-group">
-                                        <label>What happened to the device</label>
+                                   <label>Upload Picture </label>
+                                            <input hidden="true" type="file" id="ftu" name="fileToUpload" style="display: none;">
+
+                                                 <label for="ftu" class="btn btn-success col-lg-6 " > Browse...	
+
+                                                 <i class="glyphicon glyphicon-cloud-upload"> </i>
+
+
+
+                      </label>    
+
+
+
+                                    </div>
+                                    <div class="form-group ">
+                                        <label class="col-lg-12">What happened to the device</label>
                                         <textarea name="description" class="form-control" rows="3"></textarea>
                                     </div>
         
-         <div class="form-group">
+         <div class="form-group col-lg-6">
                 <label>Date:</label>
 
                 <div class="input-group date">
@@ -138,25 +153,27 @@ include 'header.php';
                 </div>
                 <!-- /.input group -->
               </div>
-                        <div class="bootstrap-timepicker">
-                <div class="form-group">
+                        <div class="bootstrap-timepicker pull-right ">
+                <div class="form-group col-lg-12">
                   <label>Time picker:</label>
 
                   <div class="input-group">
-                    <input type="text" class="form-control timepicker">
+                    <input type="text" class="form-control timepicker" name="time">
 
                     <div class="input-group-addon">
-                      <i class="fa fa-clock-o"></i>
+                      <i class="fa fa-clock-o "></i>
                     </div>
                   </div>
                   <!-- /.input group -->
                 </div>
                 <!-- /.form group -->
               </div>
+              <div class="col-lg-12">
+
                                     <button name="submit" type="submit" class="btn btn-primary">Submit Booking</button>
                                     <button type="reset" class="btn btn-default">Reset Booking</button>
 
-
+</div>
 
                                 </form>
 
@@ -201,7 +218,7 @@ include 'header.php';
               </h3>
             </div>
             <div class="box-body">
-              <div id="#" style="height: 250px; width: 100%;">Available Times and Dates code goes here </div>
+              <div id="#" style="height: 250px; width: 100%;"> ....	</div>
 
 
     
@@ -231,128 +248,9 @@ include 'header.php';
           <!-- /.box -->
 
           <!-- solid sales graph -->
-          <div class="box box-solid bg-teal-gradient">
-            <div class="box-header">
-              <i class="fa fa-th"></i>
+          
 
-              <h3 class="box-title">Sales Graph</h3>
 
-              <div class="box-tools pull-right">
-                <button type="button" class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn bg-teal btn-sm" data-widget="remove"><i class="fa fa-times"></i>
-                </button>
-              </div>
-            </div>
-            <div class="box-body border-radius-none">
-              <div class="chart" id="line-chart" style="height: 250px;"></div>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer no-border">
-              <div class="row">
-                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                  <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60"
-                         data-fgColor="#39CCCC">
-
-                  <div class="knob-label">Mail-Orders</div>
-                </div>
-                <!-- ./col -->
-                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                  <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60"
-                         data-fgColor="#39CCCC">
-
-                  <div class="knob-label">Online</div>
-                </div>
-                <!-- ./col -->
-                <div class="col-xs-4 text-center">
-                  <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60"
-                         data-fgColor="#39CCCC">
-
-                  <div class="knob-label">In-Store</div>
-                </div>
-                <!-- ./col -->
-              </div>
-              <!-- /.row -->
-            </div>
-            <!-- /.box-footer -->
-          </div>
-          <!-- /.box -->
-
-          <!-- Calendar -->
-          <div class="box box-solid bg-green-gradient">
-            <div class="box-header">
-              <i class="fa fa-calendar"></i>
-
-              <h3 class="box-title">Calendar</h3>
-              <!-- tools box -->
-              <div class="pull-right box-tools">
-                <!-- button with a dropdown -->
-                <div class="btn-group">
-                  <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-bars"></i></button>
-                  <ul class="dropdown-menu pull-right" role="menu">
-                    <li><a href="#">Add new event</a></li>
-                    <li><a href="#">Clear events</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">View calendar</a></li>
-                  </ul>
-                </div>
-                <button type="button" class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i>
-                </button>
-              </div>
-              <!-- /. tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-              <!--The calendar -->
-              <div id="calendar" style="width: 100%"></div>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer text-black">
-              <div class="row">
-                <div class="col-sm-6">
-                  <!-- Progress bars -->
-                  <div class="clearfix">
-                    <span class="pull-left">Task #1</span>
-                    <small class="pull-right">90%</small>
-                  </div>
-                  <div class="progress xs">
-                    <div class="progress-bar progress-bar-green" style="width: 90%;"></div>
-                  </div>
-
-                  <div class="clearfix">
-                    <span class="pull-left">Task #2</span>
-                    <small class="pull-right">70%</small>
-                  </div>
-                  <div class="progress xs">
-                    <div class="progress-bar progress-bar-green" style="width: 70%;"></div>
-                  </div>
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-6">
-                  <div class="clearfix">
-                    <span class="pull-left">Task #3</span>
-                    <small class="pull-right">60%</small>
-                  </div>
-                  <div class="progress xs">
-                    <div class="progress-bar progress-bar-green" style="width: 60%;"></div>
-                  </div>
-
-                  <div class="clearfix">
-                    <span class="pull-left">Task #4</span>
-                    <small class="pull-right">40%</small>
-                  </div>
-                  <div class="progress xs">
-                    <div class="progress-bar progress-bar-green" style="width: 40%;"></div>
-                  </div>
-                </div>
-                <!-- /.col -->
-              </div>
-              <!-- /.row -->
-            </div>
-          </div>
           <!-- /.box -->
 
         </section>
@@ -364,13 +262,7 @@ include 'header.php';
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 2.4.0
-    </div>
-    <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
-    reserved.
-  </footer>
+
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">

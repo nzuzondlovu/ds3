@@ -57,6 +57,28 @@ include 'header.php';
     <!-- /.row -->
 
     <!-- Modal -->
+     <div class="modal fade" id="viewItem" tabindex="-1" role="dialog" aria-labelledby="viewItemLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span> Close</button>
+            <h4 class="modal-title" id="addItemLabel">FeedBack</h4>
+          </div>
+          <div class="modal-body">
+            <form role="form" method="post" enctype="multipart/form-data">
+              <div class="form-group">
+                <label>Query</label>
+                <textarea name="description" class="form-control" rows="5"></textarea>
+              </div>
+              <button name="submit" type="submit" class="btn btn-primary">Reply</button>
+              <button type="reset" class="btn btn-default">Reset Form</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <div class="modal fade" id="addItem" tabindex="-1" role="dialog" aria-labelledby="addItemLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -97,7 +119,7 @@ include 'header.php';
           </div>
           <?php } ?>
         </div>
-        <div class="panel panel-default">
+      
           <div class="panel-heading">
             List of all responses
           </div>
@@ -110,7 +132,33 @@ include 'header.php';
                 </div>
               </div>
             </div> 
+
             <div class="table-responsive">
+            <?php
+                                $sql = "SELECT * FROM query WHERE user_id='".$_SESSION['user_id']."'";
+                                $rs_result = mysqli_query($con, $sql); //run the query
+                                $cart = mysqli_num_rows($rs_result);
+                                if ($cart < 0) {
+                                    $cart = 0;
+                                }
+                              
+                                ?>
+                                  <?php 
+        include('connect.php');
+        $result = $db->prepare("SELECT * FROM query where status like'unanswered' And user_id='".$_SESSION['user_id']."' ORDER BY id DESC");
+        $result->execute();
+        $sent = $result->rowcount();
+     
+
+      ?>
+                              <?php 
+        include('connect.php');
+        $result = $db->prepare("SELECT * FROM query where status like'answered' And user_id='".$_SESSION['user_id']."' ORDER BY id DESC");
+        $result->execute();
+        $feedback = $result->rowcount();
+        
+      ?>
+
               <?php
 
               $sql = "SELECT * FROM query WHERE user_id = '".$_SESSION['user_id']."'";
@@ -118,31 +166,136 @@ include 'header.php';
 
               if (mysqli_num_rows($res) > 0) {
                 echo '
-                <table id="bookings" class="table data-table">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Name</th>
-                      <th>Email</th>
-                      <th>Query</th>
-                      <th>Feedback</th>
+
+    <section class="content">
+      <div class="row">
+        <div class="col-md-3">
+          <a data-toggle="modal" data-target="#addItem" class="btn btn-primary btn-block margin-bottom">Compose</a>
+
+          <div class="box box-solid"> 
+            <div class="box-header with-border">
+              <h3 class="box-title">Folders</h3>
+
+              <div class="box-tools">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="box-body no-padding">
+              <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="#"><i class="fa fa-inbox"></i> Feedback
+                  <span class="label label-primary pull-right"> '.$feedback.'</span></a></li>
+
+                <li><a href="#"><i class="fa fa-envelope-o"></i> Query     <span class="label label-success pull-right"> '.$sent.'</span></a></li>
+
+                <li><a href="#"><i class="fa fa-file-text-o"></i>  '.$row['email'].'</a></li>
+                <li><a href="#"><i class="fa fa-filter"></i> Total Sent <span class="label label-warning pull-right">'.$cart.'</span></a>
+                </li>
+                <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
+              </ul>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /. box -->
+          <div class="box box-solid">
+         
+         
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-9">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Inbox</h3>
+
+              <div class="box-tools pull-right">
+                <div class="has-feedback">
+                  <input type="text" class="form-control input-sm" placeholder="Search Mail">
+                  <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                </div>
+              </div>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <div class="mailbox-controls">
+                <!-- Check all button -->
+                <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
+                </button>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
+                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
+                </div>
+                <!-- /.btn-group -->
+                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+                <div class="pull-right">
+                  1-50/200
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+                  </div>
+                  <!-- /.btn-group -->
+                </div>
+                <!-- /.pull-right -->
+              </div>
+
+                   <div class="table-responsive mailbox-messages">
+                <table id="bookings" class="table table-hover table-striped">
+      
+                 
                     </tr>
                   </thead>
                   <tbody>';
                     while ($row = mysqli_fetch_assoc($res)) {
 
                       echo '
-                      <tr>
-                        <td>'.$row['id'].'</td>
-                        <td>'.$row['name'].'</td>
-                        <td>'.$row['email'].'</td>
-                        <td>'.$row['query'].'</td>
-                        <td>'.$row['feedback'].'</td>
-                      </tr>';
+                        
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
+                    <td class="mailbox-name"><a data-toggle="modal" data-target="#viewItem">'.$row['name'].'</a></td>
+                    <td class="mailbox-subject"><b>'.$row['query'].'</b> - '.$row['feedback'].'
+                    <td class="mailbox-attachment"></td>
+                    <td class="mailbox-date">5 mins ago</td>
+             
+              </tr>
+                    ';
                     }
                     echo '
+
+
                   </tbody>
-                </table>';
+                </table>
+                </div>
+                         </div>
+            <!-- /.box-body -->
+            <div class="box-footer no-padding">
+              <div class="mailbox-controls">
+                <!-- Check all button -->
+                <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
+                </button>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
+                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
+                </div>
+                <!-- /.btn-group -->
+                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+                <div class="pull-right">
+                  1-50/200
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+                  </div>
+                  <!-- /.btn-group -->
+                </div>
+                <!-- /.pull-right -->
+              </div>
+            </div>
+                ';
               } else {
                 echo '<div class="alert alert-info">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -158,7 +311,7 @@ include 'header.php';
       <!-- /.panel -->
     </div>
   </div>
-</div>
+
 <!-- /.container-fluid -->
 </div>
 <!-- /#page-wrapper -->
