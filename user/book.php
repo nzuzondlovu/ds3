@@ -22,12 +22,20 @@ if(isset($_POST['submit'])) {
     $target_dir = "../uploads/";
     $url = basename( $_FILES["fileToUpload"]["name"]);
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-    $user = $_SESSION['user_id'];    
+    $user = $_SESSION['user_id'];  
+    $description2=""; 
+    $date_in=  date("Y-m-d H:i:s");
+     $date_out=  date("Y-m-d H:i:s");
+    $status ="";
+    $technician="";
+    $archive=0;
+
+
 
     if($name !='' && $serial !='' && $type !='' && $description !=''){
 
-        $sql = "INSERT INTO job(user, name, serial, type, pic_url, description, date)
-        VALUES('".$user."', '".$name."', '".$serial."', '".$type."', '".$url."', '".$description."', '".$date."')";
+       echo $sql = "INSERT INTO job(user, name, serial, type, pic_url, description, date,description2,date_in,status,technician,date_out,archive)
+        VALUES('".$user."', '".$name."', '".$serial."', '".$type."', '".$url."', '".$description."', '".$date."','".$description2."','".$date_in."','".$status."','".$technician."','".$date_out."','".$archive."')";
         upload($url, $target_dir, $target_file, $sql, $con);
 
     }else{

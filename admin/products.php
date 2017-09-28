@@ -10,6 +10,10 @@ if(isset($_SESSION['key']) == '' ) {
 	header("location:../login.php");
 }
 ?>
+
+
+
+
 <script>
 function sum() {
             var txtFirstNumberValue = document.getElementById('txt1').value;
@@ -44,6 +48,36 @@ function sum() {
 </script>
 
 
+<?php
+
+
+
+
+if(isset($_POST['btnPromo'])) {
+	$price = mysqli_real_escape_string($con, strip_tags(trim($_POST["price"])));
+	$start = mysqli_real_escape_string($con, strip_tags(trim($_POST["start"])));
+	$end = mysqli_real_escape_string($con, strip_tags(trim($_POST["end"])));
+	$date = date("Y-m-d");
+	
+	if($price != '' && $start != '' && $end != '') {
+
+		if ($start < $date) {
+			$_SESSION['failure'] = 'Entered start date has past already.';
+
+		} else if ($end > $start) {
+
+			$sql = "UPDATE product SET promo_price='".$price."', promo_date1='".$start."', promo_date2='".$end."' WHERE id='".$promoid."'";
+			mysqli_query($con, $sql);
+			$_SESSION['success'] = 'Your new Promotional Product was added successfully.';
+			header("Location: promotions.php");
+		} else {
+			$_SESSION['failure'] = 'Entered end date has past already.';
+		}		
+	}else {
+		$_SESSION['failure'] = 'Please fill in all fields.';
+	}
+}
+?>
 <?php
 include 'header.php';
 ?>
@@ -96,8 +130,12 @@ include 'header.php';
 
 <?php
 
-if(isset($_POST['btnSubmit'])) {
+if(isset($_POST['btnSubmit']))
+ {
 
+$archive=0;
+$promo_price=0;
+ 	$promo_date1 = date("Y-m-d H:i:s");
 	$name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
 	$type = mysqli_real_escape_string($con, strip_tags(trim($_POST["type"])));
 	$description = mysqli_real_escape_string($con, strip_tags(trim($_POST["description"])));
@@ -106,8 +144,9 @@ if(isset($_POST['btnSubmit'])) {
 	$supplier = mysqli_real_escape_string($con, strip_tags(trim($_POST["supplier"])));
 	$oPrice = mysqli_real_escape_string($con, strip_tags(trim($_POST["oPrice"])));
 	$profit = mysqli_real_escape_string($con, strip_tags(trim($_POST["profit"])));
-	
+		$onhand_qty  = mysqli_real_escape_string($con, strip_tags(trim($_POST["profit"])));
 	$qty = mysqli_real_escape_string($con, strip_tags(trim($_POST["qty"])));
+	 	$promo_date2 =date("Y-m-d H:i:s");
 
 
 
@@ -120,13 +159,20 @@ if(isset($_POST['btnSubmit'])) {
 	$user = $_SESSION['user_id'];
 	$date = date("Y-m-d H:i:s");
 
-	$sql = "INSERT INTO product(user, name, description, type, price, pic_url, date,brandname,supplier,oPrice,profit,onhand_qty,qty,qty_sold)
-	VALUES
-	('".$user."', '".$name."', '".$description."', '".$type."', '".$price."', '".$url."', '".$date."', '".$brandname."', 
-	'".$supplier."', '".$oPrice."', '".$profit."','".$qty."')";
+/*INSERT INTO `product`(`id`, `user`, `name`, `description`, `type`, `price`, `promo_price`, `pic_url`, `date`, `promo_date1`, `promo_date2`, `archive`, `onhand_qty`, `qty`, `qty_sold`, `supplier`, `brandname`, `oPrice`, `profit`, `brand_name`, `generic_name`, `supplierID`, `order_price`, `barcode`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10],[value-11],[value-12],[value-13],[value-14],[value-15],[value-16],[value-17],[value-18],[value-19],[value-20],[value-21],[value-22],[value-23],[value-24])
 
-	
 
+*/	 $sql = "INSERT INTO product(user, name, description, type, price, pic_url, date,onhand_qty,qty,supplier,brandname,oPrice,profit,promo_price,promo_date1,promo_date2,archive)
+
+
+	VALUES('$user', '$name', '$description', '$type', '$price', '$url', '$date','$onhand_qty','$qty','$supplier', '$brandname', 
+	 '$oPrice', '$profit','$promo_price','$promo_date1','$promo_date2','$archive')";
+
+
+	     mysqli_query($con, $sql);
+
+	          $_SESSION['success'] = 'Your new driver was added successfully.';
+        header("Location: products.php");
 	upload($url, $target_dir, $target_file, $sql, $con);
 
 
@@ -276,6 +322,19 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 				</div>
 			</div>
 		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 		<!-- /.Modal -->
 
 		<div class="row">
@@ -358,6 +417,8 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 
 
 												$button = '<a onclick="promoModal('.$row['id'].')"  class="label label-info">Edit Promo</>   <a onclick="productModal('.$row['id'].')"  class="label label-primary">Edit</a>';
+
+
 											}
 
 											echo '
@@ -443,22 +504,24 @@ if(isset($_SESSION['key']) == '' ) {
 
 <?php
 
-if(isset($_POST['submit'])) {
+if(isset($_POST['btnCat'])) {
 
 	$name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
 	$type = mysqli_real_escape_string($con, strip_tags(trim($_POST["type"])));
 	$description = mysqli_real_escape_string($con, strip_tags(trim($_POST["description"])));
 	$date = date("Y-m-d H:i:s");
+	$archive =0;
 
 
 
 	if($name != '' && $type != '' && $description != '') {
 
-		$sql = "INSERT INTO category(name, type, description, dateCreated)
-		VALUES('".$name."', '".$type."','".$description."' , '".$date."')";
+		echo $sql = "INSERT INTO category(name, type, description, dateCreated,archive)
+		VALUES('".$name."', '".$type."','".$description."' , '".$date."', '".$archive."')";
 		mysqli_query($con, $sql);
 		$_SESSION['success'] = 'Your new category was added successfully.';
-		header("Location: categories.php");
+		header("Location: products.php?id={$btnCat}");
+		//Location: /dns/dns_soa_edit.php?id={$zone_id}
 	}else {
 		$_SESSION['failure'] = 'Please fill in all fields.';
 	}
@@ -521,7 +584,7 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 								<label>Category description</label>
 								<textarea name="description" class="form-control" rows="3"></textarea>
 							</div>
-							<button name="submit" type="submit" class="btn btn-primary">Submit Category</button>
+							<button name="btnCat" type="submit" class="btn btn-primary">Submit Category</button>
 							<button type="reset" class="btn btn-default">Reset Category</button>
 						</form>
 					</div>
@@ -574,10 +637,10 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 
 							if (mysqli_num_rows($res) > 0) {
 								echo '								
-								<table id="category" class="table data-table">
+								<table id="category" class="table table-bordered table-hover">
 									<thead>
 										<tr>
-											<th>Category ID</th>
+									
 											<th>Name</th>
 											<th>Type</th>
 											<th>Description</th>
@@ -590,7 +653,7 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 
 											echo '
 											<tr>
-												<td>'.$row['id'].'</td>
+											
 												<td>'.$row['name'].'</td>
 												<td>'.$row['type'].'</td>
 												<td>'.$row['description'].'</td>
@@ -663,8 +726,11 @@ if(isset($_SESSION['key']) == '' ) {
 							<div class="col-lg-12">
 								<div class="pull-right">
 									<a href="products.php" class="btn btn-success"> Create Promotion</a>
+									x
 								</div>
 							</div>
+
+
 						</div>
 						<div class="table-responsive">
 							<?php
@@ -677,29 +743,28 @@ if(isset($_SESSION['key']) == '' ) {
 								<table id="promo" class="table">
 									<thead>
 										<tr>
-											<th>ID</th>
-											<th>User</th>
-											<th>Description</th>
+										
+											
+											<th>Details</th>
 											<th>Promo Price</th>
 											<th>Promo Dates</th>
-											<th>Picture</th>
 											<th>Action</th>
 										</tr>
 									</thead>
 									<tbody>';
 										while ($row = mysqli_fetch_assoc($res)) {
 
-											$details = $row['name'].'<br>'.$row['description'].'<br>'.$row['type'].'<br> R '.$row['price'];
+											$details = $row['name'].'<br>'.$row['type'].'<br> R '.$row['price'];
+
 											$dates = date("M d, y",strtotime($row['promo_date1'])).' - '.date("M d, y",strtotime($row['promo_date2']));
 											echo '
 											<tr>
-												<td>'.$row['id'].'</td>
-												<td>'.$row['user'].'</td>
+											
 												<td>'.$details.'</td>
 												<td> R '.$row['promo_price'].'</td>
 												<td>'.$dates.'</td>
-												<td><img class="img-responsive" src="../uploads/'.$row['pic_url'].'"></td>
-												<td><a href="editpromo.php?id='.$row['id'].'" class="btn btn-primary">Edit Promo</a></td>
+											
+												<td><a href="editpromo.php?id='.$row['id'].'" class="label label-primary">Edit Promo</a></td>
 											</tr>';
 										}
 										echo '

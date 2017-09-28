@@ -3,7 +3,7 @@ $sitename = 'Infinity';
 $siteaddress = '';
 session_start();
 //"localhost","thehewri_main","SzlqF-n,X2m$","thehewri_master"
-$con = mysqli_connect("localhost","root","","shop");
+$con = mysqli_connect("localhost","nzuzor1","hohi74Ro","shop");
 
 function head($type)
 {
@@ -31,6 +31,10 @@ function user($type)
           <li class="active">
 
 		<a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+	</li>
+	<li class="active">
+
+		<a href="cashflow.php"><i class="fa fa-dashboard fa-fw"></i> Cash Flow</a>
 	</li>
    <li class="active">
 		<a href="bookings.php"><i class="fa fa-book fa-fw"></i> <span> Bookings</span></a>
@@ -86,6 +90,10 @@ function user($type)
 			</li>
 		</ul>
 		<!-- /.nav-second-level -->
+	</li>
+	<li class="">
+
+		<a href="analytics.php"><i class="fa fa-line-chart fa-fw"></i> Analytics</a>
 	</li>
 	<li>
 		<a href="#"><i class="fa fa-money fa-fw"></i> Cash Flow<span class="fa arrow"></span></a>
