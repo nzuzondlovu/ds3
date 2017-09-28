@@ -33,6 +33,7 @@
         <link rel="stylesheet" href="../assets/css/skins/_all-skins.min.css">
 
 
+<<<<<<< HEAD
 
   <link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <!-- Google Font -->
@@ -40,7 +41,19 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     </head>
 
+=======
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+>>>>>>> 911ccd41d496a4caa27b6d71eafbbeea09d349c7
 
+<!-- Google Font -->
+<link rel="stylesheet"
+href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
 
 
 <body class="hold-transition skin-yellow layout-boxed">
@@ -55,7 +68,6 @@
         <span class="logo-mini"><b>A</b>LT</span>
         <!-- logo for regular state and mobile devices -->
         <span class="logo-lg"><b></b>LTE</span>
-
       </a>
 
       <!-- Header Navbar -->
@@ -407,7 +419,7 @@
 
     //Timepicker
     $('.timepicker').timepicker({
-      showInputs: 	
+      showInputs: false
     })
   })
-</script>  
+</script>   
