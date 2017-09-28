@@ -46,8 +46,6 @@ function sum() {
 			
         }
 </script>
-
-
 <?php
 
 
@@ -58,6 +56,7 @@ if(isset($_POST['btnPromo'])) {
 	$start = mysqli_real_escape_string($con, strip_tags(trim($_POST["start"])));
 	$end = mysqli_real_escape_string($con, strip_tags(trim($_POST["end"])));
 	$date = date("Y-m-d");
+	$id = mysqli_real_escape_string($con, strip_tags(trim($_POST["id"])));
 	
 	if($price != '' && $start != '' && $end != '') {
 
@@ -66,10 +65,10 @@ if(isset($_POST['btnPromo'])) {
 
 		} else if ($end > $start) {
 
-			$sql = "UPDATE product SET promo_price='".$price."', promo_date1='".$start."', promo_date2='".$end."' WHERE id='".$promoid."'";
+	 $sql = " UPDATE product SET promo_price='".$price."', promo_date1='".$start."', promo_date2='".$end."' WHERE id='".$id."'";
 			mysqli_query($con, $sql);
 			$_SESSION['success'] = 'Your new Promotional Product was added successfully.';
-			header("Location: promotions.php");
+			header("Location: products.php");
 		} else {
 			$_SESSION['failure'] = 'Entered end date has past already.';
 		}		
@@ -195,6 +194,9 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 }
 ?>
 
+
+
+
 			<?php 
 				include('connect.php');
 				$result = $db->prepare("SELECT * FROM product ORDER BY qty_sold DESC");
@@ -209,6 +211,8 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 				$rowcount123 = $result->rowcount();
 
 			?>
+
+
 				<div style="text-align:center;">
 			Total Number of Products:  <font color="green" style="font:bold 22px 'Aleo';">[<?php echo $rowcount;?>]</font>
 			</div>
@@ -361,18 +365,7 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="pull-right">
-								
-								</div>
-							</div>
-						</div>
-						<div class="table-responsive">					 <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header">
-        
-
-              <div class="box-tools">
-                <div class="input-group input-group-sm" >
+								    <div class="input-group input-group-sm" >
                   
 
                   <div class="input-group-btn">
@@ -382,10 +375,24 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 
                   </div>
                 </div>
+								</div>
+							</div>
+						</div>
+						<div class="table-responsive">					 <div class="row">
+        <div class="col-xs-12">
+
+          <div class="box">
+
+            <div class="box-header">
+        
+
+              <div class="box-tools">
+            
               </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
+
 							<?php
 
 							$sql = "SELECT * FROM product WHERE archive = 0";
@@ -416,7 +423,7 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 
 
 
-												$button = '<a onclick="promoModal('.$row['id'].')"  class="label label-info">Edit Promo</>   <a onclick="productModal('.$row['id'].')"  class="label label-primary">Edit</a>';
+												$button = '<a onclick="promoModal('.$row['id'].')"  class="label label-info">Edit Promo</a>   <a onclick="productModal('.$row['id'].')"  class="label label-primary">Edit</a>';
 
 
 											}
@@ -516,11 +523,11 @@ if(isset($_POST['btnCat'])) {
 
 	if($name != '' && $type != '' && $description != '') {
 
-		echo $sql = "INSERT INTO category(name, type, description, dateCreated,archive)
+	 $sql = "INSERT INTO category(name, type, description, dateCreated,archive)
 		VALUES('".$name."', '".$type."','".$description."' , '".$date."', '".$archive."')";
 		mysqli_query($con, $sql);
 		$_SESSION['success'] = 'Your new category was added successfully.';
-		header("Location: products.php?id={$btnCat}");
+		header("Location: products.php");
 		//Location: /dns/dns_soa_edit.php?id={$zone_id}
 	}else {
 		$_SESSION['failure'] = 'Please fill in all fields.';
@@ -616,19 +623,29 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 		<!-- /.row -->
 		<div class="row">
 			<div class="col-lg-12">
-				<div class="panel panel-default">
+			
 					<div class="panel-heading">
-						List of all categories
-					</div>
-					<!-- /.panel-heading -->
-					<div class="panel-body">
+					
+
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="pull-right">
-									<button class="btn btn-success" data-toggle="modal" data-target="#addCat"> Add Category</button>
+								    <div class="input-group input-group-sm" >
+                  
+
+                  <div class="input-group-btn">
+                    <button  class="btn btn-default"  data-toggle="modal" data-target="#addItem"><i class="fa fa-th"></i></button>
+	<button class="btn btn-success" data-toggle="modal" data-target="#addCat"> Add Category</button>
+
+                  </div>
+                </div>
 								</div>
 							</div>
 						</div>
+					</div>
+					<!-- /.panel-heading -->
+					<div class="panel-body">
+					
 						<div class="table-responsive">
 							<?php
 
@@ -681,7 +698,7 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 			</div>
 			<!-- /.panel -->
 		</div>
-	</div>
+
 
 <!-- /#page-wrapper -->
 
@@ -705,6 +722,37 @@ if(isset($_SESSION['key']) == '' ) {
 
 
 
+<?php
+ 
+
+
+
+if(isset($_POST['btnPromo'])) {
+	$price = mysqli_real_escape_string($con, strip_tags(trim($_POST["price"])));
+	$start = mysqli_real_escape_string($con, strip_tags(trim($_POST["start"])));
+	$end = mysqli_real_escape_string($con, strip_tags(trim($_POST["end"])));
+	$date = date("Y-m-d");
+	$id = mysqli_real_escape_string($con, strip_tags(trim($_POST["id"])));
+	
+	if($price != '' && $start != '' && $end != '') {
+
+		if ($start < $date) {
+			$_SESSION['failure'] = 'Entered start date has past already.';
+
+		} else if ($end > $start) {
+
+			echo 	$sql = "UPDATE product SET promo_price='".$price."', promo_date1='".$start."', promo_date2='".$end."' WHERE id='".$id."'";
+			//mysqli_query($con, $sql);
+			//$_SESSION['success'] = 'Your new Promotional Product was added successfully.';
+			//header("Location: promotions.php");
+		} else {
+			$_SESSION['failure'] = 'Entered end date has past already.';
+		}		
+	}else {
+		$_SESSION['failure'] = 'Please fill in all fields.';
+	}
+}
+?>
 <!-- Page Content -->
 
 		<div class="row">
@@ -716,19 +764,14 @@ if(isset($_SESSION['key']) == '' ) {
 		<!-- /.row -->
 		<div class="row">
 			<div class="col-lg-12">
-				<div class="panel panel-default">
+				<div class="panel panel-info">
 					<div class="panel-heading">
 						List of all promotional products
 					</div>
 					<!-- /.panel-heading -->
 					<div class="panel-body">
 					<div class="row">
-							<div class="col-lg-12">
-								<div class="pull-right">
-									<a href="products.php" class="btn btn-success"> Create Promotion</a>
-									x
-								</div>
-							</div>
+						
 
 
 						</div>
@@ -764,7 +807,7 @@ if(isset($_SESSION['key']) == '' ) {
 												<td> R '.$row['promo_price'].'</td>
 												<td>'.$dates.'</td>
 											
-												<td><a href="editpromo.php?id='.$row['id'].'" class="label label-primary">Edit Promo</a></td>
+												<td><a onclick="promoModal('.$row['id'].')"  class="label label-info">Edit Promo</a></td>
 											</tr>';
 										}
 										echo '
@@ -872,7 +915,7 @@ if(isset($_GET['ar']) && $_GET['ar'] != '') {
 								<table id="review" class="table data-table">
 									<thead>
 										<tr>
-											<th>ID</th>
+										
 											<th>Product</th>
 											<th>User ID</th>
 											<th>Name</th>
@@ -904,7 +947,7 @@ if(isset($_GET['ar']) && $_GET['ar'] != '') {
 
 											echo '
 											<tr>
-												<td>'.$row['id'].'</td>
+												
 												<td>'.$prodD.'</td>
 												<td>'.$row['user'].'</td>
 												<td>'.$row['name'].'</td>
@@ -1039,4 +1082,19 @@ include 'footer.php';
             }
         });
     }
+</script>
+
+
+	<!-- DataTables -->
+	<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+	<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+
+
+
+            <script>
+  $(function () {
+    $('#products').DataTable()
+
+  })
 </script>

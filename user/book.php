@@ -18,7 +18,9 @@ if(isset($_POST['submit'])) {
     $serial = mysqli_real_escape_string($con, strip_tags(trim($_POST["serial"])));
     $type = mysqli_real_escape_string($con, strip_tags(trim($_POST["type"])));
     $description = mysqli_real_escape_string($con, strip_tags(trim($_POST["description"])));
-    $date = date("Y-m-d H:i:s");
+        $date = mysqli_real_escape_string($con, strip_tags(trim($_POST["date"])));
+        $time =mysqli_real_escape_string($con, strip_tags(trim($_POST["time"])));
+   // $date = date("Y-m-d H:i:s");
     $target_dir = "../uploads/";
     $url = basename( $_FILES["fileToUpload"]["name"]);
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
@@ -78,25 +80,34 @@ include 'header.php';
                     </div>
                     <?php } ?>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Enter booking details
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-offset-3 col-md-6">
-                                <form role="form" method="post" enctype="multipart/form-data">
-                                    <div class="form-group">
+
+      <div class="row">
+        <!-- Left col -->
+        <section class="col-lg-7 connectedSortable">
+          <!-- Custom tabs (Charts with tabs)-->
+          <div class="nav-tabs-custom">
+            <!-- Tabs within a box -->
+            <ul class="nav nav-tabs pull-right">
+              <li class="active"><a href="#" data-toggle="tab"></a></li>
+              <li class="active"><a href="#" data-toggle="tab"></a></li>
+              <li class="pull-left header"><i class="fa fa-inbox"></i> Booking Details </li>
+            </ul>
+            <div class="tab-content no-padding" style="position: relative; height: 600px;" >
+         
+
+                       <form role="form" method="post" enctype="multipart/form-data">
+
+                                    <div class="form-group col-lg-6">
                                         <label>Device name</label>
                                         <input type="text" name="name" class="form-control" placeholder="Enter text">
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group col-lg-6">
                                         <label>Serial number</label>
                                         <input name="serial" class="form-control" placeholder="Enter text">
                                     </div>                                        
-                                    <div class="form-group">
+                                    <div class="form-group col-lg-6">
                                     <label>Device type</label>
-                                        <select name="type" class="form-control">
+                                        <select name="type" class="form-control col-lg-6">
                                             <option value="" selected="selected">Select type</option>
                                             <?php
                                             $sql = "SELECT * FROM category ORDER BY name ASC";
@@ -110,48 +121,345 @@ include 'header.php';
                                             ?>
                                         </select>
                                     </div>
+
                                     <div class="form-group">
-                                        <label>Upload picture</label>
-                                        <input type="file" name="fileToUpload">
+                                   <label>Upload Picture </label>
+                                            <input hidden="true" type="file" id="ftu" name="fileToUpload" style="display: none;">
+
+                                                 <label for="ftu" class="btn btn-success col-lg-6 " > Browse...	
+
+                                                 <i class="glyphicon glyphicon-cloud-upload"> </i>
+
+
+
+                      </label>    
+
+
+
                                     </div>
-                                    <div class="form-group">
-                                        <label>What happened to the device</label>
+                                    <div class="form-group ">
+                                        <label class="col-lg-12">What happened to the device</label>
                                         <textarea name="description" class="form-control" rows="3"></textarea>
                                     </div>
         
-         <div class="form-group">
+         <div class="form-group col-lg-6">
                 <label>Date:</label>
 
                 <div class="input-group date">
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" id="datepicker">
+                  <input name="date" type="text" class="form-control pull-right" id="datepicker">
                 </div>
                 <!-- /.input group -->
               </div>
-                        <div class="bootstrap-timepicker">
-                <div class="form-group">
+                        <div class="bootstrap-timepicker pull-right ">
+                <div class="form-group col-lg-12">
                   <label>Time picker:</label>
 
                   <div class="input-group">
-                    <input type="text" class="form-control timepicker">
+                    <input type="text" class="form-control timepicker" name="time">
 
                     <div class="input-group-addon">
-                      <i class="fa fa-clock-o"></i>
+                      <i class="fa fa-clock-o "></i>
                     </div>
                   </div>
                   <!-- /.input group -->
                 </div>
                 <!-- /.form group -->
               </div>
+              <div class="col-lg-12">
+
                                     <button name="submit" type="submit" class="btn btn-primary">Submit Booking</button>
                                     <button type="reset" class="btn btn-default">Reset Booking</button>
 
-
+</div>
 
                                 </form>
 
+              <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;"></div>
+              <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
+            </div>
+          </div>
+          <!-- /.nav-tabs-custom -->
+
+
+          <!-- /.box (chat box) -->
+
+          <!-- TO DO List -->
+          <!-- /.box -->
+
+          <!-- quick email widget -->
+
+
+        </section>
+        <!-- /.Left col -->
+        <!-- right col (We are only adding the ID to make the widgets sortable)-->
+        <section class="col-lg-5 connectedSortable">
+
+          <!-- Map box -->
+          <div class="box box-solid bg-light-blue-gradient">
+            <div class="box-header">
+              <!-- tools box -->
+              <div class="pull-right box-tools">
+                <button type="button" class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip"
+                        title="Date range">
+                  <i class="fa fa-calendar"></i></button>
+                <button type="button" class="btn btn-primary btn-sm pull-right" data-widget="collapse"
+                        data-toggle="tooltip" title="Collapse" style="margin-right: 5px;">
+                  <i class="fa fa-minus"></i></button>
+              </div>
+              <!-- /. tools -->
+
+              <i class="fa fa-map-marker"></i>
+
+              <h3 class="box-title">
+                Store Details
+              </h3>
+            </div>
+            <div class="box-body">
+              <div id="#" style="height: 250px; width: 100%;"> ....	</div>
+
+
+    
+            </div>
+            <!-- /.box-body-->
+            <div class="box-footer no-border">
+              <div class="row">
+                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+                  <div id="sparkline-1"></div>
+                  <div class="knob-label">Mon-Fri</div>
+                </div>
+                <!-- ./col -->
+                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+                  <div id="sparkline-2"></div>
+                  <div class="knob-label">08h00</div>
+                </div>
+                <!-- ./col -->
+                <div class="col-xs-4 text-center">
+                  <div id="sparkline-3"></div>
+                  <div class="knob-label">17h00 </div>
+                </div>
+                <!-- ./col -->
+              </div>
+              <!-- /.row -->
+            </div>
+          </div>
+          <!-- /.box -->
+
+          <!-- solid sales graph -->
+          
+
+
+          <!-- /.box -->
+
+        </section>
+        <!-- right col -->
+      </div>
+      <!-- /.row (main row) -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Create the tabs -->
+    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <!-- Home tab content -->
+      <div class="tab-pane" id="control-sidebar-home-tab">
+        <h3 class="control-sidebar-heading">Recent Activity</h3>
+        <ul class="control-sidebar-menu">
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+
+                <p>Will be 23 on April 24th</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-user bg-yellow"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
+
+                <p>New phone +1(800)555-1234</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
+
+                <p>nora@example.com</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-file-code-o bg-green"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
+
+                <p>Execution time 5 seconds</p>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
+        <h3 class="control-sidebar-heading">Tasks Progress</h3>
+        <ul class="control-sidebar-menu">
+          <li>
+            <a href="javascript:void(0)">
+              <h4 class="control-sidebar-subheading">
+                Custom Template Design
+                <span class="label label-danger pull-right">70%</span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <h4 class="control-sidebar-subheading">
+                Update Resume
+                <span class="label label-success pull-right">95%</span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-success" style="width: 95%"></div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <h4 class="control-sidebar-subheading">
+                Laravel Integration
+                <span class="label label-warning pull-right">50%</span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <h4 class="control-sidebar-subheading">
+                Back End Framework
+                <span class="label label-primary pull-right">68%</span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
+      </div>
+      <!-- /.tab-pane -->
+      <!-- Stats tab content -->
+      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+      <!-- /.tab-pane -->
+      <!-- Settings tab content -->
+      <div class="tab-pane" id="control-sidebar-settings-tab">
+        <form method="post">
+          <h3 class="control-sidebar-heading">General Settings</h3>
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Report panel usage
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Some information about this general settings option
+            </p>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Allow mail redirect
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Other sets of options are available
+            </p>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Expose author name in posts
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Allow the user to show his name in blog posts
+            </p>
+          </div>
+          <!-- /.form-group -->
+
+          <h3 class="control-sidebar-heading">Chat Settings</h3>
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Show me as online
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Turn off notifications
+              <input type="checkbox" class="pull-right">
+            </label>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Delete chat history
+              <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
+            </label>
+          </div>
+          <!-- /.form-group -->
+        </form>
+      </div>
+      <!-- /.tab-pane -->
+    </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Enter booking details
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-6">
+                       
 
                             </div>
                             <!-- /.col-lg-6 (nested) -->
@@ -205,8 +513,9 @@ include 'footer.php';
 <script src="bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
+<script src="   plugins/timepicker/bootstrap-timepicker.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
+  <link rel="stylesheet" href="plugins/timepicker/bootstrap-timepicker.min.css">
 <!-- Page script -->
 <script>
   $(function () {
@@ -214,9 +523,9 @@ include 'footer.php';
     $('.select2').select2()
 
     //Datemask dd/mm/yyyy
-    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+    $('#datemask').inputmask('yyyy/mm/dd', { 'placeholder': 'yyyy/mm/dd' })
     //Datemask2 mm/dd/yyyy
-    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+    $('#datemask2').inputmask('yyyy/mm/dd', { 'placeholder': 'yyyy/mm/dd' })
     //Money Euro
     $('[data-mask]').inputmask()
 
@@ -245,7 +554,9 @@ include 'footer.php';
 
     //Date picker
     $('#datepicker').datepicker({
-      autoclose: true
+      autoclose: true,
+       format: 'yyyy/mm/dd',
+    startDate: '-3d'
     })
 
     //iCheck for checkbox and radio inputs

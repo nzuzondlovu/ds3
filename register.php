@@ -13,11 +13,11 @@ if(isset($_POST['submit'])) {
     $location = mysqli_real_escape_string($con, strip_tags(trim($_POST["location"])));
     $email = mysqli_real_escape_string($con, strip_tags(trim($_POST["email"])));
     $password = md5(mysqli_real_escape_string($con, strip_tags(trim($_POST["password"]))));
-    $role = '';
+    $role = "";
 
     if($name !='' && $surname !='' && $cell !='' && $idnumber !='' && $location !='' && $email !='' && $password !=''){
 
-        $sql = "INSERT INTO user(name, surname, cell, idnumber, location, email, password, role)
+       echo $sql = "INSERT INTO user(name, surname, cell, idnumber, location, email, password, role)
         VALUES('".$name."', '".$surname."', '".$cell."', '".$idnumber."', '".$location."', '".$email."', '".$password."', '".$role."')";
         mysqli_query($con, $sql);
         $_SESSION['success'] = 'You have been registered succesfully, please log in.';

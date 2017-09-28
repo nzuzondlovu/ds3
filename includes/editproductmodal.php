@@ -9,6 +9,7 @@ if(isset($_SESSION['key']) == '' ) {
 }
 ?>
 
+
 <?php
 
   
@@ -16,8 +17,13 @@ if(isset($_SESSION['key']) == '' ) {
 
 if(isset($_POST['submit'])) {
   $price = mysqli_real_escape_string($con, strip_tags(trim($_POST["price"])));
-  $start = mysqli_real_escape_string($con, strip_tags(trim($_POST["start"])));
-  $end = mysqli_real_escape_string($con, strip_tags(trim($_POST["end"])));
+  $bname = mysqli_real_escape_string($con, strip_tags(trim($_POST["start"])));
+  $genname = mysqli_real_escape_string($con, strip_tags(trim($_POST["end"])));
+    $type = mysqli_real_escape_string($con, strip_tags(trim($_POST["price"])));
+  $description = mysqli_real_escape_string($con, strip_tags(trim($_POST["start"])));
+ 
+
+
   $date = date("Y-m-d");
   
   if($price != '' && $start != '' && $end != '') {
@@ -26,13 +32,14 @@ if(isset($_POST['submit'])) {
       $_SESSION['failure'] = 'Entered start date has past already.';
 
     } else if ($end > $start) {
+$//sql = "INSERT INTO product(user, name, description, type, price, pic_url, date,onhand_qty,qty,supplier,brandname,oPrice,profit,promo_price,promo_date1,promo_date2,archive)
 
-      $sql = "UPDATE product SET promo_price='".$price."', promo_date1='".$start."', promo_date2='".$end."' WHERE id='".$id."'";
+      $sql = "UPDATE product SET price='".$price."', brandname='".$brandname."', name='".$name."' WHERE id='".$id."'";
       mysqli_query($con, $sql);
-      $_SESSION['success'] = 'Your new Promotional Product was added successfully.';
+      $_SESSION['success'] = 'details successfully updated';
       header("Location: promotions.php");
     } else {
-      $_SESSION['failure'] = 'Entered end date has past already.';
+      $_SESSION['failure'] = '';
     }   
   }else {
     $_SESSION['failure'] = 'Please fill in all fields.';
@@ -184,9 +191,11 @@ if (isset($_POST['id']) && $_POST['id'] != null)
                     <label>Device description</label>
                     <textarea name="description" class="form-control" rows="3"><?php echo $des; ?></textarea>
                   </div>
+                       <input type="text" name="id" value="<?= $id; ?>" hidden>
                   <button name="submit" type="submit" class="btn btn-primary">Update Product</button>
                   <button type="reset" class="btn btn-default">Reset Form</button>
                 </form>
+
               </div>
               <!-- /.col-lg-6 (nested) -->
             </div>

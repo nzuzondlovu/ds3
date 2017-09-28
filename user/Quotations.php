@@ -25,23 +25,9 @@ include 'header.php';
 		<!-- /.row -->
 		<div class="row">
 			<div class="col-lg-12">
-			
+				<div class="panel panel-default">
 					<div class="panel-heading">
-						<?php
-
-                                        $res = mysqli_query($con, "SELECT * FROM user WHERE id='".$_SESSION['user_id']."' ");
-                                        $row = mysqli_fetch_assoc($res);
-                                        echo"Hello " ;echo$row['name']; echo " "; echo $row['surname']; echo " You Have ";
-                                         $sql = "SELECT * FROM job WHERE user='".$_SESSION['user_id']."'";
-                                $rs_result = mysqli_query($con, $sql); //run the query
-                                $cart = mysqli_num_rows($rs_result);
-                                if ($cart < 0) {
-                                    $cart = 0;
-                                }
-                                echo $cart;
-                                echo " Bookings" ; 
-
-                                        ?>
+						List of all bookings
 					</div>
 					<!-- /.panel-heading -->
 					<div class="panel-body">
@@ -57,42 +43,50 @@ include 'header.php';
 								$page=1;
 							}
 
-
 							$start_from = ($page-1) * $num_rec_per_page;
-							$sql = "SELECT * FROM job WHERE user ='".$_SESSION['user_id']."' ORDER BY id DESC LIMIT $start_from, $num_rec_per_page";
+							$sql = "SELECT * FROM quotation WHERE user ='".$_SESSION['user_id']."' ORDER BY id DESC LIMIT $start_from, $num_rec_per_page";
 							$res = mysqli_query($con, $sql);
 
 							if (mysqli_num_rows($res) > 0) {
 								echo '
-								<table class="table table-responsive">
+								<table class="table">
 									<thead>
 										<tr>
 										
 											<th>Device name</th>
 											<th>Serial</th>
-											<th>Type</th>
-											<th>Picture</th>
+											<th>Model</th>
+											<th>Accessory	</th>
+											<th>Technician</th>
 											<th>Description</th>
-											<th>Date</th>
-										
-											
+											<th>Deposit</th>
+											<th>Balance</th>
+											<th>Total</th>
+												<th>Status</th>
 										</tr>
 									</thead>
 									<tbody>';
 										while ($row = mysqli_fetch_assoc($res)) {
-
 
 											echo '
 											<tr>
 												
 												<td>'.$row['name'].'</td>
 												<td>'.$row['serial'].'</td>
-												<td>'.$row['type'].'</td>
-												<td> <img src="../uploads/'.$row['pic_url'].'" class="img-rounded" alt="image" width="20" height="20"></td>
-												<td style="word-wrap: break-word;min-width: 120px;max-width: 10px;" >'	.$row['description']. ' </td>
-												<td>'.date("M d, y",strtotime($row['date'])).'</td>
+												<td>'.$row['model'].'</td>
 											
-												
+												<td>'.$row['accessory'].'</td>
+											
+												<td>'.$row['technician'].'</td>
+
+
+												<td>'.$row['description'].'</td>
+											
+												<td>'.$row['deposit'].'</td>
+												<td>'.$row['balance'].'</td>
+											
+												<td>'.$row['total'].'</td>
+												<td>'.$row['status'].'</td>
 											
 											</tr>';
 										}
@@ -156,7 +150,7 @@ include 'header.php';
 		<!-- /.panel -->
 	</div>
 </div>
-
+</div>
 <!-- /.container-fluid -->
 </div>
 <!-- /#page-wrapper -->
