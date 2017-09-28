@@ -33,7 +33,7 @@
         <link rel="stylesheet" href="../assets/css/skins/_all-skins.min.css">
 
 
-  <
+
   <link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <!-- Google Font -->
   <link rel="stylesheet"
