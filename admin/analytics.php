@@ -10,12 +10,34 @@ if(isset($_SESSION['key']) == '' ) {
 ?>
 
 <?php
+if(isset($_SESSION['key']) == '' ) {
+    header("location:../login.php");
+}
+?>
+
+<?php
+if(isset($_GET['id']) && $_GET['id'] != '') {
+
+    $id = mysqli_real_escape_string($con, strip_tags(trim($_GET['id'])));
+
+    if ($id) {
+        $sql = "UPDATE quotation SET archive=1 WHERE id='".$id."'";
+        mysqli_query($con, $sql);
+        $_SESSION['success'] = 'Booking was archived successfully.';
+    } else {
+        $_SESSION['failure'] = 'An error occured, please try again.';
+    }
+
+
+}
+?>
+<?php
 include 'header.php';
 ?>
 <style>
       /* Always set the map height explicitly to define the size of the div
       * element that contains the map. */
-      #maps {
+      #map {
         height: 100%;
     }
 </style>
@@ -30,55 +52,44 @@ include 'header.php';
         </div>
 
         <div class="col-lg-12">
-          <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-              <li class="active">
-                <a href="#analytics" data-toggle="tab">Analytics</a>
-            </li>
-            <li>
-                <a href="#graph" data-toggle="tab">Graphical View</a>
-            </li>
-            <li>
-                <a href="#map" data-toggle="tab">Map</a>
-            </li>
-            <li>
-                <a href="#activity" data-toggle="tab">Quotations</a>
-            </li>
-            <li>
-                <a href="#devices" data-toggle="tab">Devices</a>
-            </li>
-            <li>
-                <a href="payments" data-toggle="tab">Payments</a>
-            </li>
-        </ul>
+            <div>
+                <?php if(isset($_SESSION['failure']) && $_SESSION['failure'] != '') { ?>
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <?php echo $_SESSION['failure']; unset($_SESSION['failure']); ?>
+                </div>
+                <?php } ?>
+
+                <?php if(isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
+                </div>
+                <?php } ?>
+            </div>
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                  <li class="active">
+                    <a href="#analytics" data-toggle="tab">Analytics</a>
+                </li>
+                <li>
+                    <a href="#graph" data-toggle="tab">Graphical View</a>
+                </li>
+                <li>
+                    <a href="#maps" data-toggle="tab">Map View</a>
+                </li>
+            </ul>
+        </div>
         <div class="tab-content">
+
+
           <div class="active tab-pane" id="analytics">
-            <!-- Post -->
             <div class="post">
-
-              <!-- /.user-block -->
-
-
               <div class="row">
-                <div class="col-lg-12">
-                    <div>
-                        <?php if(isset($_SESSION['failure']) && $_SESSION['failure'] != '') { ?>
-                        <div class="alert alert-danger">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <?php echo $_SESSION['failure']; unset($_SESSION['failure']); ?>
-                        </div>
-                        <?php } ?>
-
-                        <?php if(isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
-                        <div class="alert alert-success">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
-                        </div>
-                        <?php } ?>
-                    </div>
+                <div class="col-lg-12">                    
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            List of all bookings
+                            List of all visitors
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -137,140 +148,66 @@ include 'header.php';
                                 }
                                 ?>
                             </div>
-                            <!-- /.table-responsive -->
                         </div>
-                        <!-- /.panel-body -->
                     </div>
-                    <!-- /.panel -->
                 </div>
             </div>
-            <!-- /.row (nested) -->
-
-            <!-- /.panel-body -->
-
-        </p>
-
-    </div>
-    <!-- /.post -->
-
-
-    <!-- /.post -->
-
-
-    <!-- /.post -->
-</div>
-<!-- /.tab-pane -->
-<div class="tab-pane" id="graph">
-    <!-- The timeline -->
-
-
-    <?php
-    if(isset($_SESSION['key']) == '' ) {
-        header("location:../login.php");
-    }
-    ?>
-
-    <?php
-    if(isset($_GET['id']) && $_GET['id'] != '') {
-
-        $id = mysqli_real_escape_string($con, strip_tags(trim($_GET['id'])));
-
-        if ($id) {
-            $sql = "UPDATE quotation SET archive=1 WHERE id='".$id."'";
-            mysqli_query($con, $sql);
-            $_SESSION['success'] = 'Booking was archived successfully.';
-        } else {
-            $_SESSION['failure'] = 'An error occured, please try again.';
-        }
-
-
-    }
-    ?>
-
-
-
-    <!-- Page Content -->
-
-
-    <!-- /.row -->
-    <!-- /.row -->
-    <div class="row">
-        <div class="col-lg-12">
-            <div>
-                <?php if(isset($_SESSION['failure']) && $_SESSION['failure'] != '') { ?>
-                <div class="alert alert-danger">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <?php echo $_SESSION['failure']; unset($_SESSION['failure']); ?>
-                </div>
-                <?php } ?>
-
-                <?php if(isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
-                <div class="alert alert-success">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
-                </div>
-                <?php } ?>
-            </div>
-            <!-- /.col-lg-12 -->
         </div>
-        <!-- /.row -->
+    </div>
+
+
+
+    <div class="tab-pane" id="graph">
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        List of all Quotations
+                        Visitor Graphical View
                     </div>
-                    <!-- /.panel-heading -->
                     <div class="panel-body">
+                        <canvas id="stockcanvas" height="100%">
+                            Your web-browser does not support the HTML 5 canvas element.
+                        </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                       <div class="row">
-                        <div class="col-md-12">
-                            <canvas id="stockcanvas" height="100%">
-                                Your web-browser does not support the HTML 5 canvas element.
-                            </canvas>
+
+
+    <div class="tab-pane" id="maps">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Visitor Map View
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <div id="map"></div>
                         </div>
                     </div>
                 </div>
-                <!-- /.panel-body -->
             </div>
-            <!-- /.panel -->
         </div>
     </div>
 
-    <!-- /#page-wrapper -->
-
-    <?php
-    include 'footer.php';
-    ?>
-    <script type="text/javascript" src="../assets/js/analyticchart.js"></script>
-</div>
-<!-- /.tab-pane -->
 
 
-
-
-
-
-
-<div class="tab-pane" id="map">
-    <div class="row">
-        <div class="col-md-12">
-            <div id="maps"></div>
-        </div>
-    </div>
-</div>
-<script>
-    var customLabel = {
-        restaurant: {
-          label: 'R'
-        },
-        bar: {
-          label: 'B'
-        }
+    
+    <script>
+        var customLabel = {
+            restaurant: {
+              label: 'R'
+          },
+          bar: {
+              label: 'B'
+          }
       };
 
-    function initMap() {
-        var map = new google.maps.Map(document.getElementById('maps'), {
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
           center: new google.maps.LatLng(-33.863276, 151.207977),
           zoom: 12
       });
@@ -335,98 +272,13 @@ function doNothing() {}
 <script async defer
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMSkgPhpQfGqMGMdkY_bH0UxK3UDzFIYs&callback=initMap">
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="active tab-pane" id="quotations">
-    <!-- Post --></div>
-    <div class="active tab-pane" id="devices">
-        <!-- Post --></div>
-        <div class="active tab-pane" id="payments">
-            <!-- Post --></div>
-            <!-- /.tab-pane -->
-        </div>
-        <!-- /.tab-content -->
-    </div>
-    <!-- /.nav-tabs-custom -->
-</div>
-<!-- /.col -->
-</div>
-<!-- /.row -->
-
-</section>
-<!-- /.row -->
-
-</div>
-<!-- /.container-fluid -->
-</div>
-<!-- /#page-wrapper -->
-
-<?php
-include 'footer.php';
-?>
-<script>
-    function modal(id) {
-        var data = {"id" : id};
-        jQuery.ajax({
-            url : '../includes/createquotemodal.php',
-            method : "post",
-            data : data,
-            success : function(data) {
-                jQuery('body').append(data);
-                jQuery('#responseModal').modal('toggle');
-            },
-            error : function() {
-                alert("Ooops! Something went wrong!");
-            }
-        });
-    }
-</script>
-<script>
-    function modal1(id) {
-        var data = {"id" : id};
-        jQuery.ajax({
-            url : '../includes/editquotemodal.php',
-            method : "post",
-            data : data,
-            success : function(data) {
-                jQuery('body').append(data);
-                jQuery('#responseModal').modal('toggle');
-            },
-            error : function() {
-                alert("Ooops! Something went wrong!");
-            }
-        });
-    }
-</script>
 <script>
     $(document).ready(function(){
         $('#bookings').DataTable();
     });
 </script>
+<script type="text/javascript" src="../assets/js/analyticchart.js"></script>
 
-
-
-
-
-
-
-
-
+<?php
+    include 'footer.php';
+    ?>
