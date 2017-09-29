@@ -12,23 +12,87 @@ if(isset($_SESSION['key']) == '' ) {
 
 <?php
 
-$promo = '';
-$norm = '';
-$extr = '';
-$hpay = '';
-$bonu = '';
-$meda = '';
-$uif = '';
-$pens = '';
-$user = '';
-$role = '';
+$open = 0;
 
-/*$sql = "SELECT * FROM salary WHERE id=$id";
+//Calculation of cart sales
+$cart1 = 0.00;
+
+$sql = 'SELECT SUM(num) AS num, price FROM cart GROUP BY name';
 $res = mysqli_query($con, $sql);
 
-if(mysqli_num_rows($res) > 0) {
-	while($row = mysqli_fetch_assoc($res)) {
-		
+if (mysqli_num_rows($res) > 0) {
+	
+	while ($row = mysqli_fetch_assoc($res)) {
+
+		$sum = ($row['num'] * $row['price']);
+		$cart1 = $cart1 + $sum;
+	}
+}
+
+//Calculation of customer sale devices
+$sale = 0;
+
+$sql = 'SELECT SUM(establishAmount) AS amount FROM customersaledevice';
+$res = mysqli_query($con, $sql);
+
+if (mysqli_num_rows($res) > 0) {
+	
+	$row = mysqli_fetch_assoc($res);
+
+	$sale= $row['amount'];
+}
+
+//Calculation of quotations
+$quot = 0;
+
+$sql = 'SELECT SUM(balance) as amount FROM quotation';
+$res = mysqli_query($con, $sql);
+
+if (mysqli_num_rows($res) > 0) {
+	
+	$row = mysqli_fetch_assoc($res);
+
+	$quot= $row['amount'];
+}
+
+//Calculation of technician repairs
+$tech = 0;
+
+$sql = 'SELECT SUM(amount) AS total FROM techrepair';
+$res = mysqli_query($con, $sql);
+
+if (mysqli_num_rows($res) > 0) {
+	
+	$row = mysqli_fetch_assoc($res);
+
+	$tech= $row['total'];
+}
+
+
+//Calculation of stock orders
+$orde = 0;
+
+$sql = 'SELECT SUM(totalPrice) AS total FROM orders';
+$res = mysqli_query($con, $sql);
+
+if (mysqli_num_rows($res) > 0) {
+	
+	$row = mysqli_fetch_assoc($res);
+
+	$orde= $row['total'];
+}
+
+//Calculation of user salaries/wages
+$sala = 0;
+
+$sql = "SELECT * FROM salary";
+$res = mysqli_query($con, $sql);
+
+if (mysqli_num_rows($res) > 0) {
+
+	while ($row = mysqli_fetch_assoc($res)) {
+
+		$user = '';
 		$bonus = '';
 		$deduct = '';
 		$total = '';
@@ -41,7 +105,6 @@ if(mysqli_num_rows($res) > 0) {
 
 			$row1 = mysqli_fetch_assoc($res1);
 			$user = $row1['name'].' '.$row1['surname'];
-			$role = $row1['role'];
 		}
 
 		$sql1 = "SELECT * FROM bonus WHERE id='".$row['bonus_id']."'";
@@ -52,7 +115,6 @@ if(mysqli_num_rows($res) > 0) {
 			$row1 = mysqli_fetch_assoc($res1);
 			$total = $row1['basic_salary'] + $row1['bonus'];
 			$bonus = 'Bonus: R'.$row1['bonus'];
-			$bonu = $row1['bonus'];
 		}
 
 		$sql1 = "SELECT * FROM deduction WHERE id='".$row['deduct_id']."'";
@@ -61,30 +123,17 @@ if(mysqli_num_rows($res) > 0) {
 		if (mysqli_num_rows($res1) > 0) {
 
 			$row1 = mysqli_fetch_assoc($res1);
-			$meda = $row1['med_aid'];
-			$uif = $row1['uif'];
-			$pens = $row1['pension'];
 			$dtotal = $row1['med_aid'] + $row1['uif'] + $row1['pension'];
 			$deduct = 'Medical Aid: R'.$row1['med_aid'].'<br>UIF: R'.$row1['uif'].'<br>Pension: R'.$row1['pension'].'
 			<br>Total: R'.$dtotal;
 		}
 
 		$total = $dtotal + $total;
-		$promo = '
-		ID: '.$row['id'].'<br>
-		Employee: '.$user.'<br>
-		Normal Hours: '.$row['norm_hours'].'<br>
-		Extra Hours: '.$row['extra_hours'].'<br>
-		Hourly Pay: R '.$row['hourly_pay'].'<br>
-		Bonus: R '.$bonus.'<br>
-		'.$deduct.'<br>
-		Total Payable: R '.$total;
+		$sala = $sala + $total;
 
-		$norm = $row['norm_hours'];
-		$extr = $row['extra_hours'];
-		$hpay = $row['hourly_pay'];
 	}
-}*/
+
+}
 ?>
 
 <?php
@@ -96,7 +145,7 @@ include 'header.php';
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Payslip Details</h1>
+				<h1 class="page-header">Cash Flow</h1>
 			</div>
 			<!-- /.col-lg-12 -->
 		</div>
@@ -121,127 +170,88 @@ include 'header.php';
 				</div>
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						View payslip details
+						Company Cash Flow Statement
 					</div>
 					<div class="panel-body">
 						<div class="row">
-							<div class="col-lg-12">
-								<div class="pull-right">
-									<button onclick="javascript:printDiv('printablediv')" class="btn btn-warning"><span class="fa fa-print"></span> Print</button> <a href="salary.php" class="btn btn-warning">Salaries</a>
+							<div class="col-md-offset-10 col-md-2 pull-right">
+								<table>
+									<tr>
+										<td width="70%">For the Year Ending:</td>
+										<td width="15%">12/31/16</td>
+									</tr>
+									<tr>
+										<td>Year Openning Cash:</td>
+										<td>R <?php echo $open; ?></td>
+									</tr>
+								</table>
+							</div>
+							<p>.</p>
+							<div class="col-md-12">
+								<div class="table-responsive">
+									<table class="table data-table table-bordered">
+										<thead>
+											<tr>
+												<td width="85%">Operation</td>
+												<td width="25%">Amount</td>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><b>Inflow</b></td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>Online Sales</td>
+												<td>R <?php echo $cart1; ?></td>
+											</tr>
+											<tr>
+												<td>Refurbished Devices</td>
+												<td>R <?php echo $sale; ?></td>
+											</tr>
+											<tr>
+												<td>Devices Repaired (Quotes)</td>
+												<td>R <?php echo $quot; ?></td>
+											</tr>
+											<tr>
+												<td>Technician Repairs</td>
+												<td>R <?php echo $tech; ?></td>
+											</tr>
+											<tr>
+												<td><b>Net Cash from Inflow</b></td>
+												<td><b>R <?php echo ($cart1 + $sale + $quot + $tech); ?></b></td>
+											</tr>
+											<tr>
+												<td><b>Outflow</b></td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>Orders</td>
+												<td>(R <?php echo $orde; ?>)</td>
+											</tr>
+											<tr>
+												<td>Salaries</td>
+												<td>(R <?php echo $sala; ?>)</td>
+											</tr>
+											<tr>
+												<td><b>Net Cash from Outflow</b></td>
+												<td><b>(R <?php echo ($orde + $sala); ?>)</b></td>
+											</tr>
+											<tr>
+												<td><b>Net Increase in Cash</b></td>
+												<td><b>R <?php echo (($cart1 + $sale + $quot + $tech) - ($orde + $sala)); ?></b></td>
+											</tr>
+										</tbody>									
+									</table>
 								</div>
 							</div>
-							<div id="printablediv">
-								<div class="col-md-6">
-									<?php
-									echo '
-									Employers name: '.$sitename.'<br>
-									Employee ID: '.$id.'<br>
-									Employees name: '.$user.'<br>
-									Employment status: '.$role.'<br>
-									Hourly rate: R'.$hpay.'<br>
-								</div>
-								<div class="col-md-6">
-									Date of payment: '.date('d/m/y').'<br>
-									Pay period: '.date('d/m/y').'';?>									
-								</div>
-								<div class="col-md-12">
-									<div class="table-responsive">
-										<table class="table data-table table-bordered">
-											<thead>
-												<tr>
-													<th>Entitlements</th>
-													<th width="10%">Hours</th>
-													<th width="10%">Hourly Rate</th>
-													<th width="10%">Total</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<?php
-													echo'
-													<td>Basic salary</td>
-													<td>'.$norm.'Hrs</td>
-													<td>R'.$hpay.'</td>
-													<td>R'.$norm * $hpay.'</td>';
-													?>
-												</tr>
-												<tr>
-													<?php
-													echo'
-													<td>Extra Hours</td>
-													<td>'.$extr.'Hrs</td>
-													<td>R'.$hpay.'</td>
-													<td>R'.$extr * $hpay.'</td>';
-													?>
-												</tr>
-												<tr>
-													<?php
-													echo'
-													<td>Other</td>
-													<td>0</td>
-													<td>R0.00</td>
-													<td>R0.00</td>';
-													?>
-												</tr>
-											</tbody>									
-										</table>
-									</div>
-									<div class="table-responsive">
-										<table class="table data-table table-bordered">
-											<thead>
-												<tr>
-													<th>Deduction</th>
-													<th width="10%">Total</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<?php
-													echo'
-													<td>UIF</td>
-													<td>R'.$uif.'</td>';
-													?>
-												</tr>
-												<tr>
-													<?php
-													echo'
-													<td>Pension</td>
-													<td>R'.$pens.'</td>';
-													?>
-												</tr>
-												<tr>
-													<?php
-													echo'
-													<td>Medical Aid</td>
-													<td>R'.$meda.'</td>';
-													?>
-												</tr>
-											</tbody>									
-										</table>
-									</div>
-									<div class="table-responsive">
-										<table class="table data-table table-bordered">
-											<thead>
-												<tr>
-													<th></th>
-													<th width="10%">Total</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<?php
-													$d = ($uif + $pens + $meda);
-													$s = ($norm * $hpay) + ($extr * $hpay);
-													$a = $s - $d;
-													echo'
-													<td></td>
-													<td>R'.$a.'</td>';
-													?>
-												</tr>
-											</tbody>									
-										</table>
-									</div>
-								</div>
+							<div class="col-md-offset-10 col-md-2 pull-right">
+								<table>
+									<tr>
+										<td width="70%">Cash at End of Year:</td>
+										<td width="23%">R <?php echo ($open + (($cart1 + $sale + $quot + $tech) - ($orde + $sala))); ?></td>
+									</tr>
+								</table>
 							</div>
 						</div>
 						<!-- /.row (nested) -->
