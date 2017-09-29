@@ -280,5 +280,5 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMSkgPhpQfGqMGMdkY_bH0UxK
 <script type="text/javascript" src="../assets/js/analyticchart.js"></script>
 
 <?php
-    include 'footer.php';
-    ?>
+include 'footer.php';
+?>
