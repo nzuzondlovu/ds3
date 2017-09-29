@@ -46,7 +46,7 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
 </head>
 
 
-<body class="hold-transition skin-yellow layout-boxed">
+<body class="hold-transition skin-yellow">
   <div class="wrapper">
 
     <!-- Main Header -->
