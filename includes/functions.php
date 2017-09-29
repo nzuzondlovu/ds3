@@ -26,122 +26,122 @@ function user($type)
 {
 	
 	$menu = '
-	  <ul class="sidebar-menu" data-widget="tree">
-        <li class="header"></li>
-          <li class="active">
+	<ul class="sidebar-menu" data-widget="tree">
+	<li class="header"></li>
+	<li class="active">
 
-		<a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+	<a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 	</li>
 	<li class="active">
 
-		<a href="cashflow.php"><i class="fa fa-dashboard fa-fw"></i> Cash Flow</a>
+	<a href="cashflow.php"><i class="fa fa-dashboard fa-fw"></i> Cash Flow</a>
 	</li>
-   <li class="active">
-		<a href="bookings.php"><i class="fa fa-book fa-fw"></i> <span> Bookings</span></a>
+	<li class="active">
+	<a href="bookings.php"><i class="fa fa-book fa-fw"></i> <span> Bookings</span></a>
 
-		<!-- /.nav-second-level -->
+	<!-- /.nav-second-level -->
 	</li>
-   <li class="active">
-		<a href="products.php"><i class="fa fa-shopping-basket fa-fw"></i> Products<span></span></a>
+	<li class="active">
+	<a href="products.php"><i class="fa fa-shopping-basket fa-fw"></i> Products<span></span></a>
 	
-		<!-- /.nav-second-level -->
+	<!-- /.nav-second-level -->
 	</li>
 	<li>
-		<a href="#"><i class="fa fa-support fa-fw"></i> Queries<span class="fa arrow"></span></a>
-		<ul class="nav nav-second-level">
-			<li>
-				<a href="query.php">Queries</a>
-			</li>
-			<li>
-				<a href="feedback.php">Feedback</a>
-			</li>
-		</ul>
-		<!-- /.nav-second-level -->
+	<a href="#"><i class="fa fa-support fa-fw"></i> Queries<span class="fa arrow"></span></a>
+	<ul class="nav nav-second-level">
+	<li>
+	<a href="query.php">Queries</a>
 	</li>
 	<li>
-		<a href="#"><i class="fa fa-truck fa-fw"></i> Deliveries<span class="fa arrow"></span></a>
-		<ul class="nav nav-second-level">
-		<li>
-		  <a href="viewD.php">View Deliveries</a>
-		</li>
-		<li>
-		<a href="drivers.php">View Drivers</a>
-		</li>
-		<li>
-		<a href="addDriver.php">Add Driver</a>
-		</li>
-		</ul>
-		<!-- /.nav-second-level -->
+	<a href="feedback.php">Feedback</a>
+	</li>
+	</ul>
+	<!-- /.nav-second-level -->
+	</li>
+	<li>
+	<a href="#"><i class="fa fa-truck fa-fw"></i> Deliveries<span class="fa arrow"></span></a>
+	<ul class="nav nav-second-level">
+	<li>
+	<a href="viewD.php">View Deliveries</a>
+	</li>
+	<li>
+	<a href="drivers.php">View Drivers</a>
+	</li>
+	<li>
+	<a href="addDriver.php">Add Driver</a>
+	</li>
+	</ul>
+	<!-- /.nav-second-level -->
 	</li>	
 	<li>
-		<a href="#"><i class="fa fa-cubes fa-fw"></i> Stock<span class="fa arrow"></span></a>
-		<ul class="nav nav-second-level">
-			<li>
-				<a href="stocktable.php">View Stock</a>
-			</li>
-			<li>
-				<a href="stockgraph.php">View Stock Graph</a>
-			</li>
-			<li>
-				<a href="orders.php">View Orders</a>
-			</li>
-			<li>
-				<a href="suppliers.php">View Suppliers</a>
-			</li>
-		</ul>
-		<!-- /.nav-second-level -->
+	<a href="#"><i class="fa fa-cubes fa-fw"></i> Stock<span class="fa arrow"></span></a>
+	<ul class="nav nav-second-level">
+	<li>
+	<a href="stocktable.php">View Stock</a>
+	</li>
+	<li>
+	<a href="stockgraph.php">View Stock Graph</a>
+	</li>
+	<li>
+	<a href="orders.php">View Orders</a>
+	</li>
+	<li>
+	<a href="suppliers.php">View Suppliers</a>
+	</li>
+	</ul>
+	<!-- /.nav-second-level -->
 	</li>
 	<li class="">
 
-		<a href="analytics.php"><i class="fa fa-line-chart fa-fw"></i> Analytics</a>
+	<a href="analytics.php"><i class="fa fa-line-chart fa-fw"></i> Analytics</a>
 	</li>
 	<li>
-		<a href="#"><i class="fa fa-money fa-fw"></i> Cash Flow<span class="fa arrow"></span></a>
-		<ul class="nav nav-second-level">
-			<li>
-				<a href="#">Cart <span class="fa arrow"></span></a>
-				<ul class="nav nav-third-level">
-					<li>
-						<a href="cart.php">Table</a>
-					</li>
-					<li>
-						<a href="cartgraph.php">Bar Graph</a>
-					</li>
-				</ul>
-				<!-- /.nav-third-level -->
-			</li>
-			<li>
-				<a href="#">Expenses <span class="fa arrow"></span></a>
-				<ul class="nav nav-third-level">
-					<li>
-						<a href="expense.php">Table</a>
-					</li>
-					<li>
-						<a href="expensegraph.php">Pie Chart</a>
-					</li>
-				</ul>
-				<!-- /.nav-third-level -->
-			</li>			
-			<li>
-				<a href="#">Salaries <span class="fa arrow"></span></a>
-				<ul class="nav nav-third-level">
-					<li>
-						<a href="salary.php">Table</a>
-					</li>
-					<li>
-						<a href="salarychart.php">Bar Graph</a>
-					</li>
-				</ul>
-				<!-- /.nav-third-level -->
-			</li>
-		</ul>
-		<!-- /.nav-second-level -->
+	<a href="#"><i class="fa fa-money fa-fw"></i> Cash Flow<span class="fa arrow"></span></a>
+	<ul class="nav nav-second-level">
+	<li>
+	<a href="#">Cart <span class="fa arrow"></span></a>
+	<ul class="nav nav-third-level">
+	<li>
+	<a href="cart.php">Table</a>
 	</li>
 	<li>
-		<a href="users.php"><i class="fa fa-group fa-fw"></i> List All Users</a>
+	<a href="cartgraph.php">Bar Graph</a>
+	</li>
+	</ul>
+	<!-- /.nav-third-level -->
 	</li>
 	<li>
-		<a href="update.php"><i class="fa fa-refresh fa-fw"></i> Update Details</a>
+	<a href="#">Expenses <span class="fa arrow"></span></a>
+	<ul class="nav nav-third-level">
+	<li>
+	<a href="expense.php">Table</a>
+	</li>
+	<li>
+	<a href="expensegraph.php">Pie Chart</a>
+	</li>
+	</ul>
+	<!-- /.nav-third-level -->
+	</li>			
+	<li>
+	<a href="#">Salaries <span class="fa arrow"></span></a>
+	<ul class="nav nav-third-level">
+	<li>
+	<a href="salary.php">Table</a>
+	</li>
+	<li>
+	<a href="salarychart.php">Bar Graph</a>
+	</li>
+	</ul>
+	<!-- /.nav-third-level -->
+	</li>
+	</ul>
+	<!-- /.nav-second-level -->
+	</li>
+	<li>
+	<a href="users.php"><i class="fa fa-group fa-fw"></i> List All Users</a>
+	</li>
+	<li>
+	<a href="update.php"><i class="fa fa-refresh fa-fw"></i> Update Details</a>
 	</li>
 	
 	'
@@ -153,64 +153,64 @@ function user($type)
 	if ($type == 'technician') {
 
 		$menu = '
-		  <ul class="sidebar-menu" data-widget="tree">
-        <li class="header"></li>
-          <li class="active">
-			<a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+		<ul class="sidebar-menu" data-widget="tree">
+		<li class="header"></li>
+		<li class="active">
+		<a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 		</li>	
 		<li>
-			<a href="bookings.php"><i class="fa fa-table fa-fw"></i> Create Quotation</a>
+		<a href="bookings.php"><i class="fa fa-table fa-fw"></i> Create Quotation</a>
 		</li>
 		<li>
-			<a href="viewquot.php"><i class="fa fa-table fa-fw"></i> View Quotation</a>
+		<a href="viewquot.php"><i class="fa fa-table fa-fw"></i> View Quotation</a>
 		</li>
 		<li>
 		<a href="#"><i class="fa fa-recycle fa-fw"></i> Device Recylce<span class="fa arrow"></span></a>
 		<ul class="nav nav-second-level">
-			<li>
-				<a href="jobs.php">Waitlist</a>
-			</li>
-				<li>
-				<a href="allocated.php">Allocated</a>
-			</li>		
+		<li>
+		<a href="jobs.php">Waitlist</a>
+		</li>
+		<li>
+		<a href="allocated.php">Allocated</a>
+		</li>		
 		
 		</ul>
 		<!-- /.nav-second-level -->
-	</li>
-	<li>
-		<a href="#"><i class="fa fa-wrench fa-fw"></i> Tools and Material<span class="fa arrow"></span></a>
-		<ul class="nav nav-second-level">
-			<li>
-				<a href="orders.php">View Orders</a>
-			</li>
-			<li>
-				<a href="suppliers.php">View Suppliers</a>
-			</li>			
-		</ul>
-		<!-- /.nav-second-level -->
-	</li>
-		<li>
-			<a href="products.php"><i class="fa fa-edit fa-fw"></i> Products</a>		
 		</li>
 		<li>
-			<a href="update.php"><i class="fa fa-cogs fa-fw"></i> Update Details</a>
+		<a href="#"><i class="fa fa-wrench fa-fw"></i> Tools and Material<span class="fa arrow"></span></a>
+		<ul class="nav nav-second-level">
+		<li>
+		<a href="orders.php">View Orders</a>
+		</li>
+		<li>
+		<a href="suppliers.php">View Suppliers</a>
+		</li>			
+		</ul>
+		<!-- /.nav-second-level -->
+		</li>
+		<li>
+		<a href="products.php"><i class="fa fa-edit fa-fw"></i> Products</a>		
+		</li>
+		<li>
+		<a href="update.php"><i class="fa fa-cogs fa-fw"></i> Update Details</a>
 		</li>';
 	} else if ($type == 'clerk') {
 
 		$menu = '
-		  <ul class="sidebar-menu" data-widget="tree">
-        <li class="header"></li>
-          <li class="active">
-			<a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+		<ul class="sidebar-menu" data-widget="tree">
+		<li class="header"></li>
+		<li class="active">
+		<a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 		</li>
 		<li>
-			<a href="bookings.php"><i class="fa fa-edit fa-fw"></i> Bookings</a>
+		<a href="bookings.php"><i class="fa fa-edit fa-fw"></i> Bookings</a>
 		</li>
 		<li>
-			<a href="addTech.php"><i class="fa fa-edit fa-fw"></i> Add Technician</a>
+		<a href="addTech.php"><i class="fa fa-edit fa-fw"></i> Add Technician</a>
 		</li>
 		<li>
-			<a href="viewtech.php"><i class="fa fa-edit fa-fw"></i> View Technicians</a>
+		<a href="viewtech.php"><i class="fa fa-edit fa-fw"></i> View Technicians</a>
 		</li>
 		<li>
 		<a href="viewD.php"><i class="fa fa-edit fa-fw"></i>Deliveries</a>
@@ -219,59 +219,59 @@ function user($type)
 		<a href="drivers.php"><i class="fa fa-edit fa-fw"></i>Drivers</a>
 		</li>
 		<li>
-			<a href="quotation.php"><i class="fa fa-table fa-fw"></i> Create Quotation</a>
+		<a href="quotation.php"><i class="fa fa-table fa-fw"></i> Create Quotation</a>
 		</li>
 		<li>
-			<a href="viewquot.php"><i class="fa fa-table fa-fw"></i> View Quotation</a>
+		<a href="viewquot.php"><i class="fa fa-table fa-fw"></i> View Quotation</a>
 		</li>
 		<li>
-			<a href="items.php"><i class="fa fa-edit fa-fw"></i> Products</a>
+		<a href="items.php"><i class="fa fa-edit fa-fw"></i> Products</a>
 		</li>
 		<li>
-			<a href="update.php"><i class="fa fa-cogs fa-fw"></i> Update Details</a>
+		<a href="update.php"><i class="fa fa-cogs fa-fw"></i> Update Details</a>
 		</li>
 		<li>
-			<a href="../../index.php"><i class="fa fa-cogs fa-fw"></i>Customer Devices</a>
+		<a href="../../index.php"><i class="fa fa-cogs fa-fw"></i>Customer Devices</a>
 		</li>
 		<li>
-			<a href="../../techallocate.php"><i class="fa fa-cogs fa-fw"></i>Insert customer Info</a>
+		<a href="../../techallocate.php"><i class="fa fa-cogs fa-fw"></i>Insert customer Info</a>
 		</li>
 		<li>
-			<a href="../../createCustomer.php"><i class="fa fa-cogs fa-fw"></i>Customer Devices</a>
+		<a href="../../createCustomer.php"><i class="fa fa-cogs fa-fw"></i>Customer Devices</a>
 		</li>
 		<li>
-			<a href="../../techallocate.php"><i class="fa fa-cogs fa-fw"></i> Allocate to technician</a>
+		<a href="../../techallocate.php"><i class="fa fa-cogs fa-fw"></i> Allocate to technician</a>
 		</li>
 		<li>
-			<a href="../../view.php"><i class="fa fa-cogs fa-fw"></i> Repair Meterial</a>
+		<a href="../../view.php"><i class="fa fa-cogs fa-fw"></i> Repair Meterial</a>
 		</li>
 		<li>
-			<a href="../../create.php"><i class="fa fa-cogs fa-fw"></i> Create Order</a>
+		<a href="../../create.php"><i class="fa fa-cogs fa-fw"></i> Create Order</a>
 		</li>';
 	}
 	else if ($type == 'driver') {
 
 		$menu = '
-<<<<<<< HEAD
-			<li>
+		<<<<<<< HEAD
+		<li>
 		<a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-	</li>
+		</li>
 		<li>
 		<a href="driverJobs.php"><i class="fa fa-edit fa-fw"></i>My Deliveries</a>
-=======
+		=======
 		
-	  <ul class="sidebar-menu" data-widget="tree">
-        <li class="header"></li>
-          <li class="active">
+		<ul class="sidebar-menu" data-widget="tree">
+		<li class="header"></li>
+		<li class="active">
 		<a href="viewD.php"><i class="fa fa-edit fa-fw"></i>Deliveries</a>
->>>>>>> 43b4aadf4751352f7981c5f41c611f2690d011db
+		>>>>>>> 43b4aadf4751352f7981c5f41c611f2690d011db
 		</li>
 		<li>
 		<a href="drivers.php"><i class="fa fa-edit fa-fw"></i>Drivers</a>
 		</li>
 
 		<li>
-			<a href="update.php"><i class="fa fa-cogs fa-fw"></i> Update Details</a>
+		<a href="update.php"><i class="fa fa-cogs fa-fw"></i> Update Details</a>
 		</li>'
 		;
 	}
@@ -351,36 +351,36 @@ function pagination($con, $sql, $num_rec_per_page, $page)
 		$total_pages = 1;
 	} else {
 		echo '
-	</div>
-	<div class="col-lg-12">
+		</div>
+		<div class="col-lg-12">
 		<p align="center">
-			<a class="btn btn-primary" href="?page=1">'."|<".'</a> '; 
+		<a class="btn btn-primary" href="?page=1">'."|<".'</a> '; 
 
-			if ($page < 4) {
-				for ($i=1; $i<$page; $i++) {
-					echo '<a class="btn btn-primary" href="?page='.$i.'">'.$i.'</a> ';
-				};
-			} else {
-				for ($i=($page-3); $i<$page; $i++) {
-					echo '<a class="btn btn-primary" href="?page='.$i.'">'.$i.'</a> ';
-				};
-			}
-			echo '<a class="btn btn-default" href="?page='.$page.'">'.$page.'</a> ';
+		if ($page < 4) {
+			for ($i=1; $i<$page; $i++) {
+				echo '<a class="btn btn-primary" href="?page='.$i.'">'.$i.'</a> ';
+			};
+		} else {
+			for ($i=($page-3); $i<$page; $i++) {
+				echo '<a class="btn btn-primary" href="?page='.$i.'">'.$i.'</a> ';
+			};
+		}
+		echo '<a class="btn btn-default" href="?page='.$page.'">'.$page.'</a> ';
 
-			if ($page >= ($total_pages - 3)) {
-				for ($i=($page+1); $i<=($total_pages); $i++) {
-					echo '<a class="btn btn-primary" href="?page='.$i.'">'.$i.'</a> ';
-				};
-			} else {
-				for ($i=($page+1); $i<=($page+3); $i++) {
-					echo '<a class="btn btn-primary" href="?page='.$i.'">'.$i.'</a> ';
-				};
-			}
+		if ($page >= ($total_pages - 3)) {
+			for ($i=($page+1); $i<=($total_pages); $i++) {
+				echo '<a class="btn btn-primary" href="?page='.$i.'">'.$i.'</a> ';
+			};
+		} else {
+			for ($i=($page+1); $i<=($page+3); $i++) {
+				echo '<a class="btn btn-primary" href="?page='.$i.'">'.$i.'</a> ';
+			};
+		}
 
-			echo '
-			<a class="btn btn-primary" href="?page='.$total_pages.'">'.">|".'</a>
+		echo '
+		<a class="btn btn-primary" href="?page='.$total_pages.'">'.">|".'</a>
 		</p>
-	</div>';
+		</div>';
 	}
 	
 }
@@ -412,12 +412,12 @@ function cart($id, $title, $price, $quantity, $con)
 			while ($row = mysqli_fetch_assoc($res)) {
 				$_SESSION['cart'] .= '
 				<li>
-					<a href="item.php?id='.$id.'">
-						<div>
-							'.$row['name'].'
-							<span class="pull-right text-muted small">R '.$row['price'].'</span>
-						</div>
-					</a>
+				<a href="item.php?id='.$id.'">
+				<div>
+				'.$row['name'].'
+				<span class="pull-right text-muted small">R '.$row['price'].'</span>
+				</div>
+				</a>
 				</li>
 				<li class="divider"></li>';
 			}
