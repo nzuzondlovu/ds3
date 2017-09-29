@@ -67,7 +67,7 @@ if (isset($_GET["id"]) && $_GET['id'] != '') {
 
                             echo '
                             <div class="thubmnail-recent">
-                                <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
+                                <img src="uploads/'.$row['pic_url'].'" class="recent-thumb" alt="">
                                 <h2><a href="product.php?id='.$row['id'].'">'.$row['name'].'</a></h2>
                                 <div class="product-sidebar-price">
                                     '.$promo.'
@@ -142,13 +142,13 @@ if (isset($_GET["id"]) && $_GET['id'] != '') {
                                 <div class="col-sm-6">
                                     <div class="product-images">
                                         <div class="product-main-img">
-                                            <img src="img/product-2.jpg" alt="">
+                                            <img src="uploads/'.$row['pic_url'].'" alt="">
                                         </div>
 
                                         <div class="product-gallery">
-                                            <img src="img/product-thumb-1.jpg" alt="">
-                                            <img src="img/product-thumb-2.jpg" alt="">
-                                            <img src="img/product-thumb-3.jpg" alt="">
+                                            <img src="uploads/'.$row['pic_url'].'" alt="">
+                                            <img src="uploads/'.$row['pic_url'].'" alt="">
+                                            <img src="uploads/'.$row['pic_url'].'" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -160,12 +160,10 @@ if (isset($_GET["id"]) && $_GET['id'] != '') {
                                             '.$promo.'
                                         </div>    
 
-                                        <form action="" class="cart">
                                             <div class="quantity">
                                                 <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
                                             </div>
-                                            <button class="add_to_cart_button" type="submit">Add to cart</button>
-                                        </form>   
+                                            <a class="add_to_cart_button" ref="'.$row['id'].'" href="cart.php">Add to cart</a>
 
                                         <div class="product-inner-category">
                                             <p>Category: <a href="shop.php?cat='.$row['type'].'">'.$row['type'].'</a>. Tags: <a href="">awesome</a>, <a href="">best</a>, <a href="">sale</a>, <a href="">shoes</a>. </p>
@@ -241,9 +239,9 @@ if (isset($_GET["id"]) && $_GET['id'] != '') {
                                         echo '
                                         <div class="single-product">
                                             <div class="product-f-image">
-                                                <img src="img/product-1.jpg" alt="">
+                                                <img src="uploads/'.$row['pic_url'].'" alt="">
                                                 <div class="product-hover">
-                                                    <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                    <a class="add-to-cart-link add_to_cart_button" ref="'.$row['id'].'" href="cart.php"><i class="fa fa-shopping-cart"></i> Add to cart</a>
                                                     <a href="?id='.$row['id'].'" class="view-details-link"><i class="fa fa-link"></i> See details</a>
                                                 </div>
                                             </div>

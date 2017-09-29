@@ -106,7 +106,7 @@ include 'header.php';
                             echo '
                             <div class="single-product">
                                 <div class="product-f-image">
-                                    <img src="img/product-5.jpg" alt="">
+                                    <img src="uploads/'.$row['pic_url'].'" alt="">
                                     <div class="product-hover">
                                         <a href="cart.php" ref="'.$row['id'].'"  class="add-to-cart-link add_to_cart_button"><i class="fa fa-shopping-cart"></i> Add to cart</a>
                                         <a href="product.php?id='.$row['id'].'" class="view-details-link"><i class="fa fa-link"></i> See details</a>
@@ -185,7 +185,7 @@ include 'header.php';
 
                             echo '
                             <div class="single-wid-product">
-                                <a href="single-product.html"><img src="img/product-thumb-1.jpg" alt="" class="product-thumb"></a>
+                                <a href="single-product.html"><img src="uploads/'.$row['pic_url'].'" alt="" class="product-thumb"></a>
                                 <h2><a href="single-product.html">'.$row['brand_name'].' '.$row['generic_name'].'</a></h2>
                                 <div class="product-wid-rating">
                                     <i class="fa fa-star"></i>
@@ -234,7 +234,7 @@ include 'header.php';
 
                             echo '
                             <div class="single-wid-product">
-                                <a href="single-product.html"><img src="img/product-thumb-2.jpg" alt="" class="product-thumb"></a>
+                                <a href="single-product.html"><img src="uploads/'.$row['pic_url'].'" alt="" class="product-thumb"></a>
                                 <h2><a href="single-product.html">'.$row['brand_name'].' '.$row['generic_name'].'</a></h2>
                                 <div class="product-wid-rating">
                                     <i class="fa fa-star"></i>
@@ -282,7 +282,7 @@ include 'header.php';
 
                             echo '
                             <div class="single-wid-product">
-                                <a href="single-product.html"><img src="img/product-thumb-3.jpg" alt="" class="product-thumb"></a>
+                                <a href="single-product.html"><img src="uploads/'.$row['pic_url'].'" alt="" class="product-thumb"></a>
                                 <h2><a href="single-product.html">'.$row['brand_name'].' '.$row['generic_name'].'</a></h2>
                                 <div class="product-wid-rating">
                                     <i class="fa fa-star"></i>

@@ -50,7 +50,7 @@ include 'header.php';
                     <div class="col-md-3 col-sm-6">
                         <div class="single-shop-product">
                             <div class="product-upper">
-                                <img src="img/product-2.jpg" alt="">
+                                <img src="uploads/'.$row['pic_url'].'" alt="">
                             </div>
                             <h2><a href="product.php?id='.$row['id'].'">'.$row['brand_name'].' '.$row['generic_name'].'</a></h2>
                             <div class="product-carousel-price">

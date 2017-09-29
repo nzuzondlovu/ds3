@@ -111,7 +111,7 @@ $a = 0;
                             }
                             echo '
                             <div class="thubmnail-recent">
-                                <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
+                                <img src="uploads/'.$row['pic_url'].'" class="recent-thumb" alt="">
                                 <h2><a href="product.php?id='.$row['id'].'">'.$row['brand_name'].' '.$row['generic_name'].'</a></h2>
                                 <div class="product-sidebar-price">
                                     '.$promo.'
