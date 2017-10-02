@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../includes/functions.php';
+include 'connect.php';
 $a = $_POST['bname'];
 $b = $_POST['genname'];
 $c = $_POST['qty'];

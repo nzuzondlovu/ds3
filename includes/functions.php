@@ -3,7 +3,7 @@ $sitename = 'Infinity';
 $siteaddress = '';
 session_start();
 //"localhost","thehewri_main","SzlqF-n,X2m$","thehewri_master"
-$con = mysqli_connect("localhost","nzuzor1","hohi74Ro","shop");
+$con = mysqli_connect("localhost","root","","shop");
 
 function head($type)
 {

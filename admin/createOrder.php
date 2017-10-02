@@ -30,10 +30,10 @@ if(mysqli_num_rows($res) > 0) {
 		Name : '.$row['name'].'<br>
 		Email : '.$row['email'].'<br>
 		Website : <a href="'.$row['website'].'" target="blank">'.$row['website'].'</a><br>
-		Notes : '.$row['notes'].'
+
 		';
 		$name = $row['name'];
-		$product = $row['notes'];
+		
 		$email = $row['email'];
 	}
 }

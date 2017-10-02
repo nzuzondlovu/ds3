@@ -38,15 +38,16 @@ if(isset($_POST['submit'])) {
     $area = mysqli_real_escape_string($con, strip_tags(trim($_POST["area"])));
     $boxcode= mysqli_real_escape_string($con, strip_tags(trim($_POST["boxcode"])));
 	
-	$location=$strAddr." ,".$suburb." ,".$area.", ".$boxcode;
+	
+	$location=$strAddr." ,".$suburb." , ".$area;
 
 	if($driver != '' ) {
 
-		echo $sql="INSERT INTO driverdelivery(driverID,deliveryID,dateofDelivery,custname,custcell,location)
-		VALUES('".$driver."','".$del."','".$dateD."', '".$name."','".$cell."','".$location."')";
+		echo $sql="INSERT INTO driverdelivery(driverID,deliveryID,dateofDelivery,custname,custcell,location,area)
+		VALUES('".$driver."','".$del."','".$dateD."', '".$name."','".$cell."','".$location."','".$boxcode."')";
 		mysqli_query($con, $sql);
 		$_SESSION['success'] = 'Successfully updated details.';
-		header("Location: drivers.php");
+		header("Location: delivery.php");
 
 	} else {
 		$_SESSION['failure'] = 'Please fill in all fields';
@@ -67,6 +68,140 @@ include 'header.php';
 			</div>
 			<!-- /.col-lg-12 -->
 		</div>
+		          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Latest Orders</h3>
+
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
+              <?php
+if(isset($_GET['id']) && $_GET['id'] != '') {
+
+	$id = mysqli_real_escape_string($con, strip_tags(trim($_GET['id'])));
+
+	if ($id) {
+		$sql = "UPDATE job SET archive=1 WHERE id='".$id."'";
+		mysqli_query($con, $sql);
+		$_SESSION['success'] = 'Booking was archived successfully.';
+	} else {
+		$_SESSION['failure'] = 'An error occured, please try again.';
+	}	
+}
+?>
+
+<?php
+
+if(isset($_POST['locsubmit'])) {
+
+	$driver_locID = mysqli_real_escape_string($con, strip_tags(trim($_POST["driver_locID"])));
+	$AreaCode = mysqli_real_escape_string($con, strip_tags(trim($_POST["AreaCode"])));
+	$driver_idNumber = mysqli_real_escape_string($con, strip_tags(trim($_POST["driver_idNumber"])));
+	$Month = mysqli_real_escape_string($con, strip_tags(trim($_POST["Month"])));
+	$no_of_del = mysqli_real_escape_string($con, strip_tags(trim($_POST["no_of_del"])));
+
+
+	if($driver != '' ) {
+
+		echo $sql="INSERT INTO driver_loc(	driver_locID,AreaCode,driver_idNumber,Month,no_of_del)
+		VALUES('".$driver_locID."','".$AreaCode."','".$driver_idNumber."', '".$Month."','".$no_of_del."')";
+		mysqli_query($con, $sql);
+		$_SESSION['success'] = 'Successfully updated details.';
+		header("Location: drivers.php");
+
+	} else {
+		$_SESSION['failure'] = 'Please fill in all fields';
+	}
+}
+?>
+
+
+<!-- Page Content -->
+
+		<!-- /.row -->
+		<div class="row">
+			<div class="col-lg-12">
+				<div>
+					<?php if(isset($_SESSION['failure']) && $_SESSION['failure'] != '') { ?>
+					<div class="alert alert-danger">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<?php echo $_SESSION['failure']; unset($_SESSION['failure']); ?>
+					</div>
+					<?php } ?>
+
+					<?php if(isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
+					<div class="alert alert-success">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
+					</div>
+					<?php } ?>
+				</div>
+		
+						<div class="table-responsive">
+							<?php
+
+							$sql = "SELECT * FROM area ";
+							$res = mysqli_query($con, $sql);
+
+							if (mysqli_num_rows($res) > 0) {
+								echo '
+								<table id="area" class="table data-table ">
+									<thead>
+										<tr>
+									
+										
+											<th width="20px">City</th>
+											<th width="20px">Code</th>
+									
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>';
+										while ($row = mysqli_fetch_assoc($res)) {
+
+											echo '
+											<tr>
+											
+												<td>'.$row['cityName'].'</td>
+											
+												<td>'.$row['boxcode'].'</td>
+											
+												<td class=" pull-right">
+													<button onclick="modal1('.$row['id'].')" class="label label-warning">Assign</button> 
+													 <a href="DeleteDelivery.php?id='.$row['id'].'" class="label label-danger">Delete</a>
+												</td>
+											</tr>';
+										}
+										echo '
+									</tbody>
+								</table>';
+							} else {
+								echo '<div class="alert alert-info">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+								<strong>No deliveries found.</strong>
+							</div>';
+						}
+						?>
+					</div>
+					<!-- /.table-responsive -->
+				</div>
+				<!-- /.panel-body -->
+			</div>
+			<!-- /.panel -->
+		</div>
+	</div>
+
+<!-- /#page-wrapper -->
+
+
+ 
+
+
+
+            <!-- /.box-footer -->
+          </div>
+          <!-- /.b
 		<!-- /.row -->
 		<div class="row">
 			<div class="col-lg-12">
@@ -86,12 +221,14 @@ include 'header.php';
 					<?php } ?>
 				</div>
 			      <div class="row">
+
         <!-- Left col -->
         <div class="col-md-8">
+
 						
-						     <div class="box box-info">
+						     <div class="box box-warning">
             <div class="box-header with-border">
-              <h3 class="box-title">List of all deliveries</h3>
+              <h3 class="box-title">Pending Deliveries</h3>
 
             </div>
             <!-- /.box-header -->
@@ -136,7 +273,7 @@ include 'header.php';
 										while ($row = mysqli_fetch_assoc($res)) {
 
 											echo '
-											<tr>
+											<tr class="text-red">
 											
 												<td>'.$row['custname'].'</td>
 												<td>'.$row['custcell'].'</td>
@@ -165,6 +302,62 @@ include 'header.php';
 				</div>
 				<!-- /.panel-body -->
 			</div>
+			  <div class="col-md-4">
+			  
+			     <div class="info-box bg-orange">
+            <span class="info-box-icon"><i class="glyphicon glyphicon-shopping-cart"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Pending</span>
+              <span class="info-box-number">5,200</span>
+
+              <div class="progress">
+                <div class="progress-bar " style="width: 50%"></div>
+              </div>
+              <span class="progress-description">
+                    50% Increase in 30 Days
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+       <div class="info-box bg-green">
+            <span class="info-box-icon"><i class="glyphicon glyphicon-ok-circle"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Delivered</span>
+              <span class="info-box-number">114,381</span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 70%"></div>
+              </div>
+              <span class="progress-description">
+                    70% Increase in 30 Days
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+                <div class="info-box bg-blue">
+            <span class="info-box-icon"><i class="glyphicon glyphicon-road"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text"></span>
+              <span class="info-box-number">114,381
+              </span>	
+
+              <div class="progress">
+                <div class="progress-bar" style="width:<?php
+                                $sql = "SELECT * FROM job";
+                                indexCount($con, $sql);
+
+                                ?> 	 "></div>
+              </div>
+              <span class="progress-description">
+                    70% Increase in 30 Days
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+
 			</div>
 			
 
@@ -174,35 +367,35 @@ include 'header.php';
           <!-- MAP & BOX PANE -->
           <div class="box box-success">
             <div class="box-header with-border">
-              <h3 class="box-title">Visitors Report</h3>
+              <h3 class="box-title">Allocated Deliveries</h3>
 
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
+             
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
               <div class="row">
-                <div class="col-md-9 col-sm-8">
+                <div class="col-md-12 col-sm-8">
                   <div class="pad">
                     <!-- Map will be created here -->
                     <div id="" style="height: 325px;"> 	<?php
 
-							$sql = "SELECT * FROM driverdelivery WHERE driverID='".$_SESSION['driverID']."' ";
+							$sql = "SELECT * FROM driverdelivery ";
 							$res = mysqli_query($con, $sql);
 
 							if (mysqli_num_rows($res) > 0) {
 								echo '
-								<table id="bookings" class="table data-table">
+								<table id="del" class="table data-table">
 									<thead>
 										<tr>
+
+											<th>Driver</th>
 								
-											<th>Delivery Date</th>
-											<th>Customer Name</th>
-											<th>Cell Number</th>
+											<th>Date</th>
+										
 											<th>Address</th>
+											<th> Postal Code</th>
+
+											<th> Status</th>
 											
 										</tr>
 									</thead>
@@ -211,11 +404,12 @@ include 'header.php';
 
 											echo '
 											<tr>
-											
+												<td>'.$row['driverID'].'</td>
 												<td>'.date("M d, y",strtotime($row['dateofDelivery'])).'</td>
-												<td>'.$row['custname'].'</td>
-												<td>'.$row['custcell'].'</td>
+											
 												<td>'.$row['location'].'</td>
+												<td>'.$row['area'].'</td>
+													<td>'.$row['area'].'</td>	
 											
 											</tr>';
 										}
@@ -233,34 +427,15 @@ include 'header.php';
                   </div>
                 </div>
                 <!-- /.col -->
-                <div class="col-md-3 col-sm-4">
-                  <div class="pad box-pane-right bg-green" style="min-height: 280px">
-                    <div class="description-block margin-bottom">
-                      <div class="sparkbar pad" data-color="#fff">90,70,90,70,75,80,70</div>
-                      <h5 class="description-header">8390</h5>
-                      <span class="description-text">Visits</span>
-                    </div>
-                    <!-- /.description-block -->
-                    <div class="description-block margin-bottom">
-                      <div class="sparkbar pad" data-color="#fff">90,50,90,70,61,83,63</div>
-                      <h5 class="description-header">30%</h5>
-                      <span class="description-text">Referrals</span>
-                    </div>
-                    <!-- /.description-block -->
-                    <div class="description-block">
-                      <div class="sparkbar pad" data-color="#fff">90,50,90,70,61,83,63</div>
-                      <h5 class="description-header">70%</h5>
-                      <span class="description-text">Organic</span>
-                    </div>
-                    <!-- /.description-block -->
-                  </div>
-                </div>
+        
                 <!-- /.col -->
               </div>
               <!-- /.row -->
             </div>
             <!-- /.box-body -->
           </div>
+
+
           <!-- /.box -->
           <div class="row">
             <div class="col-md-6">
@@ -539,230 +714,7 @@ include 'header.php';
           <!-- /.row -->
 
           <!-- TABLE: LATEST ORDERS -->
-          <div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">Latest Orders</h3>
 
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <div class="table-responsive">
-              hhh
-              </div>
-              <!-- /.table-responsive -->
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer clearfix">
-              <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a>
-              <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a>
-            </div>
-            <!-- /.box-footer -->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-
-        <div class="col-md-4">
-          <!-- Info Boxes Style 2 -->
-          <div class="info-box bg-yellow">
-            <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Inventory</span>
-              <span class="info-box-number">5,200</span>
-
-              <div class="progress">
-                <div class="progress-bar" style="width: 50%"></div>
-              </div>
-              <span class="progress-description">
-                    50% Increase in 30 Days
-                  </span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-          <div class="info-box bg-green">
-            <span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Mentions</span>
-              <span class="info-box-number">92,050</span>
-
-              <div class="progress">
-                <div class="progress-bar" style="width: 20%"></div>
-              </div>
-              <span class="progress-description">
-                    20% Increase in 30 Days
-                  </span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-          <div class="info-box bg-red">
-            <span class="info-box-icon"><i class="ion ion-ios-cloud-download-outline"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Downloads</span>
-              <span class="info-box-number">114,381</span>
-
-              <div class="progress">
-                <div class="progress-bar" style="width: 70%"></div>
-              </div>
-              <span class="progress-description">
-                    70% Increase in 30 Days
-                  </span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-          <div class="info-box bg-aqua">
-            <span class="info-box-icon"><i class="ion-ios-chatbubble-outline"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Direct Messages</span>
-              <span class="info-box-number">163,921</span>
-
-              <div class="progress">
-                <div class="progress-bar" style="width: 40%"></div>
-              </div>
-              <span class="progress-description">
-                    40% Increase in 30 Days
-                  </span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-
-          <!-- /.info-box -->
-
-          <div class="box box-default">
-            <div class="box-header with-border">
-              <h3 class="box-title">Browser Usage</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <div class="row">
-                <div class="col-md-8">
-                  <div class="chart-responsive">
-                    <canvas id="pieChart" height="150"></canvas>
-                  </div>
-                  <!-- ./chart-responsive -->
-                </div>
-                <!-- /.col -->
-                <div class="col-md-4">
-                  <ul class="chart-legend clearfix">
-                    <li><i class="fa fa-circle-o text-red"></i> Chrome</li>
-                    <li><i class="fa fa-circle-o text-green"></i> IE</li>
-                    <li><i class="fa fa-circle-o text-yellow"></i> FireFox</li>
-                    <li><i class="fa fa-circle-o text-aqua"></i> Safari</li>
-                    <li><i class="fa fa-circle-o text-light-blue"></i> Opera</li>
-                    <li><i class="fa fa-circle-o text-gray"></i> Navigator</li>
-                  </ul>
-                </div>
-                <!-- /.col -->
-              </div>
-              <!-- /.row -->
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer no-padding">
-              <ul class="nav nav-pills nav-stacked">
-                <li><a href="#">United States of America
-                  <span class="pull-right text-red"><i class="fa fa-angle-down"></i> 12%</span></a></li>
-                <li><a href="#">India <span class="pull-right text-green"><i class="fa fa-angle-up"></i> 4%</span></a>
-                </li>
-                <li><a href="#">China
-                  <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 0%</span></a></li>
-              </ul>
-            </div>
-            <!-- /.footer -->
-          </div>
-          <!-- /.box -->
-
-          <!-- PRODUCT LIST -->
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Recently Added Products</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <ul class="products-list product-list-in-box">
-                <li class="item">
-                  <div class="product-img">
-                    <img src="dist/img/default-50x50.gif" alt="Product Image">
-                  </div>
-                  <div class="product-info">
-                    <a href="javascript:void(0)" class="product-title">Samsung TV
-                      <span class="label label-warning pull-right">$1800</span></a>
-                    <span class="product-description">
-                          Samsung 32" 1080p 60Hz LED Smart HDTV.
-                        </span>
-                  </div>
-                </li>
-                <!-- /.item -->
-                <li class="item">
-                  <div class="product-img">
-                    <img src="dist/img/default-50x50.gif" alt="Product Image">
-                  </div>
-                  <div class="product-info">
-                    <a href="javascript:void(0)" class="product-title">Bicycle
-                      <span class="label label-info pull-right">$700</span></a>
-                    <span class="product-description">
-                          26" Mongoose Dolomite Men's 7-speed, Navy Blue.
-                        </span>
-                  </div>
-                </li>
-                <!-- /.item -->
-                <li class="item">
-                  <div class="product-img">
-                    <img src="dist/img/default-50x50.gif" alt="Product Image">
-                  </div>
-                  <div class="product-info">
-                    <a href="javascript:void(0)" class="product-title">Xbox One <span
-                        class="label label-danger pull-right">$350</span></a>
-                    <span class="product-description">
-                          Xbox One Console Bundle with Halo Master Chief Collection.
-                        </span>
-                  </div>
-                </li>
-                <!-- /.item -->
-                <li class="item">
-                  <div class="product-img">
-                    <img src="dist/img/default-50x50.gif" alt="Product Image">
-                  </div>
-                  <div class="product-info">
-                    <a href="javascript:void(0)" class="product-title">PlayStation 4
-                      <span class="label label-success pull-right">$399</span></a>
-                    <span class="product-description">
-                          PlayStation 4 500GB Console (PS4)
-                        </span>
-                  </div>
-                </li>
-                <!-- /.item -->
-              </ul>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer text-center">
-              <a href="javascript:void(0)" class="uppercase">View All Products</a>
-            </div>
-            <!-- /.box-footer -->
-          </div>
-          <!-- /.box -->
         </div>
         <!-- /.col -->
       </div>
@@ -778,6 +730,29 @@ include 'header.php';
 <?php
 include 'footer.php';
 ?>
+
+<script>
+	function modal1(id) {
+		var data = {"id" : id};
+		jQuery.ajax({
+			url : '../includes/genlocmodal.php',
+			method : "post",
+			data : data,
+			success : function(data) {
+				jQuery('body').append(data);
+				jQuery('#LocModal').modal('toggle');
+			},
+			error : function() {
+				alert("Ooops! Something went wrong!");
+			}
+		});
+	}
+</script>
+<script>
+	$(document).ready(function(){
+		$('#driverloc').DataTable();
+	});
+</script>
 <script>
 	function modal(id) {
 		var data = {"id" : id};
@@ -800,6 +775,14 @@ include 'footer.php';
 		$('#bookings').DataTable();
 	});
 </script>
+<script>
+	$(document).ready(function(){
+		$('#area').DataTable();
+	});
+</script>
  
   <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
   <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+  <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+  <!-- jvectormap -->
+  <link rel="stylesheet" href="bower_components/jvectormap/jquery-jvectormap.css">	
