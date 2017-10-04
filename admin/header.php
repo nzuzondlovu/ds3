@@ -54,7 +54,7 @@
 </head>
 
 
-<body class="hold-transition skin-yellow layout-fixed">
+<body class="hold-transition skin-yellow sidebar-mini  ">
   <div class="wrapper">
 
     <!-- Main Header -->

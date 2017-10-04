@@ -39,6 +39,8 @@ include_once 'functions.php';
 $id = '';
 $name = '';
 $serial = '';
+  $user_book= '';
+
 
 if (isset($_POST['id']) && $_POST['id'] != null) {
 
@@ -55,11 +57,15 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
       $row['serial'].'<br>Type: '.
       $row['type'].'<br>Status: '.
       $row['status'].'<br>Description: '.
-      $row['description'].'<br>Date: '.
-      date("M d, y",strtotime($row['date'])).'<br>
+      $row['description'].'<br>USEr_ID: '. 
+            $row['user'].'<br>Date: '. 
+      date("M d, y",strtotime($row['date'])).' <br>
       <img class="img-responsive" src="../uploads/'.$row['pic_url'].'">';
       $name = $row['name'];
+
       $serial = $row['serial'];
+              $user_book= $row['user'];
+
     }
   }
 }
@@ -156,6 +162,9 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
               <input type="text" name="id" value="<?php echo $id; ?>" hidden>
               <input type="text" name="name" value="<?php echo $name; ?>" hidden>
               <input type="text" name="serial" value="<?php echo $serial; ?>" hidden>
+
+              <input type="text" name="user_book" value="<?php echo $user_book; ?>" >
+
               <button name="create" type="submit" class="btn btn-primary">Submit Quotation</button>
               <button type="reset" class="btn btn-default">Reset Quotation</button>
             </form>

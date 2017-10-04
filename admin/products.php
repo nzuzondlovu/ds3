@@ -67,7 +67,7 @@ if(isset($_POST['prodEdit'])) {
 
 
 	
-			$sql = "UPDATE product SET price='".$price."', profit='".$profit."', name='".$name."', type='".$type."', brandname='".$brandname."',
+				$sql = "UPDATE product SET price='".$price."', profit='".$profit."', name='".$name."', type='".$type."', brandname='".$brandname."',
 			 description='".$description."' WHERE id='".$id."'";
 
 			mysqli_query($con, $sql);
