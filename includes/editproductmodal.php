@@ -1,3 +1,4 @@
+
 <?php
 ob_start();
 include '../includes/functions.php';
@@ -55,15 +56,17 @@ $brandnam = '';
 $typ = '';
 $pri = '';
 $des = '';
+ $id = mysqli_real_escape_string($con, strip_tags(trim($_POST['id'])));
 
-$sql = "SELECT * FROM product WHERE id=$id";
+$sql = "SELECT * FROM product WHERE id='".$id."' ";
 $res = mysqli_query($con, $sql);
 
 if(mysqli_num_rows($res) > 0) {
   while($row = mysqli_fetch_assoc($res)) {
     $promo = '
+
     ID : '.$row['id'].'<br>
-    User : '.$row['user'].'<br>
+    User : '.$row['idnumber'].'<br>
     Name : '.$row['brand_name'].','.$row['generic_name'].'<br>
     Type : '.$row['type'].'<br>
     Price : R '.$row['price'].'<br>
@@ -94,19 +97,116 @@ if (isset($_POST['id']) && $_POST['id'] != null)
 
     while ($row = mysqli_fetch_assoc($res)) {
 
-   $promo = ' ID : '.$row['id'].'<br>
-    User : '.$row['user'].'<br>
-    Name : '.$row['brand_name'].','.$row['generic_name'].'<br>
-    Type : '.$row['type'].'<br>
-    Price : R '.$row['price'].'<br>
-    Date : '.date("M d, y",strtotime($row['date'])).'<br>
-    Description : '.$row['description'].'<br>
-    <img class="img-responsive" src="../uploads/'.$row['pic_url'].'">';
-    $gennam = $row['generic_name'];
-    $brandnam = $row['brand_name'];
+   $promo = ' 
+
+  <div class="resume">
+    <header class="page-header">
+    <h1 class="page-title">Edit Details For Product  '.$row['prod_code'].' </h1>
+    <small> <i class="fa fa-clock-o"></i> Product added on: <time> '.date("M d, y",strtotime($row['date'])).'</time></small>
+  </header>
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-0 col-lg-12 ">
+    <div class="panel panel-default">
+      <div class="panel-heading resume-heading">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="col-xs-12 col-sm-4">
+              <figure>
+
+                   <li class="list-group-item"><i class="fa fa-envelope"></i>'.$row['supplier'].'</li>
+                   <br/>
+                <img  src="../uploads/'.$row['pic_url'].'" class="img-thumbnail img-responsive" alt="Cinque Terre" width="300" height="300">
+                     <li class="list-group-item"><i class="fa fa-phone"></i> R '.$row['price'].' </li>
+                <li class="list-group-item"><i class="fa fa-envelope"></i> R '.$row['oPrice'].'</li>
+
+     <li class="list-group-item"><i class="fa fa-envelope"></i> R '.$row['profit'].'</li>
+          <li class="list-group-item"><i class="fa fa-envelope"></i>  '.$row['qty'].'</li>
+               <li class="list-group-item"><i class="fa fa-envelope"></i> R '.$row['qty_sold'].'</li>
+
+              </figure>
+              
+              <div class="row">
+             
+              </div>
+              
+            </div>
+
+            <div class="col-xs-12 col-sm-8">
+              <ul class="list-group">
+         
+                <li class="list-group-item"><i class="fa fa-phone"></i> '.$row['prod_code'].' </li>
+                <li class="list-group-item"><i class="fa fa-envelope"></i> '.$row['idnumber'].'</li>
+                               <li class="list-group-item"><i class="fa fa-phone"></i> '.$row['type'].'</li>
+                <li class="list-group-item"><i class="fa fa-envelope"></i> '.$row['brandname'].' , '.$row['name'].'</li>
+                    
+
+            
+
+     <li class="list-group-item">
+     </i>   
+         <div class="bs-callout bs-callout-danger">
+        <h4>Lates Orders</h4>
+        <table class="table table-striped table-responsive ">
+          <thead>
+            <tr><th>Degree</th>
+            <th>Graduation Year</th>
+            <th>CGPA</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td>Masters in Computer Science and Engineering</td>
+              <td>2014</td>
+              <td> 3.50 </td>
+            </tr>
+            <tr>
+              <td>BSc. in Computer Science and Engineering</td>
+              <td>2011</td>
+              <td> 3.25 </td>
+            </tr>
+          </tbody>
+        </table>
+      </div></li>
+
+     <li class="list-group-item"><i class="fa fa-envelope"></i> john@example.com</li>
+       </ul>
+
+            </div>
+          </div>
+        </div>
+      </div>
+  
+
+      <div class="bs-callout bs-callout-danger">
+        <h4 >   Description  </h4>
+        <ul class="list-group">
+          <a class="list-group-item inactive-link" href="#">
+            
+
+     '.$row['description'].'
+   
+     
+
+          
+
+          </a>
+
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+    
+</div>
+';
+    $gennam = $row['name'];
+    $brandnam = $row['brandname'];
     $typ = $row['type'];
     $pri = $row['price'];
     $des = $row['description'];
+        $op = $row['oPrice'];
+    $prof = $row['profit'];
     }
   }
 }
@@ -119,7 +219,7 @@ if (isset($_POST['id']) && $_POST['id'] != null)
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" onclick="closeModal()" aria-label="Close"><span class="fa fa-close" aria-hidden="true"></span> Close</button>
-        <h4 class="modal-title" id="responseModalLabel">Create Quote</h4>
+        <h4 class="modal-title" id="responseModalLabel">Edit Product</h4>
       </div>
       <div class="modal-body">
         <div class="row">
@@ -139,35 +239,49 @@ if (isset($_POST['id']) && $_POST['id'] != null)
           </div>
           <?php } ?>
         </div>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            Update product details
-          </div>
-          <div class="panel-body">
+  
             <div class="row">
               <div class="col-lg-12">
+               
                 <div class="pull-right">
                   <a href="products.php" class="btn btn-warning">Products</a>
                 </div>
               </div>
-              <div class="col-md-6">
-                <h2>Device details</h2>
-                <?php
+
+
+
+</div>
+              <div class="col-md-12">  <?php
                 echo $promo;
                 ?>
               </div>
+    <div class="col-xs-12 col-sm-12">
+             
 
-              <div class="col-md-6">
                 <form role="form" method="post">
-                  <div class="form-group">
+
+              <div class="form-group">
+            
+           
+    
+        
+          
+            
+    
+      
+            
+
+
+       
+                  <div class="form-group col-xs-12 col-sm-6">
                     <label>Brand Name</label>
-                    <input type="text" name="bname" class="form-control" value="<?php echo $brandnam; ?>">
+                    <input type="text" name="brandname" class="form-control" value="<?php echo $brandnam; ?>">
                   </div>
-                    <div class="form-group">
+                    <div class="form-group col-xs-12 col-sm-6">
                     <label>Generic Name</label>
-                    <input type="text" name="genname" class="form-control" value="<?php echo $gennam; ?>">
+                    <input type="text" name="name" class="form-control" value="<?php echo $gennam; ?>">
                   </div>
-                  <div class="form-group">
+                  <div class="form-group col-xs-12 col-sm-6">
                     <label>Device type</label>
                     <select name="type" class="form-control">
                       <option value="" selected="selected"><?php echo $typ; ?></option>
@@ -183,17 +297,45 @@ if (isset($_POST['id']) && $_POST['id'] != null)
                       ?>
                     </select>
                   </div>
-                  <div class="form-group">
-                    <label>Price</label>
-                    <input type="decimal" name="price" class="form-control" value="<?php echo $pri; ?>">
-                  </div>
-                  <div class="form-group">
+
+                   <div class="form-group col-xs-12 col-sm-6">
+
                     <label>Device description</label>
                     <textarea name="description" class="form-control" rows="3"><?php echo $des; ?></textarea>
+
                   </div>
+                          <div class="form-group  col-sm-6">
+                    <label>Price</label>
+                 
+
+                        <input class="form-control" type="text" id="txt1" name="price" onkeyup="sum();" value="<?php echo $pri; ?>">
+
+                                        <input type="text" id="txt3" class="form-control" hidden="true" name="profit" readonly value="<?php echo $prof; ?>">
+                                        
+
+                                                    <input class="form-control"  type="text" id="txt2"  name="oPrice" onkeyup="sum();" value="<?php echo $op; ?>">
+
+                  </div> 
+
+ <div class="row">
+              <div class="col-lg-12">
+               
+                <div class="pull-right">
+                <div class="form-group col-xs-12 col-sm-6">
                        <input type="text" name="id" value="<?= $id; ?>" hidden>
-                  <button name="submit" type="submit" class="btn btn-primary">Update Product</button>
+                  <button name="prodEdit" type="submit" class="btn btn-primary">Update Product</button>
+
                   <button type="reset" class="btn btn-default">Reset Form</button>
+                </div>
+                </div>
+              </div>
+
+
+
+</div>
+       
+                      
+             
                 </form>
 
               </div>
@@ -208,8 +350,7 @@ if (isset($_POST['id']) && $_POST['id'] != null)
       <!-- /.col-lg-12 -->
     </div>
       </div>
-    </div>
-  </div>
+ 
   <!-- /.Modal -->
   <script>
     function closeModal() {

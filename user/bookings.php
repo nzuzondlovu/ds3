@@ -47,7 +47,7 @@ include 'header.php';
 					<div class="panel-body">
 						<div class="table-responsive">
 							<?php
-							$num_rec_per_page=10;
+							$num_rec_per_page=5;
 
 							if (isset($_GET["page"])) {
 
