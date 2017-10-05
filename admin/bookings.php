@@ -26,6 +26,9 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 
 if(isset($_POST['create'])) {
 
+
+       
+
     $id = mysqli_real_escape_string($con, strip_tags(trim($_POST["id"])));
     $name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
     $serial = mysqli_real_escape_string($con, strip_tags(trim($_POST["serial"])));
@@ -37,19 +40,19 @@ if(isset($_POST['create'])) {
     $total = mysqli_real_escape_string($con, strip_tags(trim($_POST["total"])));
     $status = mysqli_real_escape_string($con, strip_tags(trim($_POST["status"])));
     $description = mysqli_real_escape_string($con, strip_tags(trim($_POST["desc"])));
+    $user_book = mysqli_real_escape_string($con, strip_tags(trim($_POST["user_book"])));
     $archive=0;
     
 
-    if( $model != '' && $accessory != '' && $technician != '' && $deposit != '' && $balance != '' && $total != '' && $status != '' && $description != '') {
 
-       echo $sql = "INSERT INTO quotation(booking_id, name, serial, model, accessory, technician, description, deposit, balance, total, status,archive) 
-        VALUES ('".$id."', '".$name."', '".$serial."', '".$model."', '".$accessory."', '".$technician."', '".$description."', '".$deposit."', '".$balance."', '".$total."', '".$status."', '".$archive."')";
-        mysqli_query($con, $sql);
+
+       
+        $sql = "INSERT INTO quotation(booking_id, name, serial, model, accessory, technician, description, deposit, balance, total, status,archive,user_book) 
+        VALUES ('".$id."', '".$name."', '".$serial."', '".$model."', '".$accessory."', '".$technician."', '".$description."', '".$deposit."', '".$balance."', '".$total."', '".$status."', '".$archive."', '".  $user_book."')";
+    mysqli_query($con, $sql);
        $_SESSION['success'] = 'Your new Quotation is added successfully.';
-        header("Location: bookings.php");
-    }else {
-        $_SESSION['failure'] = 'Please fill in all fields.';
-    }
+        //header("Location: bookings.php");
+  
 }
 
 ?>

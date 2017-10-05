@@ -79,7 +79,7 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
               </div>
     			<input type="text" name="del" value="<?php $res = mysqli_query($con, "SELECT * FROM area WHERE id=$id ");$row= mysqli_fetch_assoc($res);echo $row['id'];?> " style="display: none" />
             		
-              <input type="text" name="name" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['custname'];?>" style="display: none" />
+              <input type="text" name="name" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$rolew = mysqli_fetch_assoc($res);echo $row['custname'];?>" style="display: none" />
               
               <input type="text" name="cell" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['custcell']; ?>"  style="display: none"/>
               

@@ -104,7 +104,7 @@ if(isset($_POST['locsubmit'])) {
 
 	if($driver != '' ) {
 
-		echo $sql="INSERT INTO driver_loc(	driver_locID,AreaCode,driver_idNumber,Month,no_of_del)
+		echo $sql="INSERT INTO driver_loc(driver_locID,AreaCode,driver_idNumber,Month,no_of_del)
 		VALUES('".$driver_locID."','".$AreaCode."','".$driver_idNumber."', '".$Month."','".$no_of_del."')";
 		mysqli_query($con, $sql);
 		$_SESSION['success'] = 'Successfully updated details.';
@@ -117,7 +117,7 @@ if(isset($_POST['locsubmit'])) {
 ?>
 
 
-<!-- Page Content -->
+
 
 		<!-- /.row -->
 		<div class="row">

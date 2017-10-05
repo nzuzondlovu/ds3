@@ -112,6 +112,9 @@ include 'header.php';
                 							<label>Brand Name</label>
 											<input type="text" name="bname" class="form-control" placeholder="Enter Brand Name">
               							</div>
+
+
+              							
               							<div class="form-group">
                 							<label>Generic Name</label>
 											<input type="text" name="genname" class="form-control" placeholder="Or Device Model">

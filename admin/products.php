@@ -46,6 +46,37 @@ function sum() {
 			
         }
 </script>
+
+<?php
+
+
+
+if(isset($_POST['prodEdit'])) {
+		$name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
+	$type = mysqli_real_escape_string($con, strip_tags(trim($_POST["type"])));
+	$description = mysqli_real_escape_string($con, strip_tags(trim($_POST["description"])));
+	$price = mysqli_real_escape_string($con, strip_tags(trim($_POST["price"])));
+	$brandname = mysqli_real_escape_string($con, strip_tags(trim($_POST["brandname"])));
+
+	$oPrice = mysqli_real_escape_string($con, strip_tags(trim($_POST["oPrice"])));
+	$profit = mysqli_real_escape_string($con, strip_tags(trim($_POST["profit"])));
+		$onhand_qty  = mysqli_real_escape_string($con, strip_tags(trim($_POST["profit"])));
+
+
+		$id = mysqli_real_escape_string($con, strip_tags(trim($_POST["id"])));	
+
+
+	
+				$sql = "UPDATE product SET price='".$price."', profit='".$profit."', name='".$name."', type='".$type."', brandname='".$brandname."',
+			 description='".$description."' WHERE id='".$id."'";
+
+			mysqli_query($con, $sql);
+			$_SESSION['success'] = 'Product was updated successfully.';
+			//	header("Location: promotions.php");
+	
+
+}
+?>
 <?php
 
 
