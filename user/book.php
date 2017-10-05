@@ -20,14 +20,14 @@ if(isset($_POST['submit'])) {
     $description = mysqli_real_escape_string($con, strip_tags(trim($_POST["description"])));
         $date = mysqli_real_escape_string($con, strip_tags(trim($_POST["date"])));
         $time =mysqli_real_escape_string($con, strip_tags(trim($_POST["time"])));
-   // $date = date("Y-m-d H:i:s");
+   $date = $date." ".$time;
     $target_dir = "../uploads/";
     $url = basename( $_FILES["fileToUpload"]["name"]);
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
     $user = $_SESSION['user_id'];  
     $description2=""; 
-    $date_in=  date("Y-m-d H:i:s");
-     $date_out=  date("Y-m-d H:i:s");
+    $date_in= ("Y-m-d H:i:s");
+     $date_out=   ("Y-m-d H:i:s");
     $status ="";
     $technician="";
     $archive=0;

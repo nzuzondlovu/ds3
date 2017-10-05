@@ -1150,6 +1150,7 @@
     template: 'dropdown',
     appendWidgetTo: 'body',
     showWidgetOnAddonClick: true,
+    
     icons: {
       up: 'glyphicon glyphicon-chevron-up',
       down: 'glyphicon glyphicon-chevron-down'
