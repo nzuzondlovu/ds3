@@ -53,7 +53,7 @@ function user($type)
 	<a href="query.php">Queries</a>
 	</li>
 	<li>
-<<<<<<< HEAD
+
 	<a href="feedback.php">Feedback</a>
 	</li>
 	</ul>
@@ -73,7 +73,7 @@ function user($type)
 	</li>
 	</ul>
 	<!-- /.nav-second-level -->
-=======
+
 		<a href="#"><i class="fa fa-truck fa-fw"></i> Deliveries<span class="fa arrow"></span></a>
 		<ul class="nav nav-second-level">
 		<li>
@@ -91,7 +91,7 @@ function user($type)
 		</li>
 		</ul>
 		<!-- /.nav-second-level -->
->>>>>>> 4797bdb53405f3bcccc048d759b3547445fe8ce2
+
 	</li>	
 	<li>
 	<a href="#"><i class="fa fa-cubes fa-fw"></i> Stock<span class="fa arrow"></span></a>
