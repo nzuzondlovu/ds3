@@ -31,15 +31,35 @@ if(isset($_POST['submit'])) {
 	$number = mysqli_real_escape_string($con, strip_tags(trim($_POST["number"])));
 	$address = mysqli_real_escape_string($con, strip_tags(trim($_POST["address"])));
 	$website = mysqli_real_escape_string($con, strip_tags(trim($_POST["website"])));
-	$notes = mysqli_real_escape_string($con, strip_tags(trim($_POST["product"])));
+
+ 	function createRandomPassword() {
+	$chars = "003232303232023232023456789";
+	srand((double)microtime()*1000000);
+	$i = 0;
+	$pass = '' ;
+	while ($i <= 7) {
+
+		$num = rand() % 33;
+
+		$tmp = substr($chars, $num, 1);
+
+		$pass = $pass . $tmp;
+
+		$i++;
+
+	}
+	return $pass;
+}
+$supp_code= 'SUP-'.createRandomPassword()  ;
+
 
 	if ($name != '' && $email != '' && $number != '' &&  $address != '' && $website != '' ) {
 
-		$sql = "INSERT INTO suppliers(name, notes, contactNumber, email, website, address)
-		VALUES('".$name."', '".$notes."', '".$number."', '".$email."', '".$website."', '".$address."')";
+		$sql = "INSERT INTO suppliers(name, contactNumber, email, website, address,supp_code)
+		VALUES('".$name."',  '".$number."', '".$email."', '".$website."', '".$address."', '".$supp_code."')";
 		mysqli_query($con, $sql);
-		$_SESSION['success'] = 'You have successfully added a new supplier.';
-		header("Location: suppliers.php");
+		//$_SESSION['success'] = 'You have successfully added a new supplier.';
+		//header("Location: suppliers.php");
 	} else {
 		$_SESSION['failure'] = 'Please fill in all the fields.';
 	}
@@ -71,6 +91,7 @@ include 'header.php';
 					</div>
 					<div class="modal-body">
 						<form role="form" method="post" enctype="multipart/form-data">
+
 							<div class="form-group">
 								<label>Name</label>
 								<input type="text" name="name" class="form-control" placeholder="Enter name">
@@ -83,6 +104,7 @@ include 'header.php';
 								<label>Contact Number</label>
 								<input type="text" name="number" class="form-control" placeholder="Enter number">
 							</div>
+
 							<div class="form-group">
 								<label>Address</label>
 								<input type="text" name="address" class="form-control" placeholder="Enter address">
@@ -92,7 +114,8 @@ include 'header.php';
 								<input type="text" name="website" class="form-control" value="http://">
 							</div>
 							
-							<button onclick="modal('.$row['deliveryID'].')" class="btn btn-warning">Allocate Driver</button><button name="submit" type="submit" class="btn btn-primary">Submit Supplier</button>
+					
+							<button name="submit" type="submit" class="btn btn-primary">Submit Supplier</button>
 							<button type="reset" class="btn btn-default">Reset Supplier</button>
 						</form>
 						
@@ -124,12 +147,7 @@ include 'header.php';
 		<!-- /.row -->
 		<div class="row">
 			<div class="col-lg-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						List of all suppliers
-					</div>
-					<!-- /.panel-heading -->
-					<div class="panel-body">
+			
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="pull-right">
@@ -155,16 +173,16 @@ include 'header.php';
 
 							if (mysqli_num_rows($res) > 0) {
 								echo '
-								<table id="suppliers" class="table">
+								<table id="suppliers" class="table table-responsive">
 									<thead>
 										<tr>
-											<th>ID</th>
+											<th>Supplier ID</th>
 											<th>Name</th>
 											<th>Contact #</th>
 											<th>Email</th>
 											<th>Website</th>
 											<th>Address</th>
-											<th>Notes</th>
+											
 											<th>Action</th>
 										</tr>
 									</thead>
@@ -173,15 +191,15 @@ include 'header.php';
 
 											echo '
 											<tr>
-												<td>'.$row['id'].'</td>
+												<td>'.$row['supp_code'].'</td>
 												<td>'.$row['name'].'</td>
 												<td>'.$row['contactNumber'].'</td>
 												<td>'.$row['email'].'</td>
 												<td><a target="blank" href="'.$row['website'].'">'.$row['website'].'</a></td>
 												<td>'.$row['address'].'</td>
-												<td>'.$row['notes'].'</td>
+											
 												<td class="pull-right">
-													<a href="createOrder.php?id='.$row['id'].'" class="btn btn-primary">Make Order</a>   <a href="editsupplier.php?id='.$row['id'].'" class="btn btn-primary">Update Supplier</a>
+												   <a href="editsupplier.php?id='.$row['id'].'" class="label label-primary">Edit</a>
 												</td>
 											</tr>';
 										}
@@ -203,9 +221,7 @@ include 'header.php';
 			<!-- /.panel -->
 		</div>
 	</div>
-</div>
-<!-- /.container-fluid -->
-</div>
+
 <!-- /#page-wrapper -->
 
 <?php
@@ -233,4 +249,8 @@ include 'footer.php';
 	$(document).ready(function(){
 		$('#suppliers').DataTable();
 	});
-</script>
+</script>  <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+  <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+  <!-- jvectormap -->
+  <link rel="stylesheet" href="bower_components/jvectormap/jquery-jvectormap.css">	

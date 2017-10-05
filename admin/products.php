@@ -122,8 +122,8 @@ include 'header.php';
 
 
 		<div class="row">
-			<div class="col-lg-8">
-				<h1 class="page-header" align="center">
+			<div class="col-lg-12">
+			
 
 
 
@@ -131,6 +131,39 @@ include 'header.php';
 
 if(isset($_POST['btnSubmit']))
  {
+
+	$sql = "SELECT * FROM user ";
+	$res = mysqli_query($con, $sql);
+
+	if (mysqli_num_rows($res) > 0) {
+
+		while ($row = mysqli_fetch_assoc($res)) {
+
+			$_SESSION['user_ID'] = $row['idnumber'];
+			
+		}
+	}
+
+ 	function createRandomPassword() {
+	$chars = "003232303232023232023456789";
+	srand((double)microtime()*1000000);
+	$i = 0;
+	$pass = '' ;
+	while ($i <= 7) {
+
+		$num = rand() % 33;
+
+		$tmp = substr($chars, $num, 1);
+
+		$pass = $pass . $tmp;
+
+		$i++;
+
+	}
+	return $pass;
+}
+$prod_code= 'PRD-'.createRandomPassword()  ;
+
 
 $archive=0;
 $promo_price=0;
@@ -146,6 +179,7 @@ $promo_price=0;
 		$onhand_qty  = mysqli_real_escape_string($con, strip_tags(trim($_POST["profit"])));
 	$qty = mysqli_real_escape_string($con, strip_tags(trim($_POST["qty"])));
 	 	$promo_date2 =date("Y-m-d H:i:s");
+	 	$idnumber =$_SESSION['user_ID'];
 
 
 
@@ -161,17 +195,17 @@ $promo_price=0;
 /*INSERT INTO `product`(`id`, `user`, `name`, `description`, `type`, `price`, `promo_price`, `pic_url`, `date`, `promo_date1`, `promo_date2`, `archive`, `onhand_qty`, `qty`, `qty_sold`, `supplier`, `brandname`, `oPrice`, `profit`, `brand_name`, `generic_name`, `supplierID`, `order_price`, `barcode`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10],[value-11],[value-12],[value-13],[value-14],[value-15],[value-16],[value-17],[value-18],[value-19],[value-20],[value-21],[value-22],[value-23],[value-24])
 
 
-*/	 $sql = "INSERT INTO product(user, name, description, type, price, pic_url, date,onhand_qty,qty,supplier,brandname,oPrice,profit,promo_price,promo_date1,promo_date2,archive)
+*/	 echo $sql = "INSERT INTO product(user, name, description, type, price, pic_url, date,onhand_qty,qty,supplier,brandname,oPrice,profit,promo_price,promo_date1,promo_date2,archive,prod_code,idnumber )
 
 
 	VALUES('$user', '$name', '$description', '$type', '$price', '$url', '$date','$onhand_qty','$qty','$supplier', '$brandname', 
-	 '$oPrice', '$profit','$promo_price','$promo_date1','$promo_date2','$archive')";
+	 '$oPrice', '$profit','$promo_price','$promo_date1','$promo_date2','$archive','$prod_code','$idnumber')";
 
 
 	     mysqli_query($con, $sql);
 
 	          $_SESSION['success'] = 'Your new driver was added successfully.';
-        header("Location: products.php");
+       header("Location: products.php");
 	upload($url, $target_dir, $target_file, $sql, $con);
 
 
@@ -203,6 +237,13 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 				$result->execute();
 				$rowcount = $result->rowcount();
 			?>
+
+			<?php 
+				include('connect.php');
+				$result = $db->prepare("SELECT promo_price FROM product where promo_price != 0.00");
+				$result->execute();
+				$rowcountPromo = $result->rowcount();
+			?>
 			
 			<?php 
 				include('connect.php');
@@ -210,18 +251,40 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 				$result->execute();
 				$rowcount123 = $result->rowcount();
 
+
 			?>
 
 
-				<div style="text-align:center;">
-			Total Number of Products:  <font color="green" style="font:bold 22px 'Aleo';">[<?php echo $rowcount;?>]</font>
-			</div>
-			
-			<div style="text-align:center;">
-			<font style="color:rgb(255, 95, 66);; font:bold 22px 'Aleo';">[<?php echo $rowcount123;?>]</font> Products are below QTY of 10 
-			</div>
+			  <a class="btn btn-app">
+                <span class="badge bg-green"><?php echo $rowcount;?></span>
+                <i class="fa fa-barcode"></i> <b>  <?php echo "Total";?> </b>
 
-				</h1>
+              </a>	
+                <a class="btn btn-app">
+                <span class="badge bg-green"><?php echo $rowcountPromo;?></span>
+                <i class="fa fa-cart-arrow-down"></i> <b>  <?php echo "Promo";?> </b>
+
+              </a>	
+                <a class="btn btn-danger btn-app">
+                <span class="badge bg-green"><?php echo $rowcount;?></span>
+                <i class="fa fa-inbox"></i> Orders
+              </a>	
+                <a class="btn  btn-app">
+                <span class="badge bg-green"><?php echo $rowcount123;?></span>
+                <i class="fa fa-warning text-orange	"></i> <b>  <?php echo "<10";?> </b>
+              </a>	
+                <a class="btn btn-app">
+                <span class="badge bg-green"><?php echo $rowcount;?></span>
+                <i class="fa fa-barcode"></i> Suppliers
+              </a>	
+               <a class="btn btn-app">
+                <span class="badge bg-green"><?php echo $rowcount;?></span>
+                <i class="fa fa-barcode"></i> Sales              </a>	
+
+
+
+
+			
 			</div>
 			<!-- /.col-lg-12 -->
 		</div>
@@ -395,7 +458,7 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 
 							<?php
 
-							$sql = "SELECT * FROM product WHERE archive = 0";
+							$sql = "SELECT Distinct *   FROM product WHERE archive = 0";
 							$res = mysqli_query($con, $sql);
 
 							if (mysqli_num_rows($res) > 0) {
@@ -403,7 +466,8 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 								<table id="products"  class="table table-bordered table-hover">
 									<thead>
 										<tr>
-										
+												<th>Product ID</th>
+											<th>Brandname</th>
 											<th>Name</th>
 											
 											<th>type</th>
@@ -411,6 +475,8 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 										
 											<th>Date</th>
 											<th>Promo
+												<th style="width:10px">Quantity</th>
+														<th>Supplier</th>
 											  	
 										</tr>
 									</thead>
@@ -430,14 +496,17 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 
 											echo '
 											<tr>
-									
+											<td>'.$row['prod_code'].'</td>
+									<td>'.$row['brandname'].'</td>
 												<td>'.$row['name'].'</td>
-											
+												
 												<td>'.$row['type'].'</td>
 												<td>'.$row['price'].'</td>
 										
 												<td>'.date("M d, y",strtotime($row['date'])).'</td>
 												<td>'.$button.'   <a href="?id='.$row['id'].'" class="label label-warning">Archive</a></td>
+											<td>'.$row['qty'].'</td>
+												<td>'.$row['supplier'].'</td>
 											</tr>';
 										}
 										echo '

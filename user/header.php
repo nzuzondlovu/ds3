@@ -62,7 +62,7 @@
 </head>
 
 
-<body class="hold-transition skin-yellow fixed">
+<body class="hold-transition skin-yellow layout-boxed">
 <div class="wrapper">
 
   <!-- Main Header -->
@@ -72,8 +72,8 @@
     <a href="index2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b><?php echo $role?></b>LTE</span>
+      <!-- logo for regular state and mobile devices -->  
+      <span class="logo-lg"><b></b>C&E Panel</span>
     </a>
 
     <!-- Header Navbar -->

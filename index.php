@@ -96,24 +96,28 @@ include 'header.php';
 
                         while ($row = mysqli_fetch_assoc($res)) {
 
-                            $promo = '<ins>R'.$row['promo_price'].'</ins> <del>R'.$row['price'].'</del>';
+                            $promo = '<ins  class="label label-warning" >R'.$row['promo_price'].'</ins> <del>R'.$row['price'].'</del>';
 
                             if ($row['promo_price'] == '0.00') {
 
-                                $promo = '<ins>R'.$row['price'].'</ins>';
+                                $promo = '<ins >R'.$row['price'].'</ins>';
                             }
 
                             echo '
                             <div class="single-product">
                                 <div class="product-f-image">
+<<<<<<< HEAD
                                     <img src="uploads/'.$row['pic_url'].'" alt="">
+=======
+                                  <img src="uploads/'.$row['pic_url'].'" class="product-thumb" >
+>>>>>>> 4797bdb53405f3bcccc048d759b3547445fe8ce2
                                     <div class="product-hover">
                                         <a href="cart.php" ref="'.$row['id'].'"  class="add-to-cart-link add_to_cart_button"><i class="fa fa-shopping-cart"></i> Add to cart</a>
                                         <a href="product.php?id='.$row['id'].'" class="view-details-link"><i class="fa fa-link"></i> See details</a>
                                     </div>
                                 </div>
 
-                                <h2>'.$row['brand_name'].' '.$row['generic_name'].'</h2>
+                                <h2>'.$row['brandname'].' '.$row['name'].'</h2>
 
                                 <div class="product-carousel-price">
                                     '.$promo.'
@@ -169,7 +173,7 @@ include 'header.php';
                     <h2 class="product-wid-title">Top Sellers</h2>
                     <a href="" class="wid-view-more">View All</a>
                     <?php
-                    $sql = "SELECT * FROM product ORDER BY id DESC LIMIT 3";
+                    $sql = "SELECT * FROM product ORDER BY date DESC LIMIT 3";
                     $res = mysqli_query($con, $sql);
 
                     if (mysqli_num_rows($res) > 0) {
@@ -185,8 +189,13 @@ include 'header.php';
 
                             echo '
                             <div class="single-wid-product">
+<<<<<<< HEAD
                                 <a href="single-product.html"><img src="uploads/'.$row['pic_url'].'" alt="" class="product-thumb"></a>
                                 <h2><a href="single-product.html">'.$row['brand_name'].' '.$row['generic_name'].'</a></h2>
+=======
+                                <a href="single-product.html"><img src="uploads/'.$row['pic_url'].'" class="product-thumb" ></a>
+                                <h2><a href="single-product.html">'.$row['brandname'].' '.$row['name'].'</a></h2>
+>>>>>>> 4797bdb53405f3bcccc048d759b3547445fe8ce2
                                 <div class="product-wid-rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -225,17 +234,22 @@ include 'header.php';
 
                         while ($row = mysqli_fetch_assoc($res)) {
 
-                            $promo = '<ins>R'.$row['promo_price'].'</ins> <del>R'.$row['price'].'</del>';
+                            $promo = '<ins  class="label label-info">R'.$row['promo_price'].'</ins> <del>R'.$row['price'].'</del>';
 
                             if ($row['promo_price'] == '0.00') {
 
-                                $promo = '<ins>R'.$row['price'].'</ins>';
+                                $promo = '<ins> R'.$row['price'].'</ins>';
                             }
 
                             echo '
                             <div class="single-wid-product">
+<<<<<<< HEAD
                                 <a href="single-product.html"><img src="uploads/'.$row['pic_url'].'" alt="" class="product-thumb"></a>
                                 <h2><a href="single-product.html">'.$row['brand_name'].' '.$row['generic_name'].'</a></h2>
+=======
+                                <a href="single-product.html"><img src="uploads/'.$row['pic_url'].'" class="product-thumb" ></a>
+                                <h2><a href="single-product.html">'.$row['brand_name'].' '.$row['name'].'</a></h2>
+>>>>>>> 4797bdb53405f3bcccc048d759b3547445fe8ce2
                                 <div class="product-wid-rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -282,8 +296,13 @@ include 'header.php';
 
                             echo '
                             <div class="single-wid-product">
+<<<<<<< HEAD
                                 <a href="single-product.html"><img src="uploads/'.$row['pic_url'].'" alt="" class="product-thumb"></a>
                                 <h2><a href="single-product.html">'.$row['brand_name'].' '.$row['generic_name'].'</a></h2>
+=======
+                                <a href="single-product.html"><img src="uploads/'.$row['pic_url'].'" class="product-thumb" ></a>
+                                <h2><a href="single-product.html">'.$row['brandname'].' '.$row['name'].'</a></h2>
+>>>>>>> 4797bdb53405f3bcccc048d759b3547445fe8ce2
                                 <div class="product-wid-rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>

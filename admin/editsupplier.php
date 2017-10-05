@@ -22,11 +22,11 @@ if(isset($_POST['submit'])) {
 	$number = mysqli_real_escape_string($con, strip_tags(trim($_POST["number"])));
 	$email = mysqli_real_escape_string($con, strip_tags(trim($_POST["email"])));
 	$address = mysqli_real_escape_string($con, strip_tags(trim($_POST["address"])));
-	$product = mysqli_real_escape_string($con, strip_tags(trim($_POST["product"])));
-	
-	if($name != '' && $type != '' && $description != '') {
 
-		$sql = "UPDATE suppliers SET contactNumber='".$number."', email='".$email."', address='".$address."', product='".$product."' WHERE id='".$id."'";
+	
+	if($number != '' && $email != '' && $number != '') {
+
+		 echo $sql = "UPDATE suppliers SET contactNumber='".$number."', email='".$email."', address='".$address."' WHERE id='".$id."'";
 		mysqli_query($con, $sql);
 		$_SESSION['success'] = 'The supplier details were updated successfully.';
 		header("Location: suppliers.php");
@@ -52,7 +52,7 @@ if(mysqli_num_rows($res) > 0) {
 		Email : '.$row['email'].'<br>
 		Website : '.$row['website'].'<br>
 		Address : '.$row['address'].'<br>
-		Product : '.$row['product'].'
+	
 		';
 		
 	}
@@ -135,14 +135,7 @@ include 'header.php';
 										echo $row['address'];
 										?>">
 									</div>
-									<div class="form-group">
-										<label>Product</label>
-										<input type="text" name="product" class="form-control" value="<?php
-										$res = mysqli_query($con, "SELECT * FROM suppliers WHERE id='".$id."' ");
-										$row = mysqli_fetch_assoc($res);
-										echo $row['product'];
-										?>">
-									</div>
+							
 									<button name="submit" type="submit" class="btn btn-primary">Submit Update</button>
 									<button type="reset" class="btn btn-default">Reset Update</button>
 								</form>

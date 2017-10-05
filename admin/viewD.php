@@ -38,12 +38,12 @@ if(isset($_POST['submit'])) {
     $area = mysqli_real_escape_string($con, strip_tags(trim($_POST["area"])));
     $boxcode= mysqli_real_escape_string($con, strip_tags(trim($_POST["boxcode"])));
 	
-	$location=$strAddr." ,".$suburb." ,".$area.", ".$boxcode;
+	$location=$strAddr." ,".$suburb." , ".$area;
 
 	if($driver != '' ) {
 
-		echo $sql="INSERT INTO driverdelivery(driverID,deliveryID,dateofDelivery,custname,custcell,location)
-		VALUES('".$driver."','".$del."','".$dateD."', '".$name."','".$cell."','".$location."')";
+		echo $sql="INSERT INTO driverdelivery(driverID,deliveryID,dateofDelivery,custname,custcell,location,area)
+		VALUES('".$driver."','".$del."','".$dateD."', '".$name."','".$cell."','".$location."','".$boxcode."')";
 		mysqli_query($con, $sql);
 		$_SESSION['success'] = 'Successfully updated details.';
 		header("Location: drivers.php");
@@ -182,3 +182,6 @@ include 'footer.php';
 		$('#bookings').DataTable();
 	});
 </script>
+ 
+  <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>

@@ -119,13 +119,7 @@ include 'header.php';
       ?>
 
 
-        <div style="text-align:center;">
-      Total Number of Products:  <font color="green" style="font:bold 22px 'Aleo';">[<?php echo $rowcount;?>]</font>
-      </div>
-      
-      <div style="text-align:center;">
-      <font style="color:rgb(255, 95, 66);; font:bold 22px 'Aleo';">[</font> Products are below QTY of 10 
-      </div>
+    
 
 
       <div class="row">

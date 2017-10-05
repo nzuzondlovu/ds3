@@ -3,7 +3,7 @@ $sitename = 'Infinity';
 $siteaddress = '';
 session_start();
 //"localhost","thehewri_main","SzlqF-n,X2m$","thehewri_master"
-$con = mysqli_connect("localhost","nzuzor1","hohi74Ro","shop");
+$con = mysqli_connect("localhost","root","","shop");
 
 function head($type)
 {
@@ -53,6 +53,7 @@ function user($type)
 	<a href="query.php">Queries</a>
 	</li>
 	<li>
+<<<<<<< HEAD
 	<a href="feedback.php">Feedback</a>
 	</li>
 	</ul>
@@ -72,6 +73,25 @@ function user($type)
 	</li>
 	</ul>
 	<!-- /.nav-second-level -->
+=======
+		<a href="#"><i class="fa fa-truck fa-fw"></i> Deliveries<span class="fa arrow"></span></a>
+		<ul class="nav nav-second-level">
+		<li>
+		  <a href="viewD.php">View Deliveries</a>
+		</li>
+		<li>
+		<a href="drivers.php">View Drivers</a>
+		</li>
+		<li>
+		<a href="addDriver.php">Add Driver</a>
+		</li>
+		<li>
+		<a href="driverJobs.php">Deliveries</a>
+
+		</li>
+		</ul>
+		<!-- /.nav-second-level -->
+>>>>>>> 4797bdb53405f3bcccc048d759b3547445fe8ce2
 	</li>	
 	<li>
 	<a href="#"><i class="fa fa-cubes fa-fw"></i> Stock<span class="fa arrow"></span></a>
@@ -252,19 +272,32 @@ function user($type)
 	else if ($type == 'driver') {
 
 		$menu = '
+<<<<<<< HEAD
 		<<<<<<< HEAD
 		<li>
+=======
+
+			<li>
+>>>>>>> 4797bdb53405f3bcccc048d759b3547445fe8ce2
 		<a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 		</li>
 		<li>
 		<a href="driverJobs.php"><i class="fa fa-edit fa-fw"></i>My Deliveries</a>
+<<<<<<< HEAD
 		=======
+=======
+
+>>>>>>> 4797bdb53405f3bcccc048d759b3547445fe8ce2
 		
 		<ul class="sidebar-menu" data-widget="tree">
 		<li class="header"></li>
 		<li class="active">
 		<a href="viewD.php"><i class="fa fa-edit fa-fw"></i>Deliveries</a>
+<<<<<<< HEAD
 		>>>>>>> 43b4aadf4751352f7981c5f41c611f2690d011db
+=======
+
+>>>>>>> 4797bdb53405f3bcccc048d759b3547445fe8ce2
 		</li>
 		<li>
 		<a href="drivers.php"><i class="fa fa-edit fa-fw"></i>Drivers</a>

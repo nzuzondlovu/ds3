@@ -56,7 +56,7 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
 
                   if(mysqli_num_rows($res) > 0) {
                     while($row = mysqli_fetch_assoc($res)) {
-                      echo '<option value="'.$row['driverID'].'">'.$row['name'].'</option>';
+                      echo '<option value="'.$row['idnumber'].'">'.$row['name'].'</option>';
                     }
                   }
                   ?>
