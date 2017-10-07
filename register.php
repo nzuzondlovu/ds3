@@ -21,9 +21,8 @@ if(isset($_POST['submit'])) {
         VALUES('".$name."', '".$surname."', '".$cell."', '".$idnumber."', '".$location."', '".$email."', '".$password."', '".$role."')";
         //mysqli_query($con, $sql);
         $cell = substr($cell, 1);
-        echo $cell.'<br>';
-        echo $message = "Hello $name\nWelcome to our website, to login please use;\nEmail: $email\nWarm regards from the team ;).";
-        //include_once 'includes/twilio.php';
+        $message = "Hello $name\nWelcome to our website, to login please use;\nEmail: $email\nWarm regards from the team ;).";
+        include_once 'includes/twilio.php';
 
         $_SESSION['success'] = 'You have been registered succesfully, please log in.';
         //header("Location: login.php");
