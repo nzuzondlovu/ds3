@@ -74,11 +74,11 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
                 </select>                                        
               </div>
               <input type="text" name="id" value="<?= $id; ?>" hidden="hidden" />
-              <input type="text" name="name" value="<?php $res = mysqli_query($con, "SELECT * FROM users WHERE id=$id ");$row= mysqli_fetch_assoc($res);echo $row['name'];?> " style="display: none" />
-              <input type="text" name="surname" value="<?php $res = mysqli_query($con, "SELECT * FROM users WHERE id=$id ");$row= mysqli_fetch_assoc($res);echo $row['surname'];?> " style="display: none" />
-              <input type="text" name="cell" value="<?php $res = mysqli_query($con, "SELECT * FROM users WHERE id=$id ");$row= mysqli_fetch_assoc($res);echo $row['cell'];?>" style="display: none" />
-              <input type="text" name="idnumber" value="<?php $res = mysqli_query($con, "SELECT * FROM users WHERE id=$id ");$row= mysqli_fetch_assoc($res);echo $row['idnumber'];?> " style="display: none" />
-              <input type="text" name="email" value="<?php $res = mysqli_query($con, "SELECT * FROM users WHERE id=$id ");$row= mysqli_fetch_assoc($res);echo $row['email'];?> " style="display: none" />
+              <input type="text" name="name" value="<?= $name; ?>" hidden="hidden" />
+              <input type="text" name="surname" value="<?= $surname; ?>" hidden="hidden" />
+              <input type="text" name="cell" value="<?= $cell; ?>" hidden="hidden" />
+              <input type="text" name="idnumber" value="<?= $idnumber; ?>" hidden="hidden" />
+              <input type="text" name="email" value="<?= $email; ?>" hidden="hidden" />
               
               <button name="user" type="submit" class="btn btn-primary">Update Role</button>
               <button type="reset" class="btn btn-default">Reset Form</button>

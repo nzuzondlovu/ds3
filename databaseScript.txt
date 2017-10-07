@@ -294,3 +294,6 @@ CREATE TABLE `customer` (
 	`notes` varchar(100) NOT NULL , 
 	PRIMARY KEY (`id`)
 ) 
+
+
+CREATE TABLE `shop`.`drivers` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `name` VARCHAR(25) NOT NULL , `surname` VARCHAR(25) NOT NULL , `cell` VARCHAR(13) NOT NULL , `idnumber` VARCHAR(13) NOT NULL , `email` VARCHAR(35) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
