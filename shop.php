@@ -21,7 +21,12 @@ include 'header.php';
     <div class="container">
         <div class="row">
             <?php
+            $cat = '';
 
+            if (isset($_GET['cat'])) {
+
+                $cat = ' WHERE category="'.$_GET['cat'].'" ';
+            }
 
             if (isset($_GET["page"])) {
 
@@ -33,7 +38,7 @@ include 'header.php';
             $num_rec_per_page = 12;
             $start_from = ($page-1) * $num_rec_per_page;
 
-            $sql = "SELECT * FROM product ORDER BY id DESC LIMIT $start_from, $num_rec_per_page";
+            $sql = "SELECT * FROM product $cat ORDER BY id DESC LIMIT $start_from, $num_rec_per_page";
             $res = mysqli_query($con, $sql);
 
             if (mysqli_num_rows($res) > 0) {
@@ -49,23 +54,23 @@ include 'header.php';
                     
                     echo '
                     <div class="col-md-3 col-sm-6">
-                        <div class="single-shop-product">
-                            <div class="product-upper">
+                    <div class="single-shop-product">
+                    <div class="product-upper">
 
-                                <img src="uploads/'.$row['pic_url'].'" alt="">
+                    <img src="uploads/'.$row['pic_url'].'" alt="">
 
-                             
 
-                            </div>
-                            <h2><a href="product.php?id='.$row['prod_code'].'">'.$row['brandname'].' '.$row['name'].'</a></h2>
-                            <div class="product-carousel-price">
-                                '.$promo.'
-                            </div>  
 
-                            <div class="product-option-shop">
-                                <a class="add_to_cart_button" ref="'.$row['id'].'" href="cart.php">Add to cart</a>
-                            </div>                       
-                        </div>
+                    </div>
+                    <h2><a href="product.php?id='.$row['prod_code'].'">'.$row['brandname'].' '.$row['name'].'</a></h2>
+                    <div class="product-carousel-price">
+                    '.$promo.'
+                    </div>  
+
+                    <div class="product-option-shop">
+                    <a class="add_to_cart_button" ref="'.$row['id'].'" href="cart.php">Add to cart</a>
+                    </div>                       
+                    </div>
                     </div>';
                 }
 
@@ -73,8 +78,8 @@ include 'header.php';
 
                 echo '
                 <div class="alert alert-info">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>No titles found.</strong>
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>No titles found.</strong>
                 </div>';
             }
 
@@ -273,48 +278,48 @@ include 'header.php';
 
     echo '
     <div class="row">
-        <div class="col-md-12">
-            <div class="product-pagination text-center">
-                <nav>
-                  <ul class="pagination">
-                    <li>
-                      <a href="?page=1" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>';
-                if ($page < 4) {
-                    for ($i=1; $i<$page; $i++) {
-                        echo '<li><a href="?page='.$i.'">'.$i.'</a></li>';
-                    };
-                } else {
-                    for ($i=($page-3); $i<$page; $i++) {
-                        echo '<li><a href="?page='.$i.'">'.$i.'</a></li>';
-                    };
-                }
-                echo '<li class="active"><a href="?page='.$page.'">'.$page.'</a></li>';
+    <div class="col-md-12">
+    <div class="product-pagination text-center">
+    <nav>
+    <ul class="pagination">
+    <li>
+    <a href="?page=1" aria-label="Previous">
+    <span aria-hidden="true">&laquo;</span>
+    </a>
+    </li>';
+    if ($page < 4) {
+        for ($i=1; $i<$page; $i++) {
+            echo '<li><a href="?page='.$i.'">'.$i.'</a></li>';
+        };
+    } else {
+        for ($i=($page-3); $i<$page; $i++) {
+            echo '<li><a href="?page='.$i.'">'.$i.'</a></li>';
+        };
+    }
+    echo '<li class="active"><a href="?page='.$page.'">'.$page.'</a></li>';
 
-                if ($page >= ($total_pages - 3)) {
-                    for ($i=($page+1); $i<=($total_pages); $i++) {
-                        echo '<li><a href="?page='.$i.'">'.$i.'</a></li>';
-                    };
-                } else {
-                    for ($i=($page+1); $i<=($page+3); $i++) {
-                        echo '<li><a href="?page='.$i.'">'.$i.'</a></li>';
-                    };
-                }               
-                echo '
-                <li>
-                  <a href="?page='.$total_pages.'" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
+    if ($page >= ($total_pages - 3)) {
+        for ($i=($page+1); $i<=($total_pages); $i++) {
+            echo '<li><a href="?page='.$i.'">'.$i.'</a></li>';
+        };
+    } else {
+        for ($i=($page+1); $i<=($page+3); $i++) {
+            echo '<li><a href="?page='.$i.'">'.$i.'</a></li>';
+        };
+    }               
+    echo '
+    <li>
+    <a href="?page='.$total_pages.'" aria-label="Next">
+    <span aria-hidden="true">&raquo;</span>
+    </a>
+    </li>
+    </ul>
     </nav>                        
-</div>
-</div>
-</div>';
+    </div>
+    </div>
+    </div>';
 
-?>
+    ?>
 </div>
 </div>
 
