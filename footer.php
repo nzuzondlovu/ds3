@@ -67,9 +67,9 @@
                     <h2 class="footer-wid-title">Newsletter</h2>
                     <p>Sign up to our newsletter and get exclusive deals you wont find anywhere else straight to your inbox!</p>
                     <div class="newsletter-form">
-                        <form action="#">
-                            <input type="email" placeholder="Type your email">
-                            <input type="submit" value="Subscribe">
+                        <form method="post">
+                            <input type="email"  name="newsemail" placeholder="Type your email">
+                            <button name="newsletter" type="submit">Subscribe</button>
                         </form>
                     </div>
                 </div>
@@ -120,7 +120,7 @@
                         <button type="submit" name="login" class="btn btn-lg btn-primary btn-block">Login</button>
                         <div class="checkbox">
                             <label>
-                                <a data-toggle="modal" data-target="#recover">Recover Lost Password</a><br>
+                                <a href="recover.php">Recover Lost Password</a><br>
                                 <a href="register.php">Register your account</a><br>
                             </label>
                         </div>
@@ -176,7 +176,7 @@
     </div>
 </div> -->
 
-<div class="modal fade" id="recover" tabindex="-1" role="dialog" aria-labelledby="recoverLabel">
+<!-- <div class="modal fade" id="recover" tabindex="-1" role="dialog" aria-labelledby="recoverLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -189,7 +189,7 @@
                     <div class="form-group">
                         <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
                     </div>
-                    <!-- Change this to a button or input when using this as a form -->
+                    <!-- Change this to a button or input when using this as a form --
                     <button type="submit" name="recover" class="btn btn-lg btn-primary btn-block">Recover</button>
                     <div class="checkbox">
                         <label>
@@ -202,7 +202,7 @@
         </div>
     </div>
 </div>
-</div>
+</div> -->
 <!-- /.Modal -->
 <?php include 'includes/ip_locator.php'; ?>
 <!-- Latest jQuery form server -->
