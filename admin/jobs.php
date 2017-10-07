@@ -189,6 +189,7 @@ include 'header.php';
             <div class="row">
               <div class="col-lg-12">
                 <div class="pull-right">
+                  <a href="allocated.php" class="btn btn-warning"> Technicians</a>
                   <button class="btn btn-success" data-toggle="modal" data-target="#addDevice"> Add Device</button>
                 </div>
               </div>
@@ -227,9 +228,9 @@ include 'header.php';
                   <td>R '.$row['establishAmount'].'</td>                        
                   <td>'.date("M d, y",strtotime($row['recievedDate'])).'</td>
                   <td class="pull-right">
-                  <a class="btn btn-danger" href="?id='.$row['id'].'"><span class="fa fa-trash"> Delete</span></a>
-                  <button class="btn btn-warning" onclick="modal('.$row['id'].')"><span class="fa fa-pencil"> Edit</button>
-                  <!--<a class="btn btn-info" href="checkrepair.php?id='.$row['id'].'"><span class="fa fa-cogs"> Repair device</a>-->
+                  <a class="btn btn-danger" href="?id='.$row['id'].'"> Delete</span></a>
+                  <button class="btn btn-warning" onclick="modal('.$row['id'].')"> Edit</button>
+                  <a class="btn btn-info" href="allocate.php?id='.$row['id'].'"> Allocate</a>
                   </tr>';
                 }
                 echo '
@@ -282,80 +283,80 @@ include 'footer.php';
 </script>
 <script type="text/javascript">
 
-    $( document ).ready( function () {
-      $( "#waitlistForm" ).validate( {
-        rules: {
-          dname: {
-            required: true,
-            maxlength: 35
-          },
-          model: {
-            required: true,
-            maxlength: 35
-          },
-          serial: "required",
-          type: "required",
-          price: {
-            required: true,
-            maxlength: 35
-          },
-          date: "required",
-          cname: {
-            required: true,
-            maxlength: 35
-          },
-          id: {
-            required: true,
-            minlength: 13,
-            maxlength: 13
-          },
-          phone: {
-            required: true,
-            minlength: 11,
-            maxlength: 12
-          },
-          email: {
-            required: true,
-            maxlength: 250
-          }
+  $( document ).ready( function () {
+    $( "#waitlistForm" ).validate( {
+      rules: {
+        dname: {
+          required: true,
+          maxlength: 35
         },
-        messages: {
-          dname: {
-            required: "Please enter the name of the device",
-            maxlength: "Your device name cant be longer than 35 characters"
-          },
-          model: {
-            required: "Please enter the model of the device",
-            maxlength: "Your model cant be longer than 35 characters"
-          },
-          serial: "Please enter device serial number.",
-          type: "Please choose device type.",
-          price: {
-            required: "Please enter the price of the device",
-            maxlength: "Your price cant be longer than 35 characters"
-          },
-          date: "Please select a date",
-          cname: {
-            required: "Please enter customer name",
-            maxlength: "Your customer name cant be longer than 35 characters"
-          },
-          id: {
-            required: "Please enter user identity number",
-            maxlength: "Your identity number cant be longer than 13 characters",
-            minlength: "Your identity number cant be shorter than 13 characters"
-          },
-          phone: {
-            required: "Please enter customer cell phone number",
-            minlength: "Your customer cell number cant be longer than 11 characters",
-            maxlength: "Your customer cell number cant be longer than 12 characters"
-          },
-          email: {
-            required: "Please enter customer email address",
-            maxlength: "Your description cant be longer than 250 characters"
-          }
+        model: {
+          required: true,
+          maxlength: 35
         },
-        errorElement: "em",
-        errorPlacement: function ( error, element ) {
+        serial: "required",
+        type: "required",
+        price: {
+          required: true,
+          maxlength: 35
+        },
+        date: "required",
+        cname: {
+          required: true,
+          maxlength: 35
+        },
+        id: {
+          required: true,
+          minlength: 13,
+          maxlength: 13
+        },
+        phone: {
+          required: true,
+          minlength: 11,
+          maxlength: 12
+        },
+        email: {
+          required: true,
+          maxlength: 250
+        }
+      },
+      messages: {
+        dname: {
+          required: "Please enter the name of the device",
+          maxlength: "Your device name cant be longer than 35 characters"
+        },
+        model: {
+          required: "Please enter the model of the device",
+          maxlength: "Your model cant be longer than 35 characters"
+        },
+        serial: "Please enter device serial number.",
+        type: "Please choose device type.",
+        price: {
+          required: "Please enter the price of the device",
+          maxlength: "Your price cant be longer than 35 characters"
+        },
+        date: "Please select a date",
+        cname: {
+          required: "Please enter customer name",
+          maxlength: "Your customer name cant be longer than 35 characters"
+        },
+        id: {
+          required: "Please enter user identity number",
+          maxlength: "Your identity number cant be longer than 13 characters",
+          minlength: "Your identity number cant be shorter than 13 characters"
+        },
+        phone: {
+          required: "Please enter customer cell phone number",
+          minlength: "Your customer cell number cant be longer than 11 characters",
+          maxlength: "Your customer cell number cant be longer than 12 characters"
+        },
+        email: {
+          required: "Please enter customer email address",
+          maxlength: "Your description cant be longer than 250 characters"
+        }
+      },
+      errorElement: "em",
+      errorPlacement: function ( error, element ) {
           // Add the `help-block` class to the error element
           error.addClass( "help-block" );
 
@@ -372,5 +373,5 @@ include 'footer.php';
           $( element ).parents( ".col-sm-5" ).addClass( "has-success" ).removeClass( "has-error" );
         }
       });
-    });
-  </script>
+  });
+</script>
