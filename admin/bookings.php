@@ -41,14 +41,34 @@ if(isset($_POST['create'])) {
     $status = mysqli_real_escape_string($con, strip_tags(trim($_POST["status"])));
     $description = mysqli_real_escape_string($con, strip_tags(trim($_POST["desc"])));
     $user_book = mysqli_real_escape_string($con, strip_tags(trim($_POST["user_book"])));
+        $job_code = mysqli_real_escape_string($con, strip_tags(trim($_POST["job_code"])));
     $archive=0;
-    
+          function createRandomPassword() {
+  $chars = "003232303232023232023456789";
+  srand((double)microtime()*1000000);
+  $i = 0;
+  $pass = '' ;
+  while ($i <= 7) {
+
+    $num = rand() % 33;
+
+    $tmp = substr($chars, $num, 1);
+
+    $pass = $pass . $tmp;
+
+    $i++;
+
+  }
+  return $pass;
+}
+$quote_code= 'JQT-'.createRandomPassword()  ;
 
 
 
        
-        $sql = "INSERT INTO quotation(booking_id, name, serial, model, accessory, technician, description, deposit, balance, total, status,archive,user_book) 
-        VALUES ('".$id."', '".$name."', '".$serial."', '".$model."', '".$accessory."', '".$technician."', '".$description."', '".$deposit."', '".$balance."', '".$total."', '".$status."', '".$archive."', '".  $user_book."')";
+       echo $sql = "INSERT INTO quotation(booking_id, name, serial, model, accessory, technician, description, deposit, balance, total, status,archive,user_book,job_code,quote_code) 
+        VALUES ('".$id."', '".$name."', '".$serial."', '".$model."', '".$accessory."', '".$technician."', '".$description."', '".$deposit."', '".$balance."', '".$total."', '".$status."', '".$archive."', '".  $user_book."' , '".  $job_code."', '". 
+         $quote_code."')";
     mysqli_query($con, $sql);
        $_SESSION['success'] = 'Your new Quotation is added successfully.';
         //header("Location: bookings.php");
@@ -128,9 +148,7 @@ include 'header.php';
                                             <th>type</th>
                                             <th>Picture</th>
                                             
-                                            <th>Date In</th>
-                                        
-                                            <th>Date Out</th>
+                                          
                                             <th>Date</th>
                                             <th>Action</th>
                                         </tr>
@@ -156,9 +174,6 @@ include 'header.php';
                                                 <td>'.$row['type'].'</td>
                                                 <td><img src="../uploads/'.$row['pic_url'].'" " class="img-thumbnail" alt="No Image" width="50" height="50"></td>
                                         
-                                                <td>'.date("M d, y",strtotime($row['date_in'])).'</td>
-                                             
-                                                <td>'.date("M d, y",strtotime($row['date_out'])).'</td>
                                                 <td>'.date("M d, y",strtotime($row['date'])).'</td>
                                                 <td class="pull-right">
                                                     '.$btn.'  <a href="?id='.$row['id'].'" class="label label-warning">Archive</a>
@@ -253,18 +268,12 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            List of all Quotations
-                        </div>
+                    <div class="panel panel-info">
+                      
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="row">
-                             <div class="col-lg-12">
-                                <div class="pull-right">
-                                   <a href="bookings.php" class="btn btn-success"> Create Quotation</a>
-                               </div>
-                           </div>
+                          
                        </div>
                        <div class="table-responsive">
                         <?php
@@ -283,11 +292,14 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
                                         <th>Model</th>
                                         <th>Accessory</th>
                                         <th>Technician</th>
-                                     <th> Booked</th>
+                                 
                                         <th>Deposit</th>
                                         <th>Balance</th>
                                         <th>Total</th>
+                                         <th> Status</th>
                                         <th>Action</th>
+                                           
+
                                     </tr>
 
                                 </thead>
@@ -310,8 +322,9 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
                                                 <td>'.$row['deposit'].'</td>
                                                 <td>'.$row['balance'].'</td>
                                                 <td>'.$row['total'].'</td>
+                                                 <td class=" text-success">'.$row['status'].'</td>
                                                 <td class="pull-right">
-                                                    <a href="editquote.php?id='.$row['id'].'" class="label label-primary">Edit Quotation</a>
+                                                    <a href="editquote.php?id='.$row['id'].'" class="label label-primary">Invoice </a>
                                                 </td>
                                             </tr>';
                                         }                                                

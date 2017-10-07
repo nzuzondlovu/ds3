@@ -32,12 +32,32 @@ if(isset($_POST['submit'])) {
     $technician="";
     $archive=0;
 
+      function createRandomPassword() {
+  $chars = "003232303232023232023456789";
+  srand((double)microtime()*1000000);
+  $i = 0;
+  $pass = '' ;
+  while ($i <= 7) {
+
+    $num = rand() % 33;
+
+    $tmp = substr($chars, $num, 1);
+
+    $pass = $pass . $tmp;
+
+    $i++;
+
+  }
+  return $pass;
+}
+$job_code= 'BKN-'.createRandomPassword()  ;
+
 
 
     if($name !='' && $serial !='' && $type !='' && $description !=''){
 
-       echo $sql = "INSERT INTO job(user, name, serial, type, pic_url, description, date,description2,date_in,status,technician,date_out,archive)
-        VALUES('".$user."', '".$name."', '".$serial."', '".$type."', '".$url."', '".$description."', '".$date."','".$description2."','".$date_in."','".$status."','".$technician."','".$date_out."','".$archive."')";
+       echo $sql = "INSERT INTO job(user, name, serial, type, pic_url, description, date,description2,date_in,status,technician,date_out,archive,job_code)
+        VALUES('".$user."', '".$name."', '".$serial."', '".$type."', '".$url."', '".$description."', '".$date."','".$description2."','".$date_in."','".$status."','".$technician."','".$date_out."','".$archive."','".$job_code."')";
         upload($url, $target_dir, $target_file, $sql, $con);
 
     }else{
@@ -97,16 +117,54 @@ include 'header.php';
 
                        <form role="form" method="post" enctype="multipart/form-data">
 
-                                    <div class="form-group col-lg-6">
-                                        <label>Device name</label>
-                                        <input type="text" name="name" class="form-control" placeholder="Enter text">
+                                   
+
+                                      <div class="form-group col-lg-6">
+                                        
+
+                                        
+                                             <div class="form-group">
+                <label>Device Name</label>
+
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-laptop"></i>
+                  </div>
+                  <input type="text"  name="name" class="form-control" >
+                </div>
+                <!-- /.input group -->
+              </div>
                                     </div>
+
+
                                     <div class="form-group col-lg-6">
-                                        <label>Serial number</label>
-                                        <input name="serial" class="form-control" placeholder="Enter text">
-                                    </div>                                        
+                                        
+
+                                        
+                                             <div class="form-group">
+                <label>Serial Number</label>
+
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-barcode"></i>
+                  </div>
+                  <input type="text"  name="serial" class="form-control" data-inputmask="'alias': 'ip'" data-mask>
+            
+                </div>
+                <!-- /.input group -->
+              </div>
+
+
+                                    </div>  
+
                                     <div class="form-group col-lg-6">
+
                                     <label>Device type</label>
+                                      <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-bars"></i>
+                  </div>
+
                                         <select name="type" class="form-control col-lg-6">
                                             <option value="" selected="selected">Select type</option>
                                             <?php
@@ -121,6 +179,7 @@ include 'header.php';
                                             ?>
                                         </select>
                                     </div>
+                                  </div>
 
                                     <div class="form-group">
                                    <label>Upload Picture </label>
@@ -513,7 +572,7 @@ include 'footer.php';
 <script src="bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
-<script src="   plugins/timepicker/bootstrap-timepicker.min.js"></script>
+<script src="plugins/timepicker/bootstrap-timepicker.min.js"></script>
 <!-- AdminLTE for demo purposes -->
   <link rel="stylesheet" href="plugins/timepicker/bootstrap-timepicker.min.css">
 <!-- Page script -->

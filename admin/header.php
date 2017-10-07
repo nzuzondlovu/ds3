@@ -31,6 +31,8 @@
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
         <link rel="stylesheet" href="../assets/css/skins/_all-skins.min.css">
+              <link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css">
+              
 
 
 

@@ -88,6 +88,7 @@ include 'header.php';
           </div>
           <div class="modal-body">
             <form role="form" method="post" enctype="multipart/form-data">
+              
               <div class="form-group">
                 <label>Query</label>
                 <textarea name="description" class="form-control" rows="5"></textarea>

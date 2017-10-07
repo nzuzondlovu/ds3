@@ -35,6 +35,7 @@ if(isset($_POST['id']) && $_POST['id'] != '') {
           </div>
           <div class="modal-body">
             <form id="responseForm" role="form" method="post">
+              
                   <div class="form-group">
                     <label>Name</label>
                     <input value="<?php echo $name; ?>" class="form-control" type="text" disabled>

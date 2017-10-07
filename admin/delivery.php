@@ -64,13 +64,13 @@ include 'header.php';
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Deliveries</h1>
+				<h1 class="page-header">.</h1>
 			</div>
 			<!-- /.col-lg-12 -->
 		</div>
 		          <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Latest Orders</h3>
+              <h3 class="box-title">Driver Location</h3>
 
             </div>
             <!-- /.box-header -->
@@ -141,7 +141,7 @@ if(isset($_POST['locsubmit'])) {
 						<div class="table-responsive">
 							<?php
 
-							$sql = "SELECT * FROM area ";
+							$sql = "SELECT * FROM drivers ";
 							$res = mysqli_query($con, $sql);
 
 							if (mysqli_num_rows($res) > 0) {
@@ -151,25 +151,27 @@ if(isset($_POST['locsubmit'])) {
 										<tr>
 									
 										
-											<th width="20px">City</th>
-											<th width="20px">Code</th>
+											<th width="20px">Name</th>
+											<th width="20px">Surname</th>
 									
 											<th>Action</th>
 										</tr>
-									</thead>
-									<tbody>';
+									</thead 									<tbody>';
 										while ($row = mysqli_fetch_assoc($res)) {
 
 											echo '
 											<tr>
 											
-												<td>'.$row['cityName'].'</td>
+												<td>'.$row['name'].'</td>
 											
-												<td>'.$row['boxcode'].'</td>
+												<td>'.$row['surname'].'</td>
+												<td>'.$row['name'].'</td>
+											
+												<td>'.$row['surname'].'</td>
 											
 												<td class=" pull-right">
-													<button onclick="modal1('.$row['id'].')" class="label label-warning">Assign</button> 
-													 <a href="DeleteDelivery.php?id='.$row['id'].'" class="label label-danger">Delete</a>
+													<button onclick="modal1('.$row['driverID'].')" class="label label-warning">Assign</button> 
+													 <a href="DeleteDelivery.php?id='.$row['driverID'].'" class="label label-danger">Delete</a>
 												</td>
 											</tr>';
 										}
@@ -303,7 +305,19 @@ if(isset($_POST['locsubmit'])) {
 				<!-- /.panel-body -->
 			</div>
 			  <div class="col-md-4">
-			  
+			     <div class="form-group">
+                <label>Multiple</label>
+                <select class="form-control select2" multiple="multiple" data-placeholder="Select a State"
+                        style="width: 100%;">
+                  <option>Alabama</option>
+                  <option>Alaska</option>
+                  <option>California</option>
+                  <option>Delaware</option>
+                  <option>Tennessee</option>
+                  <option>Texas</option>
+                  <option>Washington</option>
+                </select>
+              </div>
 			     <div class="info-box bg-orange">
             <span class="info-box-icon"><i class="glyphicon glyphicon-shopping-cart"></i></span>
 
@@ -786,3 +800,6 @@ include 'footer.php';
   <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
   <!-- jvectormap -->
   <link rel="stylesheet" href="bower_components/jvectormap/jquery-jvectormap.css">	
+  <!-- Select2 -->
+<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
+  <link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css">

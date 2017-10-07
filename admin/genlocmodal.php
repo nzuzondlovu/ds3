@@ -1,5 +1,5 @@
 <?php
-include_once 'functions.php';
+include_once '../includes/functions.php';
 
 if (isset($_POST['id']) && $_POST['id'] != null) {
   $id = mysqli_real_escape_string($con, strip_tags(trim($_POST['id'])));
@@ -8,7 +8,7 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
   $cust = '';
  
 
-  $sql = "SELECT * FROM drivers WHERE driverID='".$id."'";
+  $sql = "SELECT * FROM area WHERE id='".$id."'";
   $res = mysqli_query($con, $sql);
 
   if (mysqli_num_rows($res) > 0) {
@@ -17,19 +17,8 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
 
     $cust = '
 
-
-     Driver Name:'.$row['name'].'<br>
-
-
-  Area Code : '.$row['surname'];
-  $name= $row['name'];
-    $surname= $row['surname'];
-      $email= $row['email'];
-        $cell= $row['cell'];
-          $idnumber= $row['idnumber'];
-
-
-
+        Town: '.$row['cityName'].'<br>
+  Area Code : '.$row['boxcode'];
 
 
 
@@ -50,85 +39,26 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
       <div class="modal-body">
         <div class="row">
           <div class="col-md-6">
-                <div class="box box-widget widget-user">
-            <!-- Add the bg color to the header using any of the bg-* classes -->
-            <div class="widget-user-header bg-black" style="background: url(' dist/img/photo2.png') center center;">
-              <h2 class="widget-user-username"> <b ><?php  echo $name; echo " "; echo $surname ?></b>  </h2>
-              <h5 class="widget-user-desc"><b ><?php  echo $email;  ?></b> </h5>
-            </div>
-            <div class="widget-user-image">
-              <img class="img-circle" src="dist/img/user3-128x128.jpg" alt="User Avatar">
-            </div>
-            <div class="box-footer">
-              <div class="row">
-                <div class="col-sm-4 border-right">
-                  <div class="description-block">
-                    <h5 class="description-header">
-                      2
-                 </h5>
-                    <span class="description-text">     <?php
-                           $year = date("M Y");
-                           echo $year;
-
-                 
-                  ?></span>
-                  </div>
-                  <!-- /.description-block -->
-
-                    
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-4 border-right">
-                  <div class="description-block">
-                    <h5 class="description-header">13,000</h5>
-                    <span class="description-text">FOLLOWERS</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-4">
-                  <div class="description-block">
-                    <h5 class="description-header">35</h5>
-                    <span class="description-text">PRODUCTS</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-
-                <!-- /.col -->
-              </div>
-                 <div class="box-footer no-padding">
-              <ul class="nav nav-stacked">
-                <li><a href="#"> <span class="pull-right badge bg-blue">31</span></a></li>
-                <li><a href="#">Assigned <span class="pull-right badge bg-aqua">5</span></a></li>
-                <li><a href="#">Completed Deliveries <span class="pull-right badge bg-green">12</span></a></li>
-                <li><a href="#"> Previous Month <span class="pull-right badge bg-red">842</span></a></li>
-              </ul>
-            </div>
-              <!-- /.row -->
-            </div>
-          </div>
             <?php
             echo $cust;
             ?>
           </div>
           <div class="col-md-6">
             <form role="form" method="post">
-       
-                 <div class="form-group">
-                <label>Search Area Code</label>
-                <select class="form-control select2" multiple="multiple" name="area" data-placeholder="Enter Area Code"
-                        style="width: 100%;">
-                  <option>  <?php
-                  $sql = "SELECT * FROM area";
+              <div class="form-group">
+                <label>Select Driver</label>
+                <select name="driver" class="form-control">
+        
+                  <?php
+                  $sql = "SELECT * FROM drivers";
                   $res = mysqli_query($con, $sql);
 
                   if(mysqli_num_rows($res) > 0) {
                     while($row = mysqli_fetch_assoc($res)) {
-                      echo '<option value="'.$row['boxcode'].'"> '.$row['cityName'].' , '.$row['boxcode'].' </option>';
+                      echo '<option value="'.$row['idnumber'].'">'.$row['name'].'</option>';
                     }
                   }
-                  ?></option>
-                
+                  ?>
                 </select>
               </div>
                     <div class="form-group">
@@ -138,12 +68,10 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
                   <?php
                   $sql = "SELECT * FROM Months";
                   $res = mysqli_query($con, $sql);
-              
-                  $year = date("Y");
 
                   if(mysqli_num_rows($res) > 0) {
                     while($row = mysqli_fetch_assoc($res)) {
-                      echo '<option value="'.$row['m_Name'].'">'.$row['m_Name'].' - '.$year.'</option>';
+                      echo '<option value="'.$row['m_name'].'">'.$row['m_name'].'</option>';
                     }
                   }
                   ?>
@@ -164,7 +92,19 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
               <input type="text" name="area" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['area']; ?>"  style="display: none"/>
               
               <input type="text" name="boxcode" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['boxcode']; ?>"  style="display: none"/>
-
+                 <div class="form-group">
+                <label>Multiple</label>
+                <select class="form-control select2" multiple="multiple" data-placeholder="Select a State"
+                        style="width: 100%;">
+                  <option>Alabama</option>
+                  <option>Alaska</option>
+                  <option>California</option>
+                  <option>Delaware</option>
+                  <option>Tennessee</option>
+                  <option>Texas</option>
+                  <option>Washington</option>
+                </select>
+              </div>
 				 <button name="locsubmit" type="submit" class="btn btn-primary">Submit Allocation</button>                                                                  
               <button type="reset" class="btn btn-default">Reset</button>
             </form>
@@ -187,7 +127,7 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
 
 <script src="bower_components/select2/dist/js/select2.full.min.js"></script>
   <link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css">
-
+  
 <script>
   $(function () {
     //Initialize Select2 Elements

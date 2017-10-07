@@ -1,71 +1,60 @@
-<script>
-function sum() {
-            var txtFirstNumberValue = document.getElementById('txt1').value;
-            var txtSecondNumberValue = document.getElementById('txt2').value;
-            var result = parseInt(txtFirstNumberValue) - parseInt(txtSecondNumberValue);
-            if (!isNaN(result)) {
-                document.getElementById('txt3').value = result;
-				
-            }
-			
-			 var txtFirstNumberValue = document.getElementById('txt11').value;
-            var result = parseInt(txtFirstNumberValue);
-            if (!isNaN(result)) {
-                document.getElementById('txt22').value = result;				
-            }
-			
-			 var txtFirstNumberValue = document.getElementById('txt11').value;
-            var txtSecondNumberValue = document.getElementById('txt33').value;
-            var result = parseInt(txtFirstNumberValue) + parseInt(txtSecondNumberValue);
-            if (!isNaN(result)) {
-                document.getElementById('txt55').value = result;
-				
-            }
-			
-			 var txtFirstNumberValue = document.getElementById('txt4').value;
-			 var result = parseInt(txtFirstNumberValue);
-            if (!isNaN(result)) {
-                document.getElementById('txt5').value = result;
-				}
-			
-        }
-</script>
-<?php
-include '../includes/functions.php';
-?>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AdminLTE 2 | Invoice</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
 
-<?php
-if(isset($_SESSION['key']) == '' ) {
-	header("location:../login.php");
-}
-?>
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <!-- Google Font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body onload="window.print();">
+<div class="wrapper">
+
 
 <?php
 if (isset($_GET['id']) && $_GET['id'] != null) {
-	$id = mysqli_real_escape_string($con, strip_tags(trim($_GET["id"])));
+  $id = mysqli_real_escape_string($con, strip_tags(trim($_GET["id"])));
 } else {
-	header('Location: quotations.php');
+  header('Location: quotations.php');
 }
 
 
 if(isset($_POST['submit'])) {
 
-	$description = mysqli_real_escape_string($con, strip_tags(trim($_POST["desc"])));
-	$deposit = mysqli_real_escape_string($con, strip_tags(trim($_POST["deposit"])));
-	$balance = mysqli_real_escape_string($con, strip_tags(trim($_POST["balance"])));
-	$total = mysqli_real_escape_string($con, strip_tags(trim($_POST["total"])));
-	$status = mysqli_real_escape_string($con, strip_tags(trim($_POST["status"])));
+  $description = mysqli_real_escape_string($con, strip_tags(trim($_POST["desc"])));
+  $deposit = mysqli_real_escape_string($con, strip_tags(trim($_POST["deposit"])));
+  $balance = mysqli_real_escape_string($con, strip_tags(trim($_POST["balance"])));
+  $total = mysqli_real_escape_string($con, strip_tags(trim($_POST["total"])));
+  $status = mysqli_real_escape_string($con, strip_tags(trim($_POST["status"])));
 
-	
-	if($deposit != '' && $balance != '' && $total != '' && $description != '' && $status != '' ) {
+  
+  if($deposit != '' && $balance != '' && $total != '' && $description != '' && $status != '' ) {
 
-		$sql = "UPDATE quotation SET description='".$description."', deposit='".$deposit."', balance='".$balance."', total='".$Total."', status='".$status."' WHERE id='".$id."'";
-		mysqli_query($con, $sql);
-		$_SESSION['success'] = 'Your Quotation was updated successfully.';
-		header("Location: quotations.php");
-	}else {
-		$_SESSION['failure'] = 'Please fill in all fields.';
-	}
+    $sql = "UPDATE quotation SET description='".$description."', deposit='".$deposit."', balance='".$balance."', total='".$Total."', status='".$status."' WHERE id='".$id."'";
+    mysqli_query($con, $sql);
+    $_SESSION['success'] = 'Your Quotation was updated successfully.';
+    header("Location: quotations.php");
+  }else {
+    $_SESSION['failure'] = 'Please fill in all fields.';
+  }
 }
 ?>
 
@@ -84,13 +73,13 @@ $sql = "SELECT * FROM quotation WHERE id=$id ";
 $res = mysqli_query($con, $sql);
 
 if(mysqli_num_rows($res) > 0) {
-	while($row = mysqli_fetch_assoc($res)) {
-		$cat = '
-		
+  while($row = mysqli_fetch_assoc($res)) {
+    $cat = '
+    
 
 
 
-					    <section class="invoice">
+              <section class="invoice">
       <!-- title row -->
       <div class="row">
         <div class="col-xs-12">
@@ -170,10 +159,9 @@ if(mysqli_num_rows($res) > 0) {
         <!-- accepted payments column -->
         <div class="col-xs-6">
 
-           <p class="text-muted well well-sm no-shadow" style="margin-top: 10px; ">
-<b style= "word-wrap: break-word;min-width: 120px;max-width: 10px;" >
+           <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+
        '.$row['description'].'
-       </b>
           </p>
           <p class="lead">Payment Methods:</p>
           <img src="dist/img/credit/visa.png" alt="Visa">
@@ -214,7 +202,7 @@ if(mysqli_num_rows($res) > 0) {
       <!-- this row will not appear when printing -->
       <div class="row no-print">
         <div class="col-xs-12">
-          <a href="#" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+          <a href="invoice.php" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
           <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment
           </button>
           <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
@@ -223,13 +211,13 @@ if(mysqli_num_rows($res) > 0) {
         </div>
       </div>
     </section>
-		';
-		$dep = $row['deposit'];
-		$bal = $row['balance'];
-		$tot = $row['total'];
-		$sta = $row['status'];
-		$des = $row['description'];
-	}
+    ';
+    $dep = $row['deposit'];
+    $bal = $row['balance'];
+    $tot = $row['total'];
+    $sta = $row['status'];
+    $des = $row['description'];
+  }
 }
 ?>
 
@@ -239,64 +227,64 @@ include 'header.php';
 
 <!-- Page Content -->
 <div id="page-wrapper">
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-lg-12">
-		
-			</div>
-			<!-- /.col-lg-12 -->
-		</div>
-		<!-- /.row -->
-		<!-- /.row -->
-		<div class="row">
-			<div class="col-lg-12">
-				<div>
-					<?php if(isset($_SESSION['failure']) && $_SESSION['failure'] != '') { ?>
-					<div class="alert alert-danger">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						<?php echo $_SESSION['failure']; unset($_SESSION['failure']); ?>
-					</div>
-					<?php } ?>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+    
+      </div>
+      <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div>
+          <?php if(isset($_SESSION['failure']) && $_SESSION['failure'] != '') { ?>
+          <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <?php echo $_SESSION['failure']; unset($_SESSION['failure']); ?>
+          </div>
+          <?php } ?>
 
-					<?php if(isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
-					<div class="alert alert-success">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						<?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
-					</div>
-					<?php } ?>
-				</div>
+          <?php if(isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
+          <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
+          </div>
+          <?php } ?>
+        </div>
 
-				<div class="panel panel-default">
-				
-				
-						<div class="row">
-							<div class="col-lg-12">
-								<?php
-								echo $cat;
-								?>
-							
-							</div>
-							<div class="col-md-6">
-								
-								
-							</div>
+        <div class="panel panel-default">
+        
+        
+            <div class="row">
+              <div class="col-lg-12">
+                <?php
+                echo $cat;
+                ?>
+              
+              </div>
+              <div class="col-md-6">
+                
+                
+              </div>
 
-			
-							<!-- /.col-lg-6 (nested) -->
-						</div>
-				
-					<!-- /.panel-body -->
-				</div>
-				<!-- /.panel -->
-			</div>
-			<!-- /.col-lg-12 -->
-		</div>
-		<!-- /.row -->
-	</div>
-	<!-- /.container-fluid -->
+      
+              <!-- /.col-lg-6 (nested) -->
+            </div>
+        
+          <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+      </div>
+      <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container-fluid -->
 </div>
 <!-- /#page-wrapper -->
-
-<?php
-include 'footer.php';
-?>
+</div>
+<!-- ./wrapper -->
+</body>
+</html>

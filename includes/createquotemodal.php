@@ -65,6 +65,7 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
 
       $serial = $row['serial'];
               $user_book= $row['user'];
+               $job_code= $row['job_code'];
 
     }
   }
@@ -101,6 +102,19 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
               <div class="form-group">
                 <label>Accessory</label>
                 <input class="form-control" type="text" name="accessory" placeholder="Enter accessories">
+                         <div class="form-group">
+                <label>Multiple</label>
+                <select class="form-control select2" multiple="multiple" data-placeholder="Select a State"
+                        style="width: 100%;">
+                  <option>Alabama</option>
+                  <option>Alaska</option>
+                  <option>California</option>
+                  <option>Delaware</option>
+                  <option>Tennessee</option>
+                  <option>Texas</option>
+                  <option>Washington</option>
+                </select>
+              </div>
               </div>
               <div class="form-group">
                 <label>Choose technician</label>
@@ -162,8 +176,9 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
               <input type="text" name="id" value="<?php echo $id; ?>" hidden>
               <input type="text" name="name" value="<?php echo $name; ?>" hidden>
               <input type="text" name="serial" value="<?php echo $serial; ?>" hidden>
+                 <input type="text" name="job_code" value="<?php echo $job_code; ?>" hidden>
 
-              <input type="text" name="user_book" value="<?php echo $user_book; ?>" >
+              <input type="text" name="user_book" value="<?php echo $user_book;  ?>" hidden >
 
               <button name="create" type="submit" class="btn btn-primary">Submit Quotation</button>
               <button type="reset" class="btn btn-default">Reset Quotation</button>
@@ -265,3 +280,4 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
     });
   </script>
   <?php echo ob_get_clean(); ?>
+  
