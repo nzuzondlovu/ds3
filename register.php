@@ -17,11 +17,16 @@ if(isset($_POST['submit'])) {
 
     if($name !='' && $surname !='' && $cell !='' && $idnumber !='' && $location !='' && $email !='' && $password !=''){
 
-       echo $sql = "INSERT INTO user(name, surname, cell, idnumber, location, email, password, role)
+       $sql = "INSERT INTO user(name, surname, cell, idnumber, location, email, password, role)
         VALUES('".$name."', '".$surname."', '".$cell."', '".$idnumber."', '".$location."', '".$email."', '".$password."', '".$role."')";
-        mysqli_query($con, $sql);
+        //mysqli_query($con, $sql);
+        $cell = substr($cell, 1);
+        echo $cell.'<br>';
+        echo $message = "Hello $name\nWelcome to our website, to login please use;\nEmail: $email\nWarm regards from the team ;).";
+        //include_once 'includes/twilio.php';
+
         $_SESSION['success'] = 'You have been registered succesfully, please log in.';
-        header("Location: login.php");
+        //header("Location: login.php");
 
     }else{
         $_SESSION['failure'] = 'Make sure you have filled all fields.';

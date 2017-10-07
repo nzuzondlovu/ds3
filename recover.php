@@ -46,7 +46,7 @@ if(isset($_POST['submit'])) {
 
                 mail($to, $subject, $msg, $headers);
 
-                $_SESSION['success'] = 'Check your email inbox or spam folder for your new password.';
+                $_SESSION['success'] = 'Check your messages and email inbox or spam folder for your new password.';
 
             } else {
                 session_destroy();
@@ -133,7 +133,8 @@ if(isset($_POST['submit'])) {
                                     <div class="checkbox">
                                         <label>
                                             <a href="login.php">Login to your account</a><br>
-                                            <a href="register.php">Register new account</a>
+                                            <a href="register.php">Register new account</a><br>
+                                            <a href="index.php">Home</a>
                                         </label>
                                     </div>
                                 </fieldset>
