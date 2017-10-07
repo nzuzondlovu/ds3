@@ -4,35 +4,35 @@ include 'header.php';
 ?>
 
 <div class="slider-area">
-   <!-- Slider -->
-   <div class="block-slider block-slider4">
+ <!-- Slider -->
+ <div class="block-slider block-slider4">
     <ul class="" id="bxslider-home4">
-       <li>
-          <img src="img/h4-slide.png" alt="Slide">
-          <div class="caption-group">
-             <h2 class="caption title">
-                iPhone <span class="primary">6 <strong>Plus</strong></span>
-            </h2>
-            <h4 class="caption subtitle">Dual SIM</h4>
-            <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
-        </div>
-    </li>
-    <li><img src="img/h4-slide2.png" alt="Slide">
+     <li>
+      <img src="img/h4-slide.png" alt="Slide">
       <div class="caption-group">
-         <h2 class="caption title">
-            by one, get one <span class="primary">50% <strong>off</strong></span>
-        </h2>
-        <h4 class="caption subtitle">school supplies & backpacks.*</h4>
-        <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
-    </div>
+       <h2 class="caption title">
+        iPhone <span class="primary">6 <strong>Plus</strong></span>
+    </h2>
+    <h4 class="caption subtitle">Dual SIM</h4>
+    <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
+</div>
+</li>
+<li><img src="img/h4-slide2.png" alt="Slide">
+  <div class="caption-group">
+   <h2 class="caption title">
+    by one, get one <span class="primary">50% <strong>off</strong></span>
+</h2>
+<h4 class="caption subtitle">school supplies & backpacks.*</h4>
+<a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
+</div>
 </li>
 <li><img src="img/h4-slide3.png" alt="Slide">
   <div class="caption-group">
-     <h2 class="caption title">
-        Apple <span class="primary">Store <strong>Ipod</strong></span>
-    </h2>
-    <h4 class="caption subtitle">Select Item</h4>
-    <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
+   <h2 class="caption title">
+    Apple <span class="primary">Store <strong>Ipod</strong></span>
+</h2>
+<h4 class="caption subtitle">Select Item</h4>
+<a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
 </div>
 </li>
 <li><img src="img/h4-slide4.png" alt="Slide">
@@ -89,11 +89,11 @@ include 'header.php';
                 <div class="latest-product">
                     <h2 class="section-title">Latest Products</h2>
                     <div class="product-carousel">
-                       <?php
-                       $sql = "SELECT * FROM product ORDER BY id DESC LIMIT 10";
-                       $res = mysqli_query($con, $sql);
+                     <?php
+                     $sql = "SELECT * FROM product ORDER BY id DESC LIMIT 10";
+                     $res = mysqli_query($con, $sql);
 
-                       if (mysqli_num_rows($res) > 0) {
+                     if (mysqli_num_rows($res) > 0) {
 
                         while ($row = mysqli_fetch_assoc($res)) {
 
@@ -174,41 +174,53 @@ include 'header.php';
                     <h2 class="product-wid-title">Top Sellers</h2>
                     <a href="" class="wid-view-more">View All</a>
                     <?php
-                    $sql = "SELECT * FROM product ORDER BY date DESC LIMIT 3";
-                    $res = mysqli_query($con, $sql);
+                    
+                    $sql12 = "SELECT COUNT(page) AS num, page FROM `views` WHERE page LIKE '%product%' GROUP BY page ORDER BY num DESC LIMIT 3";
+                    $res12 = mysqli_query($con, $sql12);
 
-                    if (mysqli_num_rows($res) > 0) {
+                    if (mysqli_num_rows($res12) > 0) {
 
-                        while ($row = mysqli_fetch_assoc($res)) {
+                        while ($row12 = mysqli_fetch_assoc($res12)) {
 
-                            $promo = '<ins>R'.$row['promo_price'].'</ins> <del>R'.$row['price'].'</del>';
+                            $proid = substr($row12['page'],strrpos($row12['page'], "=")+1);
 
-                            if ($row['promo_price'] == '0.00') {
+                            $sql = "SELECT * FROM product WHERE id=$proid";
+                            $res = mysqli_query($con, $sql);
 
-                                $promo = '<ins>R'.$row['price'].'</ins>';
+                            if (mysqli_num_rows($res) > 0) {
+
+                                while ($row = mysqli_fetch_assoc($res)) {
+
+                                    $promo = '<ins>R'.$row['promo_price'].'</ins> <del>R'.$row['price'].'</del>';
+
+                                    if ($row['promo_price'] == '0.00') {
+
+                                        $promo = '<ins>R'.$row['price'].'</ins>';
+                                    }
+
+                                    echo '
+                                    <div class="single-wid-product">
+
+                                    <a href="single-product.html"><img src="uploads/'.$row['pic_url'].'" alt="" class="product-thumb"></a>
+                                    <h2><a href="single-product.html">'.$row['brandname'].' '.$row['name'].'</a></h2>
+
+
+
+                                    <div class="product-wid-rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="product-wid-price">
+                                    '.$promo.'
+                                    </div>                            
+                                    </div>';
+                                }
+
                             }
-
-                            echo '
-                            <div class="single-wid-product">
-
-                            <a href="single-product.html"><img src="uploads/'.$row['pic_url'].'" alt="" class="product-thumb"></a>
-                            <h2><a href="single-product.html">'.$row['brandname'].' '.$row['name'].'</a></h2>
-
-
-
-                            <div class="product-wid-rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product-wid-price">
-                            '.$promo.'
-                            </div>                            
-                            </div>';
                         }
-
                     } else {
 
                         echo '
@@ -217,7 +229,6 @@ include 'header.php';
                         <strong>No titles found.</strong>
                         </div>';
                     }
-
                     ?>
                 </div>
             </div>
@@ -237,7 +248,7 @@ include 'header.php';
 
                             $proid = substr($row12['page'],strrpos($row12['page'], "=")+1);
 
-                            echo $sql = "SELECT * FROM product WHERE id=$proid";
+                            $sql = "SELECT * FROM product WHERE id=$proid";
                             $res = mysqli_query($con, $sql);
 
                             if (mysqli_num_rows($res) > 0) {
@@ -272,17 +283,17 @@ include 'header.php';
                                     </div>';
                                 }
 
-                            } else {
-
-                                echo '
-                                <div class="alert alert-info">
-                                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                <strong>No titles found.</strong>
-                                </div>';
                             }
-
                         }
-                    }       
+                    } else {
+
+                        echo '
+                        <div class="alert alert-info">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>No titles found.</strong>
+                        </div>';
+                    }
+
 
                     ?>
                 </div>
