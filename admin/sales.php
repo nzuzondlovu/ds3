@@ -180,14 +180,16 @@ include 'header.php';
 								echo '
 								<table id="suppliers" class="table">
 									<thead>
+										<tr colspan="6">
+										  
+										<th><h4>Invoice Number:<strong> '.$id.'</strong></h4></th>
+										</tr>
 										<tr>
-											<th>Transaction ID</th>
 											<th>Product Name</th>
 											<th>Product code</th>
 											<th>Quantity</th>
 											<th>Product Price</th>
 											<th>Total Amount</th>
-											<th>Invoice Number</th>
 											<th>Action</th>
 										</tr>
 									</thead>
@@ -196,13 +198,11 @@ include 'header.php';
 
 											echo '
 											<tr>
-												<td>'.$row['id'].'</td>
 												<td>'.$row['prodname'].'</td>
 												<td>'.$row['barcode'].'</td>
 												<td>'.$row['qty'].'</td>
 												<td>'.$row['price'].'</td>
-												<td>'.$row['total_price'].'</td>
-												<td>'.$row['invoice_num'].'</td>
+												<td>'.$row['total_price'].'</td> 
 												<td class="pull-right">
 													<button  onclick="modal('.$row['id'].')" class="btn btn-primary" ><i class="fa fa-trash fa-fw"></i>Delete Product</button>   
 												</td>
