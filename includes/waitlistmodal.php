@@ -56,7 +56,7 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
           </div>
 
           <div class="col-md-6">
-            <form role="form" method="post">
+            <form id="waitlistModalForm" role="form" method="post">
               <div class="form-group">
                 <label>Name</label>
                 <input type="text" name="name" class="form-control" value="<?php echo $nam; ?>">
@@ -103,5 +103,63 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
       jQuery('#waitlistModal').remove();
     },500);
   }
+</script>
+<script type="text/javascript">
+
+  $( document ).ready( function () {
+    $( "#waitlistModalForm" ).validate( {
+      rules: {
+        name: {
+          required: true,
+          maxlength: 35
+        },
+        model: {
+          required: true,
+          maxlength: 35
+        },
+        serial: "required",
+        type: "required",
+        date: "required",
+        price: {
+          required: true,
+          maxlength: 35
+        }
+      },
+      messages: {
+        dname: {
+          required: "Please enter the name of the device",
+          maxlength: "Your device name cant be longer than 35 characters"
+        },
+        model: {
+          required: "Please enter the model of the device",
+          maxlength: "Your model cant be longer than 35 characters"
+        },
+        serial: "Please enter device serial number.",
+        type: "Please choose device type.",
+        date: "Please select a date",
+        price: {
+          required: "Please enter the price of the device",
+          maxlength: "Your price cant be longer than 35 characters"
+        }
+      },
+      errorElement: "em",
+      errorPlacement: function ( error, element ) {
+          // Add the `help-block` class to the error element
+          error.addClass( "help-block" );
+
+          if ( element.prop( "type" ) === "checkbox" ) {
+            error.insertAfter( element.parent( "label" ) );
+          } else {
+            error.insertAfter( element );
+          }
+        },
+        highlight: function ( element, errorClass, validClass ) {
+          $( element ).parents( ".col-sm-5" ).addClass( "has-error" ).removeClass( "has-success" );
+        },
+        unhighlight: function (element, errorClass, validClass) {
+          $( element ).parents( ".col-sm-5" ).addClass( "has-success" ).removeClass( "has-error" );
+        }
+      });
+  });
 </script>
 <?php echo ob_get_clean(); ?>
