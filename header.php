@@ -231,13 +231,13 @@ if(isset($_POST['recover'])) {
                                 echo '
                                 <li><a href="user/"><i class="fa fa-user"></i> My Account</a></li>                            
                                 <!--<li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>-->
-                                <li><a href="cart.php"><i class="fa fa-user"></i> My Cart</a></li>
-                                <li><a href="checkout.php"><i class="fa fa-user"></i> Checkout</a></li>';
+                                <li><a href="cart.php"><i class="fa fa-shopping-cart"></i> My Cart</a></li>
+                                <li><a href="checkout.php"><i class="fa fa-shopping-basket"></i> Checkout</a></li>';
                             } else {
 
                                 echo '
                                 <li><a data-toggle="modal" data-target="#login"><i class="fa fa-user"></i> Login</a></li>
-                                <li><a href="register.php"><i class="fa fa-user"></i> Register</a></li>';
+                                <li><a href="register.php"><i class="fa fa-sign-in"></i> Register</a></li>';
                             }
 
                             ?>                            
