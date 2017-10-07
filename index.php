@@ -175,7 +175,7 @@ include 'header.php';
                     <a href="" class="wid-view-more">View All</a>
                     <?php
                     
-                    $sql12 = "SELECT COUNT(page) AS num, page FROM `views` WHERE page LIKE '%product%' GROUP BY page ORDER BY num DESC LIMIT 3";
+                    $sql12 = "SELECT COUNT(page) AS num, page FROM `views` WHERE page LIKE '%product.php?id%' GROUP BY page ORDER BY num DESC LIMIT 3";
                     $res12 = mysqli_query($con, $sql12);
 
                     if (mysqli_num_rows($res12) > 0) {
@@ -239,7 +239,7 @@ include 'header.php';
                     <a href="#" class="wid-view-more">View All</a>
                     <?php
 
-                    $sql12 = "SELECT * FROM views WHERE page LIKE '%product%' ORDER BY id DESC LIMIT 3";
+                    $sql12 = "SELECT * FROM views WHERE page LIKE '%product.php?id%' ORDER BY id DESC LIMIT 3";
                     $res12 = mysqli_query($con, $sql12);
 
                     if (mysqli_num_rows($res12) > 0) {
