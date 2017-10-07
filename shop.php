@@ -1,4 +1,5 @@
 <?php
+$ipge = 'shop';
 include 'header.php';
 ?>
 

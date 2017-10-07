@@ -5,7 +5,7 @@ include 'includes/functions.php';
 
 <?php
 
-if(isset($_POST['register'])) {
+/*if(isset($_POST['register'])) {
     $name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
     $surname = mysqli_real_escape_string($con, strip_tags(trim($_POST["surname"])));
     $cell = mysqli_real_escape_string($con, strip_tags(trim($_POST["cell"])));
@@ -26,7 +26,7 @@ if(isset($_POST['register'])) {
     }else{
         $_SESSION['failure'] = 'Make sure you have filled all fields.';
     }
-}
+}*/
 
 
 if(isset($_POST['login'])) {
@@ -317,14 +317,29 @@ if(isset($_POST['recover'])) {
                 </div> 
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="index.php">Home</a></li>
-                        <li><a href="shop.php">Shop page</a></li>
-                        <li><a href="product.php">Single product</a></li>
-                        <li><a href="cart.php">Cart</a></li>
+                        <?php
+                        $li1 = '';
+                        $li2 = '';
+                        $li3 = '';
+                        $li4 = '';
+
+                        if ($ipge == 'index') {
+                            $li1 = ' class="active"';
+                        } else if ($ipge == 'shop'){
+                            $li2 = ' class="active"';
+                        } else if ($ipge == 'product'){
+                            $li3 = ' class="active"';
+                        } else if ($ipge == 'cart'){
+                            $li4 = ' class="active"';
+                        }
+                        
+
+                        ?>
+                        <li<?php echo $li1; ?>><a href="index.php">Home</a></li>
+                        <li<?php echo $li2; ?>><a href="shop.php">Shop page</a></li>
+                        <li<?php echo $li3; ?>><a href="product.php">Single product</a></li>
+                        <li<?php echo $li4; ?>><a href="cart.php">Cart</a></li>
                         <li><a href="checkout.php">Checkout</a></li>
-                        <li><a href="#">Category</a></li>
-                        <li><a href="#">Others</a></li>
-                        <li><a href="#">Contact</a></li>
                     </ul>
                 </div>  
             </div>

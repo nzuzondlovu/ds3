@@ -18,7 +18,22 @@
                 <div class="footer-menu">
                     <h2 class="footer-wid-title">User Navigation </h2>
                     <ul>
-                        <li><a href="user/update.php">My account</a></li>
+                        <?php
+                        if (isset($_SESSION['user_id'])) {
+                            echo '
+                            <li><a href="user/update.php">My account</a></li>
+                            <li><a href="user/index.php">My dashboard</a></li>
+                            <li><a href="user/bookings.php">My bookings</a></li>
+                            ';
+                        } else {
+                            echo '
+                            <li><a data-toggle="modal" data-target="#login">Login to account</a></li>
+                            <li><a href="register.php">Register new account</a></li>
+                            ';
+                        }
+                        
+                        ?>
+                        
                    
                     </ul>                        
                 </div>
@@ -106,7 +121,7 @@
                         <div class="checkbox">
                             <label>
                                 <a data-toggle="modal" data-target="#recover">Recover Lost Password</a><br>
-                                <a data-toggle="modal" data-target="#register">Register your account</a><br>
+                                <a href="register.php">Register your account</a><br>
                             </label>
                         </div>
                     </fieldset>
@@ -116,7 +131,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="registerLabel">
+<!-- <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="registerLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -147,7 +162,7 @@
                         <div class="form-group">
                             <input class="form-control" placeholder="Password" name="password" type="password" value="">
                         </div>                                
-                        <!-- Change this to a button or input when using this as a form -->
+                        <!-- Change this to a button or input when using this as a form --
                         <button name="register" type="submit" class="btn btn-lg btn-primary btn-block">Register</button>
                         <div class="checkbox">
                             <label>
@@ -159,7 +174,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <div class="modal fade" id="recover" tabindex="-1" role="dialog" aria-labelledby="recoverLabel">
     <div class="modal-dialog" role="document">
@@ -179,7 +194,7 @@
                     <div class="checkbox">
                         <label>
                             <a data-toggle="modal" data-target="#login">Login to your account</a><br>
-                            <a data-toggle="modal" data-target="#register">Register new account</a>
+                            <a href="register.php">Register new account</a>
                         </label>
                     </div>
                 </fieldset>

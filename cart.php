@@ -1,4 +1,5 @@
 <?php
+$ipge = 'cart';
 include 'header.php';
 ?>
 
@@ -306,7 +307,7 @@ function dropdown_select($name, $default=null, $id= '') {
 
                                         <tr class="order-total">
                                             <th>Order Total</th>
-                                            <td><strong><span class="amount">£15.00</span></strong> </td>
+                                            <td><strong><span class="amount">R <?php echo $payment_total; ?></span></strong> </td>
                                         </tr>
                                     </tbody>
                                 </table>
