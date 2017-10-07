@@ -235,7 +235,9 @@ if(isset($_POST['recover'])) {
                                 <li><a href="checkout.php"><i class="fa fa-user"></i> Checkout</a></li>';
                             } else {
 
-                                echo '<li><a data-toggle="modal" data-target="#login"><i class="fa fa-user"></i> Login</a></li>';
+                                echo '
+                                <li><a data-toggle="modal" data-target="#login"><i class="fa fa-user"></i> Login</a></li>
+                                <li><a href="register.php"><i class="fa fa-user"></i> Register</a></li>';
                             }
 
                             ?>                            
