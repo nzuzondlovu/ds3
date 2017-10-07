@@ -14,10 +14,9 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
 
     $row = mysqli_fetch_assoc($res);
 
-    $cust = 'Product Barcode:  '.$row['prod_code'].'</br>
-				Brand Name: '.$row['brandname'].'</br>
-				Generic Name:'.$row['name'].'</br>
-				Quantity Available:	'.$row['onhand_qty'].'</br>
+    $cust = 'Product Barcode:  '.$row['barcode'].'</br>
+				Product Name: '.$row['prodname'].'</br>
+				Quantity :	'.$row['qty'].'</br>
 				Price:	R'.$row['price'];
   }
  
