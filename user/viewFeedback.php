@@ -57,28 +57,6 @@ include 'header.php';
     <!-- /.row -->
 
     <!-- Modal -->
-     <div class="modal fade" id="viewItem" tabindex="-1" role="dialog" aria-labelledby="viewItemLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span> Close</button>
-            <h4 class="modal-title" id="addItemLabel">FeedBack</h4>
-          </div>
-          <div class="modal-body">
-            <form role="form" method="post" enctype="multipart/form-data">
-              <div class="form-group">
-                <label>Query</label>
-                <textarea name="description" class="form-control" rows="5"></textarea>
-              </div>
-              <button name="submit" type="submit" class="btn btn-primary">Reply</button>
-              <button type="reset" class="btn btn-default">Reset Form</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
     <div class="modal fade" id="addItem" tabindex="-1" role="dialog" aria-labelledby="addItemLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -88,10 +66,10 @@ include 'header.php';
           </div>
           <div class="modal-body">
             <form role="form" method="post" enctype="multipart/form-data">
-              
+
               <div class="form-group">
                 <label>Query</label>
-                <textarea name="description" class="form-control" rows="5"></textarea>
+                <textarea name="description" class="form-control" rows="5" required="required"></textarea>
               </div>
               <button name="submit" type="submit" class="btn btn-primary">Submit Query</button>
               <button type="reset" class="btn btn-default">Reset Form</button>
@@ -120,242 +98,149 @@ include 'header.php';
           </div>
           <?php } ?>
         </div>
-      
-          <div class="panel-heading">
-            List of all responses
-          </div>
-          <!-- /.panel-heading -->
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="pull-right">
-                  <button class="btn btn-success" data-toggle="modal" data-target="#addItem"> Submit Query</button>
-                </div>
-              </div>
-            </div> 
 
-            <div class="table-responsive">
-            <?php
-                                $sql = "SELECT * FROM query WHERE user_id='".$_SESSION['user_id']."'";
-                                $rs_result = mysqli_query($con, $sql); //run the query
-                                $cart = mysqli_num_rows($rs_result);
-                                if ($cart < 0) {
-                                    $cart = 0;
+        <div class="panel-heading">
+          List of all responses
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="pull-right">
+                <button class="btn btn-success" data-toggle="modal" data-target="#addItem"> Submit Query</button>
+              </div>
+            </div>
+          </div> 
+
+          <div class="table-responsive">
+            <section class="content">
+              <div class="row">
+                <!-- /.col -->
+                <div class="col-md-12">
+                  <div class="box box-primary">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Inbox</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body no-padding">
+                      <div class="table-responsive mailbox-messages">
+                        <table id="bookings" class="table table-hover table-striped">
+                          <thead>
+                          </thead>
+                          <tbody>
+                            <?php
+
+                            $sql = 'SELECT * FROM query WHERE user_id='.$_SESSION['user_id'].' ORDER BY id DESC';
+                            $res = mysqli_query($con, $sql);
+
+                            if (mysqli_num_rows($res) > 0) {
+
+                              while ($row = mysqli_fetch_assoc($res)) {
+
+                                echo '
+                                <tr>
+                                <td class="mailbox-name"><a data-toggle="modal" data-target="#viewItem">'.$row['name'].'</a></td>
+                                <td class="mailbox-subject"><b>'.$row['query'].'</b>';
+
+                                $sql1 = 'SELECT * FROM feedback WHERE query_id='.$row['id'].'';
+                                $res1 = mysqli_query($con, $sql1);
+
+                                if (mysqli_num_rows($res1) > 0) {
+
+                                  while ($row1 = mysqli_fetch_assoc($res1)) {
+
+                                    if ($row1['user_id'] == $_SESSION['user_id']) {
+
+                                      echo '<pre class="text-success bg-info">'.$row1['feedback'].'</pre>';
+                                    } else {
+
+                                      echo '<pre class="text-success bg-primary">'.$row1['feedback'].'</pre>';
+                                    }                                  
+                                  }
                                 }
-                              
-                                ?>
-                                  <?php 
-        include('connect.php');
-        $result = $db->prepare("SELECT * FROM query where status like'unanswered' And user_id='".$_SESSION['user_id']."' ORDER BY id DESC");
-        $result->execute();
-        $sent = $result->rowcount();
-     
 
-      ?>
-                              <?php 
-        include('connect.php');
-        $result = $db->prepare("SELECT * FROM query where status like'answered' And user_id='".$_SESSION['user_id']."' ORDER BY id DESC");
-        $result->execute();
-        $feedback = $result->rowcount();
-        
-      ?>
+                                echo '
+                                </td>
+                                <td class="mailbox-attachment"></td>
+                                <td class="mailbox-date">'.date('D M y',strtotime($row['date'])).'<br><a href="feedbackreply.php?id='.$row['id'].'&ud='.$row['user_id'].'" class="btn btn-default btn-sm"><i class="fa fa-share"></i></a></td>
+                                </tr>
+                                ';
 
-              <?php
+                              }
 
-              $sql = "SELECT * FROM query WHERE user_id = '".$_SESSION['user_id']."'";
-              $res = mysqli_query($con, $sql);
+                            } else {
 
-              if (mysqli_num_rows($res) > 0) {
-                echo '
+                              echo '
+                              <div class="alert alert-info">
+                              <button type="button" class="close" data-dismiss="alert">&times;</button>
+                              <strong>No bookings found.</strong>
+                              </div>
+                              ';
+                            }
 
-    <section class="content">
-      <div class="row">
-        <div class="col-md-3">
-          <a data-toggle="modal" data-target="#addItem" class="btn btn-primary btn-block margin-bottom">Compose</a>
+                            ?>
 
-          <div class="box box-solid"> 
-            <div class="box-header with-border">
-              <h3 class="box-title">Folders</h3>
-
-              <div class="box-tools">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-              </div>
-            </div>
-            <div class="box-body no-padding">
-              <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="#"><i class="fa fa-inbox"></i> Feedback
-                  <span class="label label-primary pull-right"> '.$feedback.'</span></a></li>
-
-                <li><a href="#"><i class="fa fa-envelope-o"></i> Query     <span class="label label-success pull-right"> '.$sent.'</span></a></li>
-
-                <li><a href="#"><i class="fa fa-file-text-o"></i>  '.$row['email'].'</a></li>
-                <li><a href="#"><i class="fa fa-filter"></i> Total Sent <span class="label label-warning pull-right">'.$cart.'</span></a>
-                </li>
-                <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
-              </ul>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /. box -->
-          <div class="box box-solid">
-         
-         
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-9">
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Inbox</h3>
-
-              <div class="box-tools pull-right">
-                <div class="has-feedback">
-                  <input type="text" class="form-control input-sm" placeholder="Search Mail">
-                  <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                </div>
-              </div>
-              <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-              <div class="mailbox-controls">
-                <!-- Check all button -->
-                <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
-                </button>
-                <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
-                </div>
-                <!-- /.btn-group -->
-                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-                <div class="pull-right">
-                  1-50/200
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer no-padding">
+                      <!-- /.pull-right -->
+                    </div>
                   </div>
-                  <!-- /.btn-group -->
                 </div>
-                <!-- /.pull-right -->
+                <!-- /.table-responsive -->
               </div>
-
-                   <div class="table-responsive mailbox-messages">
-                <table id="bookings" class="table table-hover table-striped">
-      
-                 
-                    </tr>
-                  </thead>
-                  <tbody>';
-                    while ($row = mysqli_fetch_assoc($res)) {
-
-                      echo '
-                        
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                    <td class="mailbox-name"><a data-toggle="modal" data-target="#viewItem">'.$row['name'].'</a></td>
-                    <td class="mailbox-subject"><b>'.$row['query'].'</b> -  <pre class="text-success bg-info"> '.$row['feedback'].' </pre>
-                    <td class="mailbox-attachment"></td>
-                    <td class="mailbox-date">'.$row['status'].'</td>
-             
-              </tr>
-                    ';
-                    }
-                    echo '
-
-
-                  </tbody>
-                </table>
-                </div>
-                         </div>
-            <!-- /.box-body -->
-            <div class="box-footer no-padding">
-              <div class="mailbox-controls">
-                <!-- Check all button -->
-                <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
-                </button>
-                <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
-                </div>
-                <!-- /.btn-group -->
-                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-                <div class="pull-right">
-                  1-50/200
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                  </div>
-                  <!-- /.btn-group -->
-                </div>
-                <!-- /.pull-right -->
-              </div>
+              <!-- /.panel-body -->
             </div>
-                ';
-              } else {
-                echo '<div class="alert alert-info">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>No Feedback found.</strong>
-              </div>';
-            }
-            ?>
+            <!-- /.panel -->
           </div>
-          <!-- /.table-responsive -->
         </div>
-        <!-- /.panel-body -->
+
+        <!-- /.container-fluid -->
       </div>
-      <!-- /.panel -->
-    </div>
-  </div>
+      <!-- /#page-wrapper -->
 
-<!-- /.container-fluid -->
-</div>
-<!-- /#page-wrapper -->
-
-<?php
-include 'footer.php';
-?>
-<script>
-  $(document).ready(function(){
-    $('#bookings').DataTable();
-  });
-</script>
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- Select2 -->
-<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
-<!-- InputMask -->
-<script src="plugins/input-mask/jquery.inputmask.js"></script>
-<script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-<script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
-<!-- date-range-picker -->
-<script src="bower_components/moment/min/moment.min.js"></script>
-<script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
-<!-- bootstrap datepicker -->
-<script src="bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-<!-- bootstrap color picker -->
-<script src="bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
-<!-- bootstrap time picker -->
-<script src="plugins/timepicker/bootstrap-timepicker.min.js"></script>
-<!-- SlimScroll -->
-<script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<!-- iCheck 1.0.1 -->
-<script src="plugins/iCheck/icheck.min.js"></script>
-<!-- FastClick -->
-<script src="bower_components/fastclick/lib/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
-<!-- Page script -->
-<script>
-  $(function () {
+      <?php
+      include 'footer.php';
+      ?>
+      <script>
+        $(document).ready(function(){
+          $('#bookings').DataTable();
+        });
+      </script>
+      <script src="bower_components/jquery/dist/jquery.min.js"></script>
+      <!-- Bootstrap 3.3.7 -->
+      <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+      <!-- Select2 -->
+      <script src="bower_components/select2/dist/js/select2.full.min.js"></script>
+      <!-- InputMask -->
+      <script src="plugins/input-mask/jquery.inputmask.js"></script>
+      <script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+      <script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
+      <!-- date-range-picker -->
+      <script src="bower_components/moment/min/moment.min.js"></script>
+      <script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+      <!-- bootstrap datepicker -->
+      <script src="bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+      <!-- bootstrap color picker -->
+      <script src="bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+      <!-- bootstrap time picker -->
+      <script src="plugins/timepicker/bootstrap-timepicker.min.js"></script>
+      <!-- SlimScroll -->
+      <script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+      <!-- iCheck 1.0.1 -->
+      <script src="plugins/iCheck/icheck.min.js"></script>
+      <!-- FastClick -->
+      <script src="bower_components/fastclick/lib/fastclick.js"></script>
+      <!-- AdminLTE App -->
+      <script src="dist/js/adminlte.min.js"></script>
+      <!-- AdminLTE for demo purposes -->
+      <script src="dist/js/demo.js"></script>
+      <!-- Page script -->
+      <script>
+        $(function () {
     //Initialize Select2 Elements
     $('.select2').select2()
 
@@ -372,21 +257,21 @@ include 'footer.php';
     $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' })
     //Date range as a button
     $('#daterange-btn').daterangepicker(
-      {
-        ranges   : {
-          'Today'       : [moment(), moment()],
-          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
-          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
-          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-        },
-        startDate: moment().subtract(29, 'days'),
-        endDate  : moment()
+    {
+      ranges   : {
+        'Today'       : [moment(), moment()],
+        'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+        'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+        'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+        'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
       },
-      function (start, end) {
-        $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-      }
+      startDate: moment().subtract(29, 'days'),
+      endDate  : moment()
+    },
+    function (start, end) {
+      $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+    }
     )
 
     //Date picker
