@@ -38,17 +38,30 @@ if(mysqli_num_rows($res) > 0) {
 	}
 }
 
+
+
+
 if(isset($_POST['submit'])) {
 
-	$quantity = mysqli_real_escape_string($con, strip_tags(trim($_POST["quantity"])));
-	$date = date("Y-m-d H:i:s");
-	
-	if($quantity != '') {
+	$bname = $_POST["bname"];
+	$genname = $_POST["genname"];
+	$qty = $_POST["qty"];
 
-		$sql = "INSERT INTO orders(supplierID, supplierName, orderDate, quantity, productName, email) VALUES('".$id."', '".$name."', '".$date."', '".$quantity."', '".$product."', '".$email."')";
-		mysqli_query($con, $sql);
+	$date = date("Y-m-d H:i:s");
+
+	foreach ($bname as $key => $value) {
+		
+		echo mysqli_real_escape_string($con, strip_tags(trim($value)));
+		echo mysqli_real_escape_string($con, strip_tags(trim($genname[$key])));
+		echo mysqli_real_escape_string($con, strip_tags(trim($qty[$key])));
+	}
+	
+	if(1==1) {
+
+		//$sql = "INSERT INTO orders(supplierID, supplierName, orderDate, quantity, productName, email) VALUES('".$id."', '".$name."', '".$date."', '".$quantity."', '".$product."', '".$email."')";
+		//mysqli_query($con, $sql);
 		$_SESSION['success'] = 'Your new order has been added successfully.';
-		header("Location: orders.php");
+		//header("Location: orders.php");
 	}else {
 		$_SESSION['failure'] = 'Please fill in all fields.';
 	}
@@ -98,102 +111,53 @@ include 'header.php';
 									<a href="suppliers.php" class="btn btn-warning">Suppliers</a>
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-2">
 								<h2>Supplier details</h2>
 								<?php
 								echo $order;
 								?>
 							</div>
 
-							<div class="col-md-6">
-								<form role="form" action="incoming.php" method="post">
-									<div class="col-md-6">
-										<div class="form-group">
-                							<label>Brand Name</label>
-											<input type="text" name="bname" class="form-control" placeholder="Enter Brand Name">
-              							</div>
-
-
-              							
-              							<div class="form-group">
-                							<label>Generic Name</label>
-											<input type="text" name="genname" class="form-control" placeholder="Or Device Model">
-              							</div>
-    									<div class="form-group">
-											<label>Order Quantity</label>
-											<input type="number" name="qty" class="form-control" placeholder="Enter quantity">
-										</div>	
-              
-				 						<button name="submit" type="submit" class="btn btn-info"><i class="fa fa-plus fa-fw"></i>Add</button>                                                                  
-              							<button type="reset" class="btn btn-default">Reset</button>
-										
+							<div class="col-md-9">
+								<form role="form" method="post">
+									<table width="100%" id="container">
+										<tr>
+											<td>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label>Brand Name</label>
+														<input type="text" name="bname[]" id="bname" class="form-control" placeholder="Enter Brand Name" required="required">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label>Generic Name</label>
+														<input type="text" name="genname[]" id="genname" class="form-control" placeholder="Or Device Model" required="required">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label>Order Quantity</label>
+														<input type="number" name="qty[]" id="qty" class="form-control" placeholder="Enter quantity" required="required">
+													</div>
+												</div>
+												<div class="col-md-1">
+													<div class="form-group">
+														<label>Action</label>
+														<a href="#" id="add" class="btn btn-primary"><i class="fa fa-plus fa-fw"></i>Add More</a>
+													</div>
+												</div>
+											</td>
+										</tr>
 									</div>
+									<div class="col-md-9">
+										<button name="submit" type="submit" class="btn btn-info">Add</button>                                                                  
+										<button type="reset" class="btn btn-default">Reset</button>										
+									</table>
 								</form>
 							</div>
 							<!-- /.col-lg-6 (nested) -->
-						</div>
-						<div class="table-responsive">
-							<?php
-							$num_rec_per_page=10;
-
-							if (isset($_GET["page"])) {
-
-								$page  = $_GET["page"];
-							} else {
-
-								$page=1;
-							}
-
-							$start_from = ($page-1) * $num_rec_per_page;
-							$sql = "SELECT * FROM orders";
-							$res = mysqli_query($con, $sql);
-
-							if (mysqli_num_rows($res) > 0) {
-								echo '
-								<table id="suppliers" class="table">
-									<thead>
-										<tr>
-											<th>Order ID</th>
-											<th>Supplier ID</th>
-											<th>Supplier Name</th>
-											<th>Order Date</th>
-											<th>Quantity</th>
-											<th>Product Name</th>
-											<th>Email</th>
-											<th>Product Price</th>
-											<th>Action</th>
-										</tr>
-									</thead>
-									<tbody>';
-										while ($row = mysqli_fetch_assoc($res)) {											
-
-											echo '
-											<tr>
-												<td>'.$row['id'].'</td>
-												<td>'.$row['supplierID'].'</td>
-												<td>'.$row['supplierName'].'</td>
-												<td>'.$row['orderDate'].'</td>
-												<td>'.$row['quantity'].'</td>
-												<td>'.$row['productName'].'</td>
-												<td>'.$row['email'].'</td>
-												<td>'.$row['totalPrice'].'</td>
-												<td class="pull-right">
-													<button class="btn btn-warning"><i class="fa fa-save fa-fw"></i>Make Order</button>   
-												</td>
-											</tr>';
-										}
-										echo '
-									</tbody>
-								</table>';
-							} else {
-								echo '<div class="alert alert-info">
-								<button type="button" class="close" data-dismiss="alert">&times;</button>
-								<strong>No products found.</strong>
-							</div>';
-						}
-						?>
-						
-			 </div>		
+						</div>						
 						<!-- /.row (nested) -->
 					</div>
 					<!-- /.panel-body -->
@@ -211,20 +175,47 @@ include 'header.php';
 <?php
 include 'footer.php';
 ?>
-<script>
-	function modal(id) {
-		var data = {"id" : id};
-		jQuery.ajax({
-			url : '../includes/suppliermodal.php',
-			method : "post",
-			data : data,
-			success : function(data) {
-				jQuery('body').append(data);
-				jQuery('#supplierModal').modal('toggle');
-			},
-			error : function() {
-				alert("Ooops! Something went wrong!");
+<script type="text/javascript">
+	$(document).ready(function(e){
+		//variables
+		var i = 1;
+		var maxRows = 5;
+		var x = 1;
+
+		var html = '';
+		
+
+
+		//add rows to form
+		$("#add").click(function(e){
+
+			if (x <= maxRows) {
+
+				$("#container").append('<tr id="remove'+i+'"><td><div class="col-md-3"><div class="form-group"><label>Brand Name</label><input type="text" name="bname[]" id="childbname" class="form-control" placeholder="Enter Brand Name" required="required"></div></div><div class="col-md-3"><div class="form-group"><label>Generic Name</label><input type="text" name="genname[]" id="childgenname" class="form-control" placeholder="Or Device Model" required="required"></div></div><div class="col-md-3"><div class="form-group"><label>Order Quantity</label><input type="number" name="qty[]" id="childqty" class="form-control" placeholder="Enter quantity" required="required"></div></div><div class="col-md-1"><div class="form-group"><label>Action</label><a href="#" id="remove'+i+'" class="btn btn-danger btn-remove"><i class="fa fa-minus fa-fw"></i>Remove Row</a></div></div></td></tr>');
+				x++;
+				i++;
 			}
 		});
-	}
+
+
+		//remove rows from form
+		$(document).on('click', '.btn-remove', function(e){
+
+			var id = $(this).attr("id");
+			$("#"+id+"").remove();
+			//$(this).parent('#row').remove();
+			x--;
+		});
+
+
+		//populate values from first row
+		$("#container").on('dblclick', '#childbname', function(e){
+			$(this).val( $('#bname').val() );
+		});
+
+		$("#container").on('dblclick', '#childgenname', function(e){
+			$(this).val( $('#genname').val() );
+		});
+
+	});
 </script>

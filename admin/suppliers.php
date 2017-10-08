@@ -196,9 +196,9 @@ include 'header.php';
 									<td>'.$row['email'].'</td>
 									<td><a target="blank" href="'.$row['website'].'">'.$row['website'].'</a></td>
 									<td>'.$row['address'].'</td>
-
 									<td class="pull-right">
-									<a href="editsupplier.php?id='.$row['id'].'" class="btn btn-primary">Edit</a>
+									<a href="editsupplier.php?id='.$row['id'].'" class="btn btn-primary">Edit</a>									
+									<a href="createorder.php?id='.$row['id'].'" class="btn btn-primary">Create Order</a>
 									</td>
 									</tr>';
 								}
@@ -252,71 +252,71 @@ include 'footer.php';
 </script>  
 <script type="text/javascript">
 
-  $( document ).ready( function () {
-    $( "#supplierForm" ).validate( {
-      rules: {
-        name: {
-          required: true,
-          maxlength: 35
-        },
-        email: {
-          required: true,
-          maxlength: 35
-        },
-        number: {
-          required: true,
-          maxlength: 13
-        },
-        address: {
-          required: true,
-          maxlength: 35
-        },
-        website: {
-          required: true,
-          maxlength: 35
-        }
-      },
-      messages: {
-        name: {
-          required: "Please enter the name of the supplier",
-          maxlength: "The supplier name cant be longer than 35 characters"
-        },
-        email: {
-          required: "Please enter the email of the supplier",
-          maxlength: "The email cant be longer than 35 characters"
-        },
-        number: {
-          required: "Please enter the number of the supplier",
-          maxlength: "The number cant be longer than 13 characters"
-        },
-        address: {
-          required: "Please enter supplier address",
-          maxlength: "The supplier address cant be longer than 35 characters"
-        },
-        website: {
-          required: "Please enter supplier website",
-          maxlength: "The website cant be longer than 35 characters"
-        }
-      },
-      errorElement: "em",
-      errorPlacement: function ( error, element ) {
+	$( document ).ready( function () {
+		$( "#supplierForm" ).validate( {
+			rules: {
+				name: {
+					required: true,
+					maxlength: 35
+				},
+				email: {
+					required: true,
+					maxlength: 35
+				},
+				number: {
+					required: true,
+					maxlength: 13
+				},
+				address: {
+					required: true,
+					maxlength: 35
+				},
+				website: {
+					required: true,
+					maxlength: 35
+				}
+			},
+			messages: {
+				name: {
+					required: "Please enter the name of the supplier",
+					maxlength: "The supplier name cant be longer than 35 characters"
+				},
+				email: {
+					required: "Please enter the email of the supplier",
+					maxlength: "The email cant be longer than 35 characters"
+				},
+				number: {
+					required: "Please enter the number of the supplier",
+					maxlength: "The number cant be longer than 13 characters"
+				},
+				address: {
+					required: "Please enter supplier address",
+					maxlength: "The supplier address cant be longer than 35 characters"
+				},
+				website: {
+					required: "Please enter supplier website",
+					maxlength: "The website cant be longer than 35 characters"
+				}
+			},
+			errorElement: "em",
+			errorPlacement: function ( error, element ) {
           // Add the `help-block` class to the error element
           error.addClass( "help-block" );
 
           if ( element.prop( "type" ) === "checkbox" ) {
-            error.insertAfter( element.parent( "label" ) );
+          	error.insertAfter( element.parent( "label" ) );
           } else {
-            error.insertAfter( element );
+          	error.insertAfter( element );
           }
-        },
-        highlight: function ( element, errorClass, validClass ) {
-          $( element ).parents( ".col-sm-5" ).addClass( "has-error" ).removeClass( "has-success" );
-        },
-        unhighlight: function (element, errorClass, validClass) {
-          $( element ).parents( ".col-sm-5" ).addClass( "has-success" ).removeClass( "has-error" );
-        }
-      });
+      },
+      highlight: function ( element, errorClass, validClass ) {
+      	$( element ).parents( ".col-sm-5" ).addClass( "has-error" ).removeClass( "has-success" );
+      },
+      unhighlight: function (element, errorClass, validClass) {
+      	$( element ).parents( ".col-sm-5" ).addClass( "has-success" ).removeClass( "has-error" );
+      }
   });
+	});
 </script>
 <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>

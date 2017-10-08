@@ -207,7 +207,7 @@ CREATE TABLE `query` (
 
 
 
-
+CREATE TABLE `shop`.`feedback` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `query_id` INT(11) NOT NULL , `user_id` INT(11) NOT NULL , `feedback` VARCHAR(350) NOT NULL , `date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 
 
 
