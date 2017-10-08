@@ -48,20 +48,21 @@ if(isset($_POST['submit']))
 	$name='';
 if(isset($_POST['add']))
 {
+ 	$qty=mysqli_real_escape_string($con, strip_tags(trim($_POST["qty1"])));
 	$bcode = $_SESSION['barcode'];
 	$b=$_SESSION['brand'];
 	$n=$_SESSION['name'];
 	$p=$_SESSION['price'];
-	$q=$_SESSION['qty'];
 	
 	$name=$b.' '.$n;
-	$price=$p*($q);
+	$price=$p*$qty;
 	
-	if($bcode != '' && $name != '' && $p != '' && $q != '') {
+	if($bcode != '' && $name != '' && $p != '' && $qty != '') {
 
-		$sql = "INSERT INTO custsaleprod(prodname,barcode,qty,price,total_price,invoice_num) VALUES('".$name."','".$bcode."','".$q."', '".$p."','".$price."','".$id."')";
+		$sql = "INSERT INTO custsaleprod(prodname,barcode,qty,price,total_price,invoice_num) VALUES('".$name."','".$bcode."','".$qty."', '".$p."','".$price."','".$id."')";
 		mysqli_query($con, $sql);
-		$_SESSION['success'] = 'Your new order has been added successfully.';
+		$_SESSION['success'] = 'Product has been added successfully.';
+		
 	}else {
 		$_SESSION['failure'] = 'Please fill in all fields.';
 	}
@@ -75,6 +76,29 @@ if(isset($_POST['delete']))
 		$res = mysqli_query($con, $sql);
 		$_SESSION['success'] = 'Your new order has been added successfully.';
 
+	
+
+}
+
+
+if(isset($_POST['btnSubmit']))
+{
+ 	$cust=mysqli_real_escape_string($con, strip_tags(trim($_POST["custname"])));
+ 	$type=mysqli_real_escape_string($con, strip_tags(trim($_POST["type"])));
+ 	$cashier=mysqli_real_escape_string($con, strip_tags(trim($_POST["cashier"])));
+ 	$date=mysqli_real_escape_string($con, strip_tags(trim($_POST["date"])));
+	$amt=mysqli_real_escape_string($con, strip_tags(trim($_POST["amt"])));
+	$change=mysqli_real_escape_string($con, strip_tags(trim($_POST["change"])));
+	
+	if($cust != '' && $type != '' && $cashier != '' && $change != '' && $date != '') {
+
+		$sql = "INSERT INTO sales(invoice_num,custName,payment_method,total_amount,amount_paid,change,cashier,date) VALUES('".$id."','".$cust."','".$type."','".$cart1."','".$amt."','".$change."','".$cashier."','".$date."')";
+		mysqli_query($con, $sql);
+		$_SESSION['success'] = 'Your new sale has been added successfully.';
+		header("Location: makesale.php");
+	}else {
+		$_SESSION['failure'] = 'Please fill in all fields.';
+	}
 	
 
 }
@@ -171,7 +195,19 @@ include 'header.php';
 
 								$page=1;
 							}
+							$cart1 = 0.00;
 
+$sql1 = "SELECT SUM(total_price) AS num FROM custsaleprod WHERE invoice_num LIKE '%".$id."%'";
+$res = mysqli_query($con, $sql1);
+
+if (mysqli_num_rows($res) > 0) {
+	
+	while ($row = mysqli_fetch_assoc($res)) {
+
+		$sum = $row['num'];
+		$cart1 = $cart1 + $sum;
+	}
+}
 							$start_from = ($page-1) * $num_rec_per_page;
 							$sql = "SELECT * FROM custsaleprod WHERE invoice_num LIKE '%".$id."%'";
 							$res = mysqli_query($con, $sql);
@@ -208,9 +244,17 @@ include 'header.php';
 												</td>
 											</tr>';
 										}
+											echo '
+										<tr>
+											<td colspan="4"><strong>TOTAL:</strong></td>
+										<td><strong>R'.$cart1.'</strong></td>
+										</tr>';
 										echo '
 									</tbody>
 								</table>';
+								echo '<div class="pull-right">
+									<button onclick="transmodal('.$cart1.')" type="submit" name="save" class="btn btn-warning"><i class="fa fa-save fa-fw"></i>Save Transaction</button>  
+								</div>';
 							} else {
 								echo '<div class="alert alert-info">
 								<button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -218,9 +262,7 @@ include 'header.php';
 							</div>';
 						}
 						?>
-							<div class="pull-right">
-									<a href="orders.php" class="btn btn-warning"><i class="fa fa-save fa-fw"></i>Submit All Transaction</a>
-								</div>
+							
 			 </div>		
 						<!-- /.row (nested) -->
 					</div>
@@ -249,6 +291,23 @@ include 'footer.php';
 			success : function(data) {
 				jQuery('body').append(data);
 				jQuery('#deleteProdModal').modal('toggle');
+			},
+			error : function() {
+				alert("Ooops! Something went wrong!");
+			}
+		});
+	}
+</script>
+<script>
+	function transmodal(id) {
+		var data = {"id" : id};
+		jQuery.ajax({
+			url : '../includes/savetransmodal.php',
+			method : "post",
+			data : data,
+			success : function(data) {
+				jQuery('body').append(data);
+				jQuery('#saveTransModal').modal('toggle');
 			},
 			error : function() {
 				alert("Ooops! Something went wrong!");

@@ -102,7 +102,7 @@ include 'header.php';
 							}
 
 							$start_from = ($page-1) * $num_rec_per_page;
-							$sql = "SELECT * FROM custsaleprod ";
+							$sql = "SELECT * FROM sales ";
 							$res = mysqli_query($con, $sql);
 
 							if (mysqli_num_rows($res) > 0) {
