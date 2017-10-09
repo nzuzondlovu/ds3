@@ -56,7 +56,7 @@ function user($type)
         <a href="makesale.php">Sales</a>
       </li>
       <li>
-        <a href="salereports.php">Sales Reports</a>
+        <a href="salesreport.php">Sales Reports</a>
       </li>
     </ul> 
   </ul> 

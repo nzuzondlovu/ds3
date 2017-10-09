@@ -45,6 +45,34 @@ $invoice= 'RS-'.createRandomPassword();
 
 $_SESSION['invoice']=$invoice;
 ?>
+<script language="javascript">
+function Clickheretoprint()
+{ 
+  var disp_setting="toolbar=yes,location=no,directories=yes,menubar=yes,"; 
+      disp_setting+="scrollbars=yes,width=800, height=400, left=100, top=25"; 
+  var content_vlue = document.getElementById("content").innerHTML; 
+  
+  var docprint=window.open("","",disp_setting); 
+   docprint.document.open(); 
+   docprint.document.write('</head><body onLoad="self.print()" style="width: 800px; font-size: 13px; font-family: arial;">');          
+   docprint.document.write(content_vlue); 
+   docprint.document.close(); 
+   docprint.focus(); 
+}
+</script>
+
+
+<?php
+$d1='';
+$d2='';
+if(isset($_POST['submit']))
+{
+	$d1= mysqli_real_escape_string($con, strip_tags(trim($_POST["d1"])));
+		$d2= mysqli_real_escape_string($con, strip_tags(trim($_POST["d2"])));	
+	
+
+}
+?>
 <?php
 include 'header.php';
 ?>
@@ -85,26 +113,23 @@ include 'header.php';
 					<div class="row">
 							<div class="col-lg-12">
 								<div class="pull-right">
-									<a href="sales.php?id=<?php echo $_SESSION['invoice'];?>" class="btn btn-warning"><i class="fa fa-plus fa-fw"></i>New Transaction</a>
-
+										<a href="javascript:Clickheretoprint()" style="font-size:20px;"><button class="btn btn-success btn-large"><i class="icon-print"></i> Print</button></a>
 								</div>	
 								</div>
 							</div>
+							<form action="salesreport.php" method="post">
+<center><strong>From : <input type="date" style="width: 223px; padding:14px;" name="d1" class="tcal" value="" /> To: <input type="date" style="width: 223px; padding:14px;" name="d2" class="tcal" value="" />
+ <button class="btn btn-info" style="width: 123px; height:35px; margin-top:-8px;margin-left:8px;" type="submit" name="submit"><i class="icon icon-search icon-large"></i> Search</button>
+</strong></center>
+</form>
+<div class="content" id="content">
+<div style="font-weight:bold; text-align:center;font-size:14px;margin-bottom: 15px;">
+Sales Report from&nbsp;<?php echo $d1 ?>&nbsp;to&nbsp;<?php echo $d2 ?>
+</div>
 						<div class="table-responsive">
 							<?php
-							$num_rec_per_page=10;
-
-							if (isset($_GET["page"])) {
-
-								$page  = $_GET["page"];
-							} else {
-
-								$page=1;
-							}
-
-							$start_from = ($page-1) * $num_rec_per_page;
-							$sql = "SELECT * FROM sales ";
-							$res = mysqli_query($con, $sql);
+					     $sql = "SELECT * FROM sales WHERE date BETWEEN $d1 AND $d2 ORDER by invoice_num DESC";
+						 $res = mysqli_query($con, $sql);
 
 							if (mysqli_num_rows($res) > 0) {
 								echo '
@@ -117,7 +142,6 @@ include 'header.php';
 											<th>Total Amount</th>
 											<th>Cashier Name</th>
 											<th>Date</th>
-											<th>Action</th>
 										</tr>
 									</thead>
 									<tbody>';
@@ -131,10 +155,6 @@ include 'header.php';
 												<td>'.$row['total_amount'].'</td>
 												<td>'.$row['cashier'].'</td>
 												<td>'.$row['date'].'</td>
-												<td class="pull-right">
-												<a href="preview.php?id=<?php echo '.$row['invoice_num'].';?>" class="btn btn-warning"><i class="fa fa-edit fa-fw"></i>View Details</a>
-													<button  onclick="modal('.$row['id'].')" class="btn btn-primary" ><i class="fa fa-trash fa-fw"></i>Delete Order</button>   
-												</td>
 											</tr>';
 										}
 										echo '
@@ -147,6 +167,7 @@ include 'header.php';
 							</div>';
 						}
 						?>
+					</div>
 					</div>
 					<!-- /.table-responsive -->
 				</div>
