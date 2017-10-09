@@ -299,32 +299,32 @@ include 'header.php';
 													<form role="form" method="post" enctype="multipart/form-data">
 														<div class="form-group">
 															<label>Brand Name</label>
-															<input name="brandname" class="form-control" placeholder="Enter text">
+															<input name="brandname" class="form-control" placeholder="Enter text" required="required">
 														</div>
 														<div class="form-group">
 															<label>Generic Name</label>
-															<input name="name" class="form-control" placeholder="Enter text">
+															<input name="name" class="form-control" placeholder="Enter text" required="required">
 														</div>
 														<div class="form-group">
 															<label>Selling Price</label>
 
-															<input class="form-control" type="text" id="txt1" name="price" onkeyup="sum();" Required placeholder="R0.00">
+															<input class="form-control" type="number" id="txt1" name="price" onkeyup="sum();" Required placeholder="R0.00">
 														</div>
 														<div class="form-group">
 															<label>Original Price</label>
-															<input class="form-control"  type="text" id="txt2"  name="oPrice" onkeyup="sum();" Required placeholder="R0.00">
+															<input class="form-control"  type="number" id="txt2"  name="oPrice" onkeyup="sum();" Required placeholder="R0.00">
 														</div>
 														<div class="form-group">
 															<label>Profit</label>	
-															<input type="text" id="txt3" class="form-control" name="profit" readonly>	
+															<input type="number" id="txt3" class="form-control" name="profit" readonly>	
 														</div>
 														<div class="form-group">
 															<label>Quantity</label>
-															<input type="number" name="qty" class="form-control" placeholder="Enter text">
+															<input type="number" name="qty" class="form-control" placeholder="Enter text" required="required">
 														</div>
 														<div class="form-group">
 															<label>Select Catagory</label>
-															<select name="type" class="form-control">
+															<select name="type" class="form-control" required="required">
 																<option value="" selected="selected">Select type</option>
 																<?php
 																$sql = "SELECT * FROM category ORDER BY name ASC";
@@ -341,7 +341,7 @@ include 'header.php';
 
 														<div class="form-group">
 															<label>Select Supplier</label>
-															<select name="supplier" class="form-control">
+															<select name="supplier" class="form-control" required="required">
 																<option value="" selected="selected">Select Supplier</option>
 																<?php
 																$sql = "SELECT * FROM suppliers ORDER BY name ASC";
@@ -358,11 +358,11 @@ include 'header.php';
 
 														<div class="form-group">
 															<label>Upload picture</label>
-															<input type="file" name="fileToUpload">
+															<input type="file" name="fileToUpload" required="required">
 														</div>
 														<div class="form-group">
 															<label>Device description</label>
-															<textarea name="description" class="form-control" rows="3"></textarea>
+															<textarea name="description" class="form-control" rows="3" required="required"></textarea>
 														</div>
 														<button name="btnSubmit" type="submit" class="btn btn-primary">Save </button>
 														<button type="reset" class="btn btn-default">Reset</button>
