@@ -24,38 +24,6 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 }
 ?>
 
-<?php
-
-if(isset($_POST['submit'])) {
-
-	$driver = mysqli_real_escape_string($con, strip_tags(trim($_POST["driver"])));
-	$del = mysqli_real_escape_string($con, strip_tags(trim($_POST["del"])));
-	$name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
-	$cell = mysqli_real_escape_string($con, strip_tags(trim($_POST["cell"])));
-	$dateD = mysqli_real_escape_string($con, strip_tags(trim($_POST["dateD"])));
-	$strAddr = mysqli_real_escape_string($con, strip_tags(trim($_POST["strA"])));
-    $suburb= mysqli_real_escape_string($con, strip_tags(trim($_POST["suburb"])));
-    $area = mysqli_real_escape_string($con, strip_tags(trim($_POST["area"])));
-    $boxcode= mysqli_real_escape_string($con, strip_tags(trim($_POST["boxcode"])));
-	
-	    $status= mysqli_real_escape_string($con, strip_tags(trim($_POST["status"])));
-	
-	
-	$location=$strAddr." ,".$suburb." , ".$area;
-
-	if($driver != '' ) {
-
-		echo $sql="INSERT INTO driverdelivery(driverID,deliveryID,dateofDelivery,custname,custcell,location,area,status)
-		VALUES('".$driver."','".$del."','".$dateD."', '".$name."','".$cell."','".$location."','".$boxcode."','".$status."')";
-		mysqli_query($con, $sql);
-		$_SESSION['success'] = 'Successfully updated details.';
-		header("Location: delivery.php");
-
-	} else {
-		$_SESSION['failure'] = 'Please fill in all fields';
-	}
-}
-?>
 
 <?php
 include 'header.php';
@@ -85,50 +53,29 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 	}	
 }
 ?>
-
 <?php
 
-if(isset($_POST['locsubmit'])) {
+if(isset($_POST['btnCon'])) {
+    $status = (mysqli_real_escape_string($con, strip_tags(trim($_POST["status"]))));
 
-	 	function createRandomPassword() {
-	$chars = "003232303232023232023456789";
-	srand((double)microtime()*1000000);
-	$i = 0;
-	$pass = '' ;
-	while ($i <= 7) {
-
-		$num = rand() % 33;
-
-		$tmp = substr($chars, $num, 1);
-
-		$pass = $pass . $tmp;
-
-		$i++;
-
-	}
-	return $pass;
-} 	 
-$gen_code= 'DLV-'.createRandomPassword()  ;
-
-	$AreaCode = mysqli_real_escape_string($con, strip_tags(trim($_POST["AreaCode"])));
-	$idnumber = mysqli_real_escape_string($con, strip_tags(trim($_POST["idnumber"])));
-	$Month = mysqli_real_escape_string($con, strip_tags(trim($_POST["Month"])));
+        $del = (mysqli_real_escape_string($con, strip_tags(trim($_POST["del"]))));
 
 
 
-	if($gen_code != '' ) {
+    if($status != '') {
 
-		echo $sql="INSERT INTO driver_loc(gen_code,AreaCode,idnumber,Month)
-		VALUES('".$gen_code."','".$AreaCode."','".$idnumber."', '".$Month."')";
-		mysqli_query($con, $sql);
-		$_SESSION['success'] = 'Successfully updated details.';
-		header("Location: drivers.php");
 
-	} else {
-		$_SESSION['failure'] = 'Please fill in all fields';
-	}
+       echo $sql = "UPDATE driverdelivery SET status='".$status."'  WHERE deliveryID= '".$del."' ";
+        mysqli_query($con, $sql);
+        $_SESSION['success'] = 'Successfully updated all details.';
+   
+
+    } else {
+        $_SESSION['failure'] = 'Please fill in all fields';
+    }
 }
 ?>
+
 
  
 
@@ -200,7 +147,9 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
                         <td>'.$row['area'].'</td>
                           <td>'.$row['status'].'</td> 
                             <td class=" pull-right">
-                          <button onclick="modal('.$row['deliveryID'].')" class="label label-warning">Confirm</button> 
+                             
+
+                          <button onclick="modalx('.$row['deliveryID'].')" class="label label-warning">Confirm</button> 
                         
                         </td>
                       
@@ -281,10 +230,10 @@ include 'footer.php';
 	});
 </script>
 <script>
-	function modal(id) {
+	function modalx(id) {
 		var data = {"id" : id};
 		jQuery.ajax({
-			url : '../includes/drivermodal.php',
+			url : '../includes/conmodal.php',
 			method : "post",
 			data : data,
 			success : function(data) {
