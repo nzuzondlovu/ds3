@@ -262,6 +262,16 @@ function user($type)
 
 		$menu = '
 
+<<<<<<< HEAD
+	
+<ul class="sidebar-menu" data-widget="tree">
+	<li class="header"></li>
+	<li class="active">
+
+	<a href="location.php"><i class="fa fa-map fa-fw"></i> Locations</a>
+	</li>
+		<li class="active">
+=======
 		<li>
 
 
@@ -277,15 +287,14 @@ function user($type)
 		<li class="header"></li>
 		<li>
 		<a href="viewD.php"><i class="fa fa-edit fa-fw"></i>Deliveries</a>
+>>>>>>> 5a80649c185dac341a981083b9a0cffd89495f94
 
-		</li>
-		<li>
-		<a href="drivers.php"><i class="fa fa-edit fa-fw"></i>Drivers</a>
-		</li>
+	<a href="driverjobs.php"><i class="fa fa-truck fa-fw"> Deliveries</i></a>
+	</li>
 
-		<li>
-		<a href="update.php"><i class="fa fa-cogs fa-fw"></i> Update Details</a>
-		</li>'
+	</ul>
+		
+		'
 		;
 	}
 	
