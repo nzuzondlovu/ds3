@@ -1,4 +1,5 @@
 <?php
+include '../includes/functions.php';
 if(isset($_SESSION['user_id']) == '' ) {
 	header("location:../login.php");
 }

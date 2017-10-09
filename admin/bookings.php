@@ -26,53 +26,56 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 
 if(isset($_POST['create'])) {
 
+    function createRandomPassword() {
 
-       
+      $chars = "003232303232023232023456789";
+      srand((double)microtime()*1000000);
+      $i = 0;
+      $pass = '' ;
 
-    $id = mysqli_real_escape_string($con, strip_tags(trim($_POST["id"])));
-    $name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
-    $serial = mysqli_real_escape_string($con, strip_tags(trim($_POST["serial"])));
-    $model = mysqli_real_escape_string($con, strip_tags(trim($_POST["model"])));
-    $accessory = mysqli_real_escape_string($con, strip_tags(trim($_POST["accessory"])));
-    $technician = mysqli_real_escape_string($con, strip_tags(trim($_POST["technician"])));
-    $deposit = mysqli_real_escape_string($con, strip_tags(trim($_POST["deposit"])));
-    $balance = mysqli_real_escape_string($con, strip_tags(trim($_POST["balance"])));
-    $total = mysqli_real_escape_string($con, strip_tags(trim($_POST["total"])));
-    $status = mysqli_real_escape_string($con, strip_tags(trim($_POST["status"])));
-    $description = mysqli_real_escape_string($con, strip_tags(trim($_POST["desc"])));
-    $user_book = mysqli_real_escape_string($con, strip_tags(trim($_POST["user_book"])));
-        $job_code = mysqli_real_escape_string($con, strip_tags(trim($_POST["job_code"])));
-    $archive=0;
-          function createRandomPassword() {
-  $chars = "003232303232023232023456789";
-  srand((double)microtime()*1000000);
-  $i = 0;
-  $pass = '' ;
-  while ($i <= 7) {
+      while ($i <= 7) {
 
-    $num = rand() % 33;
+        $num = rand() % 33;
+        $tmp = substr($chars, $num, 1);
+        $pass = $pass . $tmp;
+        $i++;
+    }
 
-    $tmp = substr($chars, $num, 1);
-
-    $pass = $pass . $tmp;
-
-    $i++;
-
-  }
-  return $pass;
+    return $pass;
 }
+
+
+$id = mysqli_real_escape_string($con, strip_tags(trim($_POST["id"])));
+$name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
+$serial = mysqli_real_escape_string($con, strip_tags(trim($_POST["serial"])));
+$model = mysqli_real_escape_string($con, strip_tags(trim($_POST["model"])));
+$accessory = mysqli_real_escape_string($con, strip_tags(trim($_POST["accessory"])));
+$technician = mysqli_real_escape_string($con, strip_tags(trim($_POST["technician"])));
+$deposit = mysqli_real_escape_string($con, strip_tags(trim($_POST["deposit"])));
+$balance = mysqli_real_escape_string($con, strip_tags(trim($_POST["balance"])));
+$total = mysqli_real_escape_string($con, strip_tags(trim($_POST["total"])));
+$status = mysqli_real_escape_string($con, strip_tags(trim($_POST["status"])));
+$description = mysqli_real_escape_string($con, strip_tags(trim($_POST["desc"])));
+$user_book = mysqli_real_escape_string($con, strip_tags(trim($_POST["user_book"])));
+$job_code = mysqli_real_escape_string($con, strip_tags(trim($_POST["job_code"])));
 $quote_code= 'JQT-'.createRandomPassword()  ;
+$archive=0;
 
 
 
-       
-       echo $sql = "INSERT INTO quotation(booking_id, name, serial, model, accessory, technician, description, deposit, balance, total, status,archive,user_book,job_code,quote_code) 
-        VALUES ('".$id."', '".$name."', '".$serial."', '".$model."', '".$accessory."', '".$technician."', '".$description."', '".$deposit."', '".$balance."', '".$total."', '".$status."', '".$archive."', '".  $user_book."' , '".  $job_code."', '". 
-         $quote_code."')";
+if ($id != '' && $name != '' && $serial != '' && $model != '' && $accessory != '' && $technician != '' && $deposit != '' && $balance != '' && $total != '' && $status != '' && $description != '' && $user_book != '' && $job_code != '' && $quote_code != ''){
+
+    $sql = "INSERT INTO quotation(booking_id, name, serial, model, accessory, technician, description, deposit, balance, total, status,archive,user_book,job_code,quote_code) 
+    VALUES ('".$id."', '".$name."', '".$serial."', '".$model."', '".$accessory."', '".$technician."', '".$description."', '".$deposit."', '".$balance."', '".$total."', '".$status."', '".$archive."', '".  $user_book."' , '".  $job_code."', '". 
+    $quote_code."')";
     mysqli_query($con, $sql);
-       $_SESSION['success'] = 'Your new Quotation is added successfully.';
-        //header("Location: bookings.php");
-  
+    $_SESSION['success'] = 'Your new Quotation is added successfully.';
+    header("Location: bookings.php");
+} else {
+
+    $_SESSION['failure'] = 'There was an error please make sure to fill in all fields.';
+}
+
 }
 
 ?>
@@ -101,36 +104,36 @@ include 'header.php';
             <ul class="nav nav-tabs">
               <li class="active"><a href="#activity" data-toggle="tab">Bookings</a></li>
               <li><a href="#timeline" data-toggle="tab">Quotations</a></li>
-            </ul>
-            <div class="tab-content">
+          </ul>
+          <div class="tab-content">
               <div class="active tab-pane" id="activity">
                 <!-- Post -->
                 <div class="post">
-              
-                  <!-- /.user-block -->
-                
-                 
-                     <div class="row">
-            <div class="col-lg-12">
-                <div>
-                    <?php if(isset($_SESSION['failure']) && $_SESSION['failure'] != '') { ?>
-                    <div class="alert alert-danger">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <?php echo $_SESSION['failure']; unset($_SESSION['failure']); ?>
-                    </div>
-                    <?php } ?>
 
-                    <?php if(isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
-                    <div class="alert alert-success">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
-                    </div>
-                    <?php } ?>
-                </div>
-              
-                  
-                    <!-- /.panel-heading -->
-     
+                  <!-- /.user-block -->
+
+
+                  <div class="row">
+                    <div class="col-lg-12">
+                        <div>
+                            <?php if(isset($_SESSION['failure']) && $_SESSION['failure'] != '') { ?>
+                            <div class="alert alert-danger">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <?php echo $_SESSION['failure']; unset($_SESSION['failure']); ?>
+                            </div>
+                            <?php } ?>
+
+                            <?php if(isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
+                            <div class="alert alert-success">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
+                            </div>
+                            <?php } ?>
+                        </div>
+
+
+                        <!-- /.panel-heading -->
+
                         <div class="table-responsive">
                             <?php
 
@@ -140,108 +143,106 @@ include 'header.php';
                             if (mysqli_num_rows($res) > 0) {
                                 echo '
                                 <table id="bookings" class="table table-danger table-hover">
-                                    <thead>
-                                        <tr>
-                                       
-                                            <th>Name</th>
-                                            <th>serial</th>
-                                            <th>type</th>
-                                            <th>Picture</th>
-                                            
-                                          
-                                            <th>Date</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>';
-                                        while ($row = mysqli_fetch_assoc($res)) {
+                                <thead>
+                                <tr>
+                                <th>Name</th>
+                                <th>serial</th>
+                                <th>type</th>
+                                <th>Picture</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>';
+                                while ($row = mysqli_fetch_assoc($res)) {
 
-                                            $sql1 = "SELECT * FROM quotation WHERE booking_id = '".$row['id']."' AND archive = 0";
-                                            $res1 = mysqli_query($con, $sql1);
-                                            $btn = '<button onclick="modal('.$row['id'].')" class="label-primary label-primary"> Quotation</button>';
+                                    $sql1 = "SELECT * FROM quotation WHERE id = '".$row['id']."' AND archive = 0";
+                                    $res1 = mysqli_query($con, $sql1);
+                                    $btn = '<button onclick="modal('.$row['id'].')" class="label-primary label-primary"> Quotation</button>';
 
-                                            if (mysqli_num_rows($res1) > 0) {
+                                    if (mysqli_num_rows($res1) > 0) {
 
-                                                $row1 = mysqli_fetch_assoc($res1);
-                                                $btn = '<button onclick="modal1('.$row1['id'].')" class="label label-info">Review</button>';
-                                            }
+                                        $row1 = mysqli_fetch_assoc($res1);
+                                        $btn = '<button onclick="modal1('.$row1['id'].')" class="label label-info">Review</button>';
+                                    }
 
-                                            echo '
-                                            <tr>
-                                               
-                                                <td>'.$row['name'].'</td>
-                                                <td>'.$row['serial'].'</td>
-                                                <td>'.$row['type'].'</td>
-                                                <td><img src="../uploads/'.$row['pic_url'].'" " class="img-thumbnail" alt="No Image" width="50" height="50"></td>
-                                        
-                                                <td>'.date("M d, y",strtotime($row['date'])).'</td>
-                                                <td class="pull-right">
-                                                    '.$btn.'  <a href="?id='.$row['id'].'" class="label label-warning">Archive</a>
-                                                </td>
-                                            </tr>';
-                                        }
-                                        echo '
-                                    </tbody>
+                                    echo '
+                                    <tr>
+
+                                    <td>'.$row['name'].'</td>
+                                    <td>'.$row['serial'].'</td>
+                                    <td>'.$row['type'].'</td>
+                                    <td>
+                                    <img src="../uploads/'.$row['pic_url'].'" " class="img-thumbnail" alt="No Image" width="50" height="50">
+                                    </td>
+                                    <td>'.date("M d, y",strtotime($row['date'])).'</td>
+                                    <td class="pull-right">
+                                    '.$btn.'  <a href="?id='.$row['id'].'" class="label label-warning">Archive</a>
+                                    </td>
+                                    </tr>';
+                                }
+                                echo '
+                                </tbody>
                                 </table>';
                             } else {
                                 echo '<div class="alert alert-warning">
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                                 <strong>No Bookings found.</strong>
-                            </div>';
-                        }
-                        ?>
+                                </div>';
+                            }
+                            ?>
+                        </div>
+                        <!-- /.table-responsive -->
                     </div>
-                    <!-- /.table-responsive -->
-                </div>
-                <!-- /.panel-body -->
-            </div>
-            <!-- /.panel -->
-          <!-- /.row (nested) -->
-               
                     <!-- /.panel-body -->
-             
-                  </p>
-    
                 </div>
-                <!-- /.post -->
+                <!-- /.panel -->
+                <!-- /.row (nested) -->
 
-           
-                <!-- /.post -->
+                <!-- /.panel-body -->
 
-      
-                <!-- /.post -->
-              </div>
-              <!-- /.tab-pane -->
-              <div class="tab-pane" id="timeline">
-                <!-- The timeline -->
+            </p>
+
+        </div>
+        <!-- /.post -->
 
 
-<?php
-if(isset($_SESSION['key']) == '' ) {
-    header("location:../login.php");
-}
-?>
-
-<?php
-if(isset($_GET['id']) && $_GET['id'] != '') {
-
-    $id = mysqli_real_escape_string($con, strip_tags(trim($_GET['id'])));
-
-    if ($id) {
-        $sql = "UPDATE quotation SET archive=1 WHERE id='".$id."'";
-        mysqli_query($con, $sql);
-        $_SESSION['success'] = 'Booking was archived successfully.';
-    } else {
-        $_SESSION['failure'] = 'An error occured, please try again.';
-    }
-    
-    
-}
-?>
+        <!-- /.post -->
 
 
+        <!-- /.post -->
+    </div>
+    <!-- /.tab-pane -->
+    <div class="tab-pane" id="timeline">
+        <!-- The timeline -->
 
-<!-- Page Content -->
+
+        <?php
+        if(isset($_SESSION['key']) == '' ) {
+            header("location:../login.php");
+        }
+        ?>
+
+        <?php
+        if(isset($_GET['id']) && $_GET['id'] != '') {
+
+            $id = mysqli_real_escape_string($con, strip_tags(trim($_GET['id'])));
+
+            if ($id) {
+                $sql = "UPDATE quotation SET archive=1 WHERE id='".$id."'";
+                mysqli_query($con, $sql);
+                $_SESSION['success'] = 'Booking was archived successfully.';
+            } else {
+                $_SESSION['failure'] = 'An error occured, please try again.';
+            }
+
+
+        }
+        ?>
+
+
+
+        <!-- Page Content -->
 
 
         <!-- /.row -->
@@ -269,41 +270,41 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-info">
-                      
+
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="row">
-                          
-                       </div>
-                       <div class="table-responsive">
-                        <?php
 
-                        $sql = "SELECT * FROM quotation WHERE archive = 0";
-                        $res = mysqli_query($con, $sql);
+                            </div>
+                            <div class="table-responsive">
+                                <?php
 
-                        if (mysqli_num_rows($res) > 0) {
-                            echo '
-                            <table id="quotes" class="table table-bordered table-hover">
-                                <thead>
+                                $sql = "SELECT * FROM quotation WHERE archive = 0";
+                                $res = mysqli_query($con, $sql);
+
+                                if (mysqli_num_rows($res) > 0) {
+                                    echo '
+                                    <table id="quotes" class="table table-bordered table-hover">
+                                    <thead>
                                     <tr>
-                                 
-                                        <th>Device Name</th>
-                                        <th>Serial Number</th>
-                                        <th>Model</th>
-                                        <th>Accessory</th>
-                                        <th>Technician</th>
-                                 
-                                        <th>Deposit</th>
-                                        <th>Balance</th>
-                                        <th>Total</th>
-                                         <th> Status</th>
-                                        <th>Action</th>
-                                           
+
+                                    <th>Device Name</th>
+                                    <th>Serial Number</th>
+                                    <th>Model</th>
+                                    <th>Accessory</th>
+                                    <th>Technician</th>
+
+                                    <th>Deposit</th>
+                                    <th>Balance</th>
+                                    <th>Total</th>
+                                    <th> Status</th>
+                                    <th>Action</th>
+
 
                                     </tr>
 
-                                </thead>
-                                <tbody>';
+                                    </thead>
+                                    <tbody>';
                                     while ($row = mysqli_fetch_assoc($res)) {
 
                                         $sql1 = "SELECT * FROM job WHERE id = '".$row['booking_id']."' AND archive = 0";
@@ -312,126 +313,126 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
                                         if (mysqli_num_rows($res1) > 0) {
                                             echo '
                                             <tr>
-                                         
-                                                <td>'.$row['name'].'</td>
-                                                <td>'.$row['serial'].'</td>
-                                                <td>'.$row['model'].'</td>
-                                                <td>'.$row['accessory'].'</td>
-                                                <td>'.$row['technician'].'</td>
+
+                                            <td>'.$row['name'].'</td>
+                                            <td>'.$row['serial'].'</td>
+                                            <td>'.$row['model'].'</td>
+                                            <td>'.$row['accessory'].'</td>
+                                            <td>'.$row['technician'].'</td>
                                             
-                                                <td>'.$row['deposit'].'</td>
-                                                <td>'.$row['balance'].'</td>
-                                                <td>'.$row['total'].'</td>
-                                                 <td class=" text-success">'.$row['status'].'</td>
-                                                <td class="pull-right">
-                                                    <a href="editquote.php?id='.$row['id'].'" class="label label-primary">Invoice </a>
-                                                </td>
+                                            <td>'.$row['deposit'].'</td>
+                                            <td>'.$row['balance'].'</td>
+                                            <td>'.$row['total'].'</td>
+                                            <td class=" text-success">'.$row['status'].'</td>
+                                            <td class="pull-right">
+                                            <a href="editquote.php?id='.$row['id'].'" class="label label-primary">Invoice </a>
+                                            </td>
                                             </tr>';
                                         }                                                
                                     }
                                     echo '
-                                </tbody>
-                            </table>';
-                        } else {
-                            echo '<div class="alert alert-info">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong>No Quotations Found.</strong>
-                        </div>';
-                    }
-                    ?>
+                                    </tbody>
+                                    </table>';
+                                } else {
+                                    echo '<div class="alert alert-info">
+                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                    <strong>No Quotations Found.</strong>
+                                    </div>';
+                                }
+                                ?>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
                 </div>
-                <!-- /.table-responsive -->
             </div>
-            <!-- /.panel-body -->
+
+            <!-- /#page-wrapper -->
+
+            <?php
+            include 'footer.php';
+            ?>
+            <script>
+                $(document).ready(function(){
+                    $('#quotes').DataTable();
+                });
+            </script>
         </div>
-        <!-- /.panel -->
-    </div>
-</div>
+        <!-- /.tab-pane -->
 
-<!-- /#page-wrapper -->
+        <div class="tab-pane" id="settings">
+            <form class="form-horizontal">
+              <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label">Name</label>
 
-<?php
-include 'footer.php';
-?>
-<script>
-    $(document).ready(function(){
-        $('#quotes').DataTable();
-    });
-</script>
+                <div class="col-sm-10">
+                  <input type="email" class="form-control" id="inputName" placeholder="Name">
               </div>
-              <!-- /.tab-pane -->
-
-              <div class="tab-pane" id="settings">
-                <form class="form-horizontal">
-                  <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">Name</label>
-
-                    <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputName" placeholder="Name">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-
-                    <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">Name</label>
-
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputName" placeholder="Name">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
-
-                    <div class="col-sm-10">
-                      <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
-
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <button type="submit" class="btn btn-danger">Submit</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-                  <div class="active tab-pane" id="quotations">
-                <!-- Post --></div>
-                    <div class="active tab-pane" id="devices">
-                <!-- Post --></div>
-                    <div class="active tab-pane" id="payments">
-                <!-- Post --></div>
-              <!-- /.tab-pane -->
-            </div>
-            <!-- /.tab-content -->
           </div>
-          <!-- /.nav-tabs-custom -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
+          <div class="form-group">
+            <label for="inputEmail" class="col-sm-2 control-label">Email</label>
 
-    </section>
-        <!-- /.row -->
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+          </div>
+      </div>
+      <div class="form-group">
+        <label for="inputName" class="col-sm-2 control-label">Name</label>
+
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputName" placeholder="Name">
+      </div>
+  </div>
+  <div class="form-group">
+    <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
+
+    <div class="col-sm-10">
+      <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
+  </div>
+</div>
+<div class="form-group">
+    <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
+
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
+  </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
+      </label>
+  </div>
+</div>
+</div>
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-danger">Submit</button>
+  </div>
+</div>
+</form>
+</div>
+<div class="active tab-pane" id="quotations">
+    <!-- Post --></div>
+    <div class="active tab-pane" id="devices">
+        <!-- Post --></div>
+        <div class="active tab-pane" id="payments">
+            <!-- Post --></div>
+            <!-- /.tab-pane -->
+        </div>
+        <!-- /.tab-content -->
+    </div>
+    <!-- /.nav-tabs-custom -->
+</div>
+<!-- /.col -->
+</div>
+<!-- /.row -->
+
+</section>
+<!-- /.row -->
 
 </div>
 <!-- /.container-fluid -->
@@ -483,22 +484,22 @@ include 'footer.php';
 
 
 
-            <script>
+<script>
   $(function () {
     $('#quotes').DataTable()
 
 
-  })
+})
 </script>
- 
-  <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-  <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
-            <script>
+<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+<script>
   $(function () {
-   
+
     $('#bookings').DataTable()
-  })
+})
 </script>
 
 

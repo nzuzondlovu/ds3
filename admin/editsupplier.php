@@ -110,7 +110,7 @@ include 'header.php';
 							</div>
 
 							<div class="col-md-6">
-								<form role="form" method="post">
+								<form id="supplierForm" role="form" method="post">
 									<div class="form-group">
 										<label>Contact Number</label>
 										<input type="text" name="number" class="form-control" value="<?php
@@ -159,3 +159,55 @@ include 'header.php';
 <?php
 include 'footer.php';
 ?>
+<script type="text/javascript">
+
+  $( document ).ready( function () {
+    $( "#supplierForm" ).validate( {
+      rules: {
+        email: {
+          required: true,
+          maxlength: 35
+        },
+        number: {
+          required: true,
+          maxlength: 13
+        },
+        address: {
+          required: true,
+          maxlength: 35
+        }
+      },
+      messages: {
+        email: {
+          required: "Please enter the email of the supplier",
+          maxlength: "The email cant be longer than 35 characters"
+        },
+        number: {
+          required: "Please enter the number of the supplier",
+          maxlength: "The number cant be longer than 13 characters"
+        },
+        address: {
+          required: "Please enter supplier address",
+          maxlength: "The supplier address cant be longer than 35 characters"
+        }
+      },
+      errorElement: "em",
+      errorPlacement: function ( error, element ) {
+          // Add the `help-block` class to the error element
+          error.addClass( "help-block" );
+
+          if ( element.prop( "type" ) === "checkbox" ) {
+            error.insertAfter( element.parent( "label" ) );
+          } else {
+            error.insertAfter( element );
+          }
+        },
+        highlight: function ( element, errorClass, validClass ) {
+          $( element ).parents( ".col-sm-5" ).addClass( "has-error" ).removeClass( "has-success" );
+        },
+        unhighlight: function (element, errorClass, validClass) {
+          $( element ).parents( ".col-sm-5" ).addClass( "has-success" ).removeClass( "has-error" );
+        }
+      });
+  });
+</script>

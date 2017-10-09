@@ -100,7 +100,7 @@ include 'header.php';
 
               <?php
 
-              $sql = "SELECT DISTINCT(tname) FROM techrepair";
+              $sql = "SELECT * FROM technician";
               $res = mysqli_query($con, $sql);
 
               if (mysqli_num_rows($res) > 0) {
@@ -111,12 +111,12 @@ include 'header.php';
                   <div class="col-mg-4">
                     <div class="flip3D">
                       <div class="back">
-                        <a href="tech.php?tname='.$row['tname'].'">
+                        <a href="tech.php?tname='.$row['name'].'">
                           <h1 style="text-align: center">View Devices</h1>
                         </a>
                       </div>
                       <div class="front">
-                        <h1 style="text-align: center">'.$row['tname'].'</h1>
+                        <h1 style="text-align: center">'.$row['name'].'</h1>
                       </div>
                     </div>
                   </div>';

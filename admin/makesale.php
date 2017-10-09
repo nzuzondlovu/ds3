@@ -28,6 +28,20 @@ function createRandomPassword() {
 	return $pass;
 }
 $invoice= 'RS-'.createRandomPassword();
+
+	$sql = "SELECT * FROM custsaleprod ";
+	$res = mysqli_query($con, $sql);
+
+		if(mysqli_num_rows($res) > 0) {
+		 
+		while($row = mysqli_fetch_assoc($res)) {
+				if($invoice == $row['barcode'] )
+				{
+					$invoice= 'RS-'.createRandomPassword();
+				}
+	}
+}
+
 $_SESSION['invoice']=$invoice;
 ?>
 <?php
@@ -88,7 +102,7 @@ include 'header.php';
 							}
 
 							$start_from = ($page-1) * $num_rec_per_page;
-							$sql = "SELECT * FROM custsaleprod ";
+							$sql = "SELECT * FROM sales ";
 							$res = mysqli_query($con, $sql);
 
 							if (mysqli_num_rows($res) > 0) {

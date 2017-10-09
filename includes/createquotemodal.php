@@ -1,45 +1,10 @@
-<script>
-function sum() {
-            var txtFirstNumberValue = document.getElementById('txt1').value;
-            var txtSecondNumberValue = document.getElementById('txt2').value;
-            var result = parseInt(txtFirstNumberValue) - parseInt(txtSecondNumberValue);
-            if (!isNaN(result)) {
-                document.getElementById('txt3').value = result;
-        
-            }
-      
-       var txtFirstNumberValue = document.getElementById('txt11').value;
-            var result = parseInt(txtFirstNumberValue);
-            if (!isNaN(result)) {
-                document.getElementById('txt22').value = result;        
-            }
-      
-       var txtFirstNumberValue = document.getElementById('txt11').value;
-            var txtSecondNumberValue = document.getElementById('txt33').value;
-            var result = parseInt(txtFirstNumberValue) + parseInt(txtSecondNumberValue);
-            if (!isNaN(result)) {
-                document.getElementById('txt55').value = result;
-        
-            }
-      
-       var txtFirstNumberValue = document.getElementById('txt4').value;
-       var result = parseInt(txtFirstNumberValue);
-            if (!isNaN(result)) {
-                document.getElementById('txt5').value = result;
-        }
-      
-        }
-</script>
-
-
-
 <?php
 include_once 'functions.php';
 
 $id = '';
 $name = '';
 $serial = '';
-  $user_book= '';
+$user_book= '';
 
 
 if (isset($_POST['id']) && $_POST['id'] != null) {
@@ -58,14 +23,14 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
       $row['type'].'<br>Status: '.
       $row['status'].'<br>Description: '.
       $row['description'].'<br>USEr_ID: '. 
-            $row['user'].'<br>Date: '. 
+      $row['user'].'<br>Date: '. 
       date("M d, y",strtotime($row['date'])).' <br>
       <img class="img-responsive" src="../uploads/'.$row['pic_url'].'">';
       $name = $row['name'];
 
       $serial = $row['serial'];
-              $user_book= $row['user'];
-               $job_code= $row['job_code'];
+      $user_book= $row['user'];
+      $job_code= $row['job_code'];
 
     }
   }
@@ -73,6 +38,38 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
 
 ?>
 
+<script>
+  function sum() {
+    var txtFirstNumberValue = document.getElementById('txt1').value;
+    var txtSecondNumberValue = document.getElementById('txt2').value;
+    var result = parseInt(txtFirstNumberValue) - parseInt(txtSecondNumberValue);
+    if (!isNaN(result)) {
+      document.getElementById('txt3').value = result;
+
+    }
+
+    var txtFirstNumberValue = document.getElementById('txt11').value;
+    var result = parseInt(txtFirstNumberValue);
+    if (!isNaN(result)) {
+      document.getElementById('txt22').value = result;        
+    }
+
+    var txtFirstNumberValue = document.getElementById('txt11').value;
+    var txtSecondNumberValue = document.getElementById('txt33').value;
+    var result = parseInt(txtFirstNumberValue) + parseInt(txtSecondNumberValue);
+    if (!isNaN(result)) {
+      document.getElementById('txt55').value = result;
+
+    }
+
+    var txtFirstNumberValue = document.getElementById('txt4').value;
+    var result = parseInt(txtFirstNumberValue);
+    if (!isNaN(result)) {
+      document.getElementById('txt5').value = result;
+    }
+
+  }
+</script>
 
 <?php ob_start(); ?>
 <!-- Modal -->
@@ -99,6 +96,7 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
                 <label>Model</label>
                 <input class="form-control" type="text" name="model" placeholder="Enter model">
               </div>
+<<<<<<< HEAD
             
                          <div class="form-group">
                <label>Accessory</label>
@@ -114,6 +112,24 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
                 </select>
               </div>
              
+=======
+              <div class="form-group">
+                <label>Accessory</label>
+                <input class="form-control" type="text" name="accessory" placeholder="Enter accessories">
+                <div class="form-group">
+                  <label>Multiple</label>
+                  <select class="form-control select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
+                    <option>Alabama</option>
+                    <option>Alaska</option>
+                    <option>California</option>
+                    <option>Delaware</option>
+                    <option>Tennessee</option>
+                    <option>Texas</option>
+                    <option>Washington</option>
+                  </select>
+                </div>
+              </div>
+>>>>>>> cb2a6b7effa7ea104d34de4cac24765ef271831b
               <div class="form-group">
                 <label>Choose technician</label>
                 <select name="technician" class="form-control">
@@ -129,28 +145,19 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
                   }
                   ?>
                 </select>
-              </div>   
-
-
+              </div> 
               <div class="form-group">
-                <label>Deposit</label>
-              
+                <label>Deposit</label>              
                 <input class="form-control" type="text" id="txt2" name="deposit" onkeyup="sum();" Required placeholder="R0.00">
               </div>
               <div class="form-group">
                 <label>Total</label>
                 <input class="form-control"  type="text" id="txt1"  name="total" onkeyup="sum();" Required placeholder="R0.00">
               </div>
-          
-            
               <div class="form-group">
                 <label>Balance</label> 
-                    <input type="text" id="txt3" class="form-control" name="balance" readonly>   
-            
-
-
-              </div>                                 
-         
+                <input type="text" id="txt3" class="form-control" name="balance" readonly>
+              </div>
               <div class="form-group">
                 <label>Status</label>
                 <select name="status" class="form-control">
@@ -174,7 +181,7 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
               <input type="text" name="id" value="<?php echo $id; ?>" hidden>
               <input type="text" name="name" value="<?php echo $name; ?>" hidden>
               <input type="text" name="serial" value="<?php echo $serial; ?>" hidden>
-                 <input type="text" name="job_code" value="<?php echo $job_code; ?>" hidden>
+              <input type="text" name="job_code" value="<?php echo $job_code; ?>" hidden>
 
               <input type="text" name="user_book" value="<?php echo $user_book;  ?>" hidden >
 
@@ -278,6 +285,7 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
     });
   </script>
   <?php echo ob_get_clean(); ?>
+<<<<<<< HEAD
   
 <script src="bower_components/select2/dist/js/select2.full.min.js"></script>
   <link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css">
@@ -395,3 +403,5 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
     });
   });
 </script>
+=======
+>>>>>>> cb2a6b7effa7ea104d34de4cac24765ef271831b
