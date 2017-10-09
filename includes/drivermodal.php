@@ -64,12 +64,11 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
               </div>
 
                          <div class="form-group">
-               <label>Accessory</label>
+               <label>Delivery Status</label>
                 <select class="form-control select2" name="status" multiple="multiple" data-placeholder="Enter Status"
                         style="width: 100%;">
                   <option>Pending</option>
-                  <option>Delivered</option>
-                  <option>OnRoad</option>
+               
         
                 </select>
               </div>

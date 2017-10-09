@@ -354,6 +354,9 @@
                         <li>
                             <a href="viewFeedback.php"><i class="fa fa-question fa-fw"></i> <span> Query </span></a>
                         </li>
+                         <li>
+                            <a href="delivery.php"><i class="fa fa-truck fa-fw"></i> <span> Deliveries</span></a>
+                        </li>
                         <li>
                             <a href="update.php"><i class="fa fa-cogs fa-fw"></i> <span> Profile</span></a>
                         </li>

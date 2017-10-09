@@ -37,9 +37,8 @@ if(isset($_POST['submit'])) {
     $suburb= mysqli_real_escape_string($con, strip_tags(trim($_POST["suburb"])));
     $area = mysqli_real_escape_string($con, strip_tags(trim($_POST["area"])));
     $boxcode= mysqli_real_escape_string($con, strip_tags(trim($_POST["boxcode"])));
-	
+	   
 	    $status= mysqli_real_escape_string($con, strip_tags(trim($_POST["status"])));
-	
 	
 	$location=$strAddr." ,".$suburb." , ".$area;
 
@@ -144,19 +143,26 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
             <div class="box-body box-profile">
       
 
-              <h3 class="profile-username text-center">Nina Mcintire</h3>
-
-              <p class="text-muted text-center">Software Engineer</p>
+         
 
               <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
-                  <b>Delivered</b> <a class="pull-right"></a>
+                  <b>Delivered</b> <a class="pull-right">   <?php
+                                $sql = "SELECT * FROM driverdelivery WHERE status='Delivered'";
+                                indexCount($con, $sql);
+                                ?></a>
                 </li>
                 <li class="list-group-item">
-                  <b>Pending</b> <a class="pull-right">543</a>
+                  <b>Pending</b> <a class="pull-right"> <?php
+                                $sql = "SELECT * FROM driverdelivery";
+                                indexCount($con, $sql);
+                                ?></a>
                 </li>
                 <li class="list-group-item">
-                  <b>On Road</b> <a class="pull-right">13,287</a>
+                  <b>On Road</b> <a class="pull-right"> <?php
+                                $sql = "SELECT * FROM driverdelivery WHERE status='Pending'";
+                                indexCount($con, $sql);
+                                ?></a>
                 </li>
               </ul>
 

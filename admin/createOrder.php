@@ -27,7 +27,7 @@ $res = mysqli_query($con, $sql);
 if(mysqli_num_rows($res) > 0) {
 	while($row = mysqli_fetch_assoc($res)) {
 		$order = '
-		ID : '.$row['id'].'<br>
+		ID : '.$row['supp_code'].'<br>
 		Name : '.$row['name'].'<br>
 		Email : '.$row['email'].'<br>
 		Website : <a href="'.$row['website'].'" target="blank">'.$row['website'].'</a><br>

@@ -101,7 +101,7 @@ include 'header.php';
             <div class="info-box-content">
               <span class="info-box-text">Delivery</span>
               <span class="info-box-number"><?php
-                                $sql = "SELECT * FROM custdelivery WHERE custid='".$_SESSION['user_id']."'";
+                                $sql = "SELECT * FROM driverdelivery WHERE custcell=  '".$_SESSION['cell']."' AND status='On Road'";
                                 $rs_result = mysqli_query($con, $sql); //run the query
                                 $cart = mysqli_num_rows($rs_result);
                                 if ($cart < 0) {
@@ -120,121 +120,7 @@ include 'header.php';
       <!-- /.row -->    
     <!-- /.row -->
 </div>
-          <div class="panel-body">
-            <div class="table-responsive">
-   <?php
-              $num_rec_per_page=10;
-
-              if (isset($_GET["page"])) {
-
-                $page  = $_GET["page"];
-              } else {
-
-                $page=1;
-              }
-
-              $start_from = ($page-1) * $num_rec_per_page;
-             
-                        $sql = "SELECT * FROM quotation WHERE archive = 0";
-                        $res = mysqli_query($con, $sql);
-
-                        if (mysqli_num_rows($res) > 0) {
-                            echo '
-                            <table id="quotes" class="table data-table">
-                                <thead>
-                                    <tr>
-                                      
-                                        <th>Device Name</th>
-                                        <th>Serial Number</th>
-                                        <th>Model</th>
-                                        <th>Accessory</th>
-                                     
-                                        <th>Deposit</th>
-                                        <th>Balance</th>
-                                        <th>Total</th>
-                                        <th>Action</th>
-                                    </tr>
-
-                                </thead>
-                                <tbody>';
-                                    while ($row = mysqli_fetch_assoc($res)) {
-
-                                        $sql1 = "SELECT * FROM job WHERE id = '".$row['booking_id']."' AND archive = 0  And '".$_SESSION['user_id']."' = '".$row['user_book']."' ";
-                                        $res1 = mysqli_query($con, $sql1);
-
-                                        if (mysqli_num_rows($res1) > 0) {
-                                            echo '
-                                            <tr>
-                                              
-                                                <td>'.$row['name'].'</td>
-                                                <td>'.$row['serial'].'</td>
-                                                <td>'.$row['model'].'</td>
-                                                <td>'.$row['accessory'].'</td>
-                                                <td>'.$row['technician'].'</td>
-                                                <td>'.$row['deposit'].'</td>
-                                                <td>'.$row['balance'].'</td>
-                                                <td>'.$row['total'].'</td>
-                                                      <td>'.$row['status'].'</td>
-                                                <td class="pull-right">
-                                                    <a href="editquote.php?id='.$row['id'].'" class="label label-primary">Invoice</a>
-                                                </td>
-                                            </tr>';
-                                        }                                                
-                                    }
-                                    echo '
-                                </tbody>
-                            </table>';
-                        } else {
-                            echo '<div class="alert alert-info">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong>No Quotations Found.</strong>
-                        </div>';
-                    }
-
-            $sql = "SELECT * FROM job WHERE user ='".$_SESSION['user_id']."'";
-            $rs_result = mysqli_query($con, $sql); 
-            $total_records = mysqli_num_rows($rs_result);  
-            $total_pages = ceil($total_records / $num_rec_per_page);
-
-            if ($total_pages == 0) {
-              $total_pages = 1;
-            }
-
-            echo '
-          </div>
-          <div class="col-lg-12">
-            <p align="center">
-            <a class="btn btn-primary" href="?page=1">'."|<".'</a> '; 
-
-              if ($page < 4) {
-                for ($i=1; $i<$page; $i++) {
-                  echo '<a class="btn btn-primary" href="?page='.$i.'">'.$i.'</a> ';
-                };
-              } else {
-                for ($i=($page-3); $i<$page; $i++) {
-                  echo '<a class="btn btn-primary" href="?page='.$i.'">'.$i.'</a> ';
-                };
-              }
-              echo '<a class="btn btn-default" href="?page='.$page.'">'.$page.'</a> ';
-
-              if ($page >= ($total_pages - 3)) {
-                for ($i=($page+1); $i<=($total_pages); $i++) {
-                  echo '<a class="btn btn-primary" href="?page='.$i.'">'.$i.'</a> ';
-                };
-              } else {
-                for ($i=($page+1); $i<=($page+3); $i++) {
-                  echo '<a class="btn btn-primary" href="?page='.$i.'">'.$i.'</a> ';
-                };
-              }
-
-              echo '
-              <a class="btn btn-primary" href="?page='.$total_pages.'">'.">|".'</a>
-            </p>
-          </div>';
-          ?>
-        </div>
-        <!-- /.table-responsive -->
-      </div>
+         
 <!-- /.container-fluid -->
 </div>
 <!-- /#page-wrapper -->

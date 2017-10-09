@@ -109,10 +109,9 @@ include 'header.php';
             <ul class="nav nav-tabs">
               <li class="active"><a href="#activity" data-toggle="tab">Settings</a></li>
               <li><a href="#timeline" data-toggle="tab">Quotations</a></li>
-              <li><a href="#delivery" data-toggle="tab">Delivery</a></li>
-              <li class="quotations"><a href="#activity" data-toggle="tab">Quotations</a></li>
-              <li><a href="#devices" data-toggle="tab">Devices</a></li>
-              <li><a href="payments" data-toggle="tab">Payments</a></li>
+            
+            
+        
             </ul>
             <div class="tab-content">
               <div class="active tab-pane" id="activity">
