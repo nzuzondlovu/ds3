@@ -45,7 +45,7 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
 													<div class="modal-body">
 														<form role="form" method="post" enctype="multipart/form-data">
 
-
+															<h1>Total Price : R<?php echo $id?></h1>
 															<div class="form-group">
 															<label>Customer Name</label>
                     										<input type="text" name="custname" class="form-control" value="">
@@ -87,8 +87,7 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
 																	</div>
 															<div class="form-group">
 															  <input type="text" name="date" value="<?php echo date('Y-m-d', strtotime('today')); ?>" hidden>
-															<button name="btnSubmit" type="submit" class="btn btn-primary"><a href="preview.php?id=<?php echo $id;?>" ><i class="fa fa-save fa-fw"></i>Save</a> </button>
-														
+												<button name="btnSubmit" type="submit" class="btn btn-primary"><i class="fa fa-save fa-fw"></i>Save</button>
 															<button type="reset" class="btn btn-default">Reset</button>
 														</form>
 													</div>

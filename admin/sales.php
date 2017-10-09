@@ -16,6 +16,7 @@ if (isset($_GET['id']) && $_GET['id'] != null) {
 ?>
 <?php
 $order='';
+
 if(isset($_POST['submit']))
 {
 	$code = mysqli_real_escape_string($con, strip_tags(trim($_POST["barcode"])));
@@ -92,10 +93,10 @@ if(isset($_POST['btnSubmit']))
 	
 	if($cust != '' && $type != '' && $cashier != '' && $change != '' && $date != '') {
 
-		$sql = "INSERT INTO sales(invoice_num,custName,payment_method,total_amount,amount_paid,change,cashier,date) VALUES('".$id."','".$cust."','".$type."','".$cart1."','".$amt."','".$change."','".$cashier."','".$date."')";
+		$sql = "INSERT INTO sales(`invoice_num`, `custName`, `payment_method`, `total_amount`, `amount_paid`, `change`, `cashier`, `date`) VALUES('".$id."','".$cust."','".$type."','".$cart1."','".$amt."','".$change."','".$cashier."','".$date."')";
 		mysqli_query($con, $sql);
 		$_SESSION['success'] = 'Your new sale has been added successfully.';
-		header("Location: makesale.php");
+		header("Location: makesale.php?id=<?php echo $id;?>");
 	}else {
 		$_SESSION['failure'] = 'Please fill in all fields.';
 	}
@@ -195,6 +196,7 @@ include 'header.php';
 
 								$page=1;
 							}
+							
 							$cart1 = 0.00;
 
 $sql1 = "SELECT SUM(total_price) AS num FROM custsaleprod WHERE invoice_num LIKE '%".$id."%'";

@@ -27,6 +27,7 @@ function createRandomPassword() {
 	}
 	return $pass;
 }
+
 $invoice= 'RS-'.createRandomPassword();
 
 	$sql = "SELECT * FROM custsaleprod ";
@@ -110,13 +111,12 @@ include 'header.php';
 								<table id="suppliers" class="table">
 									<thead>
 										<tr>
-											<th>Transaction ID</th>
-											<th>Product Name</th>
-											<th>Product code</th>
-											<th>Quantity</th>
-											<th>Product Price</th>
-											<th>Total Amount</th>
 											<th>Invoice Number</th>
+											<th>Customer Name</th>
+											<th>Payment Method</th>
+											<th>Total Amount</th>
+											<th>Cashier Name</th>
+											<th>Date</th>
 											<th>Action</th>
 										</tr>
 									</thead>
@@ -125,14 +125,14 @@ include 'header.php';
 
 											echo '
 											<tr>
-												<td>'.$row['id'].'</td>
-												<td>'.$row['prodname'].'</td>
-												<td>'.$row['barcode'].'</td>
-												<td>'.$row['qty'].'</td>
-												<td>'.$row['price'].'</td>
-												<td>'.$row['total_price'].'</td>
 												<td>'.$row['invoice_num'].'</td>
+												<td>'.$row['custName'].'</td>
+												<td>'.$row['payment_method'].'</td>
+												<td>'.$row['total_amount'].'</td>
+												<td>'.$row['cashier'].'</td>
+												<td>'.$row['date'].'</td>
 												<td class="pull-right">
+											<button  onclick="modal('.$row['id'].')" class="btn btn-primary" ><i class="fa fa-trash fa-fw"></i>View Details</button>
 													<button  onclick="modal('.$row['id'].')" class="btn btn-primary" ><i class="fa fa-trash fa-fw"></i>Delete Order</button>   
 												</td>
 											</tr>';
