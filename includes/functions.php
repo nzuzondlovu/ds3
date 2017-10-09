@@ -46,6 +46,16 @@ function user($type)
 	
 	<!-- /.nav-second-level -->
 	</li>
+		<li class="active">
+	<a href="delivery.php"><i class="fa fa-truck fa-fw"></i>Deliveries<span></span></a>
+		
+	<!-- /.nav-second-level -->
+	</li>
+			<li class="active">
+	<a href="mail.php"><i class="fa fa-envelope fa-fw"></i>Mailbox<span></span></a>
+	
+	<!-- /.nav-second-level -->
+	</li>
 	<li>
 	<a href="#"><i class="fa fa-shopping-bag fa-fw"></i>In-Store Sales<span class="fa arrow"></span></a>
 	<ul class="nav nav-second-level">
@@ -156,6 +166,31 @@ function user($type)
 	<li>
 	<a href="update.php"><i class="fa fa-refresh fa-fw"></i> Update Details</a>
 	</li>
+			<li>
+		<a href="#"><i class="fa fa-recycle fa-fw"></i> Device Recylce<span class="fa arrow"></span></a>
+		<ul class="nav nav-second-level">
+		<li>
+		<a href="jobs.php">Waitlist</a>
+		</li>
+		<li>
+		<a href="allocated.php">Allocated</a>
+		</li>		
+		
+		</ul>
+		<!-- /.nav-second-level -->
+		</li>
+		<li>
+		<a href="#"><i class="fa fa-wrench fa-fw"></i> Tools and Material<span class="fa arrow"></span></a>
+		<ul class="nav nav-second-level">
+			<ul class="nav nav-second-level">
+		<li>
+		<a href="orders.php">View Orders</a>
+		</li>
+		<li>
+		<a href="suppliers.php">View Suppliers</a>
+		</li>			
+		</ul>
+		<li>
 	
 	'
 
@@ -265,32 +300,23 @@ function user($type)
 	else if ($type == 'driver') {
 
 		$menu = '
-<<<<<<< HEAD
-		<<<<<<< HEAD
+
 		<li>
-=======
+
 
 			<li>
->>>>>>> 4797bdb53405f3bcccc048d759b3547445fe8ce2
+
 		<a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 		</li>
 		<li>
 		<a href="driverJobs.php"><i class="fa fa-edit fa-fw"></i>My Deliveries</a>
-<<<<<<< HEAD
-		=======
-=======
 
->>>>>>> 4797bdb53405f3bcccc048d759b3547445fe8ce2
 		
 		<ul class="sidebar-menu" data-widget="tree">
 		<li class="header"></li>
 		<li class="active">
 		<a href="viewD.php"><i class="fa fa-edit fa-fw"></i>Deliveries</a>
-<<<<<<< HEAD
-		>>>>>>> 43b4aadf4751352f7981c5f41c611f2690d011db
-=======
 
->>>>>>> 4797bdb53405f3bcccc048d759b3547445fe8ce2
 		</li>
 		<li>
 		<a href="drivers.php"><i class="fa fa-edit fa-fw"></i>Drivers</a>

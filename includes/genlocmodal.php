@@ -64,7 +64,7 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
                 <div class="col-sm-4 border-right">
                   <div class="description-block">
                     <h5 class="description-header">
-                      2
+                      Month
                  </h5>
                     <span class="description-text">     <?php
                            $year = date("M Y");
@@ -80,16 +80,17 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
                 <!-- /.col -->
                 <div class="col-sm-4 border-right">
                   <div class="description-block">
-                    <h5 class="description-header">13,000</h5>
-                    <span class="description-text">FOLLOWERS</span>
+                    <h5 class="description-header">ID Number</h5>
+                    <span class="description-text"><?php  echo $idnumber;  ?></span>
                   </div>
                   <!-- /.description-block -->
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-4">
                   <div class="description-block">
-                    <h5 class="description-header">35</h5>
-                    <span class="description-text">PRODUCTS</span>
+                    <h5 class="description-header">Cell No</h5>
+                    <span class="description-text"><?php  echo $cell;  ?></span>
+                    <span class="description-text"></span>
                   </div>
                   <!-- /.description-block -->
                 </div>
@@ -98,10 +99,10 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
               </div>
                  <div class="box-footer no-padding">
               <ul class="nav nav-stacked">
-                <li><a href="#"> <span class="pull-right badge bg-blue">31</span></a></li>
-                <li><a href="#">Assigned <span class="pull-right badge bg-aqua">5</span></a></li>
-                <li><a href="#">Completed Deliveries <span class="pull-right badge bg-green">12</span></a></li>
-                <li><a href="#"> Previous Month <span class="pull-right badge bg-red">842</span></a></li>
+                <li><a href="#"> Total <span class="pull-right badge bg-blue">31</span></a></li>
+                <li><a href="#">Pending <span class="pull-right badge bg-aqua">5</span></a></li>
+                <li><a href="#"> Delivered <span class="pull-right badge bg-green">12</span></a></li>
+                <li><a href="#"> On Road<span class="pull-right badge bg-red">842</span></a></li>
               </ul>
             </div>
               <!-- /.row -->
@@ -116,7 +117,7 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
        
                  <div class="form-group">
                 <label>Search Area Code</label>
-                <select class="form-control select2" multiple="multiple" name="area" data-placeholder="Enter Area Code"
+                <select class="form-control select2" multiple="multiple" name="AreaCode" data-placeholder="Enter Area Code"
                         style="width: 100%;">
                   <option>  <?php
                   $sql = "SELECT * FROM area";
@@ -124,7 +125,8 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
 
                   if(mysqli_num_rows($res) > 0) {
                     while($row = mysqli_fetch_assoc($res)) {
-                      echo '<option value="'.$row['boxcode'].'"> '.$row['cityName'].' , '.$row['boxcode'].' </option>';
+
+                      echo '<option value="'.$row['boxcode'].' '.$row['cityName'].' "> '.$row['cityName'].' , '.$row['boxcode'].' </option>';
                     }
                   }
                   ?></option>
@@ -133,37 +135,24 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
               </div>
                     <div class="form-group">
                 <label>Select Month</label>
-                <select name="months" class="form-control">
+                <select name="Month" class="form-control">
          
                   <?php
-                  $sql = "SELECT * FROM Months";
+                  $sql = "SELECT * FROM Months ";
                   $res = mysqli_query($con, $sql);
               
                   $year = date("Y");
 
                   if(mysqli_num_rows($res) > 0) {
                     while($row = mysqli_fetch_assoc($res)) {
-                      echo '<option value="'.$row['m_Name'].'">'.$row['m_Name'].' - '.$year.'</option>';
+                      echo '<option value="'.$row['m_Name'].' - '.$year.'">'.$row['m_Name'].' - '.$year.'</option>';
                     }
                   }
                   ?>
                 </select>
               </div>
-    			<input type="text" name="del" value="<?php $res = mysqli_query($con, "SELECT * FROM area WHERE id=$id ");$row= mysqli_fetch_assoc($res);echo $row['id'];?> " style="display: none" />
-            		
-              <input type="text" name="name" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$rolew = mysqli_fetch_assoc($res);echo $row['custname'];?>" style="display: none" />
-              
-              <input type="text" name="cell" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['custcell']; ?>"  style="display: none"/>
-              
-              <input type="text" name="dateD" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['dateofDelivery'];?> " style="display: none" />
-              
-              <input type="text" name="strA" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['strAddress']; ?>"  style="display: none"/>
-              
-              <input type="text" name="suburb" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['suburb']; ?>"  style="display: none"/>
-              
-              <input type="text" name="area" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['area']; ?>"  style="display: none"/>
-              
-              <input type="text" name="boxcode" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['boxcode']; ?>"  style="display: none"/>
+
+              <input type="text" name="idnumber" value="<?php echo $idnumber; ?>">
 
 				 <button name="locsubmit" type="submit" class="btn btn-primary">Submit Allocation</button>                                                                  
               <button type="reset" class="btn btn-default">Reset</button>

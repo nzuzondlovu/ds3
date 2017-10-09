@@ -31,10 +31,20 @@ if(isset($_POST['id']) && $_POST['id'] != '') {
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" onclick="closeModal()" aria-label="Close"><span class="fa fa-close" aria-hidden="true"></span> Close</button>
-            <h4 class="modal-title" id="responseModalLabel">Add Response</h4>
+          
           </div>
           <div class="modal-body">
-            <form id="responseForm" role="form" method="post">
+                
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Add Response</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="form-group">
+   
+
+      <form id="responseForm" role="form" method="post">
               
                   <div class="form-group">
                     <label>Name</label>
@@ -50,16 +60,29 @@ if(isset($_POST['id']) && $_POST['id'] != '') {
                   </div>
                   <div class="form-group">
                     <label>Feedback</label>
-                    <textarea id="feedback" name="feedback" class="form-control" rows="3"></textarea>
+                    <textarea id="feedback" name="feedback" class="form-control" rows="3" ></textarea>
                   </div>
                   <input type="text" name="id" value="<?= $id; ?>" hidden>
-                  <button name="submit" type="submit" class="btn btn-primary">Submit Feedback</button>
-                  <button type="reset" class="btn btn-default">Reset Form</button>
+                 
+                    <button  name="submit" type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Send</button>
+               
+                           <button type="reset" class="btn btn-default"><i class="fa fa-times"></i> Discard</button>
+
                 </form>
+            </div>
+            <!-- /.box-body -->
+       
+            <!-- /.box-footer -->
+          </div>
+          <!-- /. box -->
+        </div>
+         
           </div>
         </div>
       </div>
     </div>
+  </div>
+
     <!-- /.Modal -->
 <script>
   function closeModal() {
@@ -108,3 +131,13 @@ if(isset($_POST['id']) && $_POST['id'] != '') {
     });
 </script>
     <?php echo ob_get_clean(); ?>
+
+<script src="../admin/plugins/iCheck/icheck.min.js"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<script src="../admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<script>
+  $(function () {
+    //Add text editor
+    $("#compose-textarea").wysihtml5();
+  });
+</script>
