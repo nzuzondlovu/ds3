@@ -88,15 +88,16 @@ if(isset($_POST['btnSubmit']))
  	$type=mysqli_real_escape_string($con, strip_tags(trim($_POST["type"])));
  	$cashier=mysqli_real_escape_string($con, strip_tags(trim($_POST["cashier"])));
  	$date=mysqli_real_escape_string($con, strip_tags(trim($_POST["date"])));
+ 	$tot=mysqli_real_escape_string($con, strip_tags(trim($_POST["total"])));
 	$amt=mysqli_real_escape_string($con, strip_tags(trim($_POST["amt"])));
 	$change=mysqli_real_escape_string($con, strip_tags(trim($_POST["change"])));
 	
 	if($cust != '' && $type != '' && $cashier != '' && $change != '' && $date != '') {
 
-		$sql = "INSERT INTO sales(`invoice_num`, `custName`, `payment_method`, `total_amount`, `amount_paid`, `change`, `cashier`, `date`) VALUES('".$id."','".$cust."','".$type."','".$cart1."','".$amt."','".$change."','".$cashier."','".$date."')";
+		$sql = "INSERT INTO sales(`invoice_num`, `custName`, `payment_method`, `total_amount`, `amount_paid`, `change`, `cashier`, `date`) VALUES('".$id."','".$cust."','".$type."','".$tot."','".$amt."','".$change."','".$cashier."','".$date."')";
 		mysqli_query($con, $sql);
 		$_SESSION['success'] = 'Your new sale has been added successfully.';
-		header("Location: makesale.php?id=<?php echo $id;?>");
+		header("Location: preview.php?id=<?php echo $id;?>");
 	}else {
 		$_SESSION['failure'] = 'Please fill in all fields.';
 	}
