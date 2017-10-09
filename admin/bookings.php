@@ -140,7 +140,6 @@ include 'header.php';
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <div class="table-responsive">
                                     <?php
 
                                     $sql = "SELECT * FROM job WHERE archive = 0";
@@ -204,7 +203,6 @@ include 'header.php';
                         </div>
                     </div>
                     <!-- /.post -->
-                </div>
             </div>
         </div>
         <!-- /.tab-pane -->
