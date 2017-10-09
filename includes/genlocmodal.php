@@ -138,7 +138,7 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
                 <select name="Month" class="form-control">
          
                   <?php
-                  $sql = "SELECT * FROM Months ";
+                  $sql = "SELECT * FROM Months ORDER BY m_ID ";
                   $res = mysqli_query($con, $sql);
               
                   $year = date("Y");
@@ -152,7 +152,7 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
                 </select>
               </div>
 
-              <input type="text" name="idnumber" value="<?php echo $idnumber; ?>">
+              <input type="text" name="idnumber" value="<?php echo $idnumber; ?>" hidden>
 
 				 <button name="locsubmit" type="submit" class="btn btn-primary">Submit Allocation</button>                                                                  
               <button type="reset" class="btn btn-default">Reset</button>

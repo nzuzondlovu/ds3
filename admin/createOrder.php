@@ -19,6 +19,7 @@ if (isset($_GET['id']) && $_GET['id'] != null) {
 $name = '';
 $product = '';
 $email = '';
+$date = date('Y-m-d H:m:s');
 
 $sql = "SELECT * FROM suppliers WHERE id=$id";
 $res = mysqli_query($con, $sql);
@@ -26,7 +27,7 @@ $res = mysqli_query($con, $sql);
 if(mysqli_num_rows($res) > 0) {
 	while($row = mysqli_fetch_assoc($res)) {
 		$order = '
-		ID : '.$row['id'].'<br>
+		ID : '.$row['supp_code'].'<br>
 		Name : '.$row['name'].'<br>
 		Email : '.$row['email'].'<br>
 		Website : <a href="'.$row['website'].'" target="blank">'.$row['website'].'</a><br>
@@ -44,27 +45,25 @@ if(mysqli_num_rows($res) > 0) {
 if(isset($_POST['submit'])) {
 
 	$bname = $_POST["bname"];
-	$genname = $_POST["genname"];
+	$price = $_POST["price"];
 	$qty = $_POST["qty"];
 
 	$date = date("Y-m-d H:i:s");
 
 	foreach ($bname as $key => $value) {
 		
-		echo mysqli_real_escape_string($con, strip_tags(trim($value)));
-		echo mysqli_real_escape_string($con, strip_tags(trim($genname[$key])));
-		echo mysqli_real_escape_string($con, strip_tags(trim($qty[$key])));
+		$brandname = mysqli_real_escape_string($con, strip_tags(trim($value)));
+		$totalPrice = mysqli_real_escape_string($con, strip_tags(trim($price[$key])));
+		$brandqty = mysqli_real_escape_string($con, strip_tags(trim($qty[$key])));
+
+		$totalPrice = $totalPrice * $brandqty;
+
+		$sql = 'INSERT INTO orders(supplierID, supplierName, orderDate, quantity, productName, email, totalPrice) VALUES ("'.$id.'", "'.$name.'", "'.$date.'", "'.$brandqty.'", "'.$brandname.'", "'.$email.'", "'.$totalPrice.'")';
+		mysqli_query($con, $sql);
+		$_SESSION['success'] = 'Your new order has been added successfully.';
+		header("Location: orders.php");
 	}
 	
-	if(1==1) {
-
-		//$sql = "INSERT INTO orders(supplierID, supplierName, orderDate, quantity, productName, email) VALUES('".$id."', '".$name."', '".$date."', '".$quantity."', '".$product."', '".$email."')";
-		//mysqli_query($con, $sql);
-		$_SESSION['success'] = 'Your new order has been added successfully.';
-		//header("Location: orders.php");
-	}else {
-		$_SESSION['failure'] = 'Please fill in all fields.';
-	}
 }
 ?>
 
@@ -131,8 +130,8 @@ include 'header.php';
 												</div>
 												<div class="col-md-3">
 													<div class="form-group">
-														<label>Generic Name</label>
-														<input type="text" name="genname[]" id="genname" class="form-control" placeholder="Or Device Model" required="required">
+														<label>Price</label>
+														<input type="number" name="price[]" id="price" class="form-control" placeholder="R0.00" required="required">
 													</div>
 												</div>
 												<div class="col-md-3">
@@ -191,7 +190,7 @@ include 'footer.php';
 
 			if (x <= maxRows) {
 
-				$("#container").append('<tr id="remove'+i+'"><td><div class="col-md-3"><div class="form-group"><label>Brand Name</label><input type="text" name="bname[]" id="childbname" class="form-control" placeholder="Enter Brand Name" required="required"></div></div><div class="col-md-3"><div class="form-group"><label>Generic Name</label><input type="text" name="genname[]" id="childgenname" class="form-control" placeholder="Or Device Model" required="required"></div></div><div class="col-md-3"><div class="form-group"><label>Order Quantity</label><input type="number" name="qty[]" id="childqty" class="form-control" placeholder="Enter quantity" required="required"></div></div><div class="col-md-1"><div class="form-group"><label>Action</label><a href="#" id="remove'+i+'" class="btn btn-danger btn-remove"><i class="fa fa-minus fa-fw"></i>Remove Row</a></div></div></td></tr>');
+				$("#container").append('<tr id="remove'+i+'"><td><div class="col-md-3"><div class="form-group"><label>Brand Name</label><input type="text" name="bname[]" id="childbname" class="form-control" placeholder="Enter Brand Name" required="required"></div></div><div class="col-md-3"><div class="form-group"><label>Generic Name</label><input type="text" name="price[]" id="childprice" class="form-control" placeholder="R0.00" required="required"></div></div><div class="col-md-3"><div class="form-group"><label>Order Quantity</label><input type="number" name="qty[]" id="childqty" class="form-control" placeholder="Enter quantity" required="required"></div></div><div class="col-md-1"><div class="form-group"><label>Action</label><a href="#" id="remove'+i+'" class="btn btn-danger btn-remove"><i class="fa fa-minus fa-fw"></i>Remove Row</a></div></div></td></tr>');
 				x++;
 				i++;
 			}
@@ -213,8 +212,8 @@ include 'footer.php';
 			$(this).val( $('#bname').val() );
 		});
 
-		$("#container").on('dblclick', '#childgenname', function(e){
-			$(this).val( $('#genname').val() );
+		$("#container").on('dblclick', '#childprice', function(e){
+			$(this).val( $('#price').val() );
 		});
 
 	});

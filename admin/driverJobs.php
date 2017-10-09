@@ -73,13 +73,15 @@ include 'header.php';
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						List of all deliveries
+
 					</div>
 					<!-- /.panel-heading -->
 					<div class="panel-body">
 						<div class="table-responsive">
 							<?php
 
-							$sql = "SELECT * FROM driverdelivery WHERE driverID='".$_SESSION['driverID']."' ";
+
+							$sql = "SELECT * FROM driverdelivery WHERE driverID='".$_SESSION['driverID']."' And status='Pending' ";
 							$res = mysqli_query($con, $sql);
 
 							if (mysqli_num_rows($res) > 0) {
@@ -87,11 +89,11 @@ include 'header.php';
 								<table id="bookings" class="table data-table">
 									<thead>
 										<tr>
-											<th>Delivery ID</th>
-											<th>Delivery Date</th>
-											<th>Customer Name</th>
-											<th>Cell Number</th>
+											<th>Customer</th>
+											<th>Cell NO</th>
 											<th>Address</th>
+											<th>Area Code</th>
+											<th>Date</th>
 											<th>Action</th>
 										</tr>
 									</thead>
@@ -100,12 +102,14 @@ include 'header.php';
 
 											echo '
 											<tr>
-												<td>'.$row['deliveryID'].'</td>
-												<td>'.date("M d, y",strtotime($row['dateofDelivery'])).'</td>
 												<td>'.$row['custname'].'</td>
 												<td>'.$row['custcell'].'</td>
 												<td>'.$row['location'].'</td>
+												<td>'.$row['area'].'</td>
+												<td>'.date("M d, y",strtotime($row['dateofDelivery'])).'</td>
+									
 												<td class=" pull-right">
+																		<button onclick="modal('.$row['deliveryID'].')" class="btn btn-success">Confirm</button> 
 													<button onclick="modal('.$row['deliveryID'].')" class="btn btn-warning">View Map</button>  <a href="DeleteDelivery.php?id='.$row['deliveryID'].'" class="btn btn-danger">Delete Request</a>
 												</td>
 											</tr>';

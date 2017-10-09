@@ -108,11 +108,10 @@ include 'header.php';
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
               <li class="active"><a href="#activity" data-toggle="tab">Settings</a></li>
-              <li><a href="#timeline" data-toggle="tab">Bookings</a></li>
-              <li><a href="#settings" data-toggle="tab">Delivery</a></li>
-              <li class="quotations"><a href="#activity" data-toggle="tab">Quotations</a></li>
-              <li><a href="#devices" data-toggle="tab">Devices</a></li>
-              <li><a href="payments" data-toggle="tab">Payments</a></li>
+              <li><a href="#timeline" data-toggle="tab">Quotations</a></li>
+            
+            
+        
             </ul>
             <div class="tab-content">
               <div class="active tab-pane" id="activity">
@@ -189,7 +188,10 @@ include 'header.php';
                 <!-- /.post -->
               </div>
               <!-- /.tab-pane -->
-              <div class="tab-pane" id="timeline">
+              <div class="tab-pane" id="delivery">
+
+              </div>
+                            <div class="tab-pane" id="timeline">
                 <!-- The timeline -->
             <div class="table-responsive">
               <?php
@@ -204,52 +206,61 @@ include 'header.php';
               }
 
               $start_from = ($page-1) * $num_rec_per_page;
-              $sql = "SELECT * FROM job WHERE user ='".$_SESSION['user_id']."' ORDER BY id DESC LIMIT $start_from, $num_rec_per_page";
-              $res = mysqli_query($con, $sql);
+             
+                        $sql = "SELECT * FROM quotation WHERE archive = 0";
+                        $res = mysqli_query($con, $sql);
 
-              if (mysqli_num_rows($res) > 0) {
-                echo '
-                <table class="table">
-                  <thead>
-                    <tr>
-                    
-                      <th>Device name</th>
-                      <th>Serial</th>
-                      <th>Type</th>
-                      <th>Picture</th>
-                      <th>Description</th>
-                      <th>Date in</th>
-                      <th>Status</th>
-                      <th>Technician</th>
-                      <th>Date out</th>
-                    </tr>
-                  </thead>
-                  <tbody>';
-                    while ($row = mysqli_fetch_assoc($res)) {
+                        if (mysqli_num_rows($res) > 0) {
+                            echo '
+                            <table id="quotes" class="table data-table">
+                                <thead>
+                                    <tr>
+                                      
+                                        <th>Device Name</th>
+                                        <th>Serial Number</th>
+                                         <th>Technician</th>
+                                     
+                                        <th>Deposit</th>
+                                        <th>Balance</th>
+                                        <th>Total</th>
+                                        <th>Status</th>
+                                    </tr>
 
-                      echo '
-                      <tr>
-                        
-                        <td>'.$row['name'].'</td>
-                        <td>'.$row['serial'].'</td>
-                        <td>'.$row['type'].'</td>
-                        <td> <img src="../uploads/'.$row['pic_url'].'" class="img-rounded" alt="Cinque Terre" width="20" height="20"></td>
-                        <td>'.$row['description'].'</td>
-                        <td>'.date("M d, y",strtotime($row['date_in'])).'</td>
-                        <td>'.$row['status'].'</td>
-                        <td>'.$row['technician'].'</td>
-                        <td>'.date("M d, y",strtotime($row['date_out'])).'</td>
-                      </tr>';
+                                </thead>
+                                <tbody>';
+                                    while ($row = mysqli_fetch_assoc($res)) {
+
+                                        $sql1 = "SELECT * FROM job WHERE id = '".$row['booking_id']."' AND archive = 0  And '".$_SESSION['user_id']."' = '".$row['user_book']."' ";
+                                        $res1 = mysqli_query($con, $sql1);
+
+                                        if (mysqli_num_rows($res1) > 0) {
+                                            echo '
+                                            <tr>
+                                              
+                                                <td>'.$row['name'].'</td>
+                                                <td>'.$row['serial'].'</td>
+                                         
+                                                <td>'.$row['technician'].'</td>
+                                      
+                                                <td>'.$row['deposit'].'</td>
+                                                <td>'.$row['balance'].'</td>
+                                                <td>'.$row['total'].'</td>
+                                                      <td>'.$row['status'].'</td>
+                                                <td class="pull-right">
+                                                    <a href="editquote.php?id='.$row['id'].'" class="label label-primary">Invoice</a>
+                                                </td>
+                                            </tr>';
+                                        }                                                
+                                    }
+                                    echo '
+                                </tbody>
+                            </table>';
+                        } else {
+                            echo '<div class="alert alert-info">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>No Quotations Found.</strong>
+                        </div>';
                     }
-                    echo '
-                  </tbody>
-                </table>';
-              } else {
-                echo '<div class="alert alert-info">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>No bookings found.</strong>
-              </div>';
-            }
 
             $sql = "SELECT * FROM job WHERE user ='".$_SESSION['user_id']."'";
             $rs_result = mysqli_query($con, $sql); 
@@ -294,9 +305,16 @@ include 'header.php';
           ?>
         </div>
               </div>
+
+<script>
+  $(document).ready(function(){
+    $('#del').DataTable();
+  });
+</script>
               <!-- /.tab-pane -->
 
-                  <div class="active tab-pane" id="quotations">
+                  <div class="active tab-pane" id="delivery">
+
                 <!-- Post --></div>
                     <div class="active tab-pane" id="devices">
                 <!-- Post --></div>

@@ -75,9 +75,9 @@ include 'header.php';
                 <li>
                     <a href="#graph" data-toggle="tab">Graphical View</a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="#maps" data-toggle="tab">Map View</a>
-                </li>
+                </li> -->
             </ul>
         </div>
         <div class="tab-content">
@@ -104,7 +104,6 @@ include 'header.php';
                                     <table id="bookings" class="table data-table">
                                     <thead>
                                     <tr>
-                                    <th>ID</th>
                                     <th>Page</th>
                                     <th>IP</th>
                                     <th>Code</th>
@@ -116,14 +115,20 @@ include 'header.php';
                                     <th>Organisation</th>
                                     <th>Time Zone</th>
                                     <th>Date</th>
+                                    <th>Map</th>
                                     </tr>
                                     </thead>
                                     <tbody>';
                                     while ($row = mysqli_fetch_assoc($res)) {
 
+                                        $btnmap = '';
+
+                                        if ($row['lat'] != 'Annonymous') {
+
+                                            $btnmap = '<a class="btn btn-warning" target="_blank" href="https://www.google.co.za/maps/@'.$row['lat'].','.$row['lon'].',15z?hl=en">View</a>';
+                                        }
                                         echo '
                                         <tr>
-                                        <td>'.$row['id'].'</td>
                                         <td>'.$row['page'].'</td>
                                         <td>'.$row['ip'].'</td>
                                         <td>'.$row['countryCode'].'</td>
@@ -135,6 +140,7 @@ include 'header.php';
                                         <td>'.$row['org'].'</td>
                                         <td>'.$row['timezone'].'</td>
                                         <td>'.date("M d, y",strtotime($row['date'])).'</td>
+                                        <td>'.$btnmap.'</td>
                                         </tr>';
                                     }
                                     echo '

@@ -22,7 +22,10 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
     Area : '.$row['area'].'<br>
     Boxcode : '.$row['boxcode'].'<br>
     Date of Request : '.$row['dateofRequest'].'<br>
-    Date of Delivery : '.$row['dateofDelivery'];
+    Date of Delivery : '.$row['dateofDelivery']
+
+    ;
+        $delID= $row['deliveryID'];
   }
  
 }
@@ -46,50 +49,27 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
           </div>
           <div class="col-md-6">
             <form role="form" method="post">
-              <div class="form-group">
-                <label>Choose Driver</label>
-                <select name="driver" class="form-control">
-                  <option value="" selected="selected">Select Driver</option>
-                  <?php
-                  $sql = "SELECT * FROM drivers";
-                  $res = mysqli_query($con, $sql);
-
-                  if(mysqli_num_rows($res) > 0) {
-                    while($row = mysqli_fetch_assoc($res)) {
-                      echo '<option value="'.$row['idnumber'].'">'.$row['name'].'</option>';
-                    }
-                  }
-                  ?>
-                </select>
-              </div>
+  
 
                          <div class="form-group">
                <label>Delivery Status</label>
                 <select class="form-control select2" name="status" multiple="multiple" data-placeholder="Enter Status"
                         style="width: 100%;">
-                  <option>Pending</option>
-               
+                  <option>Undefined</option>
+                  <option>Delivered</option>  
+             
         
                 </select>
               </div>
-    			<input type="text" name="del" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row= mysqli_fetch_assoc($res);echo $row['deliveryID'];?> " style="display: none" />
-            		
-              <input type="text" name="name" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['custname'];?>" style="display: none" />
+                 <input type="text" name="delID" value="<?php echo $delID; ?>" >
+
+
+                        <input type="text" name="del" value="<?php $res = mysqli_query($con, "SELECT * FROM driverdelivery WHERE deliveryID=$id ");$row= mysqli_fetch_assoc($res);echo $row['deliveryID'];?> " />
+
+
               
-              <input type="text" name="cell" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['custcell']; ?>"  style="display: none"/>
-              
-              <input type="text" name="dateD" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['dateofDelivery'];?> " style="display: none" />
-              
-              <input type="text" name="strA" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['strAddress']; ?>"  style="display: none"/>
-              
-              <input type="text" name="suburb" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['suburb']; ?>"  style="display: none"/>
-              
-              <input type="text" name="area" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['area']; ?>"  style="display: none"/>
-              
-              <input type="text" name="boxcode" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['boxcode']; ?>"  style="display: none"/>
-              
-				 <button name="submit" type="submit" class="btn btn-primary">Submit Allocation</button>                                                                  
-              <button type="reset" class="btn btn-default">Reset</button>
+				 <button name="btnCon" type="submit" class="btn btn-primary">Confirm </button>                                                                  
+              <button type="reset" class="btn btn-default">Decline</button>
             </form>
           </div>
         </div>

@@ -96,40 +96,22 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
                 <label>Model</label>
                 <input class="form-control" type="text" name="model" placeholder="Enter model">
               </div>
-<<<<<<< HEAD
-            
+
                          <div class="form-group">
                <label>Accessory</label>
                 <select class="form-control select2" name="accessory" multiple="multiple" data-placeholder="Select Accessories"
                         style="width: 100%;">
                   <option>Charger</option>
                   <option>Battery</option>
-                  <option></option>
-                  <option></option>
-                  <option></option>
-                  <option></option>
-                  <option></option>
+                  <option>Speakers</option>
+                  <option>Mouse</option>
+                  <option>Keyboard</option>
+                  <option>Flashdrive</option>
+                  <option>Other</option>
                 </select>
               </div>
              
-=======
-              <div class="form-group">
-                <label>Accessory</label>
-                <input class="form-control" type="text" name="accessory" placeholder="Enter accessories">
-                <div class="form-group">
-                  <label>Multiple</label>
-                  <select class="form-control select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
-                    <option>Alabama</option>
-                    <option>Alaska</option>
-                    <option>California</option>
-                    <option>Delaware</option>
-                    <option>Tennessee</option>
-                    <option>Texas</option>
-                    <option>Washington</option>
-                  </select>
-                </div>
-              </div>
->>>>>>> cb2a6b7effa7ea104d34de4cac24765ef271831b
+
               <div class="form-group">
                 <label>Choose technician</label>
                 <select name="technician" class="form-control">
@@ -285,7 +267,7 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
     });
   </script>
   <?php echo ob_get_clean(); ?>
-<<<<<<< HEAD
+
   
 <script src="bower_components/select2/dist/js/select2.full.min.js"></script>
   <link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css">
@@ -403,5 +385,3 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
     });
   });
 </script>
-=======
->>>>>>> cb2a6b7effa7ea104d34de4cac24765ef271831b
