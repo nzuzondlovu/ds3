@@ -24,34 +24,33 @@ function head($type)
 
 function user($type)
 {
-	
+	// class="active"
 	$menu = '
 	<ul class="sidebar-menu" data-widget="tree">
-	<li class="header"></li>
-	<li class="active">
+	<li>
 
 	<a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 	</li>
-	<li class="active">
+	<li>
 
 	<a href="cashflow.php"><i class="fa fa-dashboard fa-fw"></i> Cash Flow</a>
 	</li>
-	<li class="active">
+	<li>
 	<a href="bookings.php"><i class="fa fa-book fa-fw"></i> <span> Bookings</span></a>
 
 	<!-- /.nav-second-level -->
 	</li>
-	<li class="active">
+	<li>
 	<a href="products.php"><i class="fa fa-shopping-basket fa-fw"></i> Products<span></span></a>
 	
 	<!-- /.nav-second-level -->
 	</li>
-		<li class="active">
+	<li>
 	<a href="delivery.php"><i class="fa fa-truck fa-fw"></i>Deliveries<span></span></a>
-		
+
 	<!-- /.nav-second-level -->
 	</li>
-			<li class="active">	
+	<li>	
 	<a href="query.php"><i class="fa fa-envelope fa-fw"></i>Queries<span></span></a>
 	
 	<!-- /.nav-second-level -->
@@ -65,9 +64,7 @@ function user($type)
 	<li>
 	<a href="salereports.php">Sales Reports</a>
 	</li>
-	</ul>
-
-	
+	</ul>	
 	</ul>	
 	<li>
 	<a href="#"><i class="fa fa-cubes fa-fw"></i> Stock<span class="fa arrow"></span></a>
@@ -139,31 +136,31 @@ function user($type)
 	<li>
 	<a href="update.php"><i class="fa fa-refresh fa-fw"></i> Update Details</a>
 	</li>
-			<li>
-		<a href="#"><i class="fa fa-recycle fa-fw"></i> Device Recylce<span class="fa arrow"></span></a>
-		<ul class="nav nav-second-level">
-		<li>
-		<a href="jobs.php">Waitlist</a>
-		</li>
-		<li>
-		<a href="allocated.php">Allocated</a>
-		</li>		
-		
-		</ul>
-		<!-- /.nav-second-level -->
-		</li>
-		<li>
-		<a href="#"><i class="fa fa-wrench fa-fw"></i> Tools and Material<span class="fa arrow"></span></a>
-		<ul class="nav nav-second-level">
-			<ul class="nav nav-second-level">
-		<li>
-		<a href="orders.php">View Orders</a>
-		</li>
-		<li>
-		<a href="suppliers.php">View Suppliers</a>
-		</li>			
-		</ul>
-		<li>
+	<li>
+	<a href="#"><i class="fa fa-recycle fa-fw"></i> Device Recylce<span class="fa arrow"></span></a>
+	<ul class="nav nav-second-level">
+	<li>
+	<a href="jobs.php">Waitlist</a>
+	</li>
+	<li>
+	<a href="allocated.php">Allocated</a>
+	</li>		
+
+	</ul>
+	<!-- /.nav-second-level -->
+	</li>
+	<li>
+	<a href="#"><i class="fa fa-wrench fa-fw"></i> Tools and Material<span class="fa arrow"></span></a>
+	<ul class="nav nav-second-level">
+	<ul class="nav nav-second-level">
+	<li>
+	<a href="orders.php">View Orders</a>
+	</li>
+	<li>
+	<a href="suppliers.php">View Suppliers</a>
+	</li>			
+	</ul>
+	<li>
 	
 	'
 
@@ -176,7 +173,7 @@ function user($type)
 		$menu = '
 		<ul class="sidebar-menu" data-widget="tree">
 		<li class="header"></li>
-		<li class="active">
+		<li>
 		<a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 		</li>	
 		<li>
@@ -221,7 +218,7 @@ function user($type)
 		$menu = '
 		<ul class="sidebar-menu" data-widget="tree">
 		<li class="header"></li>
-		<li class="active">
+		<li>
 		<a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 		</li>
 		<li>
@@ -274,6 +271,7 @@ function user($type)
 
 		$menu = '
 
+<<<<<<< HEAD
 	
 <ul class="sidebar-menu" data-widget="tree">
 	<li class="header"></li>
@@ -282,6 +280,23 @@ function user($type)
 	<a href="location.php"><i class="fa fa-map fa-fw"></i> Locations</a>
 	</li>
 		<li class="active">
+=======
+		<li>
+
+
+		<li>
+
+		<a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+		</li>
+		<li>
+		<a href="driverJobs.php"><i class="fa fa-edit fa-fw"></i>My Deliveries</a>
+
+		
+		<ul class="sidebar-menu" data-widget="tree">
+		<li class="header"></li>
+		<li>
+		<a href="viewD.php"><i class="fa fa-edit fa-fw"></i>Deliveries</a>
+>>>>>>> 5a80649c185dac341a981083b9a0cffd89495f94
 
 	<a href="driverjobs.php"><i class="fa fa-truck fa-fw"> Deliveries</i></a>
 	</li>
