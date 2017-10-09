@@ -99,8 +99,16 @@ include 'header.php';
             <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">New Members</span>
-              <span class="info-box-number">2,000</span>
+              <span class="info-box-text">Delivery</span>
+              <span class="info-box-number"><?php
+                                $sql = "SELECT * FROM custdelivery WHERE custid='".$_SESSION['user_id']."'";
+                                $rs_result = mysqli_query($con, $sql); //run the query
+                                $cart = mysqli_num_rows($rs_result);
+                                if ($cart < 0) {
+                                    $cart = 0;
+                                }
+                                echo $cart;
+                                ?></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -114,7 +122,7 @@ include 'header.php';
 </div>
           <div class="panel-body">
             <div class="table-responsive">
-              <?php
+   <?php
               $num_rec_per_page=10;
 
               if (isset($_GET["page"])) {
@@ -125,54 +133,63 @@ include 'header.php';
                 $page=1;
               }
 
-
               $start_from = ($page-1) * $num_rec_per_page;
-              $sql = "SELECT * FROM job WHERE user ='".$_SESSION['user_id']."'  ORDER BY id DESC LIMIT $start_from, $num_rec_per_page";
-              $res = mysqli_query($con, $sql);
+             
+                        $sql = "SELECT * FROM quotation WHERE archive = 0";
+                        $res = mysqli_query($con, $sql);
 
-              if (mysqli_num_rows($res) > 0) {
-                echo '
-                <table class="table table-responsive">
-                  <thead>
-                    <tr>
-                    
-                      <th>Device name</th>
-                      <th>Serial</th>
-                      <th>Type</th>
-                      <th>Picture</th>
-                      <th>Description</th>
-                      <th>Date</th>
-                    
-                      
-                    </tr>
-                  </thead>
-                  <tbody>';
-                    while ($row = mysqli_fetch_assoc($res)) {
+                        if (mysqli_num_rows($res) > 0) {
+                            echo '
+                            <table id="quotes" class="table data-table">
+                                <thead>
+                                    <tr>
+                                      
+                                        <th>Device Name</th>
+                                        <th>Serial Number</th>
+                                        <th>Model</th>
+                                        <th>Accessory</th>
+                                     
+                                        <th>Deposit</th>
+                                        <th>Balance</th>
+                                        <th>Total</th>
+                                        <th>Action</th>
+                                    </tr>
 
+                                </thead>
+                                <tbody>';
+                                    while ($row = mysqli_fetch_assoc($res)) {
 
-                      echo '
-                      <tr>
-                        
-                        <td>'.$row['name'].'</td>
-                        <td>'.$row['serial'].'</td>
-                        <td>'.$row['type'].'</td>
-                        <td> <img src="../uploads/'.$row['pic_url'].'" class="img-rounded" alt="image" width="20" height="20"></td>
-                        <td style="word-wrap: break-word;min-width: 120px;max-width: 10px;" >'  .$row['description']. ' </td>
-                        <td>'.date("M d, y",strtotime($row['date'])).'</td>
-                      
-                        
-                      
-                      </tr>';
+                                        $sql1 = "SELECT * FROM job WHERE id = '".$row['booking_id']."' AND archive = 0  And '".$_SESSION['user_id']."' = '".$row['user_book']."' ";
+                                        $res1 = mysqli_query($con, $sql1);
+
+                                        if (mysqli_num_rows($res1) > 0) {
+                                            echo '
+                                            <tr>
+                                              
+                                                <td>'.$row['name'].'</td>
+                                                <td>'.$row['serial'].'</td>
+                                                <td>'.$row['model'].'</td>
+                                                <td>'.$row['accessory'].'</td>
+                                                <td>'.$row['technician'].'</td>
+                                                <td>'.$row['deposit'].'</td>
+                                                <td>'.$row['balance'].'</td>
+                                                <td>'.$row['total'].'</td>
+                                                      <td>'.$row['status'].'</td>
+                                                <td class="pull-right">
+                                                    <a href="editquote.php?id='.$row['id'].'" class="label label-primary">Invoice</a>
+                                                </td>
+                                            </tr>';
+                                        }                                                
+                                    }
+                                    echo '
+                                </tbody>
+                            </table>';
+                        } else {
+                            echo '<div class="alert alert-info">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>No Quotations Found.</strong>
+                        </div>';
                     }
-                    echo '
-                  </tbody>
-                </table>';
-              } else {
-                echo '<div class="alert alert-info">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>No bookings found.</strong>
-              </div>';
-            }
 
             $sql = "SELECT * FROM job WHERE user ='".$_SESSION['user_id']."'";
             $rs_result = mysqli_query($con, $sql); 
