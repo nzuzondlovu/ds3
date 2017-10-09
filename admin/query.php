@@ -80,13 +80,13 @@ include 'header.php';
           </div>
           <!-- /.panel-heading -->
           <div class="panel-body">
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-lg-12">
                 <div class="pull-right">
                   <a class="btn btn-warning" href="feedback.php"> Feedback</a>
                 </div>
               </div>
-            </div> 
+            </div>  -->
            
             <div class="table-responsive">
             <section class="content">
