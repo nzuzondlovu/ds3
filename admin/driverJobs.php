@@ -14,9 +14,9 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 
 	$id = mysqli_real_escape_string($con, strip_tags(trim($_GET['id'])));
 	if ($id) {
-		$sql = "UPDATE job SET archive=1 WHERE id='".$id."'";
+		$sql = "UPDATE driverdelivery SET status='Delivered' WHERE id='".$id."'";
 		mysqli_query($con, $sql);
-		$_SESSION['success'] = 'Booking was archived successfully.';
+		$_SESSION['success'] = 'Delivery Confirmed';
 	} else {
 		$_SESSION['failure'] = 'An error occured, please try again.';
 	}	
@@ -109,7 +109,7 @@ include 'header.php';
 												<td>'.date("M d, y",strtotime($row['dateofDelivery'])).'</td>
 									
 												<td class=" pull-right">
-																		<button onclick="modal('.$row['deliveryID'].')" class="btn btn-success">Confirm</button> 
+																		<a href="?id='.$row['id'].'" class="btn btn-success">Confirm</a> 
 													<button onclick="modal('.$row['deliveryID'].')" class="btn btn-warning">View Map</button>  <a href="DeleteDelivery.php?id='.$row['deliveryID'].'" class="btn btn-danger">Delete Request</a>
 												</td>
 											</tr>';
