@@ -38,13 +38,15 @@ if(isset($_POST['submit'])) {
     $area = mysqli_real_escape_string($con, strip_tags(trim($_POST["area"])));
     $boxcode= mysqli_real_escape_string($con, strip_tags(trim($_POST["boxcode"])));
 	
+	    $status= mysqli_real_escape_string($con, strip_tags(trim($_POST["status"])));
+	
 	
 	$location=$strAddr." ,".$suburb." , ".$area;
 
 	if($driver != '' ) {
 
-		echo $sql="INSERT INTO driverdelivery(driverID,deliveryID,dateofDelivery,custname,custcell,location,area)
-		VALUES('".$driver."','".$del."','".$dateD."', '".$name."','".$cell."','".$location."','".$boxcode."')";
+		echo $sql="INSERT INTO driverdelivery(driverID,deliveryID,dateofDelivery,custname,custcell,location,area,status)
+		VALUES('".$driver."','".$del."','".$dateD."', '".$name."','".$cell."','".$location."','".$boxcode."','".$status."')";
 		mysqli_query($con, $sql);
 		$_SESSION['success'] = 'Successfully updated details.';
 		header("Location: delivery.php");
@@ -140,7 +142,7 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
           <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive img-circle" src="dist/img/user4-128x128.jpg" alt="User profile picture">
+      
 
               <h3 class="profile-username text-center">Nina Mcintire</h3>
 
@@ -148,7 +150,7 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
 
               <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
-                  <b>Delivered</b> <a class="pull-right">1,322</a>
+                  <b>Delivered</b> <a class="pull-right"></a>
                 </li>
                 <li class="list-group-item">
                   <b>Pending</b> <a class="pull-right">543</a>
@@ -165,44 +167,8 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
           <!-- /.box -->
 
           <!-- About Me Box -->
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">About Me</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
-
-              <p class="text-muted">
-                B.S. in Computer Science from the University of Tennessee at Knoxville
-              </p>
-
-              <hr>
-
-              <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
-
-              <p class="text-muted">Malibu, California</p>
-
-              <hr>
-
-              <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
-
-              <p>
-                <span class="label label-danger">UI Design</span>
-                <span class="label label-success">Coding</span>
-                <span class="label label-info">Javascript</span>
-                <span class="label label-warning">PHP</span>
-                <span class="label label-primary">Node.js</span>
-              </p>
-
-              <hr>
-
-              <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
-
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
-            </div>
-            <!-- /.box-body -->
-          </div>
+  
+ 
           <!-- /.box -->
         </div>
         <!-- /.col -->
@@ -213,6 +179,8 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
               <li><a href="#timeline" data-toggle="tab">Location</a></li>
               <li><a href="#settings" data-toggle="tab">Allocated</a></li>
               <li><a href="#drivers" data-toggle="tab">Drivers</a></li>
+
+
             </ul>
             <div class="tab-content">
               <div class="active tab-pane" id="activity">
@@ -276,7 +244,7 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
                     }
                     echo '
                   </tbody>
-                </table>';
+                </table>';	
               } else {
                 echo '<div class="alert alert-info">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>

@@ -51,8 +51,8 @@ function user($type)
 		
 	<!-- /.nav-second-level -->
 	</li>
-			<li class="active">
-	<a href="mail.php"><i class="fa fa-envelope fa-fw"></i>Mailbox<span></span></a>
+			<li class="active">	
+	<a href="query.php"><i class="fa fa-envelope fa-fw"></i>Queries<span></span></a>
 	
 	<!-- /.nav-second-level -->
 	</li>
@@ -66,36 +66,9 @@ function user($type)
 	<a href="salereports.php">Sales Reports</a>
 	</li>
 	</ul>
-	<li>
-	<a href="#"><i class="fa fa-support fa-fw"></i> Queries<span class="fa arrow"></span></a>
-	<ul class="nav nav-second-level">
-	<li>
-	<a href="query.php">Queries</a>
-	</li>
-	<li>
 
-	<a href="feedback.php">Feedback</a>
-	</li>
 	
-	</ul>
-	<!-- /.nav-second-level -->
-	</li>
-	<li>
-	<a href="#"><i class="fa fa-truck fa-fw"></i> Deliveries<span class="fa arrow"></span></a>
-	<ul class="nav nav-second-level">
-	<li>
-	<a href="viewD.php">View Deliveries</a>
-	</li>
-	<li>
-	<a href="drivers.php">View Drivers</a>
-	</li>
-	<li>
-	<a href="addDriver.php">Add Driver</a>
-	</li>
-	</ul>
-	<!-- /.nav-second-level -->
-		<!-- /.nav-second-level -->
-
+	</ul>	
 	<li>
 	<a href="#"><i class="fa fa-cubes fa-fw"></i> Stock<span class="fa arrow"></span></a>
 	<ul class="nav nav-second-level">
