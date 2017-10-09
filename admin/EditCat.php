@@ -13,7 +13,7 @@ if(isset($_SESSION['key']) == '' ) {
 if (isset($_GET['id']) && $_GET['id'] != null) {
 	$id = mysqli_real_escape_string($con, strip_tags(trim($_GET["id"])));
 } else {
-	header('Location: categories.php');
+	header('Location: products.php');
 }
 
 
@@ -29,7 +29,7 @@ if(isset($_POST['submit'])) {
 		$sql = "UPDATE category SET name='".$name."', type='".$type."', description='".$description."' WHERE id='".$id."'";
 		mysqli_query($con, $sql);
 		$_SESSION['success'] = 'Your new Category was updated successfully.';
-		header("Location: categories.php");
+		header("Location: products.php");
 	}else {
 		$_SESSION['failure'] = 'Please fill in all fields.';
 	}
@@ -102,7 +102,7 @@ include 'header.php';
 						<div class="row">
 						<div class="col-lg-12">
 								<div class="pull-right">
-									<a href="categories.php" class="btn btn-warning">Categories</a>
+									<a href="products.php" class="btn btn-warning">Categories</a>
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -111,24 +111,23 @@ include 'header.php';
 								echo $cat;
 								?>
 							</div>
-
 							<div class="col-md-6">
 								<form role="form" method="post">
 									<div class="form-group">
 										<label>Category Name</label>
-										<input type="decimal" name="name" class="form-control" value="<?php	echo $nam; ?>">
+										<input type="decimal" name="name" class="form-control" value="<?php	echo $nam; ?>" required="required">
 									</div>
 									<div class="form-group">
 										<label>Category Type</label>
 										<select name="type" class="form-control">
-											<option value="" selected="selected"><?php	echo $typ; ?></option>
+											<option value="<?php	echo $typ; ?>" selected="selected" required="required"><?php	echo $typ; ?></option>
 											<option value="Hardware" >Hardware</option>
 											<option value="Software" >Software</option>
 										</select>
 									</div>
 									<div class="form-group">
 										<label>Category Description</label>
-										<textarea name="description" class="form-control" rows="3"><?php	echo $des; ?></textarea>
+										<textarea name="description" class="form-control" rows="3" required="required"><?php	echo $des; ?></textarea>
 									</div>
 									<button name="submit" type="submit" class="btn btn-primary">Submit Category</button>
 									<button type="reset" class="btn btn-default">Reset Category</button>

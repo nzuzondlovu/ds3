@@ -93,7 +93,7 @@ include 'header.php';
 												echo '
 												<tr>
 													<td>'.$row['id'].'</td>
-													<td>'.$row['brand_name'].' '.$row['generic_name'].'</td>
+													<td>'.$row['brandname'].' '.$row['generic_name'].'</td>
 													<td>'.count($row['generic_name']).'</td>													
 													<td>'.$row['description'].'</td>
 													<td>'.date("M d, y",strtotime($row['date'])).'</td>
