@@ -260,7 +260,7 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
                                 <li><a href="user/"><i class="fa fa-user"></i> My Account</a></li>                            
                                 <!--<li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>-->
                                 <li><a href="cart.php"><i class="fa fa-shopping-cart"></i> My Cart</a></li>
-                                <li><a href="checkout.php"><i class="fa fa-shopping-basket"></i> Checkout</a></li>';
+                                <li><a href="user/checkout.php"><i class="fa fa-shopping-basket"></i> Checkout</a></li>';
                             } else {
 
                                 echo '
@@ -369,7 +369,6 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
                         <li<?php echo $li2; ?>><a href="shop.php">Shop page</a></li>
                         <li<?php echo $li3; ?>><a href="product.php">Single product</a></li>
                         <li<?php echo $li4; ?>><a href="cart.php">Cart</a></li>
-                        <li><a href="checkout.php">Checkout</a></li>
                     </ul>
                 </div>  
             </div>
