@@ -31,6 +31,7 @@ if(isset($_POST['submit'])) {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 1d565de36801667c8d98b52411797a4509c9d9e0
   $driver = mysqli_real_escape_string($con, strip_tags(trim($_POST["driver"])));
@@ -60,6 +61,8 @@ if(isset($_POST['submit'])) {
 >>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
 =======
 >>>>>>> 1d565de36801667c8d98b52411797a4509c9d9e0
+=======
+>>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
 	$driver = mysqli_real_escape_string($con, strip_tags(trim($_POST["driver"])));
 	$del = mysqli_real_escape_string($con, strip_tags(trim($_POST["del"])));
 	$name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
@@ -83,10 +86,13 @@ if(isset($_POST['submit'])) {
 		header("Location: delivery.php");
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
 =======
 =======
 >>>>>>> 1d565de36801667c8d98b52411797a4509c9d9e0
+>>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
+=======
 >>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
 
 	} else {
@@ -120,10 +126,13 @@ include 'header.php';
 		</div>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
 =======
 =======
 >>>>>>> 1d565de36801667c8d98b52411797a4509c9d9e0
+>>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
+=======
 >>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
               <div class="table-responsive">
               <?php
@@ -225,6 +234,7 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
               <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
             </div>
             <!-- /.box-body -->
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -339,6 +349,8 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
 >>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
 =======
 >>>>>>> 1d565de36801667c8d98b52411797a4509c9d9e0
+=======
+>>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
           </div>
           <!-- /.box -->
 
@@ -374,6 +386,9 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
             <div class="box-header with-border">
               <h3 class="box-title">Pending Deliveries</h3>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
 
             </div>
             <div class="table-responsive no-margin">
@@ -382,6 +397,7 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
               $sql = "SELECT * FROM custdelivery ";
               $res = mysqli_query($con, $sql);
 
+<<<<<<< HEAD
 =======
 
             </div>
@@ -392,6 +408,8 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
               $res = mysqli_query($con, $sql);
 
 >>>>>>> 1d565de36801667c8d98b52411797a4509c9d9e0
+=======
+>>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
               if (mysqli_num_rows($res) > 0) {
                 echo '
                  
@@ -434,6 +452,7 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 1d565de36801667c8d98b52411797a4509c9d9e0
                     </tbody>
@@ -452,6 +471,8 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
 >>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
 =======
 >>>>>>> 1d565de36801667c8d98b52411797a4509c9d9e0
+=======
+>>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
                   </tbody>
                 </table>';	
               } else {
@@ -478,6 +499,7 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
               <h3 class="box-title">Driver Locations </h3>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
             </div>
          
             
@@ -601,6 +623,66 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
                 <!-- /.panel-body -->
             </div>
 >>>>>>> 1d565de36801667c8d98b52411797a4509c9d9e0
+=======
+            </div>
+         
+            
+                        <div class="table-responsive no-margin">
+                         <?php
+
+                            $sql = "SELECT * FROM drivers ";
+                            $res = mysqli_query($con, $sql);
+
+                            if (mysqli_num_rows($res) > 0) {
+                                echo '
+                                <table id="area" class="table data-table no-margin  ">
+                                    <thead>
+                                        <tr>
+                                    
+                                        
+                                            <th width="20px">Name</th>
+                                            <th width="20px">Surname</th>
+
+                                            <th width="20px">ID Number</th>
+                                            <th width="20px">Cel No</th>
+                                    
+                                                <th width="20px">Action</th>
+                                        </tr>
+                                    </thead                                     <tbody>';
+                                        while ($row = mysqli_fetch_assoc($res)) {
+
+                                            echo '
+                                            <tr>
+                                            
+                                                <td>'.$row['name'].'</td>
+                                            
+                                                <td>'.$row['surname'].'</td>
+                                                <td>'.$row['idnumber'].'</td>
+                                            
+                                                <td>'.$row['cell'].'</td>
+                                            
+                                                <td class=" pull-right">
+                                                    <button onclick="modal1('.$row['driverID'].')" class="label label-warning">Assign</button> 
+                                                     <a href="DeleteDelivery.php?id='.$row['driverID'].'" class="label label-danger">Delete</a>
+                                                </td>
+                                            </tr>';
+                                        }
+                                        echo '
+                                    </tbody>
+                                </table>';
+                            } else {
+                                echo '<div class="alert alert-info">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <strong>No deliveries found.</strong>
+                            </div>';
+                        }
+                        ?>
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+                <!-- /.panel-body -->
+            </div>
+>>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
             <div class="tab-pane" id="loc">
                 <div class="box box-success">
             <div class="box-header with-border">
@@ -825,14 +907,20 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
           </div>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 1d565de36801667c8d98b52411797a4509c9d9e0
 
 =======
+=======
+>>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
 
 <<<<<<< HEAD
 
+<<<<<<< HEAD
+>>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
+=======
 >>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
               </div>
                  <div class="tab-pane" id="drivers">
@@ -841,6 +929,7 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
 
               $sql = "SELECT * FROM drivers";
               $res = mysqli_query($con, $sql);
+<<<<<<< HEAD
 
               if (mysqli_num_rows($res) > 0) {
                 echo '
@@ -886,6 +975,26 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
                     while ($row = mysqli_fetch_assoc($res)) {
 
 >>>>>>> 1d565de36801667c8d98b52411797a4509c9d9e0
+=======
+
+              if (mysqli_num_rows($res) > 0) {
+                echo '
+                <table id="drv" class="table data-table no-margin">
+                  <thead>
+                    <tr>
+                      <th>Driver ID</th>
+                      <th>Name</th>
+                      <th>Surname</th>
+                      <th>Cell Number</th>
+                      <th>Id Number</th>
+                      <th>Email</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>';
+                    while ($row = mysqli_fetch_assoc($res)) {
+
+>>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
                       echo '
                       <tr>
                         <td>'.$row['driverID'].'</td>
@@ -995,6 +1104,7 @@ include 'footer.php';
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 1d565de36801667c8d98b52411797a4509c9d9e0
 
@@ -1010,6 +1120,8 @@ include 'footer.php';
 >>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
 =======
 >>>>>>> 1d565de36801667c8d98b52411797a4509c9d9e0
+=======
+>>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
  
   <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
   <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -1019,10 +1131,13 @@ include 'footer.php';
   <!-- Select2 -->
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
 =======
 =======
 >>>>>>> 1d565de36801667c8d98b52411797a4509c9d9e0
+>>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
+=======
 >>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
 <script src="bower_components/select2/dist/js/select2.full.min.js"></script>
   <link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css">
