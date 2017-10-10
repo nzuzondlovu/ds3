@@ -5,22 +5,22 @@ include '../includes/functions.php';
 
 <?php
 if(isset($_SESSION['key']) == '' ) {
-	header("location:../login.php");
+  header("location:../login.php");
 }
 ?>
 
 <?php
 if(isset($_GET['id']) && $_GET['id'] != '') {
 
-	$id = mysqli_real_escape_string($con, strip_tags(trim($_GET['id'])));
+  $id = mysqli_real_escape_string($con, strip_tags(trim($_GET['id'])));
 
-	if ($id) {
-		$sql = "UPDATE job SET archive=1 WHERE id='".$id."'";
-		mysqli_query($con, $sql);
-		$_SESSION['success'] = 'Booking was archived successfully.';
-	} else {
-		$_SESSION['failure'] = 'An error occured, please try again.';
-	}	
+  if ($id) {
+    $sql = "UPDATE job SET archive=1 WHERE id='".$id."'";
+    mysqli_query($con, $sql);
+    $_SESSION['success'] = 'Booking was archived successfully.';
+  } else {
+    $_SESSION['failure'] = 'An error occured, please try again.';
+  } 
 }
 ?>
 
@@ -28,7 +28,6 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 
 if(isset($_POST['submit'])) {
 
-<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
   $driver = mysqli_real_escape_string($con, strip_tags(trim($_POST["driver"])));
@@ -55,8 +54,6 @@ if(isset($_POST['submit'])) {
 =======
 =======
 >>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
-=======
->>>>>>> 10d52dae8d666446af4ba0d3e3957af62c40bb97
 	$driver = mysqli_real_escape_string($con, strip_tags(trim($_POST["driver"])));
 	$del = mysqli_real_escape_string($con, strip_tags(trim($_POST["del"])));
 	$name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
@@ -79,12 +76,9 @@ if(isset($_POST['submit'])) {
 		$_SESSION['success'] = 'Successfully updated details.';
 		header("Location: delivery.php");
 <<<<<<< HEAD
-<<<<<<< HEAD
 >>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
 =======
 >>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
-=======
->>>>>>> 10d52dae8d666446af4ba0d3e3957af62c40bb97
 
 	} else {
 		$_SESSION['failure'] = 'Please fill in all fields';
@@ -98,6 +92,16 @@ include 'header.php';
 
 <!-- Page Content -->
 <div id="page-wrapper">
+<<<<<<< HEAD
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="page-header"></h1>
+      </div>
+      <!-- /.col-lg-12 -->
+    </div>
+<<<<<<< HEAD
+=======
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
@@ -106,25 +110,22 @@ include 'header.php';
 			<!-- /.col-lg-12 -->
 		</div>
 <<<<<<< HEAD
-<<<<<<< HEAD
 >>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
 =======
 >>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
-=======
->>>>>>> 10d52dae8d666446af4ba0d3e3957af62c40bb97
               <div class="table-responsive">
               <?php
 if(isset($_GET['id']) && $_GET['id'] != '') {
 
-	$id = mysqli_real_escape_string($con, strip_tags(trim($_GET['id'])));
+  $id = mysqli_real_escape_string($con, strip_tags(trim($_GET['id'])));
 
-	if ($id) {
-		$sql = "UPDATE job SET archive=1 WHERE id='".$id."'";
-		mysqli_query($con, $sql);
-		$_SESSION['success'] = 'Booking was archived successfully.';
-	} else {
-		$_SESSION['failure'] = 'An error occured, please try again.';
-	}	
+  if ($id) {
+    $sql = "UPDATE job SET archive=1 WHERE id='".$id."'";
+    mysqli_query($con, $sql);
+    $_SESSION['success'] = 'Booking was archived successfully.';
+  } else {
+    $_SESSION['failure'] = 'An error occured, please try again.';
+  } 
 }
 ?>
 
@@ -132,43 +133,43 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 
 if(isset($_POST['locsubmit'])) {
 
-	 	function createRandomPassword() {
-	$chars = "003232303232023232023456789";
-	srand((double)microtime()*1000000);
-	$i = 0;
-	$pass = '' ;
-	while ($i <= 7) {
+    function createRandomPassword() {
+  $chars = "003232303232023232023456789";
+  srand((double)microtime()*1000000);
+  $i = 0;
+  $pass = '' ;
+  while ($i <= 7) {
 
-		$num = rand() % 33;
+    $num = rand() % 33;
 
-		$tmp = substr($chars, $num, 1);
+    $tmp = substr($chars, $num, 1);
 
-		$pass = $pass . $tmp;
+    $pass = $pass . $tmp;
 
-		$i++;
+    $i++;
 
-	}
-	return $pass;
-} 	 
+  }
+  return $pass;
+}    
 $gen_code= 'DLV-'.createRandomPassword()  ;
 
-	$AreaCode = mysqli_real_escape_string($con, strip_tags(trim($_POST["AreaCode"])));
-	$idnumber = mysqli_real_escape_string($con, strip_tags(trim($_POST["idnumber"])));
-	$Month = mysqli_real_escape_string($con, strip_tags(trim($_POST["Month"])));
+  $AreaCode = mysqli_real_escape_string($con, strip_tags(trim($_POST["AreaCode"])));
+  $idnumber = mysqli_real_escape_string($con, strip_tags(trim($_POST["idnumber"])));
+  $Month = mysqli_real_escape_string($con, strip_tags(trim($_POST["Month"])));
 
 
 
-	if($gen_code != '' ) {
+  if($gen_code != '' ) {
 
-		echo $sql="INSERT INTO driver_loc(gen_code,AreaCode,idnumber,Month)
-		VALUES('".$gen_code."','".$AreaCode."','".$idnumber."', '".$Month."')";
-		mysqli_query($con, $sql);
-		$_SESSION['success'] = 'Successfully updated details.';
-		header("Location: drivers.php");
+    echo $sql="INSERT INTO driver_loc(gen_code,AreaCode,idnumber,Month)
+    VALUES('".$gen_code."','".$AreaCode."','".$idnumber."', '".$Month."')";
+    mysqli_query($con, $sql);
+    $_SESSION['success'] = 'Successfully updated details.';
+    header("Location: delivery.php");
 
-	} else {
-		$_SESSION['failure'] = 'Please fill in all fields';
-	}
+  } else {
+    $_SESSION['failure'] = 'Please fill in all fields';
+  }
 }
 ?>
 
@@ -212,7 +213,6 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
               <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
             </div>
             <!-- /.box-body -->
-<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -321,8 +321,6 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
 >>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
 =======
 >>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
-=======
->>>>>>> 10d52dae8d666446af4ba0d3e3957af62c40bb97
           </div>
           <!-- /.box -->
 
@@ -339,23 +337,6 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
               <li><a href="#timeline" data-toggle="tab">Location</a></li>
               <li><a href="#settings" data-toggle="tab">Allocated</a></li>
               <li><a href="#drivers" data-toggle="tab">Drivers</a></li>
-<<<<<<< HEAD
-
-
-            </ul>
-            <div class="tab-content">
-              <div class="active tab-pane" id="activity">
-                <div class="col-md-12">
-
-            
-              
-          
-            
-
-            </div>
-        
-         <div class="box box-warning">
-=======
                     <li><a href="#loc" data-toggle="tab">Driver Locations</a></li>
 
 
@@ -423,7 +404,6 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
                     echo '
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
                     </tbody>
                     </table>';  
                   } else {
@@ -437,8 +417,6 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
 =======
 =======
 >>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
-=======
->>>>>>> 10d52dae8d666446af4ba0d3e3957af62c40bb97
                   </tbody>
                 </table>';	
               } else {
@@ -520,153 +498,162 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
                     </div>
                     <!-- /.table-responsive -->
 <<<<<<< HEAD
-<<<<<<< HEAD
 >>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
 =======
 >>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
-=======
->>>>>>> 10d52dae8d666446af4ba0d3e3957af62c40bb97
                 </div>
                 <!-- /.panel-body -->
             </div>
             <div class="tab-pane" id="loc">
                 <div class="box box-success">
->>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
             <div class="box-header with-border">
-              <h3 class="box-title">Pending Deliveries</h3>
+              <h3 class="box-title">Driver Locations</h3>
 
+             
             </div>
-            <div class="table-responsive no-margin">
-              <?php
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <div class="row">
+                <div class="col-md-12 col-sm-8">
+                  <div class="pad">
+                    <!-- Map will be created here -->
+                    <div id="" style="height: 325px;">  
+                      <?php
 
-              $sql = "SELECT * FROM custdelivery ";
-              $res = mysqli_query($con, $sql);
+              $sql = "SELECT * FROM driver_loc WHERE idnumber=  '".$_SESSION['idnumber']."' ";
+              $res = mysqli_query($con, $sql);  
 
               if (mysqli_num_rows($res) > 0) {
                 echo '
-                 
-      
-              
-
-                <table id="bookings" class="table data-table no-margin ">
+          <table id="bookings" class="table data-table">
                   <thead>
                     <tr>
+
+                      <th>Location ID</th>
+                
+                     <th>Location</th>
+                      <th>Month</th>
+          
+
                   
-                      <th>Name</th>
-                      <th>Number</th>
-                    
-                    
-                      <th>Code</th>
-                    
-                      <th>Date</th>
-                      <th>Action</th>
+                      
                     </tr>
                   </thead>
                   <tbody>';
                     while ($row = mysqli_fetch_assoc($res)) {
 
                       echo '
-                      <tr class="text-red">
+                      <tr>
+                        <td>'.$row['gen_code'].'</td>
+                  
                       
-                        <td>'.$row['custname'].'</td>
-                        <td>'.$row['custcell'].'</td>
-                    
-                        <td> <span class="label label-danger">'.$row['boxcode'].'</span></td>
-                    
-                        <td>'.date("M d, y",strtotime($row['dateofDelivery'])).'</td>
-                        <td class=" pull-right">
-                          <button onclick="modal('.$row['deliveryID'].')" class="label label-warning">Allocate</button> 
+                        <td>'.$row['AreaCode'].'</td>
+                        <td>'.$row['Month'].'</td>
+                     
+                            <td class=" pull-right">
+                             
+
                         
                         </td>
+                      
                       </tr>';
                     }
                     echo '
                   </tbody>
-                </table>';	
+                </table>';
               } else {
                 echo '<div class="alert alert-info">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                 <strong>No deliveries found.</strong>
               </div>';
             }
-            ?>
-          </div>
-          <!-- /.table-responsive -->
-        </div>
-        <!-- /.panel-body -->
-      </div>
-     
-         
-              <!-- /.tab-pane -->
-              <div class="tab-pane" id="timeline">
-                 <div class="col-md-12">
+            ?> </div>
 
-                           </div>
-                             <div class="box box-warning">
-            <div class="box-header with-border">
-              <h3 class="box-title">Driver Locations </h3>
-
-            </div>
-         
-            
-                        <div class="table-responsive no-margin">
-                         <?php
-
-                            $sql = "SELECT * FROM drivers ";
-                            $res = mysqli_query($con, $sql);
-
-                            if (mysqli_num_rows($res) > 0) {
-                                echo '
-                                <table id="area" class="table data-table no-margin  ">
-                                    <thead>
-                                        <tr>
-                                    
-                                        
-                                            <th width="20px">Name</th>
-                                            <th width="20px">Surname</th>
-
-                                            <th width="20px">ID Number</th>
-                                            <th width="20px">Cel No</th>
-                                    
-                                                <th width="20px">Action</th>
-                                        </tr>
-                                    </thead                                     <tbody>';
-                                        while ($row = mysqli_fetch_assoc($res)) {
-
-                                            echo '
-                                            <tr>
-                                            
-                                                <td>'.$row['name'].'</td>
-                                            
-                                                <td>'.$row['surname'].'</td>
-                                                <td>'.$row['idnumber'].'</td>
-                                            
-                                                <td>'.$row['cell'].'</td>
-                                            
-                                                <td class=" pull-right">
-                                                    <button onclick="modal1('.$row['driverID'].')" class="label label-warning">Assign</button> 
-                                                     <a href="DeleteDelivery.php?id='.$row['driverID'].'" class="label label-danger">Delete</a>
-                                                </td>
-                                            </tr>';
-                                        }
-                                        echo '
-                                    </tbody>
-                                </table>';
-                            } else {
-                                echo '<div class="alert alert-info">
-                                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                <strong>No deliveries found.</strong>
-                            </div>';
-                        }
-                        ?>
-                    </div>
-                    <!-- /.table-responsive -->
+                  </div>
                 </div>
-                <!-- /.panel-body -->
+                <!-- /.col -->
+        
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+          </div>
             </div>
               
               <!-- /.tab-pane -->
+<div class="tab-pane" id="settings">
+                        <div class="col-md-12">
+          <!-- MAP & BOX PANE --></div>
+          <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">Allocated Deliveries</h3>
 
+             
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <div class="row">
+                <div class="col-md-12 col-sm-8">
+                  <div class="pad">
+                    <!-- Map will be created here -->
+                    <div id="" style="height: 325px;">  <?php
+
+              $sql = "SELECT * FROM driverdelivery ";
+              $res = mysqli_query($con, $sql);
+
+              if (mysqli_num_rows($res) > 0) {
+                echo '
+                <table id="del" class="table data-table no-margin">
+                  <thead>
+                    <tr>
+
+                      <th>Driver</th>
+                
+                      <th>Date</th>
+                    
+                      <th>Address</th>
+                      <th> Postal Code</th>
+
+                      <th> Status</th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>';
+                    while ($row = mysqli_fetch_assoc($res)) {
+
+                      echo '
+                      <tr>
+                        <td>'.$row['driverID'].'</td>
+                        <td>'.date("M d, y",strtotime($row['dateofDelivery'])).'</td>
+                      
+                        <td>'.$row['location'].'</td>
+                        <td>'.$row['area'].'</td>
+                          <td>'.$row['status'].'</td> 
+                      
+                      </tr>';
+                    }
+                    echo '
+                  </tbody>
+                </table>';
+              } else {
+                echo '<div class="alert alert-info">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>No deliveries found.</strong>
+              </div>';
+            }
+            ?> </div>
+
+                  </div>
+                </div>
+                <!-- /.col -->
+        
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+          </div>
               <div class="tab-pane" id="settings">
                         <div class="col-md-12">
           <!-- MAP & BOX PANE --></div>
@@ -742,115 +729,6 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
 <<<<<<< HEAD
 
 
-              </div>
-                 <div class="tab-pane" id="drivers">
-                        <div class="table-responsive">
-              <?php
-
-              $sql = "SELECT * FROM drivers";
-=======
-              <div class="tab-pane" id="settings">
-                        <div class="col-md-12">
-          <!-- MAP & BOX PANE --></div>
-          <div class="box box-success">
-            <div class="box-header with-border">
-              <h3 class="box-title">Allocated Deliveries</h3>
-
-             
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-              <div class="row">
-                <div class="col-md-12 col-sm-8">
-                  <div class="pad">
-                    <!-- Map will be created here -->
-                    <div id="" style="height: 325px;">  <?php
-
-              $sql = "SELECT * FROM driverdelivery ";
->>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
-              $res = mysqli_query($con, $sql);
-
-              if (mysqli_num_rows($res) > 0) {
-                echo '
-<<<<<<< HEAD
-                <table id="drv" class="table data-table no-margin">
-                  <thead>
-                    <tr>
-                      <th>Driver ID</th>
-                      <th>Name</th>
-                      <th>Surname</th>
-                      <th>Cell Number</th>
-                      <th>Id Number</th>
-                      <th>Email</th>
-                      <th>Action</th>
-=======
-                <table id="del" class="table data-table no-margin">
-                  <thead>
-                    <tr>
-
-                      <th>Driver</th>
-                
-                      <th>Date</th>
-                    
-                      <th>Address</th>
-                      <th> Postal Code</th>
-
-                      <th> Status</th>
-                      
->>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
-                    </tr>
-                  </thead>
-                  <tbody>';
-                    while ($row = mysqli_fetch_assoc($res)) {
-
-                      echo '
-                      <tr>
-                        <td>'.$row['driverID'].'</td>
-<<<<<<< HEAD
-                        <td>'.$row['name'].'</td>
-                        <td>'.$row['surname'].'</td>
-                        <td>'.$row['cell'].'</td>
-                        <td>'.$row['idnumber'].'</td>
-                        <td>'.$row['email'].'</td>
-                        <td class=" pull-right">
-                          <a href="DeleteDriver.php?id='.$row['driverID'].'" class="btn btn-danger">Delete</a>
-                        </td>
-=======
-                        <td>'.date("M d, y",strtotime($row['dateofDelivery'])).'</td>
-                      
-                        <td>'.$row['location'].'</td>
-                        <td>'.$row['area'].'</td>
-                          <td>'.$row['status'].'</td> 
-                      
->>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
-                      </tr>';
-                    }
-                    echo '
-                  </tbody>
-                </table>';
-              } else {
-                echo '<div class="alert alert-info">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-<<<<<<< HEAD
-=======
-                <strong>No deliveries found.</strong>
-              </div>';
-            }
-            ?> </div>
-
-                  </div>
-                </div>
-                <!-- /.col -->
-        
-                <!-- /.col -->
-              </div>
-              <!-- /.row -->
-            </div>
-            <!-- /.box-body -->
-          </div>
-<<<<<<< HEAD
-
-
 =======
 
 
@@ -899,7 +777,6 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
               } else {
                 echo '<div class="alert alert-info">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
->>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
                 <strong>No products found.</strong>
               </div>';
             }
@@ -989,7 +866,6 @@ include 'footer.php';
 </script>
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 
 <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -1000,8 +876,6 @@ include 'footer.php';
 =======
 =======
 >>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
-=======
->>>>>>> 10d52dae8d666446af4ba0d3e3957af62c40bb97
  
   <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
   <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -1010,11 +884,8 @@ include 'footer.php';
   <link rel="stylesheet" href="bower_components/jvectormap/jquery-jvectormap.css">	
   <!-- Select2 -->
 <<<<<<< HEAD
-<<<<<<< HEAD
 >>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
 =======
 >>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
-=======
->>>>>>> 10d52dae8d666446af4ba0d3e3957af62c40bb97
 <script src="bower_components/select2/dist/js/select2.full.min.js"></script>
   <link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css">

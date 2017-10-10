@@ -68,7 +68,7 @@ include 'header.php';
           <!-- MAP & BOX PANE --></div>
           <div class="box box-success">
             <div class="box-header with-border">
-              <h3 class="box-title">Confirm Deliveries</h3>
+              <h3 class="box-title">Locations Your Are Allocated To</h3>
 
              
             </div>
