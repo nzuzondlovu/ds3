@@ -185,6 +185,7 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
               <li><a href="#timeline" data-toggle="tab">Location</a></li>
               <li><a href="#settings" data-toggle="tab">Allocated</a></li>
               <li><a href="#drivers" data-toggle="tab">Drivers</a></li>
+<<<<<<< HEAD
 
 
             </ul>
@@ -200,6 +201,158 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
             </div>
         
          <div class="box box-warning">
+=======
+                    <li><a href="#loc" data-toggle="tab">Driver Locations</a></li>
+
+
+            </ul>
+            <div class="tab-content">
+              <div class="active tab-pane" id="activity">
+                <div class="col-md-12">
+
+            
+              
+          
+            
+
+            </div>
+        
+         <div class="box box-warning">
+            <div class="box-header with-border">
+              <h3 class="box-title">Pending Deliveries</h3>
+
+            </div>
+            <div class="table-responsive no-margin">
+              <?php
+
+              $sql = "SELECT * FROM custdelivery ";
+              $res = mysqli_query($con, $sql);
+
+              if (mysqli_num_rows($res) > 0) {
+                echo '
+                 
+      
+              
+
+                <table id="bookings" class="table data-table no-margin ">
+                  <thead>
+                    <tr>
+                  
+                      <th>Name</th>
+                      <th>Number</th>
+                    
+                    
+                      <th>Code</th>
+                    
+                      <th>Date</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>';
+                    while ($row = mysqli_fetch_assoc($res)) {
+
+                      echo '
+                      <tr class="text-red">
+                      
+                        <td>'.$row['custname'].'</td>
+                        <td>'.$row['custcell'].'</td>
+                    
+                        <td> <span class="label label-danger">'.$row['boxcode'].'</span></td>
+                    
+                        <td>'.date("M d, y",strtotime($row['dateofDelivery'])).'</td>
+                        <td class=" pull-right">
+                          <button onclick="modal('.$row['deliveryID'].')" class="label label-warning">Allocate</button> 
+                        
+                        </td>
+                      </tr>';
+                    }
+                    echo '
+                  </tbody>
+                </table>';	
+              } else {
+                echo '<div class="alert alert-info">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>No deliveries found.</strong>
+              </div>';
+            }
+            ?>
+          </div>
+          <!-- /.table-responsive -->
+        </div>
+        <!-- /.panel-body -->
+      </div>
+     
+         
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="timeline">
+                 <div class="col-md-12">
+
+                           </div>
+                             <div class="box box-warning">
+            <div class="box-header with-border">
+              <h3 class="box-title">Driver Locations </h3>
+
+            </div>
+         
+            
+                        <div class="table-responsive no-margin">
+                         <?php
+
+                            $sql = "SELECT * FROM drivers ";
+                            $res = mysqli_query($con, $sql);
+
+                            if (mysqli_num_rows($res) > 0) {
+                                echo '
+                                <table id="area" class="table data-table no-margin  ">
+                                    <thead>
+                                        <tr>
+                                    
+                                        
+                                            <th width="20px">Name</th>
+                                            <th width="20px">Surname</th>
+
+                                            <th width="20px">ID Number</th>
+                                            <th width="20px">Cel No</th>
+                                    
+                                                <th width="20px">Action</th>
+                                        </tr>
+                                    </thead                                     <tbody>';
+                                        while ($row = mysqli_fetch_assoc($res)) {
+
+                                            echo '
+                                            <tr>
+                                            
+                                                <td>'.$row['name'].'</td>
+                                            
+                                                <td>'.$row['surname'].'</td>
+                                                <td>'.$row['idnumber'].'</td>
+                                            
+                                                <td>'.$row['cell'].'</td>
+                                            
+                                                <td class=" pull-right">
+                                                    <button onclick="modal1('.$row['driverID'].')" class="label label-warning">Assign</button> 
+                                                     <a href="DeleteDelivery.php?id='.$row['driverID'].'" class="label label-danger">Delete</a>
+                                                </td>
+                                            </tr>';
+                                        }
+                                        echo '
+                                    </tbody>
+                                </table>';
+                            } else {
+                                echo '<div class="alert alert-info">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <strong>No deliveries found.</strong>
+                            </div>';
+                        }
+                        ?>
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <div class="tab-pane" id="loc">
+                <div class="box box-success">
+>>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
             <div class="box-header with-border">
               <h3 class="box-title">Pending Deliveries</h3>
 
@@ -407,6 +560,115 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
             </div>
             <!-- /.box-body -->
           </div>
+<<<<<<< HEAD
+
+
+              </div>
+                 <div class="tab-pane" id="drivers">
+                        <div class="table-responsive">
+              <?php
+
+              $sql = "SELECT * FROM drivers";
+=======
+              <div class="tab-pane" id="settings">
+                        <div class="col-md-12">
+          <!-- MAP & BOX PANE --></div>
+          <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">Allocated Deliveries</h3>
+
+             
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <div class="row">
+                <div class="col-md-12 col-sm-8">
+                  <div class="pad">
+                    <!-- Map will be created here -->
+                    <div id="" style="height: 325px;">  <?php
+
+              $sql = "SELECT * FROM driverdelivery ";
+>>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
+              $res = mysqli_query($con, $sql);
+
+              if (mysqli_num_rows($res) > 0) {
+                echo '
+<<<<<<< HEAD
+                <table id="drv" class="table data-table no-margin">
+                  <thead>
+                    <tr>
+                      <th>Driver ID</th>
+                      <th>Name</th>
+                      <th>Surname</th>
+                      <th>Cell Number</th>
+                      <th>Id Number</th>
+                      <th>Email</th>
+                      <th>Action</th>
+=======
+                <table id="del" class="table data-table no-margin">
+                  <thead>
+                    <tr>
+
+                      <th>Driver</th>
+                
+                      <th>Date</th>
+                    
+                      <th>Address</th>
+                      <th> Postal Code</th>
+
+                      <th> Status</th>
+                      
+>>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
+                    </tr>
+                  </thead>
+                  <tbody>';
+                    while ($row = mysqli_fetch_assoc($res)) {
+
+                      echo '
+                      <tr>
+                        <td>'.$row['driverID'].'</td>
+<<<<<<< HEAD
+                        <td>'.$row['name'].'</td>
+                        <td>'.$row['surname'].'</td>
+                        <td>'.$row['cell'].'</td>
+                        <td>'.$row['idnumber'].'</td>
+                        <td>'.$row['email'].'</td>
+                        <td class=" pull-right">
+                          <a href="DeleteDriver.php?id='.$row['driverID'].'" class="btn btn-danger">Delete</a>
+                        </td>
+=======
+                        <td>'.date("M d, y",strtotime($row['dateofDelivery'])).'</td>
+                      
+                        <td>'.$row['location'].'</td>
+                        <td>'.$row['area'].'</td>
+                          <td>'.$row['status'].'</td> 
+                      
+>>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
+                      </tr>';
+                    }
+                    echo '
+                  </tbody>
+                </table>';
+              } else {
+                echo '<div class="alert alert-info">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+<<<<<<< HEAD
+=======
+                <strong>No deliveries found.</strong>
+              </div>';
+            }
+            ?> </div>
+
+                  </div>
+                </div>
+                <!-- /.col -->
+        
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+          </div>
 
 
               </div>
@@ -453,6 +715,7 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
               } else {
                 echo '<div class="alert alert-info">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
+>>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
                 <strong>No products found.</strong>
               </div>';
             }
