@@ -28,20 +28,18 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 
 if(isset($_POST['submit'])) {
 
-<<<<<<< HEAD
-<<<<<<< HEAD
   $driver = mysqli_real_escape_string($con, strip_tags(trim($_POST["driver"])));
   $del = mysqli_real_escape_string($con, strip_tags(trim($_POST["del"])));
   $name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
   $cell = mysqli_real_escape_string($con, strip_tags(trim($_POST["cell"])));
   $dateD = mysqli_real_escape_string($con, strip_tags(trim($_POST["dateD"])));
   $strAddr = mysqli_real_escape_string($con, strip_tags(trim($_POST["strA"])));
-  $suburb= mysqli_real_escape_string($con, strip_tags(trim($_POST["suburb"])));
-  $area = mysqli_real_escape_string($con, strip_tags(trim($_POST["area"])));
-  $boxcode= mysqli_real_escape_string($con, strip_tags(trim($_POST["boxcode"])));
-
-  $status= mysqli_real_escape_string($con, strip_tags(trim($_POST["status"])));
-
+    $suburb= mysqli_real_escape_string($con, strip_tags(trim($_POST["suburb"])));
+    $area = mysqli_real_escape_string($con, strip_tags(trim($_POST["area"])));
+    $boxcode= mysqli_real_escape_string($con, strip_tags(trim($_POST["boxcode"])));
+     
+      $status= mysqli_real_escape_string($con, strip_tags(trim($_POST["status"])));
+  
   $location=$strAddr." ,".$suburb." , ".$area;
 
   if($driver != '' ) {
@@ -51,38 +49,10 @@ if(isset($_POST['submit'])) {
     mysqli_query($con, $sql);
     $_SESSION['success'] = 'Successfully updated details.';
     header("Location: delivery.php");
-=======
-=======
->>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
-	$driver = mysqli_real_escape_string($con, strip_tags(trim($_POST["driver"])));
-	$del = mysqli_real_escape_string($con, strip_tags(trim($_POST["del"])));
-	$name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
-	$cell = mysqli_real_escape_string($con, strip_tags(trim($_POST["cell"])));
-	$dateD = mysqli_real_escape_string($con, strip_tags(trim($_POST["dateD"])));
-	$strAddr = mysqli_real_escape_string($con, strip_tags(trim($_POST["strA"])));
-    $suburb= mysqli_real_escape_string($con, strip_tags(trim($_POST["suburb"])));
-    $area = mysqli_real_escape_string($con, strip_tags(trim($_POST["area"])));
-    $boxcode= mysqli_real_escape_string($con, strip_tags(trim($_POST["boxcode"])));
-	   
-	    $status= mysqli_real_escape_string($con, strip_tags(trim($_POST["status"])));
-	
-	$location=$strAddr." ,".$suburb." , ".$area;
 
-	if($driver != '' ) {
-
-		echo $sql="INSERT INTO driverdelivery(driverID,deliveryID,dateofDelivery,custname,custcell,location,area,status)
-		VALUES('".$driver."','".$del."','".$dateD."', '".$name."','".$cell."','".$location."','".$boxcode."','".$status."')";
-		mysqli_query($con, $sql);
-		$_SESSION['success'] = 'Successfully updated details.';
-		header("Location: delivery.php");
-<<<<<<< HEAD
->>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
-=======
->>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
-
-	} else {
-		$_SESSION['failure'] = 'Please fill in all fields';
-	}
+  } else {
+    $_SESSION['failure'] = 'Please fill in all fields';
+  }
 }
 ?>
 
@@ -92,7 +62,6 @@ include 'header.php';
 
 <!-- Page Content -->
 <div id="page-wrapper">
-<<<<<<< HEAD
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-12">
@@ -100,19 +69,6 @@ include 'header.php';
       </div>
       <!-- /.col-lg-12 -->
     </div>
-<<<<<<< HEAD
-=======
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-lg-12">
-				<h1 class="page-header"></h1>
-			</div>
-			<!-- /.col-lg-12 -->
-		</div>
-<<<<<<< HEAD
->>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
-=======
->>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
               <div class="table-responsive">
               <?php
 if(isset($_GET['id']) && $_GET['id'] != '') {
@@ -213,114 +169,6 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
               <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
             </div>
             <!-- /.box-body -->
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    <div class="table-responsive">
-      <?php
-      if(isset($_GET['id']) && $_GET['id'] != '') {
-
-       $id = mysqli_real_escape_string($con, strip_tags(trim($_GET['id'])));
-
-       if ($id) {
-        $sql = "UPDATE job SET archive=1 WHERE id='".$id."'";
-        mysqli_query($con, $sql);
-        $_SESSION['success'] = 'Booking was archived successfully.';
-      } else {
-        $_SESSION['failure'] = 'An error occured, please try again.';
-      } 
-    }
-    ?>
-
-    <?php
-
-    if(isset($_POST['locsubmit'])) {
-
-     function createRandomPassword() {
-       $chars = "003232303232023232023456789";
-       srand((double)microtime()*1000000);
-       $i = 0;
-       $pass = '' ;
-       while ($i <= 7) {
-
-        $num = rand() % 33;
-
-        $tmp = substr($chars, $num, 1);
-
-        $pass = $pass . $tmp;
-
-        $i++;
-
-      }
-      return $pass;
-    }    
-    $gen_code= 'DLV-'.createRandomPassword()  ;
-
-    $AreaCode = mysqli_real_escape_string($con, strip_tags(trim($_POST["AreaCode"])));
-    $idnumber = mysqli_real_escape_string($con, strip_tags(trim($_POST["idnumber"])));
-    $Month = mysqli_real_escape_string($con, strip_tags(trim($_POST["Month"])));
-
-
-
-    if($gen_code != '' ) {
-
-      echo $sql="INSERT INTO driver_loc(gen_code,AreaCode,idnumber,Month)
-      VALUES('".$gen_code."','".$AreaCode."','".$idnumber."', '".$Month."')";
-      mysqli_query($con, $sql);
-      $_SESSION['success'] = 'Successfully updated details.';
-      header("Location: drivers.php");
-
-    } else {
-      $_SESSION['failure'] = 'Please fill in all fields';
-    }
-  }
-  ?>
-
-
-
-
-  <!-- Main content -->
-  <section class="content">
-    <div class="row">
-      <div class="col-md-3">
-        <!-- Profile Image -->
-        <div class="box box-primary">
-          <div class="box-body box-profile">
-            <ul class="list-group list-group-unbordered">
-              <li class="list-group-item">
-                <b>Delivered</b>
-                <a class="pull-right">
-                  <?php
-                  $sql = "SELECT * FROM driverdelivery WHERE status='Delivered'";
-                  indexCount($con, $sql);
-                  ?>                                  
-                </a>
-              </li>
-              <li class="list-group-item">
-                <b>Pending</b>
-                <a class="pull-right">
-                  <?php
-                  $sql = "SELECT * FROM driverdelivery";
-                  indexCount($con, $sql);
-                  ?>                                  
-                </a>
-              </li>
-              <li class="list-group-item">
-                <b>On Road</b>
-                <a class="pull-right">
-                  <?php
-                  $sql = "SELECT * FROM driverdelivery WHERE status='Pending'";
-                  indexCount($con, $sql);
-                  ?>
-                </a>
-              </li>
-            </ul>
-            <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
->>>>>>> 1c3ae5d7dbec6de39701875ac9b46687e6485f31
-=======
->>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
-=======
->>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
           </div>
           <!-- /.box -->
 
@@ -402,23 +250,8 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
                       </tr>';
                     }
                     echo '
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    </tbody>
-                    </table>';  
-                  } else {
-                    echo '
-                    <div class="alert alert-info">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>No deliveries found.</strong>
-                    </div>';
-                  }
-                  ?>
-=======
-=======
->>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
                   </tbody>
-                </table>';	
+                </table>';  
               } else {
                 echo '<div class="alert alert-info">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -497,10 +330,6 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
                         ?>
                     </div>
                     <!-- /.table-responsive -->
-<<<<<<< HEAD
->>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
-=======
->>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
                 </div>
                 <!-- /.panel-body -->
             </div>
@@ -726,13 +555,8 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
             </div>
             <!-- /.box-body -->
           </div>
-<<<<<<< HEAD
 
 
-=======
-
-
->>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
               </div>
                  <div class="tab-pane" id="drivers">
                         <div class="table-responsive">
@@ -797,7 +621,7 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
     </section>
     <!-- /.content -->
   </div>
-			<!-- /.panel -->
+      <!-- /.panel -->
 
 <!-- /#page-wrapper -->
 
@@ -806,53 +630,53 @@ include 'footer.php';
 ?>
 
 <script>
-	function modal1(id) {
-		var data = {"id" : id};
-		jQuery.ajax({
-			url : '../includes/genlocmodal.php',
-			method : "post",
-			data : data,
-			success : function(data) {
-				jQuery('body').append(data);
-				jQuery('#LocModal').modal('toggle');
-			},
-			error : function() {
-				alert("Ooops! Something went wrong!");
-			}
-		});
-	}
+  function modal1(id) {
+    var data = {"id" : id};
+    jQuery.ajax({
+      url : '../includes/genlocmodal.php',
+      method : "post",
+      data : data,
+      success : function(data) {
+        jQuery('body').append(data);
+        jQuery('#LocModal').modal('toggle');
+      },
+      error : function() {
+        alert("Ooops! Something went wrong!");
+      }
+    });
+  }
 </script>
 <script>
-	$(document).ready(function(){
-		$('#driverloc').DataTable();
-	});
+  $(document).ready(function(){
+    $('#driverloc').DataTable();
+  });
 </script>
 <script>
-	function modal(id) {
-		var data = {"id" : id};
-		jQuery.ajax({
-			url : '../includes/drivermodal.php',
-			method : "post",
-			data : data,
-			success : function(data) {
-				jQuery('body').append(data);
-				jQuery('#driverModal').modal('toggle');
-			},
-			error : function() {
-				alert("Ooops! Something went wrong!");
-			}
-		});
-	}
+  function modal(id) {
+    var data = {"id" : id};    
+    jQuery.ajax({
+      url : '../includes/drivermodal.php',
+      method : "post",
+      data : data,
+      success : function(data) {
+        jQuery('body').append(data);
+        jQuery('#driverModal').modal('toggle');
+      },
+      error : function() {
+        alert("Ooops! Something went wrong!");
+      }
+    });
+  }
 </script>
 <script>
-	$(document).ready(function(){
-		$('#bookings').DataTable();
-	});
+  $(document).ready(function(){
+    $('#bookings').DataTable();
+  });
 </script>
 <script>
-	$(document).ready(function(){
-		$('#area').DataTable();
-	});
+  $(document).ready(function(){
+    $('#area').DataTable();
+  });
 </script>
 <script>
   $(document).ready(function(){
@@ -864,28 +688,12 @@ include 'footer.php';
     $('#drv').DataTable();
   });
 </script>
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
-<!-- jvectormap -->
-<link rel="stylesheet" href="bower_components/jvectormap/jquery-jvectormap.css">  
-<!-- Select2 -->
-=======
-=======
->>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
  
   <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
   <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
   <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
   <!-- jvectormap -->
-  <link rel="stylesheet" href="bower_components/jvectormap/jquery-jvectormap.css">	
+  <link rel="stylesheet" href="bower_components/jvectormap/jquery-jvectormap.css">  
   <!-- Select2 -->
-<<<<<<< HEAD
->>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
-=======
->>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
 <script src="bower_components/select2/dist/js/select2.full.min.js"></script>
   <link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css">

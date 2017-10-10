@@ -29,10 +29,11 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 if(isset($_POST['submit'])) {
 
   $description = mysqli_real_escape_string($con, strip_tags(trim($_POST["description"])));
+  $date=date('Y-m-d H:m:s');
 
   if($description != '') {
 
-    $sql = "INSERT INTO query(user_id,email, name,Query,status,feedback) VALUES('".$_SESSION['user_id']."','".$_SESSION['email']."','".$_SESSION['name']."','".$description."','unanswered',' ')";
+    $sql = "INSERT INTO query(user_id,email, name,Query,status,date) VALUES('".$_SESSION['user_id']."','".$_SESSION['email']."','".$_SESSION['name']."','".$description."','unanswered','".$date."')";
     mysqli_query($con, $sql);
     $_SESSION['success'] = 'Your query was added successfully.';
   }else {
