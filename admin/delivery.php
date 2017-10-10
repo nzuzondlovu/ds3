@@ -29,6 +29,7 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 if(isset($_POST['submit'])) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   $driver = mysqli_real_escape_string($con, strip_tags(trim($_POST["driver"])));
   $del = mysqli_real_escape_string($con, strip_tags(trim($_POST["del"])));
   $name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
@@ -51,6 +52,8 @@ if(isset($_POST['submit'])) {
     $_SESSION['success'] = 'Successfully updated details.';
     header("Location: delivery.php");
 =======
+=======
+>>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
 	$driver = mysqli_real_escape_string($con, strip_tags(trim($_POST["driver"])));
 	$del = mysqli_real_escape_string($con, strip_tags(trim($_POST["del"])));
 	$name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
@@ -72,6 +75,9 @@ if(isset($_POST['submit'])) {
 		mysqli_query($con, $sql);
 		$_SESSION['success'] = 'Successfully updated details.';
 		header("Location: delivery.php");
+<<<<<<< HEAD
+>>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
+=======
 >>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
 
 	} else {
@@ -103,6 +109,9 @@ include 'header.php';
 			</div>
 			<!-- /.col-lg-12 -->
 		</div>
+<<<<<<< HEAD
+>>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
+=======
 >>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
               <div class="table-responsive">
               <?php
@@ -204,6 +213,7 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
               <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
             </div>
             <!-- /.box-body -->
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
     <div class="table-responsive">
@@ -309,6 +319,8 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
 >>>>>>> 1c3ae5d7dbec6de39701875ac9b46687e6485f31
 =======
 >>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
+=======
+>>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
           </div>
           <!-- /.box -->
 
@@ -391,6 +403,7 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
                     }
                     echo '
 <<<<<<< HEAD
+<<<<<<< HEAD
                     </tbody>
                     </table>';  
                   } else {
@@ -402,6 +415,8 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
                   }
                   ?>
 =======
+=======
+>>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
                   </tbody>
                 </table>';	
               } else {
@@ -482,6 +497,9 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
                         ?>
                     </div>
                     <!-- /.table-responsive -->
+<<<<<<< HEAD
+>>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
+=======
 >>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
                 </div>
                 <!-- /.panel-body -->
@@ -708,8 +726,13 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
             </div>
             <!-- /.box-body -->
           </div>
+<<<<<<< HEAD
 
 
+=======
+
+
+>>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
               </div>
                  <div class="tab-pane" id="drivers">
                         <div class="table-responsive">
@@ -842,6 +865,7 @@ include 'footer.php';
   });
 </script>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -850,6 +874,8 @@ include 'footer.php';
 <link rel="stylesheet" href="bower_components/jvectormap/jquery-jvectormap.css">  
 <!-- Select2 -->
 =======
+=======
+>>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
  
   <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
   <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -857,6 +883,9 @@ include 'footer.php';
   <!-- jvectormap -->
   <link rel="stylesheet" href="bower_components/jvectormap/jquery-jvectormap.css">	
   <!-- Select2 -->
+<<<<<<< HEAD
+>>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
+=======
 >>>>>>> parent of f18e153... Merge branch 'master' of https://github.com/nzuzondlovu/ds3
 <script src="bower_components/select2/dist/js/select2.full.min.js"></script>
   <link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css">
