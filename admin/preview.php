@@ -30,6 +30,7 @@ $prod_total='';
 $tot='';
 $pt='';
 $cashier='';
+$cust='';
 $sql = "SELECT * FROM sales WHERE invoice_num LIKE '%".$id."%' ";
 $res = mysqli_query($con, $sql);
 
@@ -43,6 +44,7 @@ if (mysqli_num_rows($res) > 0) {
 		$cash=$row['amount_paid'];
 		$change=$row['change'];
 		$cashier=$row['cashier'];
+		$cust=$row['custName'];
 		$date= $row['date'];
 	
 	}

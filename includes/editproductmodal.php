@@ -97,6 +97,7 @@ if (isset($_POST['id']) && $_POST['id'] != null)
 
     while ($row = mysqli_fetch_assoc($res)) {
 
+<<<<<<< HEAD
      $promo = '
      <div class="resume">
      <header class="page-header">
@@ -132,6 +133,92 @@ if (isset($_POST['id']) && $_POST['id'] != null)
      </i>   
      <div class="bs-callout bs-callout-danger">
      <h4>Description</h4>
+=======
+   $promo = ' 
+
+  <div class="resume">
+    <header class="page-header">
+    <h1 class="page-title">Edit Details For Product  '.$row['prod_code'].' </h1>
+    <small> <i class="fa fa-clock-o"></i> Product added on: <time> '.date("M d, y",strtotime($row['date'])).'</time></small>
+  </header>
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-0 col-lg-12 ">
+    <div class="panel panel-default">
+      <div class="panel-heading resume-heading">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="col-xs-12 col-sm-4">
+              <figure>
+
+                   <li class="list-group-item"><i class="fa fa-group"></i> '.$row['supplier'].'</li>
+                   <br/>
+                <img  src="../uploads/'.$row['pic_url'].'" class="img-thumbnail img-responsive" alt="Cinque Terre" width="300" height="300">
+                     <li class="list-group-item"><i class="fa fa-money"> </i> Price- R '.$row['price'].' </li>
+                <li class="list-group-item"><i class="fa fa-money"></i> Original Price- R '.$row['oPrice'].'.00</li>
+
+     <li class="list-group-item"><i class="fa fa-money"></i> Profit- R '.$row['profit'].'.00</li>
+          <li class="list-group-item"><i class="fa fa-envelope"></i> QTY- '.$row['qty'].'</li>
+          
+
+              </figure>
+              
+              <div class="row">
+             
+              </div>
+              
+            </div>
+
+            <div class="col-xs-12 col-sm-8">
+              <ul class="list-group">
+         
+                <li class="list-group-item"><i class="fa fa-tag"></i> '.$row['prod_code'].' </li>
+                <li class="list-group-item"><i class="fa fa-user"></i> Added By -'.$row['idnumber'].'</li>
+                               <li class="list-group-item"><i class="fa fa-briefcase"></i> '.$row['type'].'</li>
+                <li class="list-group-item"><i class="fa fa-registered"></i> '.$row['brandname'].' , '.$row['name'].'</li>
+                    
+
+            
+
+     <li class="list-group-item">
+     </i>   
+         <div class="bs-callout bs-callout-danger">
+        <h4>Lates Orders</h4>
+        <table class="table table-striped table-responsive ">
+          <thead>
+            <tr><th></th>
+            <th></th>
+            <th></th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td> </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td>    </td>
+            </tr>
+          </tbody>
+        </table>
+      </div></li>
+
+       </ul>
+
+            </div>
+          </div>
+        </div>
+      </div>
+  
+
+      <div class="bs-callout bs-callout-danger">
+        <h4 >   Description  </h4>
+        <ul class="list-group">
+          <a class="list-group-item inactive-link" href="#">
+            
+
+>>>>>>> c5c0977d1c9c0018bd8d96a66acac65cb71cd1ad
      '.$row['description'].'
      </div>
      </li>
@@ -181,12 +268,35 @@ if (isset($_POST['id']) && $_POST['id'] != null)
       </div>
       <div class="modal-body">
         <div class="row">
+<<<<<<< HEAD
           <div class="col-lg-12">
             <div>
               <?php if(isset($_SESSION['failure']) && $_SESSION['failure'] != '') { ?>
               <div class="alert alert-danger">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                 <?php echo $_SESSION['failure']; unset($_SESSION['failure']); ?>
+=======
+      <div class="col-lg-12">
+        <div>
+          <?php if(isset($_SESSION['failure']) && $_SESSION['failure'] != '') { ?>
+          <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <?php echo $_SESSION['failure']; unset($_SESSION['failure']); ?>
+          </div>
+          <?php } ?>
+
+          <?php if(isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
+          <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
+          </div>
+          <?php } ?>
+        </div>
+  
+            <div class="row">
+              <div class="col-lg-12">
+          
+>>>>>>> c5c0977d1c9c0018bd8d96a66acac65cb71cd1ad
               </div>
               <?php } ?>
 
@@ -231,10 +341,24 @@ if (isset($_POST['id']) && $_POST['id'] != null)
                       ?>
                     </select>
                   </div>
+<<<<<<< HEAD
                   <div class="form-group col-xs-12 col-sm-6">
+=======
+   <div class="form-group  col-sm-6">
+                    <label>Price</label>
+                  <input class="form-control" type="text" id="txt1" name="price" onkeyup="sum();" value="<?php echo $pri; ?>">
+
+      
+
+
+                  </div> 
+                   <div class="form-group col-xs-12 col-sm-6">
+
+>>>>>>> c5c0977d1c9c0018bd8d96a66acac65cb71cd1ad
                     <label>Device description</label>
                     <textarea name="description" class="form-control" rows="3"><?php echo $des; ?></textarea>
                   </div>
+<<<<<<< HEAD
                   <div class="form-group  col-sm-6">
                     <label>Price</label>
                     <input required="required" class="form-control" type="text" id="txt1" name="price" onkeyup="sum();" value="<?php echo $pri; ?>">
@@ -283,6 +407,87 @@ if (isset($_POST['id']) && $_POST['id'] != null)
         model: {
           required: true,
           maxlength: 35
+=======
+                       
+
+ <div class="row">
+              <div class="col-lg-12">
+               
+                <div class="pull-right">
+                <div class="form-group col-xs-12 col-sm-6">
+                       <input type="text" name="id" value="<?= $id; ?>" hidden>
+                  <button name="prodEdit" type="submit" class="btn btn-primary">Update Product</button>
+                </div>
+  <div class="form-group col-xs-12 col-sm-6">
+                  <button type="reset" class="btn btn-default">Reset Form</button>
+
+                </div>
+                </div>
+              </div>
+
+
+
+</div>
+       
+                      
+             
+                </form>
+
+              </div>
+              <!-- /.col-lg-6 (nested) -->
+            </div>
+            <!-- /.row (nested) -->
+          </div>
+          <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+      </div>
+      <!-- /.col-lg-12 -->
+    </div>
+      </div>
+ 
+  <!-- /.Modal -->
+  <script>
+    function closeModal() {
+      jQuery('#responseModal').modal('hide');
+      setTimeout(function() {
+        jQuery('#responseModal').remove();
+      },500);
+    }
+  </script>
+  <script type="text/javascript">
+
+    $( document ).ready( function () {
+      $( "#quoteForm" ).validate( {
+        rules: {
+          model: {
+            required: true,
+            maxlength: 35
+          },
+          accessory: {
+            required: true,
+            maxlength: 250
+          },
+          technician: "required",
+          deposit: {
+            required: true,
+            maxlength: 10
+          },
+          balance: {
+            required: true,
+            maxlength: 10
+          },
+          total: {
+            required: true,
+            maxlength: 10
+          },
+          status: "required",
+          desc: {
+            required: true,
+            minlength: 10,
+            maxlength: 250
+          }
+>>>>>>> c5c0977d1c9c0018bd8d96a66acac65cb71cd1ad
         },
         accessory: {
           required: true,

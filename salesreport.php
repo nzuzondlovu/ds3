@@ -90,6 +90,11 @@ include 'header.php';
 								</div>	
 								</div>
 							</div>
+							<form action="salesreport.php" method="get">
+<center><strong>From : <input type="text" style="width: 223px; padding:14px;" name="d1" class="tcal" value="" /> To: <input type="text" style="width: 223px; padding:14px;" name="d2" class="tcal" value="" />
+ <button class="btn btn-info" style="width: 123px; height:35px; margin-top:-8px;margin-left:8px;" type="submit"><i class="icon icon-search icon-large"></i> Search</button>
+</strong></center>
+</form>
 						<div class="table-responsive">
 							<?php
 							$num_rec_per_page=10;
@@ -132,7 +137,7 @@ include 'header.php';
 												<td>'.$row['cashier'].'</td>
 												<td>'.$row['date'].'</td>
 												<td class="pull-right">
-												<a href="preview.php?id=<?php echo '.$row['invoice_num'].';?>" class="btn btn-warning"><i class="fa fa-edit fa-fw"></i>View Details</a>
+											<button  onclick="modal('.$row['id'].')" class="btn btn-primary" ><i class="fa fa-trash fa-fw"></i>View Details</button>
 													<button  onclick="modal('.$row['id'].')" class="btn btn-primary" ><i class="fa fa-trash fa-fw"></i>Delete Order</button>   
 												</td>
 											</tr>';
