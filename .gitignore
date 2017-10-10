@@ -2,3 +2,4 @@
 *.json
 *.jpg
 admin/delivery.php
+includes/geolocation.php
