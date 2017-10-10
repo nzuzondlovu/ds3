@@ -121,7 +121,7 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
 		VALUES('".$gen_code."','".$AreaCode."','".$idnumber."', '".$Month."')";
 		mysqli_query($con, $sql);
 		$_SESSION['success'] = 'Successfully updated details.';
-		header("Location: drivers.php");
+		header("Location: delivery.php");
 
 	} else {
 		$_SESSION['failure'] = 'Please fill in all fields';
@@ -185,6 +185,7 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
               <li><a href="#timeline" data-toggle="tab">Location</a></li>
               <li><a href="#settings" data-toggle="tab">Allocated</a></li>
               <li><a href="#drivers" data-toggle="tab">Drivers</a></li>
+                    <li><a href="#loc" data-toggle="tab">Driver Locations</a></li>
 
 
             </ul>
@@ -332,9 +333,156 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
                 </div>
                 <!-- /.panel-body -->
             </div>
+            <div class="tab-pane" id="loc">
+                <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">Driver Locations</h3>
+
+             
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <div class="row">
+                <div class="col-md-12 col-sm-8">
+                  <div class="pad">
+                    <!-- Map will be created here -->
+                    <div id="" style="height: 325px;">  
+                      <?php
+
+              $sql = "SELECT * FROM driver_loc WHERE idnumber=  '".$_SESSION['idnumber']."' ";
+              $res = mysqli_query($con, $sql);  
+
+              if (mysqli_num_rows($res) > 0) {
+                echo '
+          <table id="bookings" class="table data-table">
+                  <thead>
+                    <tr>
+
+                      <th>Location ID</th>
+                
+                     <th>Location</th>
+                      <th>Month</th>
+          
+
+                  
+                      
+                    </tr>
+                  </thead>
+                  <tbody>';
+                    while ($row = mysqli_fetch_assoc($res)) {
+
+                      echo '
+                      <tr>
+                        <td>'.$row['gen_code'].'</td>
+                  
+                      
+                        <td>'.$row['AreaCode'].'</td>
+                        <td>'.$row['Month'].'</td>
+                     
+                            <td class=" pull-right">
+                             
+
+                        
+                        </td>
+                      
+                      </tr>';
+                    }
+                    echo '
+                  </tbody>
+                </table>';
+              } else {
+                echo '<div class="alert alert-info">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>No deliveries found.</strong>
+              </div>';
+            }
+            ?> </div>
+
+                  </div>
+                </div>
+                <!-- /.col -->
+        
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+          </div>
+            </div>
               
               <!-- /.tab-pane -->
+<div class="tab-pane" id="settings">
+                        <div class="col-md-12">
+          <!-- MAP & BOX PANE --></div>
+          <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">Allocated Deliveries</h3>
 
+             
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <div class="row">
+                <div class="col-md-12 col-sm-8">
+                  <div class="pad">
+                    <!-- Map will be created here -->
+                    <div id="" style="height: 325px;">  <?php
+
+              $sql = "SELECT * FROM driverdelivery ";
+              $res = mysqli_query($con, $sql);
+
+              if (mysqli_num_rows($res) > 0) {
+                echo '
+                <table id="del" class="table data-table no-margin">
+                  <thead>
+                    <tr>
+
+                      <th>Driver</th>
+                
+                      <th>Date</th>
+                    
+                      <th>Address</th>
+                      <th> Postal Code</th>
+
+                      <th> Status</th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>';
+                    while ($row = mysqli_fetch_assoc($res)) {
+
+                      echo '
+                      <tr>
+                        <td>'.$row['driverID'].'</td>
+                        <td>'.date("M d, y",strtotime($row['dateofDelivery'])).'</td>
+                      
+                        <td>'.$row['location'].'</td>
+                        <td>'.$row['area'].'</td>
+                          <td>'.$row['status'].'</td> 
+                      
+                      </tr>';
+                    }
+                    echo '
+                  </tbody>
+                </table>';
+              } else {
+                echo '<div class="alert alert-info">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>No deliveries found.</strong>
+              </div>';
+            }
+            ?> </div>
+
+                  </div>
+                </div>
+                <!-- /.col -->
+        
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+          </div>
               <div class="tab-pane" id="settings">
                         <div class="col-md-12">
           <!-- MAP & BOX PANE --></div>
