@@ -29,7 +29,7 @@ if(isset($_POST['submit'])) {
 		$sql = "UPDATE category SET name='".$name."', type='".$type."', description='".$description."' WHERE id='".$id."'";
 		mysqli_query($con, $sql);
 		$_SESSION['success'] = 'Your new Category was updated successfully.';
-		header("Location: categories.php");
+		header("Location: products.php");
 	}else {
 		$_SESSION['failure'] = 'Please fill in all fields.';
 	}

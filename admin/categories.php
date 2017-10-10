@@ -148,11 +148,11 @@ include 'header.php';
 								<table id="category" class="table data-table">
 									<thead>
 										<tr>
-											<th>Category ID</th>
+										
 											<th>Name</th>
 											<th>Type</th>
 											<th>Description</th>
-											<th>Date</th>
+											
 											<th>Action</th>
 										</tr>
 									</thead>
@@ -161,11 +161,11 @@ include 'header.php';
 
 											echo '
 											<tr>
-												<td>'.$row['id'].'</td>
+												
 												<td>'.$row['name'].'</td>
 												<td>'.$row['type'].'</td>
 												<td>'.$row['description'].'</td>
-												<td>'.date("M d, y",strtotime($row['dateCreated'])).'</td>
+											
 												<td class="pull-right">
 													<a href="editcat.php?id='.$row['id'].'" class="btn btn-primary">Edit Category</a>  <a href="?id='.$row['id'].'" class="btn btn-warning">Archive Category</a>
 												</td>
@@ -201,4 +201,5 @@ include 'footer.php';
 	$(document).ready(function(){
 		$('#category').DataTable();
 	});
-</script>
+</script><script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>

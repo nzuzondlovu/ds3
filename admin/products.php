@@ -356,10 +356,23 @@ include 'header.php';
 															</select>
 														</div>
 
-														<div class="form-group">
-															<label>Upload picture</label>
-															<input type="file" name="fileToUpload" required="required">
-														</div>
+
+
+														      <div class="form-group">
+             <label>Upload Picture </label>
+             <input hidden="true" type="file" id="ftu" name="fileToUpload" style="display: none;">
+
+             <label for="ftu" class="btn btn-success col-lg-6 " > Browse...	
+
+               <i class="glyphicon glyphicon-cloud-upload"> </i>
+
+
+
+             </label>    
+
+
+
+           </div>
 														<div class="form-group">
 															<label>Device description</label>
 															<textarea name="description" class="form-control" rows="3" required="required"></textarea>
@@ -641,7 +654,7 @@ include 'header.php';
 											<th>Name</th>
 											<th>Type</th>
 											<th>Description</th>
-											<th>Date</th>
+										
 											<th>Action</th>
 											</tr>
 											</thead>
@@ -654,7 +667,7 @@ include 'header.php';
 												<td>'.$row['name'].'</td>
 												<td>'.$row['type'].'</td>
 												<td>'.$row['description'].'</td>
-												<td>'.date("M d, y",strtotime($row['dateCreated'])).'</td>
+											
 												<td class="pull-right">
 												<a href="editcat.php?id='.$row['id'].'" class="label label-primary">Edit </a>  
 												<a href="?id='.$row['id'].'" class="label label-warning">Archive </a>

@@ -113,15 +113,15 @@ if (isset($_POST['id']) && $_POST['id'] != null)
             <div class="col-xs-12 col-sm-4">
               <figure>
 
-                   <li class="list-group-item"><i class="fa fa-envelope"></i>'.$row['supplier'].'</li>
+                   <li class="list-group-item"><i class="fa fa-group"></i> '.$row['supplier'].'</li>
                    <br/>
                 <img  src="../uploads/'.$row['pic_url'].'" class="img-thumbnail img-responsive" alt="Cinque Terre" width="300" height="300">
-                     <li class="list-group-item"><i class="fa fa-phone"></i> R '.$row['price'].' </li>
-                <li class="list-group-item"><i class="fa fa-envelope"></i> R '.$row['oPrice'].'</li>
+                     <li class="list-group-item"><i class="fa fa-money"> </i> Price- R '.$row['price'].' </li>
+                <li class="list-group-item"><i class="fa fa-money"></i> Original Price- R '.$row['oPrice'].'.00</li>
 
-     <li class="list-group-item"><i class="fa fa-envelope"></i> R '.$row['profit'].'</li>
-          <li class="list-group-item"><i class="fa fa-envelope"></i>  '.$row['qty'].'</li>
-               <li class="list-group-item"><i class="fa fa-envelope"></i> R '.$row['qty_sold'].'</li>
+     <li class="list-group-item"><i class="fa fa-money"></i> Profit- R '.$row['profit'].'.00</li>
+          <li class="list-group-item"><i class="fa fa-envelope"></i> QTY- '.$row['qty'].'</li>
+          
 
               </figure>
               
@@ -134,10 +134,10 @@ if (isset($_POST['id']) && $_POST['id'] != null)
             <div class="col-xs-12 col-sm-8">
               <ul class="list-group">
          
-                <li class="list-group-item"><i class="fa fa-phone"></i> '.$row['prod_code'].' </li>
-                <li class="list-group-item"><i class="fa fa-envelope"></i> '.$row['idnumber'].'</li>
-                               <li class="list-group-item"><i class="fa fa-phone"></i> '.$row['type'].'</li>
-                <li class="list-group-item"><i class="fa fa-envelope"></i> '.$row['brandname'].' , '.$row['name'].'</li>
+                <li class="list-group-item"><i class="fa fa-tag"></i> '.$row['prod_code'].' </li>
+                <li class="list-group-item"><i class="fa fa-user"></i> Added By -'.$row['idnumber'].'</li>
+                               <li class="list-group-item"><i class="fa fa-briefcase"></i> '.$row['type'].'</li>
+                <li class="list-group-item"><i class="fa fa-registered"></i> '.$row['brandname'].' , '.$row['name'].'</li>
                     
 
             
@@ -148,26 +148,25 @@ if (isset($_POST['id']) && $_POST['id'] != null)
         <h4>Lates Orders</h4>
         <table class="table table-striped table-responsive ">
           <thead>
-            <tr><th>Degree</th>
-            <th>Graduation Year</th>
-            <th>CGPA</th>
+            <tr><th></th>
+            <th></th>
+            <th></th>
           </tr></thead>
           <tbody>
             <tr>
-              <td>Masters in Computer Science and Engineering</td>
-              <td>2014</td>
-              <td> 3.50 </td>
+              <td></td>
+              <td></td>
+              <td> </td>
             </tr>
             <tr>
-              <td>BSc. in Computer Science and Engineering</td>
-              <td>2011</td>
-              <td> 3.25 </td>
+              <td></td>
+              <td></td>
+              <td>    </td>
             </tr>
           </tbody>
         </table>
       </div></li>
 
-     <li class="list-group-item"><i class="fa fa-envelope"></i> john@example.com</li>
        </ul>
 
             </div>
@@ -242,10 +241,7 @@ if (isset($_POST['id']) && $_POST['id'] != null)
   
             <div class="row">
               <div class="col-lg-12">
-               
-                <div class="pull-right">
-                  <a href="products.php" class="btn btn-warning">Products</a>
-                </div>
+          
               </div>
 
 
@@ -297,25 +293,21 @@ if (isset($_POST['id']) && $_POST['id'] != null)
                       ?>
                     </select>
                   </div>
+   <div class="form-group  col-sm-6">
+                    <label>Price</label>
+                  <input class="form-control" type="text" id="txt1" name="price" onkeyup="sum();" value="<?php echo $pri; ?>">
 
+      
+
+
+                  </div> 
                    <div class="form-group col-xs-12 col-sm-6">
 
                     <label>Device description</label>
                     <textarea name="description" class="form-control" rows="3"><?php echo $des; ?></textarea>
 
                   </div>
-                          <div class="form-group  col-sm-6">
-                    <label>Price</label>
-                 
-
-                        <input class="form-control" type="text" id="txt1" name="price" onkeyup="sum();" value="<?php echo $pri; ?>">
-
-                                        <input type="text" id="txt3" class="form-control" hidden="true" name="profit" readonly value="<?php echo $prof; ?>">
-                                        
-
-                                                    <input class="form-control"  type="text" id="txt2"  name="oPrice" onkeyup="sum();" value="<?php echo $op; ?>">
-
-                  </div> 
+                       
 
  <div class="row">
               <div class="col-lg-12">
@@ -324,8 +316,10 @@ if (isset($_POST['id']) && $_POST['id'] != null)
                 <div class="form-group col-xs-12 col-sm-6">
                        <input type="text" name="id" value="<?= $id; ?>" hidden>
                   <button name="prodEdit" type="submit" class="btn btn-primary">Update Product</button>
-
+                </div>
+  <div class="form-group col-xs-12 col-sm-6">
                   <button type="reset" class="btn btn-default">Reset Form</button>
+
                 </div>
                 </div>
               </div>
