@@ -13,16 +13,16 @@ if(isset($_SESSION['key']) == '' ) {
 
 <?php
 
-
+  
 
 
 if(isset($_POST['submit'])) {
   $price = mysqli_real_escape_string($con, strip_tags(trim($_POST["price"])));
   $bname = mysqli_real_escape_string($con, strip_tags(trim($_POST["start"])));
   $genname = mysqli_real_escape_string($con, strip_tags(trim($_POST["end"])));
-  $type = mysqli_real_escape_string($con, strip_tags(trim($_POST["price"])));
+    $type = mysqli_real_escape_string($con, strip_tags(trim($_POST["price"])));
   $description = mysqli_real_escape_string($con, strip_tags(trim($_POST["start"])));
-
+ 
 
 
   $date = date("Y-m-d");
@@ -35,16 +35,16 @@ if(isset($_POST['submit'])) {
     } else if ($end > $start) {
 $//sql = "INSERT INTO product(user, name, description, type, price, pic_url, date,onhand_qty,qty,supplier,brandname,oPrice,profit,promo_price,promo_date1,promo_date2,archive)
 
-$sql = "UPDATE product SET price='".$price."', brandname='".$brandname."', name='".$name."' WHERE id='".$id."'";
-mysqli_query($con, $sql);
-$_SESSION['success'] = 'details successfully updated';
-header("Location: promotions.php");
-} else {
-  $_SESSION['failure'] = '';
-}   
-}else {
-  $_SESSION['failure'] = 'Please fill in all fields.';
-}
+      $sql = "UPDATE product SET price='".$price."', brandname='".$brandname."', name='".$name."' WHERE id='".$id."'";
+      mysqli_query($con, $sql);
+      $_SESSION['success'] = 'details successfully updated';
+      header("Location: promotions.php");
+    } else {
+      $_SESSION['failure'] = '';
+    }   
+  }else {
+    $_SESSION['failure'] = 'Please fill in all fields.';
+  }
 }
 ?>
 
@@ -56,7 +56,7 @@ $brandnam = '';
 $typ = '';
 $pri = '';
 $des = '';
-$id = mysqli_real_escape_string($con, strip_tags(trim($_POST['id'])));
+ $id = mysqli_real_escape_string($con, strip_tags(trim($_POST['id'])));
 
 $sql = "SELECT * FROM product WHERE id='".$id."' ";
 $res = mysqli_query($con, $sql);
@@ -97,43 +97,6 @@ if (isset($_POST['id']) && $_POST['id'] != null)
 
     while ($row = mysqli_fetch_assoc($res)) {
 
-<<<<<<< HEAD
-     $promo = '
-     <div class="resume">
-     <header class="page-header">
-     <h1 class="page-title">Edit Details For Product  '.$row['prod_code'].' </h1>
-     <small> <i class="fa fa-clock-o"></i> Product added on: <time> '.date("M d, y",strtotime($row['date'])).'</time></small>
-     </header>
-     <div class="row">
-     <div class="col-xs-12 col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-0 col-lg-12 ">
-     <div class="panel panel-default">
-     <div class="panel-heading resume-heading">
-     <div class="row">
-     <div class="col-lg-12">
-     <div class="col-xs-12 col-sm-4">
-     <figure>
-     <li class="list-group-item"><i class="fa fa-bank"></i> '.$row['supplier'].'</li>     <br/>
-     <img  src="../uploads/'.$row['pic_url'].'" class="img-thumbnail img-responsive" alt="Cinque Terre" width="300" height="300">
-     <li class="list-group-item"><i class="fa fa-money"></i> R '.$row['price'].' </li>
-     <li class="list-group-item"><i class="fa fa-dollar"></i> R '.$row['oPrice'].'</li>
-     <li class="list-group-item"><i class="fa fa-line-chart"></i> R '.$row['profit'].'</li>
-     </figure>
-     <div class="row">
-     </div>
-     </div>
-     <div class="col-xs-12 col-sm-8">
-     <ul class="list-group">
-     <li class="list-group-item"><i class="fa fa-barcode"></i> '.$row['prod_code'].' </li>
-     <li class="list-group-item"><i class="fa fa-user"></i> '.$row['idnumber'].'</li>
-     <li class="list-group-item"><i class="fa fa-tags"></i> '.$row['type'].'</li>
-     <li class="list-group-item"><i class="fa fa-trademark"></i> '.$row['brandname'].' , '.$row['name'].'</li>     
-     <li class="list-group-item"><i class="fa fa-database"></i> Quantity - '.$row['qty'].'</li>
-     <li class="list-group-item"><i class="fa fa-credit-card"></i> Quantity - '.$row['qty_sold'].'</li>
-     <li class="list-group-item">
-     </i>   
-     <div class="bs-callout bs-callout-danger">
-     <h4>Description</h4>
-=======
    $promo = ' 
 
   <div class="resume">
@@ -218,45 +181,36 @@ if (isset($_POST['id']) && $_POST['id'] != null)
           <a class="list-group-item inactive-link" href="#">
             
 
->>>>>>> c5c0977d1c9c0018bd8d96a66acac65cb71cd1ad
      '.$row['description'].'
-     </div>
-     </li>
-     <li class="list-group-item"><i class="fa fa-barcode"></i> '.$row['id'].'</li>
-     </ul>
-     </div>
-     </div>
-     </div>
-     </div>
-     </div>
-     </div>
-     </div>     
-     </div>
-     ';
-     $gennam = $row['name'];
-     $brandnam = $row['brandname'];
-     $typ = $row['type'];
-     $pri = $row['price'];
-     $des = $row['description'];
-     $op = $row['oPrice'];
-     $prof = $row['profit'];
-   }
- }
+   
+     
+
+          
+
+          </a>
+
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+    
+</div>
+';
+    $gennam = $row['name'];
+    $brandnam = $row['brandname'];
+    $typ = $row['type'];
+    $pri = $row['price'];
+    $des = $row['description'];
+        $op = $row['oPrice'];
+    $prof = $row['profit'];
+    }
+  }
 }
 
 ?>
-
-<script>
-  function sum() {
-    var txtFirstNumberValue = document.getElementById('txt1').value;
-    var txtSecondNumberValue = document.getElementById('txt2').value;
-    var result = parseInt(txtFirstNumberValue) - parseInt(txtSecondNumberValue);
-    if (!isNaN(result)) {
-      document.getElementById('txt3').value = result;
-
-    }
-  }
-</script>
 
 <!-- Modal -->
 <div class="modal fade " id="responseModal" tabindex="-1" role="dialog" aria-labelledby="responseModalLabel">
@@ -268,14 +222,6 @@ if (isset($_POST['id']) && $_POST['id'] != null)
       </div>
       <div class="modal-body">
         <div class="row">
-<<<<<<< HEAD
-          <div class="col-lg-12">
-            <div>
-              <?php if(isset($_SESSION['failure']) && $_SESSION['failure'] != '') { ?>
-              <div class="alert alert-danger">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <?php echo $_SESSION['failure']; unset($_SESSION['failure']); ?>
-=======
       <div class="col-lg-12">
         <div>
           <?php if(isset($_SESSION['failure']) && $_SESSION['failure'] != '') { ?>
@@ -296,32 +242,38 @@ if (isset($_POST['id']) && $_POST['id'] != null)
             <div class="row">
               <div class="col-lg-12">
           
->>>>>>> c5c0977d1c9c0018bd8d96a66acac65cb71cd1ad
               </div>
-              <?php } ?>
 
-              <?php if(isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
-              <div class="alert alert-success">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
+
+
+</div>
+              <div class="col-md-12">  <?php
+                echo $promo;
+                ?>
               </div>
-              <?php } ?>
-            </div>
-            <div class="row">
-            </div>
-            <div class="col-md-12">
-              <?php
-              echo $promo;
-              ?>
-            </div>
-            <div class="col-xs-12 col-sm-12">
-              <form role="form" method="post">
-                <div class="form-group">
+    <div class="col-xs-12 col-sm-12">
+             
+
+                <form role="form" method="post">
+
+              <div class="form-group">
+            
+           
+    
+        
+          
+            
+    
+      
+            
+
+
+       
                   <div class="form-group col-xs-12 col-sm-6">
                     <label>Brand Name</label>
                     <input type="text" name="brandname" class="form-control" value="<?php echo $brandnam; ?>">
                   </div>
-                  <div class="form-group col-xs-12 col-sm-6">
+                    <div class="form-group col-xs-12 col-sm-6">
                     <label>Generic Name</label>
                     <input type="text" name="name" class="form-control" value="<?php echo $gennam; ?>">
                   </div>
@@ -341,9 +293,6 @@ if (isset($_POST['id']) && $_POST['id'] != null)
                       ?>
                     </select>
                   </div>
-<<<<<<< HEAD
-                  <div class="form-group col-xs-12 col-sm-6">
-=======
    <div class="form-group  col-sm-6">
                     <label>Price</label>
                   <input class="form-control" type="text" id="txt1" name="price" onkeyup="sum();" value="<?php echo $pri; ?>">
@@ -354,60 +303,10 @@ if (isset($_POST['id']) && $_POST['id'] != null)
                   </div> 
                    <div class="form-group col-xs-12 col-sm-6">
 
->>>>>>> c5c0977d1c9c0018bd8d96a66acac65cb71cd1ad
                     <label>Device description</label>
                     <textarea name="description" class="form-control" rows="3"><?php echo $des; ?></textarea>
-                  </div>
-<<<<<<< HEAD
-                  <div class="form-group  col-sm-6">
-                    <label>Price</label>
-                    <input required="required" class="form-control" type="text" id="txt1" name="price" onkeyup="sum();" value="<?php echo $pri; ?>">
-                    <input type="text" id="txt3" class="form-control" hidden="true" name="profit" readonly value="<?php echo $prof; ?>" required="required">
-                    <input class="form-control"  type="text" id="txt2"  name="oPrice" required="required"> onkeyup="sum();" value="<?php echo $op; ?>">
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-12">
-                      <div class="pull-right">
-                        <div class="form-group col-md-12 col-sm-6">
-                         <input type="text" name="id" value="<?= $id; ?>" hidden>
-                         <button name="prodEdit" type="submit" class="btn btn-primary">Update Product</button>
-                         <button type="reset" class="btn btn-default">Reset Form</button>
-                       </div>
-                     </div>
-                   </div>
-                 </div>
-               </form>
-             </div>
-             <!-- /.col-lg-6 (nested) -->
-           </div>
-           <!-- /.row (nested) -->
-         </div>
-         <!-- /.panel-body -->
-       </div>
-       <!-- /.panel -->
-     </div>
-     <!-- /.col-lg-12 -->
-   </div>
- </div>
 
- <!-- /.Modal -->
- <script>
-  function closeModal() {
-    jQuery('#responseModal').modal('hide');
-    setTimeout(function() {
-      jQuery('#responseModal').remove();
-    },500);
-  }
-</script>
-<script type="text/javascript">
-
-  $( document ).ready( function () {
-    $( "#quoteForm" ).validate( {
-      rules: {
-        model: {
-          required: true,
-          maxlength: 35
-=======
+                  </div>
                        
 
  <div class="row">
@@ -487,63 +386,38 @@ if (isset($_POST['id']) && $_POST['id'] != null)
             minlength: 10,
             maxlength: 250
           }
->>>>>>> c5c0977d1c9c0018bd8d96a66acac65cb71cd1ad
         },
-        accessory: {
-          required: true,
-          maxlength: 250
+        messages: {
+          model: {
+            required: "Please enter the model of the device",
+            maxlength: "Your model cant be longer than 35 characters"
+          },
+          accessory: {
+            required: "Please enter the accessoriesof the device",
+            maxlength: "Your response cant be longer than 250 characters"
+          },
+          technician: "Please select a technician",
+          deposit: {
+            required: "Please enter a deposit amount",
+            maxlength: "Please enter a valid amount"
+          },
+          balance: {
+            required: "Please enter a balance amount",
+            maxlength: "Please enter a valid amount"
+          },
+          total: {
+            required: "Please enter the total amount",
+            maxlength: "Please enter a valid amount"
+          },
+          status: "Please select a device status",
+          desc: {
+            required: "Please enter a description of the device",
+            minlength: "Your description has to be more than 10 characters",
+            maxlength: "Your description cant be longer than 250 characters"
+          }
         },
-        technician: "required",
-        deposit: {
-          required: true,
-          maxlength: 10
-        },
-        balance: {
-          required: true,
-          maxlength: 10
-        },
-        total: {
-          required: true,
-          maxlength: 10
-        },
-        status: "required",
-        desc: {
-          required: true,
-          minlength: 10,
-          maxlength: 250
-        }
-      },
-      messages: {
-        model: {
-          required: "Please enter the model of the device",
-          maxlength: "Your model cant be longer than 35 characters"
-        },
-        accessory: {
-          required: "Please enter the accessoriesof the device",
-          maxlength: "Your response cant be longer than 250 characters"
-        },
-        technician: "Please select a technician",
-        deposit: {
-          required: "Please enter a deposit amount",
-          maxlength: "Please enter a valid amount"
-        },
-        balance: {
-          required: "Please enter a balance amount",
-          maxlength: "Please enter a valid amount"
-        },
-        total: {
-          required: "Please enter the total amount",
-          maxlength: "Please enter a valid amount"
-        },
-        status: "Please select a device status",
-        desc: {
-          required: "Please enter a description of the device",
-          minlength: "Your description has to be more than 10 characters",
-          maxlength: "Your description cant be longer than 250 characters"
-        }
-      },
-      errorElement: "em",
-      errorPlacement: function ( error, element ) {
+        errorElement: "em",
+        errorPlacement: function ( error, element ) {
           // Add the `help-block` class to the error element
           error.addClass( "help-block" );
 
@@ -560,6 +434,6 @@ if (isset($_POST['id']) && $_POST['id'] != null)
           $( element ).parents( ".col-sm-5" ).addClass( "has-success" ).removeClass( "has-error" );
         }
       });
-  });
-</script>
-<?php echo ob_get_clean(); ?>
+    });
+  </script>
+  <?php echo ob_get_clean(); ?>

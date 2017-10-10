@@ -1,4 +1,35 @@
-<?php
+<script>
+function sum() {
+            var txtFirstNumberValue = document.getElementById('txt1').value;
+            var txtSecondNumberValue = document.getElementById('txt2').value;
+            var result = parseInt(txtFirstNumberValue) - parseInt(txtSecondNumberValue);
+            if (!isNaN(result)) {
+                document.getElementById('txt3').value = result;
+        
+            }
+      
+       var txtFirstNumberValue = document.getElementById('txt11').value;
+            var result = parseInt(txtFirstNumberValue);
+            if (!isNaN(result)) {
+                document.getElementById('txt22').value = result;        
+            }
+      
+       var txtFirstNumberValue = document.getElementById('txt11').value;
+            var txtSecondNumberValue = document.getElementById('txt33').value;
+            var result = parseInt(txtFirstNumberValue) + parseInt(txtSecondNumberValue);
+            if (!isNaN(result)) {
+                document.getElementById('txt55').value = result;
+        
+            }
+      
+       var txtFirstNumberValue = document.getElementById('txt4').value;
+       var result = parseInt(txtFirstNumberValue);
+            if (!isNaN(result)) {
+                document.getElementById('txt5').value = result;
+        }
+      
+        }
+</script><?php
 include_once 'functions.php';
 
 if (isset($_POST['id']) && $_POST['id'] != null) {
@@ -40,38 +71,6 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
 }
 ?>
 
-<script>
-  function sum() {
-    var txtFirstNumberValue = document.getElementById('txt1').value;
-    var txtSecondNumberValue = document.getElementById('txt2').value;
-    var result = parseInt(txtFirstNumberValue) - parseInt(txtSecondNumberValue);
-    if (!isNaN(result)) {
-      document.getElementById('txt3').value = result;
-
-    }
-
-    var txtFirstNumberValue = document.getElementById('txt11').value;
-    var result = parseInt(txtFirstNumberValue);
-    if (!isNaN(result)) {
-      document.getElementById('txt22').value = result;        
-    }
-
-    var txtFirstNumberValue = document.getElementById('txt11').value;
-    var txtSecondNumberValue = document.getElementById('txt33').value;
-    var result = parseInt(txtFirstNumberValue) + parseInt(txtSecondNumberValue);
-    if (!isNaN(result)) {
-      document.getElementById('txt55').value = result;
-
-    }
-
-    var txtFirstNumberValue = document.getElementById('txt4').value;
-    var result = parseInt(txtFirstNumberValue);
-    if (!isNaN(result)) {
-      document.getElementById('txt5').value = result;
-    }
-
-  }
-</script>
 
 <?php ob_start(); ?>
 <!-- Modal -->
@@ -85,51 +84,69 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
       <div class="modal-body">
         <div class="row">
           <div class="col-md-6">
-            <h2>Qoutation details</h2>
-            <?php
-            echo $cat;
-            ?>
-          </div>
+                <h2>Qoutation details</h2>
+                <?php
+                echo $cat;
+                ?>
+              </div>
 
-          <div class="col-md-6">
-            <form id="editForm" role="form" method="post">
-              <div class="form-group">
-                <label>Deposit</label>              
-                <input class="form-control" type="text" id="txt2" name="deposit" onkeyup="sum();"  required="required" placeholder="R0.00"  value="<?php echo $dep;?>">
+              <div class="col-md-6">
+                <form id="editForm" role="form" method="post">
+
+                  <div class="form-group">
+                    <label>Deposit</label>
+                    <input name="deposit" class="form-control" value="<?php echo $dep;?>">
+                  </div>
+                  <div class="form-group">
+                    <label>Balance</label>
+                    <input name="balance" class="form-control" value="<?php echo $bal;?>">
+                  </div>
+                  <div class="form-group">
+                    <label>Total</label>
+                    <input name="total" class="form-control" value="<?php echo $tot;?>">
+                  </div>
+
+                   <div class="form-group">
+                <label>Deposit</label>
+              
+                <input class="form-control" type="text" id="txt2" name="deposit" onkeyup="sum();" Required placeholder="R0.00"  value="<?php echo $dep;?>">
               </div>
               <div class="form-group">
                 <label>Total</label>
-                <input class="form-control"  type="text" id="txt1"  name="total" onkeyup="sum();"  required="required" placeholder="R0.00"  value="<?php echo $tot;?>">
+                <input class="form-control"  type="text" id="txt1"  name="total" onkeyup="sum();" Required placeholder="R0.00"  value="<?php echo $tot;?>">
               </div>
+          
+            
               <div class="form-group">
                 <label>Balance</label> 
-                <input type="text" id="txt3" class="form-control" name="balance" onkeyup="sum();" readonly value="<?php echo $bal;?>" required="required">
-              </div>
-              <div class="form-group">
-                <label>Status</label>
-                <select name="status" class="form-control">
-                  <option value="<?php echo $sta;?>" selected="selected"><?php echo $sta;?></option>
-                  <?php
-                  $sql = "SELECT * FROM status ORDER BY name ASC";
-                  $res = mysqli_query($con, $sql);
+                    <input type="text" id="txt3" class="form-control" name="balance" readonlyvalue="<?php echo $bal;?>">
 
-                  if(mysqli_num_rows($res) > 0) {
-                    while($row = mysqli_fetch_assoc($res)) {
-                      echo '<option value="'.$row['name'].'">'.$row['name'].'</option>';
-                    }
-                  }
-                  ?>
-                </select>
+              </div> 
+
+                  <div class="form-group">
+                    <label>Status</label>
+                    <select name="status" class="form-control">
+                      <option value="" selected="selected"><?php echo $sta;?></option>
+                      <?php
+                      $sql = "SELECT * FROM status ORDER BY name ASC";
+                      $res = mysqli_query($con, $sql);
+
+                      if(mysqli_num_rows($res) > 0) {
+                        while($row = mysqli_fetch_assoc($res)) {
+                          echo '<option value="'.$row['name'].'">'.$row['name'].'</option>';
+                        }
+                      }
+                      ?>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="desc" class="form-control" rows="3"><?php echo $des;?></textarea>
+                  </div>
+                  <button name="submit" type="submit" class="btn btn-primary">Submit Quotation</button>
+                  <button type="reset" class="btn btn-default">Reset Quotation</button>
+                </form>
               </div>
-              <div class="form-group">
-                <label>Description</label>
-                <textarea name="desc" class="form-control" rows="3"><?php echo $des;?></textarea>
-              </div>
-              <input type="number" name="id" value="<?php echo $id; ?>" hidden>
-              <button name="editquote" type="submit" class="btn btn-primary">Submit Quotation</button>
-              <button type="reset" class="btn btn-default">Reset Quotation</button>
-            </form>
-          </div>
         </div>
       </div>
     </div>

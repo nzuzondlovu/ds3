@@ -1,7 +1,12 @@
 <?php
 ob_start();
 include '../includes/functions.php';
-include '../includes/geolocation.php';
+?>
+
+<?php
+if(isset($_SESSION['key']) == '' ) {
+    header("location:../login.php");
+}
 ?>
 
 <?php
@@ -70,9 +75,9 @@ include 'header.php';
                 <li>
                     <a href="#graph" data-toggle="tab">Graphical View</a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="#maps" data-toggle="tab">Map View</a>
-                </li>
+                </li> -->
             </ul>
         </div>
         <div class="tab-content">
@@ -110,11 +115,18 @@ include 'header.php';
                                     <th>Organisation</th>
                                     <th>Time Zone</th>
                                     <th>Date</th>
+                                    <th>Map</th>
                                     </tr>
                                     </thead>
                                     <tbody>';
                                     while ($row = mysqli_fetch_assoc($res)) {
 
+                                        $btnmap = '';
+
+                                        if ($row['lat'] != 'Annonymous') {
+
+                                            $btnmap = '<a class="btn btn-warning" target="_blank" href="https://www.google.co.za/maps/@'.$row['lat'].','.$row['lon'].',15z?hl=en">View</a>';
+                                        }
                                         echo '
                                         <tr>
                                         <td>'.$row['page'].'</td>
@@ -128,6 +140,7 @@ include 'header.php';
                                         <td>'.$row['org'].'</td>
                                         <td>'.$row['timezone'].'</td>
                                         <td>'.date("M d, y",strtotime($row['date'])).'</td>
+                                        <td>'.$btnmap.'</td>
                                         </tr>';
                                     }
                                     echo '
@@ -178,7 +191,7 @@ include 'header.php';
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <?=$locations;?>
+                            <div id="map"></div>
                         </div>
                     </div>
                 </div>
@@ -187,64 +200,84 @@ include 'header.php';
     </div>
 
 
-<?php
-include 'footer.php';
-?>
- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMSkgPhpQfGqMGMdkY_bH0UxK3UDzFIYs&sensor=false"></script>
-  <script type="text/javascript">
-  <?php
-  $x=0; $y=1;
-   while($x<$id): ?>
-  $(function(){
-    navigator.geolocation.getCurrentPosition(success, error);
-    function success(position){
-      //getting the coordinates
-      var lat = "<?=$lat[$x];?>";//position.coords.latitude;
-      var long = "<?=$long[$x];?>";//position.coords.longitude;
-      $('latitude').html(lat);
-      $('longitude').html(long);
-      var latlon = new google.maps.LatLng(lat,long);
-      //create map
-      var mapOptions = {
-         zoom: 16,
-         center: latlon,
-         mapTypeId: google.maps.MapTypeId.ROADMAP
+
+    
+    <script>
+        var customLabel = {
+            restaurant: {
+              label: 'R'
+          },
+          bar: {
+              label: 'B'
+          }
       };
-      var map =  new google.maps.Map(document.getElementById("maps<?=$y;?>"), mapOptions);
-      var marker = new google.maps.Marker({
-        position: latlon,
-        map: map,
-        title: "I was Here",
-        draggable: true,
-        animation: google.maps.Animation.BOUNCE
+
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: new google.maps.LatLng(-33.863276, 151.207977),
+          zoom: 12
       });
-            var latlng = new google.maps.LatLng(<?=$lat[$x];?>, <?=$long[$x];?>);
-            //var infowindow = new google.maps.InfoWindow;
-            var geocoder = new google.maps.Geocoder;
-            geocoder.geocode({'latLng': latlng}, function(results, status) {
-                if(status == google.maps.GeocoderStatus.OK) {
-                    if(results[0]) {
-                        $('#address<?=$y;?>').text(results[0].formatted_address);
-                    } else {
-                        alert("No results found");
-                    }
-                } else {
-                    var error = {
-                        'ZERO_RESULTS': 'Kunde inte hitta adress'
-                    }
-                    // alert('Geocoder failed due to: ' + status);
-                    $('#address<?=$y;?>').html('<span class="color-red">' + error[status] + '</span>');
-                }
+        var infoWindow = new google.maps.InfoWindow;
+
+          // Change this depending on the name of your PHP or XML file
+          downloadUrl('../includes/maps_xml.php', function(data) {
+            var xml = data.responseXML;
+            var markers = xml.documentElement.getElementsByTagName('marker');
+            Array.prototype.forEach.call(markers, function(markerElem) {
+              var id = markerElem.getAttribute('id');
+              var name = markerElem.getAttribute('name');
+              var address = markerElem.getAttribute('address');
+              var type = markerElem.getAttribute('type');
+              var point = new google.maps.LatLng(
+                  parseFloat(markerElem.getAttribute('lat')),
+                  parseFloat(markerElem.getAttribute('lng')));
+
+              var infowincontent = document.createElement('div');
+              var strong = document.createElement('strong');
+              strong.textContent = name
+              infowincontent.appendChild(strong);
+              infowincontent.appendChild(document.createElement('br'));
+
+              var text = document.createElement('text');
+              text.textContent = address
+              infowincontent.appendChild(text);
+              var icon = customLabel[type] || {};
+              var marker = new google.maps.Marker({
+                map: map,
+                position: point,
+                label: icon.label
             });
-    }
-    function error(){
-      $('maps<?=$y;?>').html("Your network connection was interrupted");
-    }
-  });
-  <?php
-  $x++; $y++;
-  endwhile; ?>
-  </script>
+              marker.addListener('click', function() {
+                infoWindow.setContent(infowincontent);
+                infoWindow.open(map, marker);
+            });
+          });
+        });
+      }
+
+
+
+      function downloadUrl(url, callback) {
+        var request = window.ActiveXObject ?
+        new ActiveXObject('Microsoft.XMLHTTP') :
+        new XMLHttpRequest;
+
+        request.onreadystatechange = function() {
+          if (request.readyState == 4) {
+            request.onreadystatechange = doNothing;
+            callback(request, request.status);
+        }
+    };
+
+    request.open('GET', url, true);
+    request.send(null);
+}
+
+function doNothing() {}
+</script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMSkgPhpQfGqMGMdkY_bH0UxK3UDzFIYs&callback=initMap">
+</script>
 <script>
     $(document).ready(function(){
         $('#bookings').DataTable();
@@ -252,3 +285,6 @@ include 'footer.php';
 </script>
 <script type="text/javascript" src="../assets/js/analyticchart.js"></script>
 
+<?php
+include 'footer.php';
+?>

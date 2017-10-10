@@ -55,13 +55,64 @@ include 'header.php';
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Cart (Chart)</h1>
+				<h1 class="page-header">Products</h1>
 			</div>
 			<!-- /.col-lg-12 -->
 		</div>
 		<!-- /.row -->
 
-				<div class="row">
+		<!-- Modal -->
+		<div class="modal fade" id="addItem" tabindex="-1" role="dialog" aria-labelledby="addItemLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span> Close</button>
+						<h4 class="modal-title" id="addItemLabel">Add Product</h4>
+					</div>
+					<div class="modal-body">
+						<form role="form" method="post" enctype="multipart/form-data">
+							<div class="form-group">
+								<label>Device name</label>
+								<input name="name" class="form-control" placeholder="Enter text">
+							</div>
+							<div class="form-group">
+								<label>Device type</label>
+								<select name="type" class="form-control">
+									<option value="" selected="selected">Select type</option>
+									<?php
+									$sql = "SELECT * FROM category ORDER BY name ASC";
+									$res = mysqli_query($con, $sql);
+
+									if(mysqli_num_rows($res) > 0) {
+										while($row = mysqli_fetch_assoc($res)) {
+											echo '<option value="'.$row['name'].'">'.$row['name'].'</option>';
+										}
+									}
+									?>
+								</select>
+							</div>
+							<div class="form-group">
+								<label>Device price</label>
+								<input name="price" class="form-control" placeholder="Enter text">
+							</div>
+							<div class="form-group">
+								<label>Upload picture</label>
+								<input type="file" name="fileToUpload">
+							</div>
+							<div class="form-group">
+								<label>Device description</label>
+								<textarea name="description" class="form-control" rows="3"></textarea>
+							</div>
+							<button name="submit" type="submit" class="btn btn-primary">Submit Device</button>
+							<button type="reset" class="btn btn-default">Reset Device</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /.Modal -->
+
+		<div class="row">
 			<div class="col-lg-12">
 				<div>
 					<?php if(isset($_SESSION['failure']) && $_SESSION['failure'] != '') { ?>
@@ -80,25 +131,71 @@ include 'header.php';
 				</div>
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						Chart of cart products
+						List of all products
 					</div>
 					<!-- /.panel-heading -->
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="pull-right">
-									<a class="btn btn-success" href="cart.php"> Table</a>
+									<button class="btn btn-success" data-toggle="modal" data-target="#addItem"> Add Product</button>
 								</div>
 							</div>
 						</div>
 						<div class="table-responsive">
-            <div class="col-lg-12">
-                <div class="panel panel-default">
-                        <canvas id="stockcanvas" height="100%">
-                            Your web-browser does not support the HTML 5 canvas element.
-                        </canvas>
-            </div>
-        </div>
+							<?php
+
+							$sql = "SELECT * FROM product WHERE archive = 0";
+							$res = mysqli_query($con, $sql);
+
+							if (mysqli_num_rows($res) > 0) {
+								echo '
+								<table id="products" class="table">
+									<thead>
+										<tr>
+											<th>Product ID</th>
+											<th>User</th>
+											<th>Name</th>
+											<th>Description</th>
+											<th>type</th>
+											<th>Price</th>
+											<th>Picture</th>
+											<th>Date</th>
+											<th>Promo</th>
+										</tr>
+									</thead>
+									<tbody>';
+										while ($row = mysqli_fetch_assoc($res)) {
+
+											$button = '<a href="editpromo.php?id='.$row['id'].'" class="btn btn-primary">Make Promo</a>   <a href="editproduct.php?id='.$row['id'].'" class="btn btn-info">Edit</a>';
+											
+											if ($row['promo_price'] > 0) {
+												$button = '<a href="editpromo.php?id='.$row['id'].'" class="btn btn-info">Edit Promo</a>   <a href="editproduct.php?id='.$row['id'].'" class="btn btn-primary">Edit</a>';
+											}
+
+											echo '
+											<tr>
+												<td>'.$row['id'].'</td>
+												<td>'.$row['user'].'</td>
+												<td>'.$row['name'].'</td>
+												<td>'.$row['description'].'</td>
+												<td>'.$row['type'].'</td>
+												<td>'.$row['price'].'</td>
+												<td><img src="../uploads/'.$row['pic_url'].'" class="img-responsive"></td>
+												<td>'.date("M d, y",strtotime($row['date'])).'</td>
+												<td>'.$button.'   <a href="?id='.$row['id'].'" class="btn btn-warning">Archive</a></td>
+											</tr>';
+										}
+										echo '
+									</tbody>
+								</table>';
+							} else {
+								echo '<div class="alert alert-info">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+								<strong>No products found.</strong>
+							</div>';
+						}
+						?>
 					</div>
 					<!-- /.table-responsive -->
 				</div>
@@ -120,4 +217,3 @@ include 'footer.php';
 		$('#products').DataTable();
 	});
 </script>
-<script type="text/javascript" src="../assets/js/cartchart.js"></script>

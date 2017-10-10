@@ -93,7 +93,7 @@ include 'header.php';
 							} else {
 								echo '<div class="alert alert-info">
 								<button type="button" class="close" data-dismiss="alert">&times;</button>
-								<strong>No products found.</strong>
+								<strong>No bookings found.</strong>
 							</div>';
 						}
 

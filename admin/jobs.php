@@ -218,15 +218,6 @@ include 'header.php';
                 <tbody>';
                 while ($row = mysqli_fetch_assoc($res)) {
 
-                  $btn = '<a class="btn btn-info" href="allocate.php?id='.$row['id'].'"> Allocate</a>';
-                  $sql1 = 'SELECT * FROM techrepair WHERE job_id='.$row['id'];
-                  $res1 = mysqli_query($con, $sql1);
-
-                  if (mysqli_num_rows($res1) > 0) {
-                    
-                    $btn = '';
-                  }
-
                   echo '
                   <tr>
                   <td>'.$row['id'].'</td>
@@ -239,7 +230,7 @@ include 'header.php';
                   <td class="pull-right">
                   <a class="btn btn-danger" href="?id='.$row['id'].'"> Delete</span></a>
                   <button class="btn btn-warning" onclick="modal('.$row['id'].')"> Edit</button>
-                  '.$btn.'
+                  <a class="btn btn-info" href="allocate.php?id='.$row['id'].'"> Allocate</a>
                   </tr>';
                 }
                 echo '

@@ -24,18 +24,18 @@ if (isset($_POST['id']) && $_POST['id'] != null)
 
     while ($row = mysqli_fetch_assoc($res)) {
 
-     $promo = '
-     ID : '.$row['id'].'<br>
-     User : '.$row['user'].'<br>
-     Name : '.$row['name'].'<br>
-     Type : '.$row['type'].'<br>
-     Price : R '.$row['price'].'<br>
-     Date : '.date("M d, y",strtotime($row['date'])).'<br>
-     Description : '.$row['description'].'<br>
+   $promo = '
+    ID : '.$row['id'].'<br>
+    User : '.$row['user'].'<br>
+    Name : '.$row['name'].'<br>
+    Type : '.$row['type'].'<br>
+    Price : R '.$row['price'].'<br>
+    Date : '.date("M d, y",strtotime($row['date'])).'<br>
+    Description : '.$row['description'].'<br>
 
-     <img  src="../uploads/'.$row['pic_url'].'" class="img-thumbnail" alt="Cinque Terre" width="200" height="200">';
-   }
- }
+    <img  src="../uploads/'.$row['pic_url'].'" class="img-thumbnail" alt="Cinque Terre" width="200" height="200">';
+    }
+  }
 }
 
 ?>
@@ -53,31 +53,45 @@ if (isset($_POST['id']) && $_POST['id'] != null)
       <div class="modal-body">
         <div class="row">
           <div class="col-md-6">
+          <div class="col-lg-12">
+  
+
+                <div class="pull-right">
+                  <a href="products.php" class="btn btn-warning">Products</a>
+                  <a href="promotions.php" class="btn btn-warning">Promotions</a>
+                </div>
+              </div>
             <h2>Device details</h2>
             <p>
-              <?php
-              echo $promo;
-              ?>
+            <?php
+                echo $promo;
+                ?>
+
+                
             </p>
           </div>
           <div class="col-md-6">
-            <form id="promoForm " role="form" method="post">
-              <div class="form-group">
-                <label>Promotional Price</label>
-                <input type="decimal" name="price" class="form-control" placeholder="Enter price" required="required">
-              </div>
-              <div class="form-group">
-                <label>Start Date</label>
-                <input type="date" name="start" class="form-control" placeholder="Enter date" required="required">
-              </div>
-              <div class="form-group">
-                <label>End Date</label>
-                <input type="date" name="end" class="form-control" placeholder="Enter date" required="required">
-              </div>
-              <input type="text" name="id" value="<?= $id; ?>" hidden>
-              <button name="btnPromo" type="submit" class="btn btn-primary">Submit Promotion</button>
-              <button type="reset" class="btn btn-default">Reset Promotion</button>
-            </form>
+           
+
+
+                <form id="promoForm " role="form" method="post">
+                  <div class="form-group">
+                    <label>Promotional Price</label>
+                    <input type="decimal" name="price" class="form-control" placeholder="Enter price">
+                  </div>
+                  <div class="form-group">
+                    <label>Start Date</label>
+                    <input type="date" name="start" class="form-control" placeholder="Enter date">
+                  </div>
+                  <div class="form-group">
+                    <label>End Date</label>
+                    <input type="date" name="end" class="form-control" placeholder="Enter date">
+                  </div>
+                          <input type="text" name="id" value="<?= $id; ?>" hidden>
+                  <button name="btnPromo" type="submit" class="btn btn-primary">Submit Promotion</button>
+                  <button type="reset" class="btn btn-default">Reset Promotion</button>
+                </form>
+
           </div>
         </div>
       </div>

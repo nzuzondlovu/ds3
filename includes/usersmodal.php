@@ -56,7 +56,7 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
             <form role="form" method="post">
               <div class="form-group">
                 <label>Choose Role</label>
-                <select name="role" class="form-control" required="required">
+                <select name="role" class="form-control">
                   <option value="" selected="selected">Select role</option>
                   <option value="admin" >Admin</option>
                   <option value="clerk" >Clerk</option>
@@ -66,7 +66,7 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
               </div>
               <div class="form-group">
                 <label>Technician Specialty</label>
-                <select name="speciality" class="form-control" required="required">
+                <select name="speciality" class="form-control">
                   <option value="" selected="selected">Select speciality (Technician only)</option>
                   <option value="Hardware" >Hardware Technician</option>
                   <option value="Software" >Software Technician</option>

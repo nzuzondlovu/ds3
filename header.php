@@ -368,11 +368,7 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
                         <li<?php echo $li1; ?>><a href="index.php">Home</a></li>
                         <li<?php echo $li2; ?>><a href="shop.php">Shop page</a></li>
                         <li<?php echo $li3; ?>><a href="product.php">Single product</a></li>
-                        <?php
-                        if (isset($_SESSION['user_id'])) {
-                            echo '<li'.$li4.'><a href="cart.php">Cart</a></li>';
-                        }
-                        ?>                     
+                        <li<?php echo $li4; ?>><a href="cart.php">Cart</a></li>
                     </ul>
                 </div>  
             </div>

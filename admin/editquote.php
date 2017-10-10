@@ -119,7 +119,7 @@ include 'header.php';
                 <div class="row">
                   <div class="col-xs-12">
                     <h2 class="page-header">
-                      <i class="fa fa-globe"></i> Infinity, Inc.
+                      <i class="fa fa-globe"></i> AdminLTE, Inc.
                       <small class="pull-right"><?php echo $date; ?></small>
                     </h2>
                   </div>
@@ -242,7 +242,6 @@ include 'header.php';
                   <button onclick="javascript:printDiv('printablediv')" class="btn btn-primary pull-right" style="margin-right: 5px;">
                     <i class="fa fa-download"></i> Generate PDF
                   </button>
-                  <a class="btn btn-warning" href="bookings.php">Bookings</a>
                 </div>
               </div>
             </section>
