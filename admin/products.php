@@ -12,8 +12,6 @@ if(isset($_SESSION['key']) == '' ) {
 
 <?php
 
-
-
 if(isset($_POST['prodEdit'])) {
 	$name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
 	$type = mysqli_real_escape_string($con, strip_tags(trim($_POST["type"])));
@@ -35,15 +33,37 @@ if(isset($_POST['prodEdit'])) {
 
 	mysqli_query($con, $sql);
 	$_SESSION['success'] = 'Product was updated successfully.';
-			//	header("Location: promotions.php");
+	header("Location: products.php");
 	
 
 }
 ?>
+
 <?php
+if(isset($_GET['id']) && $_GET['id'] != '') {
 
+	$id = mysqli_real_escape_string($con, strip_tags(trim($_GET['id'])));
+	$sql = "UPDATE review SET seen=1 WHERE id='".$id."'";
+	$res = mysqli_query($con, $sql);
+}
+?>
 
+<?php
+if(isset($_GET['ar']) && $_GET['ar'] != '') {
 
+	$ar = mysqli_real_escape_string($con, strip_tags(trim($_GET['ar'])));
+
+	if ($ar) {
+		$sql = "UPDATE review SET archive=1 WHERE id='".$ar."'";
+		mysqli_query($con, $sql);
+		$_SESSION['success'] = 'Booking was archived successfully.';
+	} else {
+		$_SESSION['failure'] = 'An error occured, please try again.';
+	}	
+}
+?>
+
+<?php
 
 if(isset($_POST['btnPromo'])) {
 	$price = mysqli_real_escape_string($con, strip_tags(trim($_POST["price"])));
@@ -107,6 +127,7 @@ if(isset($_POST['btnSubmit']))
 		}
 		return $pass;
 	}
+
 	$prod_code= 'PRD-'.createRandomPassword()  ;
 
 
@@ -157,6 +178,78 @@ if(isset($_POST['btnSubmit']))
 ?>
 
 <?php
+
+if(isset($_POST['btnCat'])) {
+
+	$name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
+	$type = mysqli_real_escape_string($con, strip_tags(trim($_POST["type"])));
+	$description = mysqli_real_escape_string($con, strip_tags(trim($_POST["description"])));
+	$date = date("Y-m-d H:i:s");
+	$archive =0;
+
+
+
+	if($name != '' && $type != '' && $description != '') {
+
+		$sql = "INSERT INTO category(name, type, description, dateCreated,archive)
+		VALUES('".$name."', '".$type."','".$description."' , '".$date."', '".$archive."')";
+		mysqli_query($con, $sql);
+		$_SESSION['success'] = 'Your new category was added successfully.';
+		header("Location: products.php");
+
+	}else {
+		$_SESSION['failure'] = 'Please fill in all fields.';
+	}
+}
+?>
+
+<?php
+
+if(isset($_GET['id']) && $_GET['id'] != '') {
+
+	$id = mysqli_real_escape_string($con, strip_tags(trim($_GET['id'])));
+
+	if ($id) {
+		$sql = "UPDATE category SET archive=1 WHERE id='".$id."'";
+		mysqli_query($con, $sql);
+		$_SESSION['success'] = 'Category was archived successfully.';
+	} else {
+		$_SESSION['failure'] = 'An error occured, please try again.';
+	}
+}
+?>
+
+<?php
+
+if(isset($_POST['btnPromo'])) {
+	$price = mysqli_real_escape_string($con, strip_tags(trim($_POST["price"])));
+	$start = mysqli_real_escape_string($con, strip_tags(trim($_POST["start"])));
+	$end = mysqli_real_escape_string($con, strip_tags(trim($_POST["end"])));
+	$date = date("Y-m-d");
+	$id = mysqli_real_escape_string($con, strip_tags(trim($_POST["id"])));
+
+	if($price != '' && $start != '' && $end != '') {
+
+		if ($start < $date) {
+			$_SESSION['failure'] = 'Entered start date has past already.';
+
+		} else if ($end > $start) {
+
+			$sql = "UPDATE product SET promo_price='".$price."', promo_date1='".$start."', promo_date2='".$end."' WHERE id='".$id."'";
+			mysqli_query($con, $sql);
+			$_SESSION['success'] = 'Your new Promotional Product was added successfully.';
+			header("Location: products.php");
+		} else {
+			$_SESSION['failure'] = 'Entered end date has past already.';
+		}		
+	}else {
+		$_SESSION['failure'] = 'Please fill in all fields.';
+	}
+}
+?>
+
+<?php
+
 if(isset($_GET['id']) && $_GET['id'] != '') {
 
 	$id = mysqli_real_escape_string($con, strip_tags(trim($_GET['id'])));
@@ -316,7 +409,7 @@ include 'header.php';
 														</div>
 														<div class="form-group">
 															<label>Profit</label>	
-															<input type="number" id="txt3" class="form-control" name="profit" readonly>	
+															<input type="number" id="txt3" class="form-control" name="profit" readonly required="required">	
 														</div>
 														<div class="form-group">
 															<label>Quantity</label>
@@ -408,82 +501,82 @@ include 'header.php';
 										</div>
 										<!-- /.panel-heading -->
 
-											<div class="col-lg-12">
-												<div class="pull-right">
-													<div class="input-group input-group-sm" >
-														<div class="input-group-btn">
-															<button class="btn btn-success" data-toggle="modal" data-target="#addItem"> Add Product</button>
-														</div>
+										<div class="col-lg-12">
+											<div class="pull-right">
+												<div class="input-group input-group-sm" >
+													<div class="input-group-btn">
+														<button class="btn btn-success" data-toggle="modal" data-target="#addItem"> Add Product</button>
 													</div>
 												</div>
 											</div>
-
-											<div class="col-md-12">
-												<div class="table-responsive">
-													<?php
-
-													$sql = "SELECT Distinct *   FROM product WHERE archive = 0";
-													$res = mysqli_query($con, $sql);
-
-													if (mysqli_num_rows($res) > 0) {
-														echo '
-														<table id="products"  class="table table-bordered table-hover">
-														<thead>
-														<tr>
-														<th>Product ID</th>
-														<th>Brandname</th>
-														<th>Name</th>
-														<th>type</th>
-														<th>Price</th>
-														<th>Date</th>
-														<th>Promo
-														<th style="width:10px">Quantity</th>
-														<th>Supplier</th>
-														</tr>
-														</thead>
-														<tbody>';
-														while ($row = mysqli_fetch_assoc($res)) {
-
-															$button = '<a onclick="promoModal('.$row['id'].')" class="label label-primary">Make Promo</a>   <a onclick="productModal('.$row['id'].')"  class="label label-info">Edit</a>';
-
-															if ($row['promo_price'] > 0) {
-
-																$button = '<a onclick="promoModal('.$row['id'].')"  class="label label-info">Edit Promo</a>   <a onclick="productModal('.$row['id'].')"  class="label label-primary">Edit</a>';
-															}
-
-															echo '
-															<tr>
-															<td>'.$row['prod_code'].'</td>
-															<td>'.$row['brandname'].'</td>
-															<td>'.$row['name'].'</td>
-															<td>'.$row['type'].'</td>
-															<td>'.$row['price'].'</td>
-															<td>'.date("M d, y",strtotime($row['date'])).'</td>
-															<td>'.$button.'   <a href="?id='.$row['id'].'" class="label label-warning">Archive</a></td>
-															<td>'.$row['qty'].'</td>
-															<td>'.$row['supplier'].'</td>
-															</tr>';
-														}
-														echo '
-														</tbody>
-														</table>';
-													} else {
-														echo '<div class="alert alert-info">
-														<button type="button" class="close" data-dismiss="alert">&times;</button>
-														<strong>No products found.</strong>
-														</div>';
-													}
-													?>
-
-												</div>
-												<!-- /.table-responsive -->
-
-												<!-- /.panel -->
-											</div>
 										</div>
-										<!-- /.panel -->
+
+										<div class="col-md-12">
+											<div class="table-responsive">
+												<?php
+
+												$sql = "SELECT * FROM product WHERE archive = 0";
+												$res = mysqli_query($con, $sql);
+
+												if (mysqli_num_rows($res) > 0) {
+													echo '
+													<table id="products"  class="table table-bordered table-hover">
+													<thead>
+													<tr>
+													<th>Product ID</th>
+													<th>Brandname</th>
+													<th>Name</th>
+													<th>type</th>
+													<th>Price</th>
+													<th>Date</th>
+													<th>Promo
+													<th style="width:10px">Quantity</th>
+													<th>Supplier</th>
+													</tr>
+													</thead>
+													<tbody>';
+													while ($row = mysqli_fetch_assoc($res)) {
+
+														$button = '<a onclick="promoModal('.$row['id'].')" class="label label-primary">Make Promo</a>   <a onclick="productModal('.$row['id'].')"  class="label label-info">Edit</a>';
+
+														if ($row['promo_price'] > 0) {
+
+															$button = '<a onclick="promoModal('.$row['id'].')"  class="label label-info">Edit Promo</a>   <a onclick="productModal('.$row['id'].')"  class="label label-primary">Edit</a>';
+														}
+
+														echo '
+														<tr>
+														<td>'.$row['prod_code'].'</td>
+														<td>'.$row['brandname'].'</td>
+														<td>'.$row['name'].'</td>
+														<td>'.$row['type'].'</td>
+														<td>'.$row['price'].'</td>
+														<td>'.date("M d, y",strtotime($row['date'])).'</td>
+														<td>'.$button.'   <a href="?id='.$row['id'].'" class="label label-warning">Archive</a></td>
+														<td>'.$row['qty'].'</td>
+														<td>'.$row['supplier'].'</td>
+														</tr>';
+													}
+													echo '
+													</tbody>
+													</table>';
+												} else {
+													echo '<div class="alert alert-info">
+													<button type="button" class="close" data-dismiss="alert">&times;</button>
+													<strong>No products found.</strong>
+													</div>';
+												}
+												?>
+
+											</div>
+											<!-- /.table-responsive -->
+
+											<!-- /.panel -->
+										</div>
 									</div>
+									<!-- /.panel -->
 								</div>
+							</div>
 						</div>
 						<script>
 							$(document).ready(function(){
@@ -493,62 +586,8 @@ include 'header.php';
 					</div>
 					<!-- /.tab-pane -->
 					<div class="tab-pane" id="timeline">
-						<!-- The timeline -->
-
-
-						<?php
-						if(isset($_SESSION['key']) == '' ) {
-							header("location:../login.php");
-						}
-						?>
-
-						<?php
-
-						if(isset($_POST['btnCat'])) {
-
-							$name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
-							$type = mysqli_real_escape_string($con, strip_tags(trim($_POST["type"])));
-							$description = mysqli_real_escape_string($con, strip_tags(trim($_POST["description"])));
-							$date = date("Y-m-d H:i:s");
-							$archive =0;
-
-
-
-							if($name != '' && $type != '' && $description != '') {
-
-								$sql = "INSERT INTO category(name, type, description, dateCreated,archive)
-								VALUES('".$name."', '".$type."','".$description."' , '".$date."', '".$archive."')";
-								mysqli_query($con, $sql);
-								$_SESSION['success'] = 'Your new category was added successfully.';
-								header("Location: products.php");
-		//Location: /dns/dns_soa_edit.php?id={$zone_id}
-							}else {
-								$_SESSION['failure'] = 'Please fill in all fields.';
-							}
-						}
-						?>
-
-						<?php
-						if(isset($_GET['id']) && $_GET['id'] != '') {
-
-							$id = mysqli_real_escape_string($con, strip_tags(trim($_GET['id'])));
-
-							if ($id) {
-								$sql = "UPDATE category SET archive=1 WHERE id='".$id."'";
-								mysqli_query($con, $sql);
-								$_SESSION['success'] = 'Category was archived successfully.';
-							} else {
-								$_SESSION['failure'] = 'An error occured, please try again.';
-							}
-
-
-						}
-						?>
-
-
-
+						<!-- The timeline -->						
 						<!-- Page Content -->
-
 						<div class="row">
 							<div class="col-lg-12">
 								<h1 class="page-header">Categories</h1>				
@@ -557,7 +596,6 @@ include 'header.php';
 						</div>
 						<!-- /.row -->
 						<!-- /.row -->
-
 						<!-- Modal -->
 						<div class="modal fade" id="addCat" tabindex="-1" role="dialog" aria-labelledby="addCatLabel">
 							<div class="modal-dialog" role="document">
@@ -570,11 +608,11 @@ include 'header.php';
 										<form role="form" method="post">
 											<div class="form-group">
 												<label>Category name</label>
-												<input name="name" class="form-control" placeholder="Enter name">
+												<input name="name" class="form-control" placeholder="Enter name" required="required">
 											</div>
 											<div class="form-group">
 												<label>Category type</label>
-												<select name="type" class="form-control">
+												<select name="type" class="form-control" required="">
 													<option value="" selected="selected">Select type</option>
 													<option value="Hardware" >Hardware</option>
 													<option value="Software" >Software</option>
@@ -582,7 +620,7 @@ include 'header.php';
 											</div>
 											<div class="form-group">
 												<label>Category description</label>
-												<textarea name="description" class="form-control" rows="3"></textarea>
+												<textarea name="description" class="form-control" rows="3" required="required"></textarea>
 											</div>
 											<button name="btnCat" type="submit" class="btn btn-primary">Submit Category</button>
 											<button type="reset" class="btn btn-default">Reset Category</button>
@@ -616,20 +654,13 @@ include 'header.php';
 						<!-- /.row -->
 						<div class="row">
 							<div class="col-lg-12">
-
 								<div class="panel-heading">
-
-
 									<div class="row">
 										<div class="col-lg-12">
 											<div class="pull-right">
 												<div class="input-group input-group-sm" >
-
-
 													<div class="input-group-btn">
-														<button  class="btn btn-default"  data-toggle="modal" data-target="#addItem"><i class="fa fa-th"></i></button>
 														<button class="btn btn-success" data-toggle="modal" data-target="#addCat"> Add Category</button>
-
 													</div>
 												</div>
 											</div>
@@ -638,7 +669,6 @@ include 'header.php';
 								</div>
 								<!-- /.panel-heading -->
 								<div class="panel-body">
-
 									<div class="table-responsive">
 										<?php
 
@@ -669,8 +699,8 @@ include 'header.php';
 												<td>'.$row['description'].'</td>
 											
 												<td class="pull-right">
-												<a href="editcat.php?id='.$row['id'].'" class="label label-primary">Edit </a>  
-												<a href="?id='.$row['id'].'" class="label label-warning">Archive </a>
+												<a href="editcat.php?id='.$row['id'].'" class="btn btn-primary">Edit </a>  
+												<a href="?id='.$row['id'].'" class="btn btn-warning">Archive </a>
 												</td>
 												</tr>';
 											}
@@ -706,46 +736,6 @@ include 'header.php';
 
 					<div class="tab-pane" id="settings">
 
-
-						<?php
-						if(isset($_SESSION['key']) == '' ) {
-							header("location:../login.php");
-						}
-						?>
-
-
-
-						<?php
-
-
-
-
-						if(isset($_POST['btnPromo'])) {
-							$price = mysqli_real_escape_string($con, strip_tags(trim($_POST["price"])));
-							$start = mysqli_real_escape_string($con, strip_tags(trim($_POST["start"])));
-							$end = mysqli_real_escape_string($con, strip_tags(trim($_POST["end"])));
-							$date = date("Y-m-d");
-							$id = mysqli_real_escape_string($con, strip_tags(trim($_POST["id"])));
-
-							if($price != '' && $start != '' && $end != '') {
-
-								if ($start < $date) {
-									$_SESSION['failure'] = 'Entered start date has past already.';
-
-								} else if ($end > $start) {
-
-									echo 	$sql = "UPDATE product SET promo_price='".$price."', promo_date1='".$start."', promo_date2='".$end."' WHERE id='".$id."'";
-			//mysqli_query($con, $sql);
-			//$_SESSION['success'] = 'Your new Promotional Product was added successfully.';
-			//header("Location: promotions.php");
-								} else {
-									$_SESSION['failure'] = 'Entered end date has past already.';
-								}		
-							}else {
-								$_SESSION['failure'] = 'Please fill in all fields.';
-							}
-						}
-						?>
 						<!-- Page Content -->
 
 						<div class="row">
@@ -764,9 +754,6 @@ include 'header.php';
 									<!-- /.panel-heading -->
 									<div class="panel-body">
 										<div class="row">
-
-
-
 										</div>
 										<div class="table-responsive">
 											<?php
@@ -779,8 +766,6 @@ include 'header.php';
 												<table id="promo" class="table">
 												<thead>
 												<tr>
-
-
 												<th>Details</th>
 												<th>Promo Price</th>
 												<th>Promo Dates</th>
@@ -791,15 +776,13 @@ include 'header.php';
 												while ($row = mysqli_fetch_assoc($res)) {
 
 													$details = $row['name'].'<br>'.$row['type'].'<br> R '.$row['price'];
-
 													$dates = date("M d, y",strtotime($row['promo_date1'])).' - '.date("M d, y",strtotime($row['promo_date2']));
+
 													echo '
 													<tr>
-
 													<td>'.$details.'</td>
 													<td> R '.$row['promo_price'].'</td>
 													<td>'.$dates.'</td>
-
 													<td><a onclick="promoModal('.$row['id'].')"  class="label label-info">Edit Promo</a></td>
 													</tr>';
 												}
@@ -809,7 +792,7 @@ include 'header.php';
 											} else {
 												echo '<div class="alert alert-info">
 												<button type="button" class="close" data-dismiss="alert">&times;</button>
-												<strong>No products found.</strong>
+												<strong>No promotional products found.</strong>
 												</div>';
 											}
 											?>
@@ -830,43 +813,6 @@ include 'header.php';
 					</div>
 
 					<div class="tab-pane" id="devices">
-
-
-
-
-						<?php
-						if(isset($_SESSION['key']) == '' ) {
-							header("location:../login.php");
-						}
-						?>
-
-						<?php
-						if(isset($_GET['id']) && $_GET['id'] != '') {
-
-							$id = mysqli_real_escape_string($con, strip_tags(trim($_GET['id'])));
-							$sql = "UPDATE review SET seen=1 WHERE id='".$id."'";
-							$res = mysqli_query($con, $sql);
-						}
-						?>
-
-						<?php
-						if(isset($_GET['ar']) && $_GET['ar'] != '') {
-
-							$ar = mysqli_real_escape_string($con, strip_tags(trim($_GET['ar'])));
-
-							if ($ar) {
-								$sql = "UPDATE review SET archive=1 WHERE id='".$ar."'";
-								mysqli_query($con, $sql);
-								$_SESSION['success'] = 'Booking was archived successfully.';
-							} else {
-								$_SESSION['failure'] = 'An error occured, please try again.';
-							}	
-						}
-						?>
-
-
-
-
 						<div class="row">
 							<div class="col-lg-12">
 								<h1 class="page-header">Reviews</h1>
@@ -956,7 +902,7 @@ include 'header.php';
 											} else {
 												echo '<div class="alert alert-info">
 												<button type="button" class="close" data-dismiss="alert">&times;</button>
-												<strong>No products found.</strong>
+												<strong>No product reviews found.</strong>
 												</div>';
 											}
 											?>

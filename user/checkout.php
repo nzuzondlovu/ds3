@@ -92,7 +92,7 @@ if ($pi == 0) {
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="pull-right">
-                                    <a href="cart.php" class="btn btn-warning">Back to cart</a>
+                                    <a href="../cart.php" class="btn btn-warning">Back to cart</a>
                                 </div>
                             </div>
                         </div>
