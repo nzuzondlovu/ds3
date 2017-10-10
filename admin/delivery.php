@@ -5,22 +5,22 @@ include '../includes/functions.php';
 
 <?php
 if(isset($_SESSION['key']) == '' ) {
-	header("location:../login.php");
+  header("location:../login.php");
 }
 ?>
 
 <?php
 if(isset($_GET['id']) && $_GET['id'] != '') {
 
-	$id = mysqli_real_escape_string($con, strip_tags(trim($_GET['id'])));
+  $id = mysqli_real_escape_string($con, strip_tags(trim($_GET['id'])));
 
-	if ($id) {
-		$sql = "UPDATE job SET archive=1 WHERE id='".$id."'";
-		mysqli_query($con, $sql);
-		$_SESSION['success'] = 'Booking was archived successfully.';
-	} else {
-		$_SESSION['failure'] = 'An error occured, please try again.';
-	}	
+  if ($id) {
+    $sql = "UPDATE job SET archive=1 WHERE id='".$id."'";
+    mysqli_query($con, $sql);
+    $_SESSION['success'] = 'Booking was archived successfully.';
+  } else {
+    $_SESSION['failure'] = 'An error occured, please try again.';
+  } 
 }
 ?>
 
@@ -28,12 +28,12 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 
 if(isset($_POST['submit'])) {
 
-	$driver = mysqli_real_escape_string($con, strip_tags(trim($_POST["driver"])));
-	$del = mysqli_real_escape_string($con, strip_tags(trim($_POST["del"])));
-	$name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
-	$cell = mysqli_real_escape_string($con, strip_tags(trim($_POST["cell"])));
-	$dateD = mysqli_real_escape_string($con, strip_tags(trim($_POST["dateD"])));
-	$strAddr = mysqli_real_escape_string($con, strip_tags(trim($_POST["strA"])));
+  $driver = mysqli_real_escape_string($con, strip_tags(trim($_POST["driver"])));
+  $del = mysqli_real_escape_string($con, strip_tags(trim($_POST["del"])));
+  $name = mysqli_real_escape_string($con, strip_tags(trim($_POST["name"])));
+  $cell = mysqli_real_escape_string($con, strip_tags(trim($_POST["cell"])));
+  $dateD = mysqli_real_escape_string($con, strip_tags(trim($_POST["dateD"])));
+  $strAddr = mysqli_real_escape_string($con, strip_tags(trim($_POST["strA"])));
   $suburb= mysqli_real_escape_string($con, strip_tags(trim($_POST["suburb"])));
   $area = mysqli_real_escape_string($con, strip_tags(trim($_POST["area"])));
   $boxcode= mysqli_real_escape_string($con, strip_tags(trim($_POST["boxcode"])));
@@ -62,27 +62,27 @@ include 'header.php';
 
 <!-- Page Content -->
 <div id="page-wrapper">
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-lg-12">
-				<h1 class="page-header"></h1>
-			</div>
-			<!-- /.col-lg-12 -->
-		</div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="page-header"></h1>
+      </div>
+      <!-- /.col-lg-12 -->
+    </div>
 <<<<<<< HEAD
               <div class="table-responsive">
               <?php
 if(isset($_GET['id']) && $_GET['id'] != '') {
 
-	$id = mysqli_real_escape_string($con, strip_tags(trim($_GET['id'])));
+  $id = mysqli_real_escape_string($con, strip_tags(trim($_GET['id'])));
 
-	if ($id) {
-		$sql = "UPDATE job SET archive=1 WHERE id='".$id."'";
-		mysqli_query($con, $sql);
-		$_SESSION['success'] = 'Booking was archived successfully.';
-	} else {
-		$_SESSION['failure'] = 'An error occured, please try again.';
-	}	
+  if ($id) {
+    $sql = "UPDATE job SET archive=1 WHERE id='".$id."'";
+    mysqli_query($con, $sql);
+    $_SESSION['success'] = 'Booking was archived successfully.';
+  } else {
+    $_SESSION['failure'] = 'An error occured, please try again.';
+  } 
 }
 ?>
 
@@ -90,43 +90,43 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 
 if(isset($_POST['locsubmit'])) {
 
-	 	function createRandomPassword() {
-	$chars = "003232303232023232023456789";
-	srand((double)microtime()*1000000);
-	$i = 0;
-	$pass = '' ;
-	while ($i <= 7) {
+    function createRandomPassword() {
+  $chars = "003232303232023232023456789";
+  srand((double)microtime()*1000000);
+  $i = 0;
+  $pass = '' ;
+  while ($i <= 7) {
 
-		$num = rand() % 33;
+    $num = rand() % 33;
 
-		$tmp = substr($chars, $num, 1);
+    $tmp = substr($chars, $num, 1);
 
-		$pass = $pass . $tmp;
+    $pass = $pass . $tmp;
 
-		$i++;
+    $i++;
 
-	}
-	return $pass;
-} 	 
+  }
+  return $pass;
+}    
 $gen_code= 'DLV-'.createRandomPassword()  ;
 
-	$AreaCode = mysqli_real_escape_string($con, strip_tags(trim($_POST["AreaCode"])));
-	$idnumber = mysqli_real_escape_string($con, strip_tags(trim($_POST["idnumber"])));
-	$Month = mysqli_real_escape_string($con, strip_tags(trim($_POST["Month"])));
+  $AreaCode = mysqli_real_escape_string($con, strip_tags(trim($_POST["AreaCode"])));
+  $idnumber = mysqli_real_escape_string($con, strip_tags(trim($_POST["idnumber"])));
+  $Month = mysqli_real_escape_string($con, strip_tags(trim($_POST["Month"])));
 
 
 
-	if($gen_code != '' ) {
+  if($gen_code != '' ) {
 
-		echo $sql="INSERT INTO driver_loc(gen_code,AreaCode,idnumber,Month)
-		VALUES('".$gen_code."','".$AreaCode."','".$idnumber."', '".$Month."')";
-		mysqli_query($con, $sql);
-		$_SESSION['success'] = 'Successfully updated details.';
-		header("Location: delivery.php");
+    echo $sql="INSERT INTO driver_loc(gen_code,AreaCode,idnumber,Month)
+    VALUES('".$gen_code."','".$AreaCode."','".$idnumber."', '".$Month."')";
+    mysqli_query($con, $sql);
+    $_SESSION['success'] = 'Successfully updated details.';
+    header("Location: delivery.php");
 
-	} else {
-		$_SESSION['failure'] = 'Please fill in all fields';
-	}
+  } else {
+    $_SESSION['failure'] = 'Please fill in all fields';
+  }
 }
 ?>
 
@@ -183,7 +183,7 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
         $_SESSION['success'] = 'Booking was archived successfully.';
       } else {
         $_SESSION['failure'] = 'An error occured, please try again.';
-      }	
+      } 
     }
     ?>
 
@@ -208,7 +208,7 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
 
       }
       return $pass;
-    } 	 
+    }    
     $gen_code= 'DLV-'.createRandomPassword()  ;
 
     $AreaCode = mysqli_real_escape_string($con, strip_tags(trim($_POST["AreaCode"])));
@@ -346,7 +346,7 @@ $gen_code= 'DLV-'.createRandomPassword()  ;
                     }
                     echo '
                     </tbody>
-                    </table>';	
+                    </table>';  
                   } else {
                     echo '
                     <div class="alert alert-info">
@@ -799,7 +799,7 @@ include 'footer.php';
 <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
 <!-- jvectormap -->
-<link rel="stylesheet" href="bower_components/jvectormap/jquery-jvectormap.css">	
+<link rel="stylesheet" href="bower_components/jvectormap/jquery-jvectormap.css">  
 <!-- Select2 -->
 <script src="bower_components/select2/dist/js/select2.full.min.js"></script>
 <link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css">
