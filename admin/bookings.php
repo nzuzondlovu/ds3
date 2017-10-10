@@ -78,6 +78,31 @@ if ($id != '' && $name != '' && $serial != '' && $model != '' && $accessory != '
 
 }
 
+
+
+if (isset($_POST['editquote'])) {
+
+    $id = mysqli_real_escape_string($con, strip_tags(trim($_POST["id"])));
+    $deposit = mysqli_real_escape_string($con, strip_tags(trim($_POST["deposit"])));
+    $total = mysqli_real_escape_string($con, strip_tags(trim($_POST["total"])));
+    $balance = mysqli_real_escape_string($con, strip_tags(trim($_POST["balance"])));
+    $status = mysqli_real_escape_string($con, strip_tags(trim($_POST["status"])));
+    $description = mysqli_real_escape_string($con, strip_tags(trim($_POST["desc"])));
+
+    if ($id != '' && $deposit != '' && $total != '' && $balance != '' && $status != '' && $description != '') {
+
+        $sql = 'UPDATE quotation SET deposit="'.$deposit.'", total="'.$total.'", balance="'.$balance.'", status="'.$status.'" WHERE id="'.$id.'"';
+        mysqli_query($con, $sql);
+        $_SESSION['success'] = 'Your new Quotation is added successfully.';
+
+    } else {
+
+        $_SESSION['failure'] = 'There was an error please make sure to fill in all fields.';
+    }
+    
+}
+
+
 ?>
 
 <?php
@@ -93,12 +118,6 @@ include 'header.php';
             </div>
             <!-- /.col-lg-12 -->
         </div>
-
-
-
-
-
-
         <div class="col-lg-12">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
@@ -109,10 +128,7 @@ include 'header.php';
               <div class="active tab-pane" id="activity">
                 <!-- Post -->
                 <div class="post">
-
                   <!-- /.user-block -->
-
-
                   <div class="row">
                     <div class="col-lg-12">
                         <div>
@@ -133,79 +149,80 @@ include 'header.php';
                     </div>
                 </div>
 
-
                 <!-- /.panel-heading -->
                 <div class="row">
                     <div class="col-lg-12">
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="table-responsive">
-                                    <?php
+                                <?php
 
-                                    $sql = "SELECT * FROM job WHERE archive = 0";
-                                    $res = mysqli_query($con, $sql);
+                                $sql = "SELECT * FROM job WHERE archive = 0";
+                                $res = mysqli_query($con, $sql);
 
-                                    if (mysqli_num_rows($res) > 0) {
-                                        echo '
-                                        <table id="bookings" class="table table-bordered table-hover">
-                                        <thead>
-                                        <tr>
-                                        <th>Name</th>
-                                        <th>serial</th>
-                                        <th>type</th>
-                                        <th>Picture</th>
-                                        <th>Date</th>
-                                        <th>Action</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>';
-                                        while ($row = mysqli_fetch_assoc($res)) {
+                                if (mysqli_num_rows($res) > 0) {
+                                    echo '
+                                    <table id="bookings" class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                    <th>Name</th>
+                                    <th>serial</th>
+                                    <th>type</th>
+                                    <th>Picture</th>
+                                    <th>Date</th>
+                                    <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>';
+                                    while ($row = mysqli_fetch_assoc($res)) {
 
-                                            $sql1 = "SELECT * FROM quotation WHERE id = '".$row['id']."' AND archive = 0";
-                                            $res1 = mysqli_query($con, $sql1);
-                                            $btn = '<button onclick="modal('.$row['id'].')" class="label-primary label-primary"> Quotation</button>';
+                                        $sql1 = "SELECT * FROM quotation WHERE booking_id = '".$row['id']."' AND archive = 0";
+                                        $res1 = mysqli_query($con, $sql1);
+                                        $btn = '<button onclick="modal('.$row['id'].')" class="btn btn-primary"> Quotation</button>';
 
-                                            if (mysqli_num_rows($res1) > 0) {
+                                        if (mysqli_num_rows($res1) > 0) {
 
-                                                $row1 = mysqli_fetch_assoc($res1);
-                                                $btn = '<button onclick="modal1('.$row1['id'].')" class="label label-info">Review</button>';
-                                            }
-
-                                            echo '
-                                            <tr>
-
-                                            <td>'.$row['name'].'</td>
-                                            <td>'.$row['serial'].'</td>
-                                            <td>'.$row['type'].'</td>
-                                            <td>
-                                            <img src="../uploads/'.$row['pic_url'].'" " class="img-thumbnail" alt="No Image" width="50" height="50">
-                                            </td>
-                                            <td>'.date("M d, y",strtotime($row['date'])).'</td>
-                                            <td class="pull-right">
-                                            '.$btn.'  <a href="?id='.$row['id'].'" class="label label-warning">Archive</a>
-                                            </td>
-                                            </tr>';
+                                            $row1 = mysqli_fetch_assoc($res1);
+                                            $btn = '<button onclick="modal1('.$row1['id'].')" class="btn btn-info">Review</button>';
                                         }
+
                                         echo '
-                                        </tbody>
-                                        </table>';
-                                    } else {
-                                        echo '<div class="alert alert-warning">
-                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                        <strong>No Bookings found.</strong>
-                                        </div>';
+                                        <tr>
+
+                                        <td>'.$row['name'].'</td>
+                                        <td>'.$row['serial'].'</td>
+                                        <td>'.$row['type'].'</td>
+                                        <td>
+                                        <img src="../uploads/'.$row['pic_url'].'" " class="img-thumbnail" alt="No Image" width="50" height="50">
+                                        </td>
+                                        <td>'.date("M d, y",strtotime($row['date'])).'</td>
+                                        <td class="pull-right">
+                                        '.$btn.'  <a href="?id='.$row['id'].'" class="btn btn-warning">Archive</a>
+                                        </td>
+                                        </tr>';
                                     }
-                                    ?>
-                                </div>
-                                <!-- /.table-responsive -->
+                                    echo '
+                                    </tbody>
+                                    </table>';
+                                } else {
+                                    echo '<div class="alert alert-warning">
+                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                    <strong>No Bookings found.</strong>
+                                    </div>';
+                                }
+                                ?>
                             </div>
-                            <!-- /.panel-body -->
+                            <!-- /.table-responsive -->
                         </div>
+                        <!-- /.panel-body -->
                     </div>
-                    <!-- /.post -->
+                </div>
+                <!-- /.post -->
             </div>
         </div>
         <!-- /.tab-pane -->
+
+
         <div class="tab-pane" id="timeline">
             <!-- The timeline -->
             <?php
@@ -226,8 +243,6 @@ include 'header.php';
                 } else {
                     $_SESSION['failure'] = 'An error occured, please try again.';
                 }
-
-
             }
             ?>
             <!-- Page Content -->
@@ -306,7 +321,7 @@ include 'header.php';
                                             <td>'.$row['total'].'</td>
                                             <td class=" text-success">'.$row['status'].'</td>
                                             <td class="pull-right">
-                                            <a href="editquote.php?id='.$row['id'].'" class="label label-primary">Invoice </a>
+                                            <a href="editquote.php?id='.$row['id'].'" class="btn btn-primary">Invoice </a>
                                             </td>
                                             </tr>';
                                         }                                                
@@ -481,7 +496,6 @@ include 'footer.php';
     $('#bookings').DataTable()
 })
 </script>
-
 
 
 

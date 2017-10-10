@@ -5,15 +5,15 @@ include '../includes/functions.php';
 
 <?php
 if(isset($_SESSION['key']) == '' ) {
-	header("location:../login.php");
+  header("location:../login.php");
 }
 ?>
 
 <?php
 if (isset($_GET['id']) && $_GET['id'] != null) {
-	$id = mysqli_real_escape_string($con, strip_tags(trim($_GET["id"])));
+  $id = mysqli_real_escape_string($con, strip_tags(trim($_GET["id"])));
 } else {
-	header('Location: quotations.php');
+  header('Location: quotations.php');
 }
 
 //Use quote id to get data
@@ -54,22 +54,22 @@ $user = $_SESSION['user_id'];
 
 if(isset($_POST['submit'])) {
 
-	$description = mysqli_real_escape_string($con, strip_tags(trim($_POST["desc"])));
-	$deposit = mysqli_real_escape_string($con, strip_tags(trim($_POST["deposit"])));
-	$balance = mysqli_real_escape_string($con, strip_tags(trim($_POST["balance"])));
-	$total = mysqli_real_escape_string($con, strip_tags(trim($_POST["total"])));
-	$status = mysqli_real_escape_string($con, strip_tags(trim($_POST["status"])));
+  $description = mysqli_real_escape_string($con, strip_tags(trim($_POST["desc"])));
+  $deposit = mysqli_real_escape_string($con, strip_tags(trim($_POST["deposit"])));
+  $balance = mysqli_real_escape_string($con, strip_tags(trim($_POST["balance"])));
+  $total = mysqli_real_escape_string($con, strip_tags(trim($_POST["total"])));
+  $status = mysqli_real_escape_string($con, strip_tags(trim($_POST["status"])));
 
-	
-	if($deposit != '' && $balance != '' && $total != '' && $description != '' && $status != '' ) {
+  
+  if($deposit != '' && $balance != '' && $total != '' && $description != '' && $status != '' ) {
 
-		$sql = "UPDATE quotation SET description='".$description."', deposit='".$deposit."', balance='".$balance."', total='".$Total."', status='".$status."' WHERE id='".$id."'";
-		mysqli_query($con, $sql);
-		$_SESSION['success'] = 'Your Quotation was updated successfully.';
-		header("Location: quotations.php");
-	}else {
-		$_SESSION['failure'] = 'Please fill in all fields.';
-	}
+    $sql = "UPDATE quotation SET description='".$description."', deposit='".$deposit."', balance='".$balance."', total='".$Total."', status='".$status."' WHERE id='".$id."'";
+    mysqli_query($con, $sql);
+    $_SESSION['success'] = 'Your Quotation was updated successfully.';
+    header("Location: quotations.php");
+  }else {
+    $_SESSION['failure'] = 'Please fill in all fields.';
+  }
 }
 ?>
 
@@ -81,34 +81,34 @@ include 'header.php';
 
 <!-- Page Content -->
 <div id="page-wrapper">
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-lg-12">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
 
-			</div>
-			<!-- /.col-lg-12 -->
-		</div>
-		<!-- /.row -->
-		<!-- /.row -->
-		<div class="row">
-			<div class="col-lg-12">
-				<div>
-					<?php if(isset($_SESSION['failure']) && $_SESSION['failure'] != '') { ?>
-					<div class="alert alert-danger">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						<?php echo $_SESSION['failure']; unset($_SESSION['failure']); ?>
-					</div>
-					<?php } ?>
+      </div>
+      <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div>
+          <?php if(isset($_SESSION['failure']) && $_SESSION['failure'] != '') { ?>
+          <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <?php echo $_SESSION['failure']; unset($_SESSION['failure']); ?>
+          </div>
+          <?php } ?>
 
-					<?php if(isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
-					<div class="alert alert-success">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						<?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
-					</div>
-					<?php } ?>
-				</div>
+          <?php if(isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
+          <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
+          </div>
+          <?php } ?>
+        </div>
 
-				<div class="panel panel-default">
+        <div class="panel panel-default">
 
 
           <div class="row">
@@ -119,7 +119,7 @@ include 'header.php';
                 <div class="row">
                   <div class="col-xs-12">
                     <h2 class="page-header">
-                      <i class="fa fa-globe"></i> AdminLTE, Inc.
+                      <i class="fa fa-globe"></i> Infinity, Inc.
                       <small class="pull-right"><?php echo $date; ?></small>
                     </h2>
                   </div>
@@ -242,6 +242,7 @@ include 'header.php';
                   <button onclick="javascript:printDiv('printablediv')" class="btn btn-primary pull-right" style="margin-right: 5px;">
                     <i class="fa fa-download"></i> Generate PDF
                   </button>
+                  <a class="btn btn-warning" href="bookings.php">Bookings</a>
                 </div>
               </div>
             </section>

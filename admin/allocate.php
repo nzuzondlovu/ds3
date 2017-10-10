@@ -23,6 +23,7 @@ $sql = "SELECT * FROM customersaledevice WHERE id ='$id'";
 $res = mysqli_query($con, $sql);
 $row = mysqli_fetch_assoc($res);
 
+$id = $row['id'];
 $name = $row['diviceName'];
 $model = $row['model'];
 $serial = $row['serialNumber'];
@@ -51,8 +52,8 @@ if(isset($_POST['submit'])){
 
   if ($tech != '') {
 
-    $sql = "INSERT INTO techrepair(diviceName, model, serialNumber, Dtype, recievedDate, amount, tname) 
-    VALUES ('$name','$model', '$serial', '$type', '$date','$amount', '$tech')";
+    echo $sql = "INSERT INTO techrepair(job_id, diviceName, model, serialNumber, Dtype, recievedDate, amount, tname) 
+    VALUES ('$id', '$name','$model', '$serial', '$type', '$date','$amount', '$tech')";
     mysqli_query($con, $sql);
     header("location: allocated.php");
 
