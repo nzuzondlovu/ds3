@@ -172,7 +172,12 @@ include 'header.php';
 					<div class="panel-heading">
 						Company Cash Flow Statement
 					</div>
-					<div class="panel-body">
+					<div class="col-lg-12">
+						<div class="pull-right">
+							<button onclick="javascript:printDiv('printablediv')" class="btn btn-warning"><span class="fa fa-print"></span> Print</button>
+						</div>
+					</div>
+					<div class="panel-body" id="printablediv">
 						<div class="row">
 							<div class="col-md-offset-10 col-md-2 pull-right">
 								<table>
@@ -189,7 +194,7 @@ include 'header.php';
 							<p>.</p>
 							<div class="col-md-12">
 								<div class="table-responsive">
-									<table class="table data-table table-bordered">
+									<table class="table data-table table-bordered" width="100%">
 										<thead>
 											<tr>
 												<td width="85%">Operation</td>

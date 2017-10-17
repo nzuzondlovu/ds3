@@ -40,7 +40,7 @@ include 'header.php';
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Blank</h1>
+				<h1 class="page-header">Reply</h1>
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="pull-right">

@@ -99,18 +99,28 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
               </div>
                  <div class="box-footer no-padding">
               <ul class="nav nav-stacked">
-                <li><a href="#"> Total <span class="pull-right badge bg-blue">31</span></a></li>
-                <li><a href="#">Pending <span class="pull-right badge bg-aqua">5</span></a></li>
-                <li><a href="#"> Delivered <span class="pull-right badge bg-green">12</span></a></li>
-                <li><a href="#"> On Road<span class="pull-right badge bg-red">842</span></a></li>
+                <li><a href="#"> Total <span class="pull-right badge bg-blue">  <?php
+                                  $sql = "SELECT * FROM driverdelivery WHERE driverID= $idnumber ";
+                                  indexCount($con, $sql);
+                                  ?> </span></a></li>
+                <li><a href="#">Pending <span class="pull-right badge bg-aqua"><?php
+                                  $sql = "SELECT * FROM driverdelivery WHERE driverID= $idnumber and status='Pending' ";
+                                  indexCount($con, $sql);
+                                  ?></span></a></li>
+                <li><a href="#"> Delivered <span class="pull-right badge bg-green"><?php
+                                  $sql = "SELECT * FROM driverdelivery WHERE driverID= $idnumber and status='Delivered'";
+                                  indexCount($con, $sql);
+                                  ?></span></a></li>
+                <li><a href="#"> On Road<span class="pull-right badge bg-red"><?php
+                                  $sql = "SELECT * FROM driverdelivery WHERE driverID= $idnumber and status='OnRoad' ";
+                                  indexCount($con, $sql);
+                                  ?></span></a></li>
               </ul>
             </div>
               <!-- /.row -->
             </div>
           </div>
-            <?php
-            echo $cust;
-            ?>
+       
           </div>
           <div class="col-md-6">
             <form role="form" method="post">

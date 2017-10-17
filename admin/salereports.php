@@ -68,7 +68,7 @@ $d2='';
 if(isset($_POST['submit']))
 {
 	$d1= mysqli_real_escape_string($con, strip_tags(trim($_POST["d1"])));
-		$d2= mysqli_real_escape_string($con, strip_tags(trim($_POST["d2"])));	
+	$d2= mysqli_real_escape_string($con, strip_tags(trim($_POST["d2"])));	
 	
 
 }
@@ -128,7 +128,7 @@ Sales Report from&nbsp;<?php echo $d1 ?>&nbsp;to&nbsp;<?php echo $d2 ?>
 </div>
 						<div class="table-responsive">
 							<?php
-					     $sql = "SELECT * FROM sales WHERE date BETWEEN $d1 AND $d2 ORDER by invoice_num DESC";
+					     $sql = "SELECT * FROM sales WHERE date BETWEEN '$d1' AND '$d2' ";
 						 $res = mysqli_query($con, $sql);
 
 							if (mysqli_num_rows($res) > 0) {
@@ -163,10 +163,11 @@ Sales Report from&nbsp;<?php echo $d1 ?>&nbsp;to&nbsp;<?php echo $d2 ?>
 							} else {
 								echo '<div class="alert alert-info">
 								<button type="button" class="close" data-dismiss="alert">&times;</button>
-								<strong>No products found.</strong>
+								<strong>No Invoices found.</strong>
 							</div>';
 						}
 						?>
+					</div>
 					</div>
 					</div>
 					<!-- /.table-responsive -->
@@ -187,7 +188,7 @@ include 'footer.php';
 
 <script>
 	$(document).ready(function(){
-		$('#bookings').DataTable();
+		$('#suppliers').DataTable();
 	});
 </script>
  

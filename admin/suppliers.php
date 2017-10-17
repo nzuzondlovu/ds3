@@ -76,7 +76,7 @@ include 'header.php';
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span> Close</button>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="fa fa-close" aria-hidden="true"></span> Close</button>
 				<h4 class="modal-title" id="addSuppLabel">Add Supplier</h4>
 			</div>
 			<div class="modal-body">
@@ -101,7 +101,7 @@ include 'header.php';
 					</div>
 					<div class="form-group">
 						<label>Website</label>
-						<input type="text" name="website" class="form-control" value="http://">
+						<input type="url" name="website" class="form-control" value="http://">
 					</div>
 
 

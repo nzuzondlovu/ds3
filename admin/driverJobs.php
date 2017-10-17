@@ -14,7 +14,7 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 
 	$id = mysqli_real_escape_string($con, strip_tags(trim($_GET['id'])));
 	if ($id) {
-		$sql = "UPDATE driverdelivery SET status='Delivered' WHERE id='".$id."'";
+		$sql = "UPDATE driverdelivery SET status='OnRoad' WHERE id='".$id."'";
 		mysqli_query($con, $sql);
 		$_SESSION['success'] = 'Delivery Confirmed';
 	} else {
@@ -81,7 +81,7 @@ include 'header.php';
 							<?php
 
 
-							$sql = "SELECT * FROM driverdelivery WHERE driverID='".$_SESSION['driverID']."' And status='Pending' ";
+							$sql = "SELECT * FROM driverdelivery WHERE driverID='".$_SESSION['idnumber']."' And status='Pending' ";
 							$res = mysqli_query($con, $sql);
 
 							if (mysqli_num_rows($res) > 0) {

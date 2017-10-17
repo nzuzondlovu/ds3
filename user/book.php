@@ -132,7 +132,7 @@ include 'header.php';
                     <div class="input-group-addon">
                       <i class="fa fa-laptop"></i>
                     </div>
-                    <input type="text"  name="name" class="form-control" >
+                    <input type="text"  name="name" class="form-control" required="required">
                   </div>
                   <!-- /.input group -->
                 </div>
@@ -150,7 +150,7 @@ include 'header.php';
                   <div class="input-group-addon">
                     <i class="fa fa-barcode"></i>
                   </div>
-                  <input type="text"  name="serial" class="form-control" data-inputmask="'alias': 'ip'" data-mask>
+                  <input type="text"  name="serial" class="form-control" data-inputmask="'alias': 'ip'" data-mask  required="required">
 
                 </div>
                 <!-- /.input group -->
@@ -168,7 +168,7 @@ include 'header.php';
                 </div>
 
                 <select name="type" class="form-control col-lg-6">
-                  <option value="" selected="selected">Select type</option>
+                  <option value="" selected="selected"  required="required">Select type</option>
                   <?php
                   $sql = "SELECT * FROM category ORDER BY name ASC";
                   $res = mysqli_query($con, $sql);
@@ -185,9 +185,9 @@ include 'header.php';
 
             <div class="form-group">
              <label>Upload Picture </label>
-             <input hidden="true" type="file" id="ftu" name="fileToUpload" style="display: none;">
+             <input  required="required" hidden="true" type="file" id="ftu" name="fileToUpload" style="display: none;">
 
-             <label for="ftu" class="btn btn-success col-lg-6 " > Browse...	
+             <label for="ftu" class="btn btn-success col-lg-6 " > Browse... 
 
                <i class="glyphicon glyphicon-cloud-upload"> </i>
 
@@ -200,7 +200,7 @@ include 'header.php';
            </div>
            <div class="form-group ">
             <label class="col-lg-12">What happened to the device</label>
-            <textarea name="description" class="form-control" rows="3"></textarea>
+            <textarea required="required" name="description" class="form-control" rows="3"></textarea>
           </div>
 
           <div class="form-group col-lg-6">
@@ -210,7 +210,7 @@ include 'header.php';
               <div class="input-group-addon">
                 <i class="fa fa-calendar"></i>
               </div>
-              <input name="date" type="text" class="form-control pull-right" id="datepicker">
+              <input required="required" name="date" type="text" class="form-control pull-right" id="datepicker">
             </div>
             <!-- /.input group -->
           </div>
@@ -219,7 +219,7 @@ include 'header.php';
               <label>Time picker:</label>
 
               <div class="input-group">
-                <input type="text" class="form-control timepicker" name="time">
+                <input required="required" type="text" class="form-control timepicker" name="time">
 
                 <div class="input-group-addon">
                   <i class="fa fa-clock-o "></i>
@@ -279,7 +279,7 @@ include 'header.php';
         </h3>
       </div>
       <div class="box-body">
-        <div id="#" style="height: 250px; width: 100%;"> ....	</div>
+        <div id="#" style="height: 250px; width: 100%;"> .... </div>
 
 
 
