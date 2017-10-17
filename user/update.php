@@ -18,10 +18,10 @@ $target_dir = "../profile/";
 
 
 
-    echo $sql = "INSERT INTO  ()
+    echo $sql = "INSERT INTO userdetails(idnumber,pic_url,street,areaCode)
 
 
-  VALUES( '$url' )";
+  VALUES('$idnumber','$url','$street','$areaCode',)";
 
 
   mysqli_query($con, $sql);
