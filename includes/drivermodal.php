@@ -5,7 +5,7 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
   $id = mysqli_real_escape_string($con, strip_tags(trim($_POST['id'])));
 
   $cust = '';
- 
+
 
   $sql = "SELECT * FROM custdelivery WHERE deliveryID='".$id."'";
   $res = mysqli_query($con, $sql);
@@ -23,8 +23,11 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
     Boxcode : '.$row['boxcode'].'<br>
     Date of Request : '.$row['dateofRequest'].'<br>
     Date of Delivery : '.$row['dateofDelivery'];
+    $a= $row['boxcode'];
+
   }
- 
+
+
 }
 ?>
 
@@ -50,52 +53,79 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
                 <label>Choose Driver</label>
                 <select name="driver" class="form-control">
                   <option value="" selected="selected">Select Driver</option>
+
+
                   <?php
-                  $sql = "SELECT * FROM drivers";
+                  $string = array();
+                   $names = array();
+                  $i = 0;
+                  
+
+                 $sql= " SELECT DISTINCT driver_loc.idnumber, driver_loc.AreaCode FROM driver_loc
+JOIN custdelivery ON driver_loc.AreaCode = $a
+WHERE custdelivery.boxcode = driver_loc.AreaCode  ORDER BY driver_loc.idnumber DESC";
+
                   $res = mysqli_query($con, $sql);
 
                   if(mysqli_num_rows($res) > 0) {
+
                     while($row = mysqli_fetch_assoc($res)) {
-                      echo '<option value="'.$row['idnumber'].'">'.$row['name'].'</option>';
+
+                      $sql1 = 'SELECT * FROM drivers WHERE idnumber='.$row['idnumber'];
+                      $res1 = mysqli_query($con, $sql1);
+                      $row1 = mysqli_fetch_assoc($res1);
+
+$string[$i] = $row['idnumber'];
+$names[$i] = $row1['name'];
+$i++;                      
                     }
                   }
+                  array_unique($string);
+                  array_unique($names);
+for ($s=0; $s < count($string); $s++) { 
+
+ echo '<option value="'.$string[$s].'">'.$names[$s].'</option>';
+
+}
+                 
                   ?>
+
                 </select>
               </div>
 
-                         <div class="form-group">
+              <div class="form-group">
                <label>Delivery Status</label>
-                <select class="form-control select2" name="status" multiple="multiple" data-placeholder="Enter Status"
-                        style="width: 100%;">
-                  <option>Pending</option>
+               <select class="form-control select2" name="status" multiple="multiple" data-placeholder="Enter Status"
+               style="width: 100%;">
+               <option>Pending</option>
                
-        
-                </select>
-              </div>
-    			<input type="text" name="del" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row= mysqli_fetch_assoc($res);echo $row['deliveryID'];?> " style="display: none" />
-            		
-              <input type="text" name="name" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['custname'];?>" style="display: none" />
-              
-              <input type="text" name="cell" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['custcell']; ?>"  style="display: none"/>
-              
-              <input type="text" name="dateD" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['dateofDelivery'];?> " style="display: none" />
-              
-              <input type="text" name="strA" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['strAddress']; ?>"  style="display: none"/>
-              
-              <input type="text" name="suburb" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['suburb']; ?>"  style="display: none"/>
-              
-              <input type="text" name="area" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['area']; ?>"  style="display: none"/>
-              
-              <input type="text" name="boxcode" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['boxcode']; ?>"  style="display: none"/>
-              
-				 <button name="submit" type="submit" class="btn btn-primary">Submit Allocation</button>                                                                  
-              <button type="reset" class="btn btn-default">Reset</button>
-            </form>
-          </div>
-        </div>
-      </div>  
-    </div>    
-  </div>      
+
+             </select>
+           </div>
+           <input type="text" name="del" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row= mysqli_fetch_assoc($res);echo $row['deliveryID'];?> " style="display: none" />
+
+           <input type="text" name="name" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['custname'];?>" style="display: none" />
+
+           <input type="text" name="cell" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['custcell']; ?>"  style="display: none"/>
+
+           <input type="text" name="dateD" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['dateofDelivery'];?> " style="display: none" />
+
+           <input type="text" name="strA" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['strAddress']; ?>"  style="display: none"/>
+
+           <input type="text" name="suburb" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['suburb']; ?>"  style="display: none"/>
+
+           <input type="text" name="area" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['area']; ?>"  style="display: none"/>
+
+           <input type="text" name="boxcode" value="<?php $res = mysqli_query($con, "SELECT * FROM custdelivery WHERE deliveryID=$id ");$row = mysqli_fetch_assoc($res);echo $row['boxcode']; ?>"  style="display: none"/>
+
+           <button name="submit" type="submit" class="btn btn-primary">Submit Allocation</button>                                                                  
+           <button type="reset" class="btn btn-default">Reset</button>
+         </form>
+       </div>
+     </div>
+   </div>  
+ </div>    
+</div>      
 </div>        
 <!-- /.Modal -->
 <script>      
@@ -108,9 +138,9 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
 </script>     
 <?php echo ob_get_clean(); ?>
 
-  
+
 <script src="bower_components/select2/dist/js/select2.full.min.js"></script>
-  <link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css">
+<link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css">
 
 <script>
   $(function () {
@@ -130,21 +160,21 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
     $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' })
     //Date range as a button
     $('#daterange-btn').daterangepicker(
-      {
-        ranges   : {
-          'Today'       : [moment(), moment()],
-          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
-          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
-          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-        },
-        startDate: moment().subtract(29, 'days'),
-        endDate  : moment()
+    {
+      ranges   : {
+        'Today'       : [moment(), moment()],
+        'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+        'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+        'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+        'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
       },
-      function (start, end) {
-        $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-      }
+      startDate: moment().subtract(29, 'days'),
+      endDate  : moment()
+    },
+    function (start, end) {
+      $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+    }
     )
 
     //Date picker

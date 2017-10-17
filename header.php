@@ -363,6 +363,9 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
                             $li4 = ' class="active"';
                         }
                         
+                        else{
+                            echo "";
+                        }
 
                         ?>
                         <li<?php echo $li1; ?>><a href="index.php">Home</a></li>

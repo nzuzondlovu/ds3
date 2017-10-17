@@ -112,7 +112,7 @@ $a = 0;
                             echo '
                             <div class="thubmnail-recent">
                                 <img src="uploads/'.$row['pic_url'].'" class="recent-thumb" alt="">
-                                <h2><a href="product.php?id='.$row['id'].'">'.$row['brand_name'].' '.$row['generic_name'].'</a></h2>
+                                <h2><a href="product.php?id='.$row['id'].'">'.$row['brandname'].' '.$row['name'].'</a></h2>
                                 <div class="product-sidebar-price">
                                     '.$promo.'
                                 </div>                             
@@ -137,7 +137,7 @@ $a = 0;
                         if (mysqli_num_rows($res) > 0) {
                             while ($row = mysqli_fetch_assoc($res)) {
                                 echo '
-                                <li><a href="product.php?id='.$row['id'].'">'.$row['brand_name'].' '.$row['generic_name'].'</a></li>';
+                                <li><a href="product.php?id='.$row['id'].'">'.$row['brandname'].' '.$row['name'].'</a></li>';
                             }
                         } else {
                             echo '
