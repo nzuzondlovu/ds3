@@ -9,6 +9,27 @@ if(isset($_SESSION['user_id']) == '' ) {
 }
 ?>
 
+<?php 
+if(isset($_POST['btnSave'])) {
+
+$target_dir = "../profile/";
+  $url = basename( $_FILES["fileToUpload"]["name"]);
+  $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+
+
+
+    echo $sql = "INSERT INTO  ()
+
+
+  VALUES( '$url' )";
+
+
+  mysqli_query($con, $sql);
+
+  $_SESSION['success'] = 'Your Profile Was Updated .';
+  upload($url, $target_dir, $target_file, $sql, $con);
+}
+?>
 <?php
 
 if(isset($_POST['submit'])) {
@@ -91,12 +112,70 @@ include 'header.php';
                       <b>Devices</b> <a class="pull-right"> </a>
                     </li>
                     <li class="list-group-item">
-                      <b>Delivery</b> <a class="pull-right">13,287</a>
+                  
+
+                            <p><b>Mobile : </b><?php echo $_SESSION['cell']; ?></p>
+              <p><b>Email : </b>  <?php echo $_SESSION['email']; ?></p>
+              <p><b>Location :</b> <?php echo $_SESSION['location']; ?> </p>
+              <p></p>
                     </li>
                   </ul>
 
-                  <a href="#" class="btn btn-primary btn-block"><b>...</b></a>
+                           <div class="col-lg-12">
+
+         <div class="form-group">
+                                        <label>Street Number/Road</label>
+                                        <input name="strAddress" class="form-control" placeholder="Street Number">
+                                    </div>
+
+                               
+                                     <div class="form-group">
+                                        <label>Suburb</label>
+                                         <select id="area" name="area" class="form-control select2" onchange="document.getElementById('boxcode').value=this.value" required>
+                                          
+                                            <?php
+                                            $sql = "SELECT * FROM area ORDER BY cityName ASC";
+                                            $res = mysqli_query($con, $sql);
+
+                                            if(mysqli_num_rows($res) > 0    ) {
+                                                while($row = mysqli_fetch_assoc($res)) {
+
+                                                    echo '<option  value="'.$row['cityName'].','.$row['boxcode'].'">'.$row['cityName'].'</option>';
+                                                 
+                                                }
+                                                
+                                            }
+                                            ?>
+                                        </select>
+                                      
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>Area Code</label>
+                                        <input id="boxcode" name="boxcode" class="form-control" value="" placeholder="Enter text" >
+                                    </div>
+                                       <div class="form-group">
+             <label>Upload Picture </label>
+             <input  required="required" hidden="true" type="file" id="ftu" name="fileToUpload" style="display: none;">
+
+             <label for="ftu" class="btn btn-success col-lg-6 " > Browse... 
+
+               <i class="glyphicon glyphicon-cloud-upload"> </i>
+
+
+
+             </label>    
+
+
+
+           </div>
+                                       <div class="form-group">
+                                        <button name="btnAdd" type="submit" class="btn btn-primary">Update</button>
+                                      </div>
+
+              </div>
                 </div>
+       
                 <!-- /.box-body -->
               </div>
               <!-- /.box -->
@@ -166,6 +245,7 @@ include 'header.php';
                               <label>Password</label>
                               <input required="required" name="password" class="form-control" placeholder="Enter password" type="Password">
                             </div>
+
                             <button name="submit" type="submit" class="btn btn-primary">Save Details</button>
                             
                           </form>

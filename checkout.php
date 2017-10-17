@@ -235,10 +235,7 @@ $a = 0;
                                     </p>
                                     <div class="clear"></div>
 
-                                    <p id="billing_company_field" class="form-row form-row-wide">
-                                        <label class="" for="billing_company">Company Name</label>
-                                        <input type="text" value="" placeholder="" id="billing_company" name="billing_company" class="input-text ">
-                                    </p>
+                               
 
                                     <p id="billing_address_1_field" class="form-row form-row-wide address-field validate-required">
                                         <label class="" for="billing_address_1">Address <abbr title="required" class="required">*</abbr>
@@ -263,6 +260,9 @@ $a = 0;
                                     <p id="billing_postcode_field" class="form-row form-row-last address-field validate-required validate-postcode" data-o_class="form-row form-row-last address-field validate-required validate-postcode">
                                         <label class="" for="billing_postcode">Postcode <abbr title="required" class="required">*</abbr>
                                         </label>
+
+                                       <?php
+                                       ?>
                                         <input type="text" value="<?php echo $name; ?>" placeholder="Postcode / Zip" id="billing_postcode" name="billing_postcode" class="input-text ">
                                     </p>
 

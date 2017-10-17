@@ -239,7 +239,8 @@ if (isset($_POST['id']) && $_POST['id'] != null)
                     <label>Price</label>
                     <input required="required" class="form-control" type="text" id="txt1" name="price" onkeyup="sum();" value="<?php echo $pri; ?>">
                     <input type="text" id="txt3" class="form-control" hidden="true" name="profit" readonly value="<?php echo $prof; ?>" required="required">
-                    <input class="form-control"  type="text" id="txt2"  name="oPrice" required="required"> onkeyup="sum();" value="<?php echo $op; ?>">
+                    <input class="form-control"  type="text" id="txt2"  name="oPrice" required="required"
+                    onkeyup="sum();" value="<?php echo $op; ?>">
                   </div>
                   <div class="row">
                     <div class="col-lg-12">
