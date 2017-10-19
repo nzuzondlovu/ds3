@@ -165,8 +165,8 @@
                                         <input type="hidden" name="ap_discountamount" value="4.99"/>
                                         <input type="hidden" name="ap_ipnversion" value="2"/>
 
-                                        <input type="hidden" name="ap_returnurl" value="http://ds3.theheat.co.za/user/thanks.php?id='.$_SESSION['user_id'].'" /> 
-                                        <input type="hidden" name="ap_cancelurl" value="http://ds3.theheat.co.za/user/cart.php" /> 
+                                        <input type="hidden" name="ap_returnurl" value="http://silverbacksa.co.za/ds3/user/thanks.php?id='.$_SESSION['user_id'].'" /> 
+                                        <input type="hidden" name="ap_cancelurl" value="http://silverbacksa.co.za/ds3/user/cart.php" /> 
                                         <input type="image" name="ap_image" src="https://www.payza.com/images/payza-buy-now.png"/>
                                     </form>';
                                     ?>                                    
