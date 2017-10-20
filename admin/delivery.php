@@ -189,7 +189,7 @@
               <ul class="nav nav-tabs">
                 <li class="active"><a href="#activity" data-toggle="tab">Pending</a></li>
                 <li><a href="#timeline" data-toggle="tab">Location</a></li>
-                <li><a href="#settings" data-toggle="tab">Allocated</a></li>
+                <li><a href="#settings" data-toggle="tab">Deliveries</a></li>
                 <li><a href="#drivers" data-toggle="tab">Drivers</a></li>
                       <li><a href="#loc" data-toggle="tab">Driver Locations</a></li>
 

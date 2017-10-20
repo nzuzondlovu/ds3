@@ -91,7 +91,7 @@ include 'header.php';
           <ul class="nav nav-tabs">
             <li class="active"><a href="#settings" data-toggle="tab">Deliveries</a></li>
             
-
+   <li><a href="#timeline" data-toggle="tab">Address</a></li>
 
           </ul>
           <div class="tab-content">
@@ -179,6 +179,12 @@ include 'header.php';
 
 
               </div>
+                  <div class="tab-pane" id="timeline">
+              
+   
+
+
+            </div>
               <!-- /.panel-body -->
             </div>
             
@@ -206,7 +212,14 @@ include 'header.php';
   <?php
   include 'footer.php';
   ?>
-
+<script type="text/javascript">
+                window.onload=function() { 
+  document.getElementById("suburb").onchange=function() {
+    document.getElementById("area").value=this.options[this.selectedIndex].getAttribute("data-sync"); 
+  }
+  document.getElementById("suburb").onchange(); // trigger when loading
+}
+                </script>
   <script>
    function modal1(id) {
     var data = {"id" : id};

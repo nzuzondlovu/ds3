@@ -14,6 +14,12 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
 
 }
 ?>
+  <?php
+
+$loc  = $_SESSION['location'];
+$pieces = explode(" ", $loc);
+
+?>
 <?php
 
 if(isset($_POST['submit'])) {
@@ -65,13 +71,13 @@ include 'header.php';
     					if(mysqli_num_rows($res1) > 0) {
 
     						while($row1 = mysqli_fetch_assoc($res1)) {
-    							echo 
-    							$row1['name'].'<br>'.
-    							$row1['surname'].'<br>'.
-    							$row1['cell'].'<br>'.
-    							$row1['idnumber'].'<br>'.
-    							$row1['email'].'<br>'.
-    							$row1['location'];
+    						
+    						$n=	$row1['name'].'<br>'.
+    							$s=$row1['surname'].'<br>'.
+    							$c=$row1['cell'].'<br>'.
+    							$i=$row1['idnumber'].'<br>'.
+    							$e=$row1['email'].'<br>'.
+    							$l=$row1['location'];
     						}
     					} 
     					?>
@@ -80,7 +86,122 @@ include 'header.php';
 		</div>
 		<!-- /.row -->
 		<div class="row">
+              <div class="receipt-main col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
+            <div class="row">
+          <div class="receipt-header">
+          <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="receipt-left">
+              <img class="img-responsive" alt="" src="../img/logo.png" style="width: 200px; border-radius: 200px;">
+            </div>
+          </div>  
+          <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+            <div class="receipt-right">
+              <h5>TechiTouch.</h5>
+              <p>+91 12345-6789 <i class="fa fa-phone"></i></p>
+              <p>info@gmail.com <i class="fa fa-envelope-o"></i></p>
+              <p> <?php echo $pieces[0]; ?> <i class="fa fa-location-arrow"></i></p>
+            </div>
+          </div>
+        </div>
+            </div>
+      
+      <div class="row">
+        <div class="receipt-header receipt-header-mid">
+          <div class="col-xs-8 col-sm-8 col-md-8 text-left">
+            <div class="receipt-right">
+              <h5> <?php echo $_SESSION['name']; echo " "; echo $_SESSION['surname']; ?> <small>  |   Lucky Number : 156</small></h5>
+              <p><b>Mobile : </b><?php echo $_SESSION['cell']; ?></p>
+              <p><b>Email : </b>  <?php echo $_SESSION['email']; ?></p>
+              <p><b>Location :</b> <?php echo $_SESSION['location']; ?> </p>
+            </div>
+          </div>
+          <div class="col-xs-4 col-sm-4 col-md-4">
+            <div class="receipt-left">
+              <h1>Receipt</h1>
+            </div>
+          </div>
+        </div>
+            </div>
+      
+            <div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="col-md-9">Payment for August 2016</td>
+                            <td class="col-md-3"><i class="fa fa-inr"></i> 15,000/-</td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-9">Payment for June 2016</td>
+                            <td class="col-md-3"><i class="fa fa-inr"></i> 6,00/-</td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-9">Payment for May 2016</td>
+                            <td class="col-md-3"><i class="fa fa-inr"></i> 35,00/-</td>
+                        </tr>
+                        <tr>
+                            <td class="text-right">
+                            <p>
+                                <strong>Total Amount: </strong>
+                            </p>
+                            <p>
+                                <strong>Late Fees: </strong>
+                            </p>
+              <p>
+                                <strong>Payable Amount: </strong>
+                            </p>
+              <p>
+                                <strong>Balance Due: </strong>
+                            </p>
+              </td>
+                            <td>
+                            <p>
+                                <strong><i class="fa fa-inr"></i> 65,500/-</strong>
+                            </p>
+                            <p>
+                                <strong><i class="fa fa-inr"></i> 500/-</strong>
+                            </p>
+              <p>
+                                <strong><i class="fa fa-inr"></i> 1300/-</strong>
+                            </p>
+              <p>
+                                <strong><i class="fa fa-inr"></i> 9500/-</strong>
+                            </p>
+              </td>
+                        </tr>
+                        <tr>
+                           
+                            <td class="text-right"><h2><strong>Total: </strong></h2></td>
+                            <td class="text-left text-danger"><h2><strong><i class="fa fa-inr"></i> 31.566/-</strong></h2></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+      
+      <div class="row">
+        <div class="receipt-header receipt-header-mid receipt-footer">
+          <div class="col-xs-8 col-sm-8 col-md-8 text-left">
+            <div class="receipt-right">
+              <p><b>Date :</b> 15 Aug 2016</p>
+              <h5 style="color: rgb(140, 140, 140);">Thank you for your business!</h5>
+            </div>
+          </div>
+          <div class="col-xs-4 col-sm-4 col-md-4">
+            <div class="receipt-left">
+              <h1>Signature</h1>
+            </div>
+          </div>
+        </div>
+            </div>
+      
+        </div> 
 			<div class="col-lg-12">
+
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						Change Details
@@ -88,37 +209,28 @@ include 'header.php';
 					<!-- /.panel-heading -->
 				<div class="panel-body">
 					<div class="row">
-    			    <div class="col-lg-12">
+
+    			    <div class="col-lg-12">  
     				  <div class="col-md-offset-3 col-md-6">
     				   <form role="form" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label>Street Address</label>
                                         <input name="strAddress" class="form-control" placeholder="Enter text">
                                     </div>
+                                       
                                     
-                                    <div class="form-group">
-                                        <label>Suburb</label>
-                                        <select id="suburb" name="suburb" class="form-control select2" onchange="document.getElementById('area').value=this.value" required>
-                                            <option value="" selected="selected">      <?php
-                                            $sql = "SELECT * FROM suburb ORDER BY suburbName ASC";
-                                            $res = mysqli_query($con, $sql);
+                                  <div class="form-group">
+                                          <label>Town/City
 
-                                            if(mysqli_num_rows($res) > 0) {
-                                                while($row = mysqli_fetch_assoc($res)) {
-                                                    echo '<option  value="'.$row['suburbName'].'">'.$row['suburbName'].'</option>';
-                                                 
-                                                }
-                                                
-                                            }
-                                            ?></option>
-                                   
-                                        </select>
-                                      
-                                    </div>
+                                     </label>
+                                          <input name="town" class="form-control"  value="<?php echo $pieces[0]; ?>"placeholder="Enter text">
+                                      </div>
+
+
 
 
                                      <div class="form-group">
-                                        <label>City</label>
+                                        <label>Suburb</label>
                                       	 <select id="area" name="area" class="form-control select2" onchange="document.getElementById('boxcode').value=this.value" required>
                                             <option value="" selected="selected">Select type</option>
                                             <?php
@@ -127,6 +239,7 @@ include 'header.php';
 
                                             if(mysqli_num_rows($res) > 0    ) {
                                                 while($row = mysqli_fetch_assoc($res)) {
+
                                                     echo '<option  value="'.$row['cityName'].','.$row['boxcode'].'">'.$row['cityName'].'</option>';
                                                  
                                                 }
@@ -136,6 +249,7 @@ include 'header.php';
                                         </select>
                                       
                                     </div>
+
                                     <div class="form-group">
                                         <label>Area Code</label>
                                         <input id="boxcode" name="boxcode" class="form-control" value="" placeholder="Enter text" >
