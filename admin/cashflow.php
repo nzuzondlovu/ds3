@@ -134,6 +134,29 @@ if (mysqli_num_rows($res) > 0) {
 	}
 
 }
+
+//Calculation of expenses
+$fees = 0;
+$insu = 0;
+$inte = 0;
+$mand = 0;
+$ruma = 0;
+$taxe = 0;
+$trat = 0;
+
+$sql = "SELECT * FROM expenses ORDER BY id DESC LIMIT 1";
+$res = mysqli_query($con, $sql);
+
+$row = mysqli_fetch_assoc($res);
+
+$fees = $row['fees'];
+$insu = $row['insurance'];
+$inte = $row['interest'];
+$mand = $row['mande'];
+$ruma = $row['rent'] + $row['utility'] + $row['maintenance'];
+$taxe = $row['tax'];
+$trat = $row['training'] + $row['travel'];
+
 ?>
 
 <?php
@@ -239,8 +262,36 @@ include 'header.php';
 												<td>(R <?php echo $sala; ?>)</td>
 											</tr>
 											<tr>
+												<td>Fees</td>
+												<td>(R <?php echo $fees; ?>)</td>
+											</tr>
+											<tr>
+												<td>Insurances</td>
+												<td>(R <?php echo $insu; ?>)</td>
+											</tr>
+											<tr>
+												<td>Interest</td>
+												<td>(R <?php echo $inte; ?>)</td>
+											</tr>
+											<tr>
+												<td>Taxes</td>
+												<td>(R <?php echo $taxe; ?>)</td>
+											</tr>
+											<tr>
+												<td>Travel & Training</td>
+												<td>(R <?php echo $trat; ?>)</td>
+											</tr>
+											<tr>
+												<td>Meals & Entertainment</td>
+												<td>(R <?php echo $mand; ?>)</td>
+											</tr>
+											<tr>
+												<td>Rent, Utitlies & Maintenance</td>
+												<td>(R <?php echo $ruma; ?>)</td>
+											</tr>
+											<tr>
 												<td><b>Net Cash from Outflow</b></td>
-												<td><b>(R <?php echo ($orde + $sala); ?>)</b></td>
+												<td><b>(R <?php echo ($orde + $sala + $fees + $insu + $inte + $taxe + $trat + $mand + $ruma); ?>)</b></td>
 											</tr>
 											<tr>
 												<td><b>Net Increase in Cash</b></td>
@@ -254,7 +305,7 @@ include 'header.php';
 								<table>
 									<tr>
 										<td width="70%">Cash at End of Year:</td>
-										<td width="23%">R <?php echo ($open + (($cart1 + $sale + $quot + $tech) - ($orde + $sala))); ?></td>
+										<td width="23%">R <?php echo ($open + (($cart1 + $sale + $quot + $tech) - ($orde + $sala + $fees + $insu + $inte + $taxe + $trat + $mand + $ruma))); ?></td>
 									</tr>
 								</table>
 							</div>
