@@ -343,6 +343,20 @@ include 'header.php';
 											$result->execute();
 											$rowcountPromo = $result->rowcount();
 											?>
+												<?php 
+											include('connect.php');
+											$result = $db->prepare("SELECT * FROM suppliers ");
+											$result->execute();
+											$rowcountSupp = $result->rowcount();
+											?>
+
+
+												<?php 
+											include('connect.php');
+											$result = $db->prepare("SELECT * FROM orders  ");
+											$result->execute();
+											$rowcountOrder = $result->rowcount();
+											?>
 
 											<?php 
 											include('connect.php');
@@ -360,7 +374,7 @@ include 'header.php';
 												<i class="fa fa-cart-arrow-down"></i> <b>  <?php echo "Promo";?> </b>
 											</a>	
 											<a class="btn btn-danger btn-app">
-												<span class="badge bg-green"><?php echo $rowcount;?></span>
+												<span class="badge bg-green"><?php echo $rowcountOrder;?></span>
 												<i class="fa fa-inbox"></i> Orders
 											</a>	
 											<a class="btn  btn-app">
@@ -368,7 +382,7 @@ include 'header.php';
 												<i class="fa fa-warning text-orange	"></i> <b>  <?php echo "<10";?> </b>
 											</a>	
 											<a class="btn btn-app">
-												<span class="badge bg-green"><?php echo $rowcount;?></span>
+												<span class="badge bg-green"><?php echo $rowcountSupp;?></span>
 												<i class="fa fa-barcode"></i> Suppliers
 											</a>	
 											<a class="btn btn-app">

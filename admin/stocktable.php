@@ -94,7 +94,7 @@ include 'header.php';
 												<tr>
 													<td>'.$row['prod_code'].'</td>
 													<td>'.$row['brandname'].' '.$row['name'].'</td>
-													<td>'.count($row['name']).'</td>													
+														<td>'.$row['qty'].'</td>										
 													<td>'.$row['description'].'</td>
 													<td>'.date("M d, y",strtotime($row['date'])).'</td>
 												</tr>';
@@ -149,3 +149,6 @@ include 'footer.php';
 		$('#stock').DataTable();
 	});
 </script>
+
+<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>

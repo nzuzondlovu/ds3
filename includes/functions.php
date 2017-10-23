@@ -140,9 +140,7 @@ function user($type)
 	        <li>
 	            <a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 	        </li>   
-	        <li>
-	            <a href="bookings.php"><i class="fa fa-pencil-square-o fa-fw"></i> Create Quotation</a>
-	        </li>
+	        
 	        <li>
 	            <a href="#"><i class="fa fa-recycle fa-fw"></i> Device Recylce<span class="fa arrow"></span></a>
 	            <ul class="nav nav-second-level">
@@ -169,6 +167,9 @@ function user($type)
 	        </li>
 	        <li>
 	            <a href="products.php"><i class="fa fa-shopping-basket fa-fw"></i> Products</a>        
+	        </li>
+	          <li>
+	            <a href="devices.php"><i class="fa fa-pencil-square-o fa-fw"></i> Devices</a>
 	        </li>
 	        <li>
 	            <a href="update.php"><i class="fa fa-cogs fa-fw"></i> Update Details</a>

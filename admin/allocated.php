@@ -33,14 +33,14 @@ include 'header.php';
   .flip3D > .front{
     position:absolute;
     transform: perspective( 600px ) rotateY( 0deg );
-    background:#FC0; width:240px; height:200px; border-radius: 7px;
+     background-color:  #105900 ; width:140px; height:100px; border-radius: 7px;
     backface-visibility: hidden;
     transition: transform .5s linear 0s;
   }
   .flip3D > .back{
     position:absolute;
     transform: perspective( 600px ) rotateY( 180deg );
-    background: #80BFFF; width:240px; height:200px; border-radius: 7px;
+       background-color:  #105900  ; width:140px; height:100px; border-radius: 7px;
     backface-visibility: hidden;
     transition: transform .5s linear 0s;
   }
@@ -113,6 +113,7 @@ include 'header.php';
                       <div class="back">
                         <a href="tech.php?tname='.$row['name'].'">
                           <h1 style="text-align: center">View Devices</h1>
+
                         </a>
                       </div>
                       <div class="front">
@@ -148,4 +149,5 @@ include 'footer.php';
   $(document).ready(function(){
     $('#bookings').DataTable();
   });
-</script>
+</script><script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>

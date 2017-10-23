@@ -22,10 +22,31 @@ if(isset($_POST['submit'])) {
   $id = mysqli_real_escape_string($con, strip_tags(trim($_POST["id"])));
   $phone = mysqli_real_escape_string($con, strip_tags(trim($_POST["phone"])));
   $email = mysqli_real_escape_string($con, strip_tags(trim($_POST["email"])));
+
+  function createRandomPassword() {
+    $chars = "003232303232023232023456789";
+    srand((double)microtime()*1000000);
+    $i = 0;
+    $pass = '' ;
+    while ($i <= 7) {
+
+      $num = rand() % 33;
+
+      $tmp = substr($chars, $num, 1);
+
+      $pass = $pass . $tmp;
+
+      $i++; 
+
+    }
+    return $pass;
+  }
+  $job_code= 'JOB-'.createRandomPassword()  ;
+
   
   if($dname != '' && $model != '' && $serial != '' && $type != '' && $date != '' && $price != '' && $id != '' && $cname != '' && $phone != '' && $email != '') {
 
-    $sql = 'INSERT INTO customersaledevice (diviceName, model, serialNumber, Dtype, recievedDate, establishAmount, Cname, idNo, num, email) VALUES("'.$dname.'", "'.$model.'", "'.$serial.'", "'.$type.'", "'.$date.'", "'.$price.'", "'.$cname.'", "'.$id.'", "'.$phone.'", "'.$email.'")';
+     $sql = 'INSERT INTO customersaledevice (diviceName, model, serialNumber, Dtype, recievedDate, establishAmount, Cname, idNo, num, email,job_code) VALUES("'.$dname.'", "'.$model.'", "'.$serial.'", "'.$type.'", "'.$date.'", "'.$price.'", "'.$cname.'", "'.$id.'", "'.$phone.'", "'.$email.'", "'.$job_code.'")';
     mysqli_query($con, $sql);
     $_SESSION['success'] = 'New Customer and Device details was added successfully.';
   }else {
@@ -201,7 +222,7 @@ include 'header.php';
               $res = mysqli_query($con, $sql);
 
               if (mysqli_num_rows($res) > 0) {
-                echo '
+                echo '  
                 <table id="bookings" class="table data-table">
                 <thead>
                 <tr>
@@ -229,7 +250,7 @@ include 'header.php';
 
                   echo '
                   <tr>
-                  <td>'.$row['id'].'</td>
+                  <td>'.$row['job_code'].'</td>
                   <td>'.$row['diviceName'].'</td>
                   <td>'.$row['model'].'</td>
                   <td>'.$row['serialNumber'].'</td>
@@ -384,3 +405,5 @@ include 'footer.php';
       });
   });
 </script>
+<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>

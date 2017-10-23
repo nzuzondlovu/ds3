@@ -67,6 +67,7 @@ include 'header.php';
               <?php
 
               $sql = "SELECT * FROM techrepair WHERE tname ='".$tname."'";
+
               $res = mysqli_query($con, $sql);
 
               if (mysqli_num_rows($res) > 0) {
@@ -74,7 +75,7 @@ include 'header.php';
                 <table id="bookings" class="table data-table">
                   <thead>
                     <tr>
-                      <th>ID</th>
+                      <th>Customer</th>
                       <th>Name</th>
                       <th>Model</th>
                       <th>serial</th>
@@ -87,7 +88,7 @@ include 'header.php';
 
                       echo '
                       <tr>
-                        <td>'.$row['id'].'</td>
+                        <td>'.$row['cID'].'</td>
                         <td>'.$row['diviceName'].'</td>
                         <td>'.$row['model'].'</td>
                         <td>'.$row['serialNumber'].'</td>
@@ -115,7 +116,7 @@ include 'header.php';
     </div>
   </div>
 </div>
-<!-- /.container-fluid -->
+<!-- /.container-fluid -->  
 </div>
 <!-- /#page-wrapper -->
 
@@ -127,3 +128,5 @@ include 'footer.php';
     $('#bookings').DataTable();
   });
 </script>
+<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>

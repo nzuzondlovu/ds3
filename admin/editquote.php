@@ -209,7 +209,7 @@ include 'header.php';
                   </div>
                   <!-- /.col -->
                   <div class="col-xs-6">
-                    <p class="lead">Amount Due 2/22/2014</p>
+                    <p class="lead"></p>
 
                     <div class="table-responsive">
                       <table class="table">

@@ -44,7 +44,7 @@ ID Number : '.$row['idNo'].'<br>
 Cell Number : '.$row['num'].'<br>
 Email Address : '.$row['email'].'
 ';
-
+$cID = $row['idNo'];
 
 if(isset($_POST['submit'])){
 
@@ -52,10 +52,10 @@ if(isset($_POST['submit'])){
 
   if ($tech != '') {
 
-    echo $sql = "INSERT INTO techrepair(job_id, diviceName, model, serialNumber, Dtype, recievedDate, amount, tname) 
-    VALUES ('$id', '$name','$model', '$serial', '$type', '$date','$amount', '$tech')";
+    echo $sql = "INSERT INTO techrepair(job_id, diviceName, model, serialNumber, Dtype, recievedDate, amount, tname,cID) 
+    VALUES ('$id', '$name','$model', '$serial', '$type', '$date','$amount', '$tech', '$cID')";
     mysqli_query($con, $sql);
-    header("location: allocated.php");
+     header("location: allocated.php");
 
   } else {
 
@@ -181,3 +181,5 @@ include 'footer.php';
       });
   });
 </script>
+<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>

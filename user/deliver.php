@@ -220,8 +220,7 @@ include 'header.php';
                                        
                                     
                                   <div class="form-group">
-                                          <label>Town/City
-
+                                          <label>Town/C
                                      </label>
                                           <input name="town" class="form-control"  value="<?php echo $pieces[0]; ?>"placeholder="Enter text">
                                       </div>
