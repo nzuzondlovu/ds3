@@ -29,11 +29,7 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 if(isset($_POST['submit'])) {
 
   $description = mysqli_real_escape_string($con, strip_tags(trim($_POST["description"])));
-<<<<<<< HEAD
-  $date=date('Y-m-d H:m:s');
-=======
   $date = date('Y-m-d H:m:s');
->>>>>>> 05c397b1dc98d596935724f1fb845662d5ec993d
 
   if($description != '') {
 

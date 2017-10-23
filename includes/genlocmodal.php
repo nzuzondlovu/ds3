@@ -148,7 +148,7 @@ if (isset($_POST['id']) && $_POST['id'] != null) {
                 <select name="Month" class="form-control">
          
                   <?php
-                  $sql = "SELECT * FROM Months ORDER BY m_ID ";
+                  $sql = "SELECT * FROM months ORDER BY m_ID ";
                   $res = mysqli_query($con, $sql);
               
                   $year = date("Y");
