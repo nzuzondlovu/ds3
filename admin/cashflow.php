@@ -28,6 +28,18 @@ if (mysqli_num_rows($res) > 0) {
 		$cart1 = $cart1 + $sum;
 	}
 }
+//Calculation in store
+$sale1 = 0;
+
+$sql = 'SELECT SUM(total_price) AS amount FROM custsaleprod';
+$res = mysqli_query($con, $sql);
+
+if (mysqli_num_rows($res) > 0) {
+	
+	$row = mysqli_fetch_assoc($res);
+
+	$sale1= $row['amount'];
+}
 
 //Calculation of customer sale devices
 $sale = 0;
@@ -45,7 +57,7 @@ if (mysqli_num_rows($res) > 0) {
 //Calculation of quotations
 $quot = 0;
 
-$sql = 'SELECT SUM(balance) as amount FROM quotation';
+$sql = 'SELECT SUM(total) as amount FROM quotation';
 $res = mysqli_query($con, $sql);
 
 if (mysqli_num_rows($res) > 0) {
@@ -233,6 +245,10 @@ include 'header.php';
 												<td>Online Sales</td>
 												<td>R <?php echo $cart1; ?></td>
 											</tr>
+												<tr>
+												<td>Instore Sale</td>
+												<td>R <?php echo $sale1; ?></td>
+											</tr>
 											<tr>
 												<td>Refurbished Devices</td>
 												<td>R <?php echo $sale; ?></td>
@@ -305,7 +321,7 @@ include 'header.php';
 								<table>
 									<tr>
 										<td width="70%">Cash at End of Year:</td>
-										<td width="23%">R <?php echo ($open + (($cart1 + $sale + $quot + $tech) - ($orde + $sala + $fees + $insu + $inte + $taxe + $trat + $mand + $ruma))); ?></td>
+										<td width="23%">R <?php echo ($open + (($cart1 + $sale + $sale1 + $quot + $tech) - ($orde + $sala + $fees + $insu + $inte + $taxe + $trat + $mand + $ruma))); ?></td>
 									</tr>
 								</table>
 							</div>

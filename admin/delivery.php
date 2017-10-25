@@ -38,13 +38,13 @@
       $area = mysqli_real_escape_string($con, strip_tags(trim($_POST["area"])));
       $boxcode= mysqli_real_escape_string($con, strip_tags(trim($_POST["boxcode"])));
        
-        $status= mysqli_real_escape_string($con, strip_tags(trim($_POST["status"])));
+        $status= mysqli_real_escape_string($con, strip_tags(trim($_POST["status"])  ));
     
     $location=$strAddr." ,".$suburb." , ".$area;
 
     if($driver != '' ) {
 
-      echo $sql="INSERT INTO driverdelivery(driverID,deliveryID,dateofDelivery,custname,custcell,location,area,status)
+   $sql="INSERT INTO driverdelivery(driverID,deliveryID,dateofDelivery,custname,custcell,location,area,status)
       VALUES('".$driver."','".$del."','".$dateD."', '".$name."','".$cell."','".$location."','".$boxcode."','".$status."')";
       mysqli_query($con, $sql);
       $_SESSION['success'] = 'Successfully updated details.';

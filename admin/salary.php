@@ -33,7 +33,7 @@ if(isset($_POST['submit'])) {
 		$row1 = mysqli_fetch_assoc($res1);
 		$bonus_id = $row1['id'];
 
-		$sql1 = "INSERT INTO deduction(emp_id, med_aid, uif, pension)
+		 $sql1 = "INSERT INTO deduction(emp_id, med_aid, uif, pension)
 		VALUES('".$emp_id."', '0.00', '0.00', '0.00')";
 		mysqli_query($con, $sql1);
 
@@ -42,7 +42,7 @@ if(isset($_POST['submit'])) {
 		$row1 = mysqli_fetch_assoc($res1);
 		$deduct_id = $row1['id'];
 
-		$sql = "INSERT INTO salary(emp_id, norm_hours, extra_hours, hourly_pay, bonus_id, deduct_id)
+	 $sql = "INSERT INTO salary(emp_id, norm_hours, extra_hours, hourly_pay, bonus_id, deduct_id)
 		VALUES('".$emp_id."', '".$norm_hours."', '".$extra_hours."', '".$hourly_pay."', '".$bonus_id."', '".$deduct_id."')";
 		mysqli_query($con, $sql);
 
@@ -98,8 +98,8 @@ include 'header.php';
 						<form role="form" method="post" enctype="multipart/form-data">							
 							<div class="form-group">
 								<label>Employee</label>
-								<select name="emp_id" class="form-control">
-									<option value="" selected="selected">Select employee</option>
+								<select name="emp_id" class="form-control select2" multiple="multiple" style="width: 100%;">>
+									<option value="" selected="selected">Select Employee</option>
 									<?php
 									$sql = "SELECT * FROM user ORDER BY name ASC";
 									$res = mysqli_query($con, $sql);
@@ -270,3 +270,16 @@ include 'footer.php';
 		$('#bookings').DataTable();
 	});
 </script>
+<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
+    <link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css">
+
+  <script>
+    $(function () {
+      //Initialize Select2 Elements
+      $('.select2').select2()
+      </script>
+
+
+<!-- DataTables -->
+<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
