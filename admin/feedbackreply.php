@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
 	$date = date('Y-m-d H:m:s');
 
 	if ($reply != '') {
-		$sql = 'INSERT INTO feedback(query_id, user_id, feedback, date) VALUES("'.$id.'", "'.$ud.'", "'.$reply.'", "'.$date.'")';
+		echo $sql = 'INSERT INTO feedback(query_id, user_id, feedback, date) VALUES("'.$id.'", "'.$ud.'", "'.$reply.'", "'.$date.'")';
 		mysqli_query($con, $sql);
 		$_SESSION['success'] = 'Your reply has been sent.';
 		header('Location: query.php');

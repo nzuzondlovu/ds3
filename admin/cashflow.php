@@ -15,7 +15,7 @@ if(isset($_SESSION['key']) == '' ) {
 $open = 0;
 
 //Calculation of cart sales
-$cart1 = 0.00;
+$carts123 = 0;
 
 $sql = 'SELECT SUM(num) AS num, price FROM cart GROUP BY name';
 $res = mysqli_query($con, $sql);
@@ -23,9 +23,8 @@ $res = mysqli_query($con, $sql);
 if (mysqli_num_rows($res) > 0) {
 	
 	while ($row = mysqli_fetch_assoc($res)) {
-
-		$sum = ($row['num'] * $row['price']);
-		$cart1 = $cart1 + $sum;
+		//$sum = ($row['num'] * $row['price']);
+		$carts123 += ($row['num'] * $row['price']);
 	}
 }
 //Calculation in store
@@ -243,7 +242,7 @@ include 'header.php';
 											</tr>
 											<tr>
 												<td>Online Sales</td>
-												<td>R <?php echo $cart1; ?></td>
+												<td>R <?php echo $carts123; ?></td>
 											</tr>
 												<tr>
 												<td>Instore Sale</td>
@@ -263,7 +262,7 @@ include 'header.php';
 											</tr>
 											<tr>
 												<td><b>Net Cash from Inflow</b></td>
-												<td><b>R <?php echo ($cart1 + $sale + $quot + $tech); ?></b></td>
+												<td><b>R <?php echo ($carts123 + $sale + $sale1 + $quot + $tech); ?></b></td>
 											</tr>
 											<tr>
 												<td><b>Outflow</b></td>
@@ -311,7 +310,7 @@ include 'header.php';
 											</tr>
 											<tr>
 												<td><b>Net Increase in Cash</b></td>
-												<td><b>R <?php echo (($cart1 + $sale + $quot + $tech) - ($orde + $sala)); ?></b></td>
+												<td><b>R <?php echo (($carts123 + $sale + $sale1 + $quot + $tech) - ($orde + $sala)); ?></b></td>
 											</tr>
 										</tbody>									
 									</table>
@@ -320,8 +319,8 @@ include 'header.php';
 							<div class="col-md-offset-10 col-md-2 pull-right">
 								<table>
 									<tr>
-										<td width="70%">Cash at End of Year:</td>
-										<td width="23%">R <?php echo ($open + (($cart1 + $sale + $sale1 + $quot + $tech) - ($orde + $sala + $fees + $insu + $inte + $taxe + $trat + $mand + $ruma))); ?></td>
+										<td width="50%">End of Year:  </td>
+										<td width="50%">  R <?php echo ($open + (($carts123 + $sale + $sale1 + $quot + $tech) - ($orde + $sala + $fees + $insu + $inte + $taxe + $trat + $mand + $ruma))); ?></td>
 									</tr>
 								</table>
 							</div>

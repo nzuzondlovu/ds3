@@ -93,6 +93,35 @@ if (isset($_POST['editquote'])) {
 
         $sql = 'UPDATE quotation SET deposit="'.$deposit.'", total="'.$total.'", balance="'.$balance.'", status="'.$status.'" WHERE id="'.$id.'"';
         mysqli_query($con, $sql);
+
+        if ($status == 'Done') {
+
+            $sql = 'SELECT * FROM quotation WHERE id="'.$id.'"';
+            $res = mysqli_query($con, $sql);
+            $row = mysqli_fetch_assoc($res);
+
+            $sql = 'SELECT * FROM job WHERE user="'.$row['id'].'"';
+            $res = mysqli_query($con, $sql);
+            $row = mysqli_fetch_assoc($res);
+
+            $sql = 'SELECT * FROM user WHERE id="'.$row['user'].'"';
+            $res = mysqli_query($con, $sql);
+            $row = mysqli_fetch_assoc($res);
+
+            $to = $row['email'];
+            $subject = "Device Fixed";
+            $msg = "Dear User:\n
+            Your device has been fixed and we a happy to tell you to come check it\n
+            Please visit the store or check the site online.";
+            $msg = wordwrap($msg, 70);
+            $headers =  'MIME-Version: 1.0' . "\r\n";
+            $headers .= 'From:  <info@ds3.nzuzondlovu.com>' . "\r\n";
+            $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+            mail($to, $subject, $msg, $headers);
+
+        }
+
         $_SESSION['success'] = 'Your new Quotation is added successfully.';
 
     } else {

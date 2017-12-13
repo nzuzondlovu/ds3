@@ -159,4 +159,4 @@ CREATE TABLE `suppliers` (
   PRIMARY KEY (`id`)
 ); 
 
-CREATE TABLE `shop`.`expenses` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `rent` DECIMAL(7,2) NOT NULL , `utility` DECIMAL(7,2) NOT NULL , `insurance` DECIMAL(7,2) NOT NULL , `fees` DECIMAL(7,2) NOT NULL , `tax` DECIMAL(7,2) NOT NULL , `interest` DECIMAL(7,2) NOT NULL , `maintenance` DECIMAL(7,2) NOT NULL , `travel` DECIMAL(7,2) NOT NULL , `mande` DECIMAL(7,2) NOT NULL , `training` DECIMAL(7,2) NOT NULL , `date` DATETIME NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+CREATE TABLE `expenses` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `rent` DECIMAL(7,2) NOT NULL , `utility` DECIMAL(7,2) NOT NULL , `insurance` DECIMAL(7,2) NOT NULL , `fees` DECIMAL(7,2) NOT NULL , `tax` DECIMAL(7,2) NOT NULL , `interest` DECIMAL(7,2) NOT NULL , `maintenance` DECIMAL(7,2) NOT NULL , `travel` DECIMAL(7,2) NOT NULL , `mande` DECIMAL(7,2) NOT NULL , `training` DECIMAL(7,2) NOT NULL , `date` DATETIME NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
